@@ -1,0 +1,41 @@
+id,fuente_dataset,texto,clase_real,etiqueta_real,categoria
+IA_SENS_0,IA Sintético (70 reg.),¡El fin de la humanidad! La nueva inteligencia artificial que destruirá millones de empleos mañana mismo. Expertos advierten que el apocalipsis digital ya comenzó y nadie está a salvo.,1,Sensacionalista,Tecnología
+IA_SENS_2,IA Sintético (70 reg.),¡Tu celular te está espiando! Descubre cómo la cámara secreta graba todas tus conversaciones y las envía a los gobiernos sin tu permiso.,1,Sensacionalista,Tecnología
+IA_SENS_4,IA Sintético (70 reg.),¡Escándalo brutal! Político es captado destruyendo pruebas de corrupción en una fiesta clandestina con delincuentes peligrosos.,1,Sensacionalista,Política
+IA_SENS_6,IA Sintético (70 reg.),¡Fraude colosal! El gobierno planea confiscar todos los depósitos bancarios de los ciudadanos para pagar una deuda secreta este fin de semana.,1,Sensacionalista,Política
+IA_SENS_8,IA Sintético (70 reg.),¡Terremoto devastador! La falla tectónica que partirá al país en dos y hundirá ciudades enteras en las próximas horas.,1,Sensacionalista,Ciencia & Clima
+IA_SENS_10,IA Sintético (70 reg.),¡Tóxicos en tu ropa! Las marcas de moda más famosas usan ácidos mortales que están quemando la piel de millones.,1,Sensacionalista,Moda
+IA_SENS_12,IA Sintético (70 reg.),¡Ola de calor asesina! Temperaturas extremas derretirán el asfalto y causarán muertes instantáneas si sales de tu casa mañana.,1,Sensacionalista,Ciencia & Clima
+IA_SENS_14,IA Sintético (70 reg.),¡Universidades de cartón! Estudiantes descubren que sus diplomas son totalmente falsos tras años de pagar fortunas a mafias académicas.,1,Sensacionalista,Educación
+IA_SENS_16,IA Sintético (70 reg.),¡El metro es una trampa mortal! Fallas eléctricas inminentes amenazan con electrocutar a miles de pasajeros en hora pico.,1,Sensacionalista,Transporte
+IA_SENS_18,IA Sintético (70 reg.),¡Actor enloquece en vivo! Golpea salvajemente a un presentador y amenaza con incendiar el estudio de grabación por completo.,1,Sensacionalista,Entretenimiento
+IA_NONSENS_1,IA Sintético (70 reg.),Empresa de tecnología anuncia un nuevo modelo de lenguaje que podría automatizar tareas administrativas. El reporte técnico indica un posible impacto gradual en el sector empresarial.,0,No Sensacionalista,Tecnología
+IA_NONSENS_3,IA Sintético (70 reg.),Especialistas en ciberseguridad recomiendan revisar los permisos de las aplicaciones móviles para proteger los datos personales de los usuarios.,0,No Sensacionalista,Tecnología
+IA_NONSENS_5,IA Sintético (70 reg.),La comisión parlamentaria citó al funcionario público para responder sobre presuntas irregularidades en el presupuesto de infraestructura.,0,No Sensacionalista,Política
+IA_NONSENS_7,IA Sintético (70 reg.),El Banco Central emitió un comunicado oficial asegurando la estabilidad del sistema financiero tras las fluctuaciones del mercado internacional.,0,No Sensacionalista,Política
+IA_NONSENS_9,IA Sintético (70 reg.),El instituto geofísico monitorea la actividad sísmica en la región andina tras registrarse un temblor de magnitud moderada sin daños reportados.,0,No Sensacionalista,Ciencia & Clima
+IA_NONSENS_11,IA Sintético (70 reg.),Diseñador local presentó su nueva colección de invierno destacando el uso de materiales reciclados y sostenibles.,0,No Sensacionalista,Moda
+IA_NONSENS_13,IA Sintético (70 reg.),Las autoridades declararon alerta amarilla ante el aumento gradual de las temperaturas en la región central del país.,0,No Sensacionalista,Ciencia & Clima
+IA_NONSENS_15,IA Sintético (70 reg.),Universidad pública inaugura un nuevo centro de investigación tecnológica con fondos otorgados por organismos internacionales.,0,No Sensacionalista,Educación
+IA_NONSENS_17,IA Sintético (70 reg.),La línea de metro suspenderá su servicio en tres estaciones durante el fin de semana por mantenimiento preventivo en las vías.,0,No Sensacionalista,Transporte
+IA_NONSENS_19,IA Sintético (70 reg.),La ceremonia de premios a la televisión concluyó con un homenaje a la trayectoria del reconocido director de cine independiente.,0,No Sensacionalista,Entretenimiento
+AMA_SENS_0,Amarillismo Real (202 reg.),El ingeniero de Google que asegura que un programa de inteligencia artificial ha cobrado conciencia propia y siente,1,Sensacionalista,BBC
+AMA_SENS_1,Amarillismo Real (202 reg.),Los científicos descubrieron un planeta teóricamente habitable del tamaño de la Tierra,1,Sensacionalista,CNN
+AMA_SENS_2,Amarillismo Real (202 reg.),¿Asteroide Apophis destruiría la Tierra en 2029? Los cálculos de la Nasa,1,Sensacionalista,El Tiempo
+AMA_SENS_3,Amarillismo Real (202 reg.),¿Un parque Jurásico de la vida real?: podrían clonar dinosaurios después de un increíble descubrimiento de fósiles,1,Sensacionalista,Rosario 3
+AMA_SENS_4,Amarillismo Real (202 reg.),"Científicos aseguran haber descubierto el 'elixir de la juventud': un cóctel que lleva a nuestras células a ""un estado más juvenil""",1,Sensacionalista,20 Minutos
+AMA_SENS_5,Amarillismo Real (202 reg.),El artífice de los trasplantes con corazón de cerdo: “El paciente podrá decidir si quiere un órgano de un enfermo o uno porcino sano”,1,Sensacionalista,El Pais
+AMA_SENS_6,Amarillismo Real (202 reg.),Científicos mexicanos diseñan cura contra el cáncer,1,Sensacionalista,Cliki Salud
+AMA_SENS_7,Amarillismo Real (202 reg.),"Científicos revelan un fósil de ""dragón"" de 240 millones de años",1,Sensacionalista,CNN
+AMA_SENS_8,Amarillismo Real (202 reg.),Un estudio científico de Harvard reveló la fórmula secreta para perder peso sin esfuerzos,1,Sensacionalista,El Destape
+AMA_SENS_14,Amarillismo Real (202 reg.),LA ONU ALERTA SOBRE MEGATERREMOTO EN MÉXICO Y EU EN LAS PROXIMAS *NUMBER* HORAS.,1,Sensacionalista,nan
+AMA_NONSENS_9,Amarillismo Real (202 reg.),El agua dulce apareció en la Tierra 500 millones de años antes de lo que se creía,0,No Sensacionalista,Nature
+AMA_NONSENS_10,Amarillismo Real (202 reg.),¿Qué son los homínidos?,0,No Sensacionalista,El Pais
+AMA_NONSENS_13,Amarillismo Real (202 reg.),Un nuevo estudio reveló la verdadera forma del megalodón,0,No Sensacionalista,La Nacion
+AMA_NONSENS_16,Amarillismo Real (202 reg.),California obliga a poner paneles solares en las casas nuevas,0,No Sensacionalista,nan
+AMA_NONSENS_17,Amarillismo Real (202 reg.),"Facebook ya no recibirá más avisos de privacidad: ""Se les advirtió con tiempo""",0,No Sensacionalista,nan
+AMA_NONSENS_11,Amarillismo Real (202 reg.),Descubrieron una nueva criatura marina que impactó al mundo científico,0,No Sensacionalista,La Nacion
+AMA_NONSENS_12,Amarillismo Real (202 reg.),Eclipse solar total: todo lo que hay que saber del fenómeno astronómico que oscurecerá la Tierra,0,No Sensacionalista,La Nacion
+AMA_NONSENS_18,Amarillismo Real (202 reg.),La NASA te invita a recorrer la Luna desde tu casa,0,No Sensacionalista,nan
+AMA_NONSENS_20,Amarillismo Real (202 reg.),Lanzan primera versión de Android P,0,No Sensacionalista,nan
+AMA_NONSENS_21,Amarillismo Real (202 reg.),¿El empleado biónico?,0,No Sensacionalista,nan

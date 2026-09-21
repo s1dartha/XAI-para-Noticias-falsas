@@ -1,0 +1,617 @@
+{
+    "total_muestras_evaluadas": 10,
+    "tiempo_total_benchmark_s": 5931.12612080574,
+    "tiempo_carga_modelo_s": 16.877416610717773,
+    "latencias_medias_s": {
+        "Saliency": 7.792307066917419,
+        "Input_x_Grad": 7.792307066917419,
+        "Fast_IG": 110.0269597530365,
+        "Attention": 7.260772919654846,
+        "LIME": 81.54559820890427,
+        "SHAP": 81.54559820890427
+    },
+    "comprehensiveness_medias": {
+        "Saliency": 0.0002813091774240384,
+        "Fast_IG": 0.0003463864904243441,
+        "Attention": 8.537438695100929e-05,
+        "LIME": 8.850742316496296e-05,
+        "SHAP": 0.00018543088323415003
+    },
+    "sufficiency_medias": {
+        "Saliency": 0.005818194166271806,
+        "Fast_IG": 0.00649841784008226,
+        "Attention": 0.007688947271112345,
+        "LIME": 0.007016406192805369,
+        "SHAP": 0.00634542294937771
+    },
+    "sanity_check_adebayo": {
+        "spearman_rho": 0.9123215230037016,
+        "pearson_r": 0.8294000029563904,
+        "status": "APROBADO"
+    },
+    "analisis_morfologico": {
+        "fake_cue_attr": {
+            "saliency": 0.3677288542559836,
+            "fast_ig": 0.24303006107220426,
+            "attention": 0.1508005388546735,
+            "lime": 0.21509937513783708,
+            "shap": 0.02903179091825477
+        },
+        "fake_non_cue_attr": {
+            "saliency": 0.2344622715827427,
+            "fast_ig": 0.1682632915931208,
+            "attention": 0.09212790824471995,
+            "lime": 0.368975412084088,
+            "shap": 0.10754764434351353
+        },
+        "real_all_attr": {
+            "saliency": 0.27536544739765867,
+            "fast_ig": 0.20714593103016293,
+            "attention": 0.15218490274855867,
+            "lime": 0.3657956454815621,
+            "shap": 0.0
+        }
+    },
+    "muestras": [
+        {
+            "sample_id": 1,
+            "categoria": "Conspiración / Sensacionalismo",
+            "subtipo": "Extremo",
+            "clase_real": 1,
+            "clase_str_real": "FALSA",
+            "pred_class": 0,
+            "pred_str": "VERDADERA",
+            "confianza_pred": 0.9710071300278823,
+            "acierto": false,
+            "texto": "¡¡¡URGENTE!!! COMPARTAN ANTES DE QUE LO BORREN. Médicos descubren que las vacunas tienen microchips alienígenas para controlar tu mente. El gobierno reptiliano nos esta mintiendo despertemos ya!!! 100% REAL.",
+            "top_palabras": {
+                "Saliency": [
+                    "REAL",
+                    "!!!",
+                    "¡",
+                    "%",
+                    "!!!"
+                ],
+                "Fast_IG": [
+                    "!!!",
+                    "!!!",
+                    "¡",
+                    "ENTE",
+                    "esta"
+                ],
+                "Attention": [
+                    "",
+                    ".",
+                    "!!!",
+                    ".",
+                    "REAL"
+                ],
+                "LIME": [
+                    "il",
+                    "iano",
+                    "0",
+                    "%",
+                    "REAL"
+                ],
+                "SHAP": [
+                    "tienen",
+                    "emos",
+                    ".",
+                    "El",
+                    "gobierno"
+                ]
+            },
+            "latencias_s": {
+                "Saliency": 11.618513107299805,
+                "Fast_IG": 112.25151562690735,
+                "Attention": 7.241534233093262,
+                "LIME": 81.29477298259735,
+                "SHAP": 81.29477298259735
+            }
+        },
+        {
+            "sample_id": 2,
+            "categoria": "Pseudociencia / Milagro",
+            "subtipo": "Salud / Engaño",
+            "clase_real": 1,
+            "clase_str_real": "FALSA",
+            "pred_class": 0,
+            "pred_str": "VERDADERA",
+            "confianza_pred": 0.9919438178101813,
+            "acierto": false,
+            "texto": "DESCUBREN LA CURA CONTRA TODO TIPO DE CANCER. Solo necesitas mezclar jugo de limon con bicarbonato y tomarlo en ayunas por 2 dias. Las grandes farmaceuticas te ocultan esta informacion para robarte tu dinero. HAZ CLICK AQUI.",
+            "top_palabras": {
+                "Saliency": [
+                    ".",
+                    "CLICK",
+                    "QUI",
+                    "A",
+                    "A"
+                ],
+                "Fast_IG": [
+                    ".",
+                    ".",
+                    ".",
+                    "esta",
+                    "TODO"
+                ],
+                "Attention": [
+                    ".",
+                    ".",
+                    ".",
+                    "LA",
+                    "REN"
+                ],
+                "LIME": [
+                    ".",
+                    "dinero",
+                    "tu",
+                    "arte",
+                    "."
+                ],
+                "SHAP": [
+                    "QUI",
+                    "A",
+                    "CLICK",
+                    "AZ",
+                    "H"
+                ]
+            },
+            "latencias_s": {
+                "Saliency": 6.506848096847534,
+                "Fast_IG": 107.05230975151062,
+                "Attention": 7.456398963928223,
+                "LIME": 81.06114852428436,
+                "SHAP": 81.06114852428436
+            }
+        },
+        {
+            "sample_id": 3,
+            "categoria": "Política Absurda",
+            "subtipo": "Bulo Político",
+            "clase_real": 1,
+            "clase_str_real": "FALSA",
+            "pred_class": 0,
+            "pred_str": "VERDADERA",
+            "confianza_pred": 0.9969523808614811,
+            "acierto": false,
+            "texto": "Escándalo mundial: Se filtra video secreto del presidente convirtiéndose en hombre lobo durante la luna llena en plena Casa Blanca. Renuncia inminente. Fuentes anonimas confirman que come carne cruda en las reuniones.",
+            "top_palabras": {
+                "Saliency": [
+                    "F",
+                    ".",
+                    "come",
+                    ":",
+                    "."
+                ],
+                "Fast_IG": [
+                    "min",
+                    "come",
+                    "ente",
+                    "F",
+                    "las"
+                ],
+                "Attention": [
+                    ".",
+                    "F",
+                    ".",
+                    "video",
+                    ":"
+                ],
+                "LIME": [
+                    ".",
+                    "Ren",
+                    "man",
+                    "que",
+                    "ir"
+                ],
+                "SHAP": [
+                    "conv",
+                    "irt",
+                    "imas",
+                    "conf",
+                    "l"
+                ]
+            },
+            "latencias_s": {
+                "Saliency": 6.142546892166138,
+                "Fast_IG": 112.60557794570923,
+                "Attention": 6.956256151199341,
+                "LIME": 80.47042465209961,
+                "SHAP": 80.47042465209961
+            }
+        },
+        {
+            "sample_id": 4,
+            "categoria": "Estafa Financiera",
+            "subtipo": "Phishing / Dinero Fácil",
+            "clase_real": 1,
+            "clase_str_real": "FALSA",
+            "pred_class": 0,
+            "pred_str": "VERDADERA",
+            "confianza_pred": 0.9874008455874923,
+            "acierto": false,
+            "texto": "Gana $10,000 dolares al dia desde tu casa solo usando esta aplicacion secreta que los millonarios no quieren que sepas. No necesitas experiencia, solo tu tarjeta de credito para empezar. CUPOS LIMITADOS, entra ya mismo!!!",
+            "top_palabras": {
+                "Saliency": [
+                    "$",
+                    ".",
+                    "mismo",
+                    "POS",
+                    "LIMIT"
+                ],
+                "Fast_IG": [
+                    ".",
+                    "aplic",
+                    "ana",
+                    "entra",
+                    "desde"
+                ],
+                "Attention": [
+                    ".",
+                    ".",
+                    "$",
+                    "ana",
+                    "esta"
+                ],
+                "LIME": [
+                    "ana",
+                    "$",
+                    "tar",
+                    "aplic",
+                    "esta"
+                ],
+                "SHAP": [
+                    "mismo",
+                    "ya",
+                    "entra",
+                    ",",
+                    "ADOS"
+                ]
+            },
+            "latencias_s": {
+                "Saliency": 6.565060138702393,
+                "Fast_IG": 107.95580673217773,
+                "Attention": 7.103513240814209,
+                "LIME": 81.24333918094635,
+                "SHAP": 81.24333918094635
+            }
+        },
+        {
+            "sample_id": 5,
+            "categoria": "Falsa Muerte / Clickbait",
+            "subtipo": "Celebridades / Sensacionalismo",
+            "clase_real": 1,
+            "clase_str_real": "FALSA",
+            "pred_class": 0,
+            "pred_str": "VERDADERA",
+            "confianza_pred": 0.9770152640947285,
+            "acierto": false,
+            "texto": "LUTO MUNDIAL. Famoso cantante muere tragicamente tras ser abducido por un ovni en la antartida. Las imagenes son demasiado fuertes, no lo podras creer. Entra al enlace para ver el video sin censura.",
+            "top_palabras": {
+                "Saliency": [
+                    "tra",
+                    "En",
+                    ".",
+                    "UTO",
+                    "lace"
+                ],
+                "Fast_IG": [
+                    "UTO",
+                    "F",
+                    "IAL",
+                    "ni",
+                    "ov"
+                ],
+                "Attention": [
+                    ".",
+                    ".",
+                    "UTO",
+                    ".",
+                    "lace"
+                ],
+                "LIME": [
+                    "art",
+                    "ida",
+                    "cre",
+                    "pod",
+                    "ras"
+                ],
+                "SHAP": [
+                    "ura",
+                    "ens",
+                    "c",
+                    "sin",
+                    "video"
+                ]
+            },
+            "latencias_s": {
+                "Saliency": 7.432172060012817,
+                "Fast_IG": 109.85561847686768,
+                "Attention": 7.276828289031982,
+                "LIME": 81.27014923095703,
+                "SHAP": 81.27014923095703
+            }
+        },
+        {
+            "sample_id": 6,
+            "categoria": "Economía / Política Fiscal",
+            "subtipo": "Institucional / Bancario",
+            "clase_real": 0,
+            "clase_str_real": "VERDADERA",
+            "pred_class": 0,
+            "pred_str": "VERDADERA",
+            "confianza_pred": 0.999819177369534,
+            "acierto": true,
+            "texto": "El Banco Central anunció este martes una reducción de las tasas de interés en un 0.5%, con el objetivo de estimular el crecimiento económico y fomentar la inversión durante el próximo trimestre, según indicó su presidente en rueda de prensa.",
+            "top_palabras": {
+                "Saliency": [
+                    "presidente",
+                    "en",
+                    "Central",
+                    "Banco",
+                    "."
+                ],
+                "Fast_IG": [
+                    "en",
+                    "",
+                    "Central",
+                    "5",
+                    "%,"
+                ],
+                "Attention": [
+                    ",",
+                    "%,",
+                    "una",
+                    "según",
+                    "Banco"
+                ],
+                "LIME": [
+                    "cre",
+                    "inversión",
+                    "cción",
+                    "redu",
+                    "mart"
+                ],
+                "SHAP": [
+                    "a",
+                    "ns",
+                    "pre",
+                    "de",
+                    "a"
+                ]
+            },
+            "latencias_s": {
+                "Saliency": 7.33475661277771,
+                "Fast_IG": 111.04135060310364,
+                "Attention": 7.50831413269043,
+                "LIME": 82.89641177654266,
+                "SHAP": 82.89641177654266
+            }
+        },
+        {
+            "sample_id": 7,
+            "categoria": "Ciencia / Investigación",
+            "subtipo": "Académico / Energía",
+            "clase_real": 0,
+            "clase_str_real": "VERDADERA",
+            "pred_class": 0,
+            "pred_str": "VERDADERA",
+            "confianza_pred": 0.999814350255942,
+            "acierto": true,
+            "texto": "Investigadores de la Universidad de Oxford publicaron un nuevo estudio en la revista Nature que detalla los avances en el desarrollo de paneles solares más eficientes, capaces de convertir hasta un 30% más de energía solar en electricidad.",
+            "top_palabras": {
+                "Saliency": [
+                    "estudio",
+                    "pane",
+                    "nuevo",
+                    "más",
+                    "%"
+                ],
+                "Fast_IG": [
+                    "%",
+                    "que",
+                    "un",
+                    "más",
+                    "icient"
+                ],
+                "Attention": [
+                    ",",
+                    "los",
+                    "pane",
+                    "Nature",
+                    "hasta"
+                ],
+                "LIME": [
+                    "en",
+                    "ista",
+                    "rev",
+                    "la",
+                    "Nature"
+                ],
+                "SHAP": [
+                    "idad",
+                    "electric",
+                    "en",
+                    "solar",
+                    "energía"
+                ]
+            },
+            "latencias_s": {
+                "Saliency": 8.045040607452393,
+                "Fast_IG": 109.25704097747803,
+                "Attention": 7.086739540100098,
+                "LIME": 79.32887279987335,
+                "SHAP": 79.32887279987335
+            }
+        },
+        {
+            "sample_id": 8,
+            "categoria": "Internacional / Diplomacia",
+            "subtipo": "Geopolítica / Clima",
+            "clase_real": 0,
+            "clase_str_real": "VERDADERA",
+            "pred_class": 0,
+            "pred_str": "VERDADERA",
+            "confianza_pred": 0.9996029195838155,
+            "acierto": true,
+            "texto": "La cumbre internacional sobre cambio climático concluyó en París con un acuerdo bilateral entre las principales potencias para reducir las emisiones de carbono en un 20% para el año 2030, estableciendo nuevos protocolos de verificación.",
+            "top_palabras": {
+                "Saliency": [
+                    "ificación",
+                    "bilateral",
+                    "ver",
+                    "re",
+                    "protocol"
+                ],
+                "Fast_IG": [
+                    "re",
+                    "acuerdo",
+                    "ís",
+                    "ificación",
+                    "0"
+                ],
+                "Attention": [
+                    ",",
+                    "acuerdo",
+                    "ís",
+                    "bilateral",
+                    "un"
+                ],
+                "LIME": [
+                    "principales",
+                    "redu",
+                    "para",
+                    "cir",
+                    "bilateral"
+                ],
+                "SHAP": [
+                    "ificación",
+                    "ver",
+                    "de",
+                    "os",
+                    "protocol"
+                ]
+            },
+            "latencias_s": {
+                "Saliency": 11.080953121185303,
+                "Fast_IG": 112.19099593162537,
+                "Attention": 7.275570631027222,
+                "LIME": 83.62618696689606,
+                "SHAP": 83.62618696689606
+            }
+        },
+        {
+            "sample_id": 9,
+            "categoria": "Tecnología / Empresas",
+            "subtipo": "Hardware / IA",
+            "clase_real": 0,
+            "clase_str_real": "VERDADERA",
+            "pred_class": 0,
+            "pred_str": "VERDADERA",
+            "confianza_pred": 0.9998707245529597,
+            "acierto": true,
+            "texto": "Una reconocida empresa del sector tecnológico presentó hoy su nueva línea de procesadores móviles, los cuales prometen mejorar la eficiencia energética en un 15% y optimizar el rendimiento de las aplicaciones de inteligencia artificial en smartphones.",
+            "top_palabras": {
+                "Saliency": [
+                    "adores",
+                    "smartphones",
+                    "proces",
+                    "ó",
+                    "eten"
+                ],
+                "Fast_IG": [
+                    "los",
+                    "adores",
+                    "",
+                    "cuales",
+                    "las"
+                ],
+                "Attention": [
+                    "los",
+                    ",",
+                    "y",
+                    "hoy",
+                    "cuales"
+                ],
+                "LIME": [
+                    "en",
+                    "ética",
+                    "izar",
+                    "el",
+                    "rend"
+                ],
+                "SHAP": [
+                    "smartphones",
+                    "en",
+                    "artificial",
+                    "encia",
+                    "intelig"
+                ]
+            },
+            "latencias_s": {
+                "Saliency": 6.401834487915039,
+                "Fast_IG": 106.9995744228363,
+                "Attention": 7.3655900955200195,
+                "LIME": 80.63148021697998,
+                "SHAP": 80.63148021697998
+            }
+        },
+        {
+            "sample_id": 10,
+            "categoria": "Deportes / Competición",
+            "subtipo": "Fútbol / Torneo",
+            "clase_real": 0,
+            "clase_str_real": "VERDADERA",
+            "pred_class": 0,
+            "pred_str": "VERDADERA",
+            "confianza_pred": 0.999130335170617,
+            "acierto": true,
+            "texto": "El equipo local se coronó campeón del torneo de clausura tras vencer 2-0 a su histórico rival en el partido de vuelta de la final. Los goles fueron anotados en el segundo tiempo ante un estadio con más de cuarenta mil espectadores.",
+            "top_palabras": {
+                "Saliency": [
+                    "adores",
+                    ".",
+                    "espect",
+                    "ante",
+                    "tras"
+                ],
+                "Fast_IG": [
+                    ".",
+                    "rival",
+                    "est",
+                    "adio",
+                    "con"
+                ],
+                "Attention": [
+                    ".",
+                    "Los",
+                    "tras",
+                    "0",
+                    "les"
+                ],
+                "LIME": [
+                    "2",
+                    "",
+                    "0",
+                    "histórico",
+                    "su"
+                ],
+                "SHAP": [
+                    "adores",
+                    "espect",
+                    "mil",
+                    "a",
+                    "arent"
+                ]
+            },
+            "latencias_s": {
+                "Saliency": 6.7953455448150635,
+                "Fast_IG": 111.05980706214905,
+                "Attention": 7.336983919143677,
+                "LIME": 83.6331957578659,
+                "SHAP": 83.6331957578659
+            }
+        }
+    ]
+}

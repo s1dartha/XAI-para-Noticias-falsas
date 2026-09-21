@@ -1,0 +1,100 @@
+{
+    "metadata": {
+        "dataset_path": "C:\\Users\\natali.albatem\\Documents\\Tesis\\Datasets\\casificar fake\\Noticias_entre_70_y_370_palabras (1).xlsx",
+        "total_registros": 2604,
+        "clase_verdadera_0": 1259,
+        "clase_falsa_1": 1345,
+        "dispositivo": "cpu (8 threads)",
+        "timestamp": "2026-08-31 15:15:00"
+    },
+    "modelos": {
+        "BETO_Narrativaai": {
+            "Nombre": "BETO Fake News (Narrativaai)",
+            "ID": "Narrativaai/fake-news-detection-spanish",
+            "Accuracy": 0.3763,
+            "Precision": 0.363,
+            "Recall": 0.372,
+            "F1-Score": 0.3629,
+            "AUC": 0.3074,
+            "AP": 0.3812,
+            "Tiempo Total (s)": 2083.26,
+            "Latencia (ms)": 800.02,
+            "CM": [
+                [
+                    301,
+                    958
+                ],
+                [
+                    666,
+                    679
+                ]
+            ]
+        },
+        "SaBERT_Verificado": {
+            "Nombre": "SaBERT (VerificadoProfesional)",
+            "ID": "VerificadoProfesional/SaBERT-Spanish-Fake-News",
+            "Accuracy": 0.1429,
+            "Precision": 0.1181,
+            "Recall": 0.1471,
+            "F1-Score": 0.1299,
+            "AUC": 0.0638,
+            "AP": 0.1245,
+            "Tiempo Total (s)": 620.63,
+            "Latencia (ms)": 238.34,
+            "CM": [
+                [
+                    345,
+                    914
+                ],
+                [
+                    1318,
+                    27
+                ]
+            ]
+        },
+        "Spanish_FakeNews_Juanillaberia": {
+            "Nombre": "Spanish Fake News (Juanillaberia)",
+            "ID": "Juanillaberia/spanish-fake-news-classifier",
+            "Accuracy": 0.3053,
+            "Precision": 0.2446,
+            "Recall": 0.2975,
+            "F1-Score": 0.2611,
+            "AUC": 0.1365,
+            "AP": 0.3521,
+            "Tiempo Total (s)": 627.01,
+            "Latencia (ms)": 240.79,
+            "CM": [
+                [
+                    79,
+                    1180
+                ],
+                [
+                    629,
+                    716
+                ]
+            ]
+        },
+        "Qwen2.5_1.5B_ZeroShot": {
+            "Nombre": "LLM Zero-Shot (Qwen 1.5B)",
+            "ID": "Qwen/Qwen2.5-1.5B-Instruct",
+            "Accuracy": 0.5426,
+            "Precision": 0.5422,
+            "Recall": 0.5425,
+            "F1-Score": 0.5423,
+            "AUC": 0.5618,
+            "AP": 0.548,
+            "Tiempo Total (s)": 780.4,
+            "Latencia (ms)": 299.69,
+            "CM": [
+                [
+                    682,
+                    577
+                ],
+                [
+                    614,
+                    731
+                ]
+            ]
+        }
+    }
+}

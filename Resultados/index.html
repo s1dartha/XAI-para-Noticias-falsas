@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pipeline Tesis — Detector Multidimensional de Noticias Falsas</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- TOP NAVBAR -->
+  <nav class="navbar">
+    <a href="#" class="brand-logo">
+      <svg viewBox="0 0 24 24">
+        <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.81z"/>
+      </svg>
+      <span>Pipeline Tesis</span>
+    </a>
+    
+    <div class="nav-actions">
+      <span id="server-status" class="nav-btn" style="background: rgba(16, 185, 129, 0.1); color: #059669; border-color: rgba(16, 185, 129, 0.3);">
+        ● PyTorch Backend Activo
+      </span>
+      
+      <!-- LIGHT / DARK MODE TOGGLE BUTTON -->
+      <button id="btn-theme-toggle" class="nav-btn">
+        <span id="theme-icon">🌙</span>
+        <span id="theme-label">Modo Oscuro</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MAIN PAGE CONTAINER -->
+  <div class="container">
+    
+    <!-- INITIAL LANDING HERO & INPUT SECTION (COMPACT ONE-GLANCE LAYOUT) -->
+    <div id="landing-view">
+      
+      <!-- HERO HEADER -->
+      <section class="hero-section">
+        <div class="hero-icon-wrapper">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+        <h1 class="hero-title">Pipeline Tesis</h1>
+        <p class="hero-subtitle">
+          Plataforma híbrida de IA para la verificación de noticias y detección multidimensional de falsedad.
+        </p>
+      </section>
+
+      <!-- 3 FEATURE INFO CARDS -->
+      <div class="feature-cards-grid">
+        <div class="feature-card">
+          <div class="feature-icon-box" style="background: rgba(16, 185, 129, 0.1); color: #10b981;">
+            ✓
+          </div>
+          <h3>Modelo SaBERT</h3>
+          <p>Clasificación de veracidad y falsedad mediante modelo BERT fine-tuned.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-box" style="background: rgba(59, 130, 246, 0.1); color: #3b82f6;">
+            🔍
+          </div>
+          <h3>Módulo MexGen</h3>
+          <p>Extracción e identificación automática de párrafos clave con mayor score de sospecha.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-box" style="background: rgba(245, 158, 11, 0.1); color: #f59e0b;">
+            ⚠️
+          </div>
+          <h3>Análisis Secundario</h3>
+          <p>Evaluación simultánea de sensacionalismo emocional y redundancia semántica.</p>
+        </div>
+      </div>
+
+      <!-- INPUT BOX CONTAINER -->
+      <div class="input-container-card">
+        <div class="input-tab-header">
+          <button class="input-tab-btn active">
+            📝 Texto de la Noticia
+          </button>
+        </div>
+
+        <textarea id="news-input" class="news-textarea" placeholder="Pega el texto completo de la noticia aquí para analizar... (mínimo 50 caracteres)"></textarea>
+
+        <div class="input-footer">
+          <!-- WORDS AND CHARACTERS COUNTER -->
+          <div id="char-counter" class="char-counter">0 palabras | 0 caracteres</div>
+          <button id="btn-detect" class="btn-verify">
+            <span id="btn-icon">🚨</span>
+            <span id="btn-text">Detectar Noticia Falsa</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- COLLAPSED INPUT SUMMARY BAR (Active when Results are Shown) -->
+    <div id="collapsed-bar" class="collapsed-input-bar">
+      <div class="collapsed-text-preview">
+        <strong>📰 Noticia en Análisis:</strong> <span id="news-preview-text">...</span>
+      </div>
+      <button id="btn-edit-news" class="btn-edit-news">
+        ✏️ Modificar / Nueva Noticia
+      </button>
+    </div>
+
+    <!-- RESULTS VIEW SECTION -->
+    <main id="results-section" class="results-section">
+      
+      <!-- RESULTS SUMMARY DASHBOARD (Full News Metrics) -->
+      <div class="section-heading">
+        <span>📊 Clasificación General de Toda la Noticia</span>
+      </div>
+
+      <div class="results-grid-header">
+        <!-- CARD 1: FALSO/VERDADERO SaBERT -->
+        <div class="metric-card">
+          <div class="metric-header-title">Modelo Principal (SaBERT)</div>
+          <div id="gen-sabert-val" class="metric-badge-status" style="color: var(--fake-color);">--</div>
+          <div id="gen-sabert-pct" class="metric-subscore">Prob. Falso: 0%</div>
+          <div class="progress-track">
+            <div id="gen-sabert-bar" class="progress-fill" style="width: 0%; background: var(--fake-color);"></div>
+          </div>
+        </div>
+
+        <!-- CARD 2: SENSACIONALISMO -->
+        <div class="metric-card">
+          <div class="metric-header-title">Modelo Sensacionalismo</div>
+          <div id="gen-sens-val" class="metric-badge-status" style="color: var(--sens-color);">--</div>
+          <div id="gen-sens-pct" class="metric-subscore">Score: 0%</div>
+          <div class="progress-track">
+            <div id="gen-sens-bar" class="progress-fill" style="width: 0%; background: var(--sens-color);"></div>
+          </div>
+        </div>
+
+        <!-- CARD 3: REDUNDANCIA -->
+        <div class="metric-card">
+          <div class="metric-header-title">Modelo Redundancia</div>
+          <div id="gen-redun-val" class="metric-badge-status" style="color: var(--redun-color);">--</div>
+          <div id="gen-redun-pct" class="metric-subscore">Similitud SBERT: 0%</div>
+          <div class="progress-track">
+            <div id="gen-redun-bar" class="progress-fill" style="width: 0%; background: var(--redun-color);"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HORIZONTAL PARAGRAPHS CAROUSEL WITH INTENSITY HIGHLIGHTING -->
+      <div class="section-heading">
+        <span>📋 Párrafos Extraídos por MexGen (Deslizante)</span>
+        <div class="carousel-controls">
+          <button id="btn-scroll-left" class="btn-arrow">&larr;</button>
+          <button id="btn-scroll-right" class="btn-arrow">&rarr;</button>
+        </div>
+      </div>
+
+      <div class="carousel-wrapper">
+        <div id="carousel-track" class="carousel-track">
+          <!-- Carousel cards injected dynamically -->
+        </div>
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- INTERACTIVE MODAL / POPOVER MINI-WINDOW -->
+  <div id="modal-overlay" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-top-bar">
+        <div id="modal-title" class="modal-heading">🔍 Análisis Detallado: Párrafo 1</div>
+        <button id="btn-close-modal" class="modal-close-btn">&times;</button>
+      </div>
+
+      <div id="modal-quote" class="modal-quote-box">
+        "Texto del párrafo seleccionado..."
+      </div>
+
+      <p style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600; margin-bottom: 0.75rem;">
+        ¿Qué dimensión deseas inspeccionar para este párrafo?
+      </p>
+
+      <div class="modal-action-buttons">
+        <button id="btn-modal-sabert" class="modal-act-btn active-sabert">
+          <span>🚨 Clasificación y Score</span>
+          <small style="font-weight: 400; opacity: 0.8;">SaBERT Falsedad</small>
+        </button>
+
+        <button id="btn-modal-sens" class="modal-act-btn">
+          <span>🔥 Sensacionalismo</span>
+          <small style="font-weight: 400; opacity: 0.8;">Modelo BERT Sens.</small>
+        </button>
+
+        <button id="btn-modal-redun" class="modal-act-btn">
+          <span>🔄 Redundancia</span>
+          <small style="font-weight: 400; opacity: 0.8;">SBERT Embeddings</small>
+        </button>
+      </div>
+
+      <div id="modal-detail-panel" class="modal-detail-panel">
+        <!-- Dynamic paragraph metrics loaded here -->
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

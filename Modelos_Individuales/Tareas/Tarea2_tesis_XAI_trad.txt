@@ -1,0 +1,73 @@
+Role & Objective
+Act as an NLP Researcher and Senior Data Scientist. Your objective is to rigorously implement, execute, and evaluate Explainable AI (XAI) techniques on a specific Transformer model fine-tuned for sensationalism detection.
+
+Hardware Optimization Constraint
+All code (both the script and the notebook) must be heavily optimized for local execution. You must explicitly configure the environment and code to utilize the local GPU (device='cuda'), ensuring batch processing and tensor operations are handled efficiently in VRAM.
+
+1. Model & Data Specifications
+
+Target Model: JJNeila/bert-spanish-sensationalism-oss (Previously identified as the winning model).
+
+Evaluation Sample (20 records total):
+
+Extract 10 news articles from the Synthetic AI dataset (out of the 70 total records).
+
+Extract 10 news articles from the Yellow Journalism (Amarillismo) dataset.
+
+Balancing Constraint: The 10 articles selected from each dataset must be strictly balanced: exactly 5 sensationalist and 5 non-sensationalist articles per source.
+
+2. XAI Techniques to Implement
+Evaluate the model's behavior using strictly the following methods:
+
+Integrated Gradients (IG)
+
+Attention Rollout/Flow
+
+SHAP
+
+LIME
+
+Gradient-weighted Feature Attribution
+
+Layer-wise Relevance Propagation (LRP)
+
+3. XAI Evaluation Test Battery
+Each implemented XAI technique must undergo the following validations:
+
+Faithfulness Tests:
+
+Erasure/Comprehensiveness: Mask the most important features/words identified by the XAI and quantify the drop in the original prediction probability.
+
+Sufficiency: Isolate and keep ONLY the most important features/words (removing the rest of the context) to check if they are sufficient to maintain the original prediction.
+
+Ablation/Perturbation Tests:
+
+Ablation Curves: Generate MoRF (Most Relevant First) and LoRF (Least Relevant First) curves.
+
+Parameter Randomization: Apply cascading randomization (from top layers to bottom layers of the model architecture) to verify sensitivity and observe changes in the generated heatmaps.
+
+4. File Architecture & Code Deliverables
+You must generate the solution in two complementary but logically identical formats.
+
+Target Directory: /home/ubuntu/Documentos/Tesis/Modelos_Individuales/Sensacionalismo/Pruebas_XAI/
+
+The Notebook (.ipynb): Designed exclusively for manual review. It must be highly structured with detailed Markdown cells, organized logically, and thoroughly documented without needing immediate execution.
+
+The Python Script (.py): Designed for terminal execution. It will contain the automated pipeline that loads data, runs the model on the GPU, processes XAI methods, calculates metrics, and exports all images.
+
+Image Exports: The script must save all heatmaps, MoRF/LoRF curves, and visualizations as .png or .jpg files directly to /home/ubuntu/Documentos/Tesis/reportes/imagenes/XAI_pruebas_sensacionalismo.
+
+5. Final Report Requirements (MUST BE WRITTEN IN SPANISH)
+Generate a rigorous and highly detailed academic report in Spanish.
+
+Report Destination: /home/ubuntu/Documentos/Tesis/reportes/
+
+Content & Format Mandates:
+
+Compatibility Analysis: Document whether all XAI techniques were technically compatible with JJNeila/bert-spanish-sensationalism-oss. If a technique failed, explain the architectural incompatibility.
+
+Granularity: Explicitly state whether the feature importance tests were calculated at the token (subword) level or grouped at the complete word level.
+
+Perturbation Strategy: Detail the exact mechanism used when altering the text (were tokens deleted, replaced by a [MASK] token, or swapped with a random/similar word?) and analyze how this choice impacted the metrics.
+
+Radically Honest Metric Interpretation: Every metric (Comprehensiveness, Sufficiency, MoRF/LoRF AUC) must include its formal definition, its theoretical range (e.g., -1 to 1, or 0 to 1), and the meaning of the extremes. Do not sugarcoat the results. If the best performance in the Erasure test yields a 0.003 on a scale where 1.0 is ideal, state explicitly that the model performs poorly in that dimension. Being "the best of the batch" does not excuse a mathematically poor result.

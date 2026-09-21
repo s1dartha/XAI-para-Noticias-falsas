@@ -1,0 +1,584 @@
+{
+    "total_muestras_evaluadas": 10,
+    "tiempo_total_benchmark_s": 6265.701135635376,
+    "tiempo_carga_modelo_s": 3.071939468383789,
+    "latencias_medias_s": {
+        "Saliency": 7.080048632621765,
+        "Input_x_Grad": 7.080048632621765,
+        "Fast_IG": 120.37778534889222,
+        "Attention": 7.976678419113159,
+        "LIME": 87.78971294164657,
+        "SHAP": 87.78971294164657
+    },
+    "comprehensiveness_medias": {
+        "Saliency": 0.0012916287659179182,
+        "Fast_IG": 0.0014542586913532606,
+        "Attention": 0.00123703230802652,
+        "LIME": 0.0013805262708256217,
+        "SHAP": 0.0035098401398972467
+    },
+    "sufficiency_medias": {
+        "Saliency": 0.0037660622990363323,
+        "Fast_IG": 0.002183126529174839,
+        "Attention": 0.0029163525245142208,
+        "LIME": 0.004203392327250288,
+        "SHAP": 0.0029373579201873667
+    },
+    "sanity_check_adebayo": {
+        "spearman_rho": 0.9559979244303975,
+        "pearson_r": 0.8784668445587158,
+        "status": "APROBADO"
+    },
+    "muestras": [
+        {
+            "sample_id": 1,
+            "row": 4,
+            "categoria": "Ciencia / Internacional",
+            "clase_real": 1,
+            "clase_str_real": "FALSA",
+            "pred_class": 0,
+            "pred_str": "VERDADERA",
+            "confianza_pred": 0.9992224180139627,
+            "acierto": false,
+            "top_palabras": {
+                "Saliency": [
+                    "a",
+                    "a",
+                    "Univers",
+                    "a",
+                    "quiere"
+                ],
+                "Fast_IG": [
+                    "o",
+                    "E",
+                    "N",
+                    "FE",
+                    "a"
+                ],
+                "Attention": [
+                    ".",
+                    "ia",
+                    "quiere",
+                    "el",
+                    ","
+                ],
+                "LIME": [
+                    "N",
+                    "UB",
+                    "Red",
+                    ".",
+                    "col"
+                ],
+                "SHAP": [
+                    "N",
+                    "UB",
+                    "que",
+                    "Rus",
+                    "0"
+                ]
+            },
+            "latencias_s": {
+                "Saliency": 6.5208258628845215,
+                "Fast_IG": 117.60036134719849,
+                "Attention": 7.839792728424072,
+                "LIME": 86.84593892097473,
+                "SHAP": 86.84593892097473
+            }
+        },
+        {
+            "sample_id": 2,
+            "row": 10,
+            "categoria": "Política / Judicial",
+            "clase_real": 1,
+            "clase_str_real": "FALSA",
+            "pred_class": 0,
+            "pred_str": "VERDADERA",
+            "confianza_pred": 0.9976423051536021,
+            "acierto": false,
+            "top_palabras": {
+                "Saliency": [
+                    "),",
+                    "seguir",
+                    "aunque",
+                    ",",
+                    "("
+                ],
+                "Fast_IG": [
+                    "),",
+                    "este",
+                    "-",
+                    "seguir",
+                    "Tribunal"
+                ],
+                "Attention": [
+                    "aunque",
+                    "(",
+                    "Tribunal",
+                    "Cristina",
+                    "),"
+                ],
+                "LIME": [
+                    "1",
+                    "0",
+                    "ido",
+                    "mill",
+                    "iva"
+                ],
+                "SHAP": [
+                    "ó",
+                    "confirm",
+                    "os",
+                    "ern",
+                    "0"
+                ]
+            },
+            "latencias_s": {
+                "Saliency": 7.2667763233184814,
+                "Fast_IG": 117.25602769851685,
+                "Attention": 7.724445819854736,
+                "LIME": 87.29101586341858,
+                "SHAP": 87.29101586341858
+            }
+        },
+        {
+            "sample_id": 3,
+            "row": 8,
+            "categoria": "Migración / Tensión",
+            "clase_real": 1,
+            "clase_str_real": "FALSA",
+            "pred_class": 0,
+            "pred_str": "VERDADERA",
+            "confianza_pred": 0.9967628429833976,
+            "acierto": false,
+            "top_palabras": {
+                "Saliency": [
+                    "México",
+                    "a",
+                    "deport",
+                    ")",
+                    "deport"
+                ],
+                "Fast_IG": [
+                    ")",
+                    "E",
+                    "–",
+                    ".",
+                    "deport"
+                ],
+                "Attention": [
+                    ".",
+                    ".",
+                    ")",
+                    "México",
+                    "."
+                ],
+                "LIME": [
+                    ")",
+                    "antes",
+                    "FE",
+                    "E",
+                    "on"
+                ],
+                "SHAP": [
+                    "on",
+                    "buscar",
+                    "que",
+                    "antes",
+                    "uro"
+                ]
+            },
+            "latencias_s": {
+                "Saliency": 7.307245254516602,
+                "Fast_IG": 125.86599850654602,
+                "Attention": 8.312922477722168,
+                "LIME": 90.41654181480408,
+                "SHAP": 90.41654181480408
+            }
+        },
+        {
+            "sample_id": 4,
+            "row": 5,
+            "categoria": "Cultura / Teatro",
+            "clase_real": 1,
+            "clase_str_real": "FALSA",
+            "pred_class": 0,
+            "pred_str": "VERDADERA",
+            "confianza_pred": 0.9982598349188634,
+            "acierto": false,
+            "top_palabras": {
+                "Saliency": [
+                    "a",
+                    "dej",
+                    "En",
+                    "tí",
+                    "von"
+                ],
+                "Fast_IG": [
+                    "Anita",
+                    "dej",
+                    "a",
+                    "de",
+                    "son"
+                ],
+                "Attention": [
+                    "Anita",
+                    "En",
+                    "son",
+                    ",",
+                    ","
+                ],
+                "LIME": [
+                    "tí",
+                    "ter",
+                    "ado",
+                    ",",
+                    "el"
+                ],
+                "SHAP": [
+                    "Male",
+                    "constitu",
+                    "c",
+                    "algo",
+                    "y"
+                ]
+            },
+            "latencias_s": {
+                "Saliency": 6.842595100402832,
+                "Fast_IG": 118.87411141395569,
+                "Attention": 7.901421308517456,
+                "LIME": 86.87496852874756,
+                "SHAP": 86.87496852874756
+            }
+        },
+        {
+            "sample_id": 5,
+            "row": 9,
+            "categoria": "Deportes / Polémica",
+            "clase_real": 1,
+            "clase_str_real": "FALSA",
+            "pred_class": 0,
+            "pred_str": "VERDADERA",
+            "confianza_pred": 0.9913304587647049,
+            "acierto": false,
+            "top_palabras": {
+                "Saliency": [
+                    "Po",
+                    ".",
+                    "arse",
+                    "confirm",
+                    "podría"
+                ],
+                "Fast_IG": [
+                    ".",
+                    "Po",
+                    "podría",
+                    "ac",
+                    "adas"
+                ],
+                "Attention": [
+                    ".",
+                    "podría",
+                    "El",
+                    "podría",
+                    "perder"
+                ],
+                "LIME": [
+                    "Po",
+                    "cam",
+                    "de",
+                    "f",
+                    "tb"
+                ],
+                "SHAP": [
+                    "caso",
+                    "uesto",
+                    "ificación",
+                    "fals",
+                    "Amar"
+                ]
+            },
+            "latencias_s": {
+                "Saliency": 6.713447093963623,
+                "Fast_IG": 116.61488938331604,
+                "Attention": 7.754469394683838,
+                "LIME": 83.19160163402557,
+                "SHAP": 83.19160163402557
+            }
+        },
+        {
+            "sample_id": 6,
+            "row": 0,
+            "categoria": "Sátira / Desinformación Formal",
+            "clase_real": 0,
+            "clase_str_real": "VERDADERA",
+            "pred_class": 0,
+            "pred_str": "VERDADERA",
+            "confianza_pred": 0.9959889638774999,
+            "acierto": true,
+            "top_palabras": {
+                "Saliency": [
+                    "a",
+                    "cr",
+                    "mayoría",
+                    "mayoría",
+                    ","
+                ],
+                "Fast_IG": [
+                    ".",
+                    "ificar",
+                    "cr",
+                    "absolut",
+                    "."
+                ],
+                "Attention": [
+                    ".",
+                    ".",
+                    "El",
+                    "Las",
+                    ","
+                ],
+                "LIME": [
+                    ".",
+                    "lesia",
+                    "ancia",
+                    "donde",
+                    "a"
+                ],
+                "SHAP": [
+                    ".",
+                    "mayoría",
+                    "prob",
+                    "a",
+                    "a"
+                ]
+            },
+            "latencias_s": {
+                "Saliency": 6.691735506057739,
+                "Fast_IG": 117.36308550834656,
+                "Attention": 7.843279838562012,
+                "LIME": 85.59010910987854,
+                "SHAP": 85.59010910987854
+            }
+        },
+        {
+            "sample_id": 7,
+            "row": 1,
+            "categoria": "Política Local / Religión",
+            "clase_real": 0,
+            "clase_str_real": "VERDADERA",
+            "pred_class": 0,
+            "pred_str": "VERDADERA",
+            "confianza_pred": 0.9912270467831126,
+            "acierto": true,
+            "top_palabras": {
+                "Saliency": [
+                    "a",
+                    "gol",
+                    "\"",
+                    "iba",
+                    "o"
+                ],
+                "Fast_IG": [
+                    "gol",
+                    "a",
+                    "más",
+                    "digital",
+                    "o"
+                ],
+                "Attention": [
+                    ".",
+                    "Islam",
+                    ",",
+                    "Las",
+                    "la"
+                ],
+                "LIME": [
+                    "Las",
+                    ".",
+                    "ést",
+                    "dom",
+                    "bien"
+                ],
+                "SHAP": [
+                    "bien",
+                    "ena",
+                    "Carm",
+                    "gol",
+                    "uela"
+                ]
+            },
+            "latencias_s": {
+                "Saliency": 6.999185085296631,
+                "Fast_IG": 115.94678044319153,
+                "Attention": 7.509653806686401,
+                "LIME": 84.47853481769562,
+                "SHAP": 84.47853481769562
+            }
+        },
+        {
+            "sample_id": 8,
+            "row": 2,
+            "categoria": "Opinión / Ensayo Social",
+            "clase_real": 0,
+            "clase_str_real": "VERDADERA",
+            "pred_class": 0,
+            "pred_str": "VERDADERA",
+            "confianza_pred": 0.9962594425747031,
+            "acierto": true,
+            "top_palabras": {
+                "Saliency": [
+                    "a",
+                    "?:",
+                    "¿",
+                    "como",
+                    "as"
+                ],
+                "Fast_IG": [
+                    "como",
+                    "?:",
+                    "¿",
+                    "por",
+                    "qué"
+                ],
+                "Attention": [
+                    "?:",
+                    ".",
+                    "qué",
+                    "¿",
+                    "principal"
+                ],
+                "LIME": [
+                    "ino",
+                    ".",
+                    "la",
+                    "co",
+                    "?:"
+                ],
+                "SHAP": [
+                    "ejemplo",
+                    "pop",
+                    "la",
+                    ",",
+                    "ev"
+                ]
+            },
+            "latencias_s": {
+                "Saliency": 7.31990385055542,
+                "Fast_IG": 123.06146168708801,
+                "Attention": 8.167020320892334,
+                "LIME": 90.41115665435791,
+                "SHAP": 90.41115665435791
+            }
+        },
+        {
+            "sample_id": 9,
+            "row": 3,
+            "categoria": "Entretenimiento / Espectáculos",
+            "clase_real": 0,
+            "clase_str_real": "VERDADERA",
+            "pred_class": 0,
+            "pred_str": "VERDADERA",
+            "confianza_pred": 0.9981595065303167,
+            "acierto": true,
+            "top_palabras": {
+                "Saliency": [
+                    "a",
+                    "La",
+                    "l",
+                    "Tele",
+                    "Españ"
+                ],
+                "Fast_IG": [
+                    "La",
+                    "l",
+                    "Españ",
+                    "EN",
+                    "\""
+                ],
+                "Attention": [
+                    "más",
+                    "Tele",
+                    "La",
+                    "O",
+                    "hay"
+                ],
+                "LIME": [
+                    "PA",
+                    "COM",
+                    "l",
+                    "de",
+                    "de"
+                ],
+                "SHAP": [
+                    "ación",
+                    "Oper",
+                    "ER",
+                    "Ñ",
+                    "antes"
+                ]
+            },
+            "latencias_s": {
+                "Saliency": 7.8599114418029785,
+                "Fast_IG": 127.91296529769897,
+                "Attention": 8.542015790939331,
+                "LIME": 93.0688716173172,
+                "SHAP": 93.0688716173172
+            }
+        },
+        {
+            "sample_id": 10,
+            "row": 6,
+            "categoria": "Sátira Costumbrista",
+            "clase_real": 0,
+            "clase_str_real": "VERDADERA",
+            "pred_class": 0,
+            "pred_str": "VERDADERA",
+            "confianza_pred": 0.9977484505351742,
+            "acierto": true,
+            "top_palabras": {
+                "Saliency": [
+                    "omi",
+                    "ab",
+                    "En",
+                    "completa",
+                    "."
+                ],
+                "Fast_IG": [
+                    "En",
+                    "I",
+                    "ab",
+                    ".",
+                    "una"
+                ],
+                "Attention": [
+                    ".",
+                    "En",
+                    "cord",
+                    ",",
+                    "ha"
+                ],
+                "LIME": [
+                    "pes",
+                    "ar",
+                    "la",
+                    "señ",
+                    "cord"
+                ],
+                "SHAP": [
+                    "5",
+                    "",
+                    "",
+                    "ré",
+                    "ech"
+                ]
+            },
+            "latencias_s": {
+                "Saliency": 7.278860807418823,
+                "Fast_IG": 123.28217220306396,
+                "Attention": 8.171762704849243,
+                "LIME": 89.72839045524597,
+                "SHAP": 89.72839045524597
+            }
+        }
+    ]
+}

@@ -1,0 +1,54 @@
+Act as an NLP Researcher and Senior Data Scientist. Your objective is to execute, analyze, and document two Jupyter notebooks focused on text classification, ensuring careful use of local machine resources.
+
+🔴 CRITICAL SYSTEM CONSTRAINTS (LIMITED RESOURCES):
+
+    Strictly Sequential Execution: Under no circumstances execute processes in parallel. You must completely finish analyzing, executing, and writing the report for Notebook 1 before touching Notebook 2.
+
+    Data Modification: Before running the notebooks, use your code reading tools to find variables like nrows=100, .head(100), or similar in the dataset loading section and REMOVE THEM. You must run the entire dataset.
+
+    Images and Plots: Ensure the notebooks save the results plots (confusion matrices, ROC curves, etc.) as .png images in the local folder, so you can link them in the reports later.
+
+📂 FILE PATHS:
+
+    Notebook 1: /home/ubuntu/Documentos/Tesis/Modelos_Individuales/Sensacionalismo/3sensacionalismo.ipynb
+
+    Notebook 2: /home/ubuntu/Documentos/Tesis/Modelos_Individuales/Clasificar_fake/Comparativo_FakeNews_3Modelos.ipynb
+
+    Reports Destination: Create a new folder at /home/ubuntu/Documentos/Tesis/reportes
+
+🛠️ WORKFLOW FOR EACH NOTEBOOK (Execute one by one):
+
+STEP 1: Execution and Results Extraction
+
+    Analyze and execute the corresponding notebook.
+
+    Accurately measure the execution time and extract all performance metrics (Accuracy, F1-Score, Precision, Recall).
+
+    NEVER mix the results or the context of the models from Notebook 1 with those from Notebook 2.
+
+STEP 2: Technical Web Research (Browser Tool)
+
+    For the 3 models used in the active notebook, research their technical specifications online: architecture, number of parameters, common hyperparameters, original purpose, pre-training data, and size.
+
+STEP 3: Report Writing (Markdown .md format)
+Create a meticulous and academically rigorous report document for the notebook, including:
+
+    Introduction and Methodology: Explanation of how categories were created and what was done in the script.
+
+    Models' Technical Specs: Detailed theoretical research for each model.
+
+    Results and Times: Comparative table of metrics and execution times. Include images of the results if generated.
+
+    Discussion: Deep analysis comparing the theory of why they were created vs. the actual results obtained. Justify the metrics based on their architecture.
+
+    [ONLY FOR NOTEBOOK 1 - SENSATIONALISM]: Add a special section researching the jjneila model. Since this had the best performance and is the only one with the "sensationalism" class natively, research online and provide technical recommendations on whether any of the other 2 evaluated models can serve as a complement (ensemble) to jjneila to improve robustness, or if it is better to use jjneila alone.
+
+Save the documents as Reporte_Sensacionalismo.md and Reporte_FakeNews.md inside the reportes folder. Your task ends when both .md files are created and saved.
+
+🛡️ ERROR HANDLING & CHECKPOINTS:
+
+    Immediate Save: The moment you finish the analysis and research for Notebook 1, generate and save Reporte_Sensacionalismo.md immediately. DO NOT wait until Notebook 2 is finished to save the first report.
+
+    Web Search Fallback: If a web search fails or you cannot find specific technical details for a model after 2 attempts, do NOT get stuck in an infinite loop. Write "Technical information not available online" in that section of the report and move on to the next step.
+
+    Execution Errors: If a cell in the Jupyter notebook throws a fatal error, try to fix the code a maximum of TWO times. If it still fails, document the error trace in the .md report, skip that specific model, and proceed with the rest of the execution.

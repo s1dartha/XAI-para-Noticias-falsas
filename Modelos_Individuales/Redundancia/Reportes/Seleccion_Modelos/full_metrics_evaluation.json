@@ -1,0 +1,163 @@
+{
+  "stsb_results": {
+    "SBERT Pre-entrenado (hiiamsid)": {
+      "Pearson": 0.8281962410830407,
+      "Spearman": 0.8230113145584408,
+      "Time_sec": 127.12297415733337
+    },
+    "BETO SBERT (Mean Pooling)": {
+      "Pearson": 0.5671903416637822,
+      "Spearman": 0.5707753052363835,
+      "Time_sec": 2093.6818656921387
+    },
+    "BETO CNN-SBERT": {
+      "Pearson": 0.5380565169369791,
+      "Spearman": 0.538848738262306,
+      "Time_sec": 2093.6818656921387
+    },
+    "BETO BLSTM-SBERT": {
+      "Pearson": 0.4942410893555734,
+      "Spearman": 0.5041018775722245,
+      "Time_sec": 2093.6818656921387
+    },
+    "BETO Attention-SBERT": {
+      "Pearson": 0.5132895294751766,
+      "Spearman": 0.5213978828561254,
+      "Time_sec": 2093.6818656921387
+    }
+  },
+  "paws_results": {
+    "Best_Threshold": 0.6393939393939394,
+    "Accuracy": 0.458,
+    "F1_Score": 0.6256906077348067,
+    "Precision": 0.4555052790346908,
+    "Recall": 0.9988974641675854,
+    "ROC_AUC": 0.5597684372134593
+  },
+  "xnli_results": {
+    "SBERT Clásico": {
+      "Accuracy": 0.45461847389558235,
+      "F1_Macro": 0.4393126333908584
+    },
+    "CNN-SBERT": {
+      "Accuracy": 0.3333333333333333,
+      "F1_Macro": 0.16820935063505063
+    },
+    "BLSTM-SBERT": {
+      "Accuracy": 0.39839357429718875,
+      "F1_Macro": 0.3426008485115583
+    },
+    "Attention-SBERT": {
+      "Accuracy": 0.46265060240963857,
+      "F1_Macro": 0.4459791685656966
+    }
+  },
+  "thesis_classification_results": {
+    "SBERT": {
+      "Accuracy": 0.5165133618780452,
+      "Accuracy_std": 0.00039716521482358047,
+      "F1_Score": 0.6811852850106688,
+      "F1_std": 0.00034525356564150126,
+      "Precision": 0.5165133618780452,
+      "Recall": 1.0,
+      "ROC_AUC": 0.504411297983848,
+      "ROC_AUC_std": 0.016182859517636452
+    },
+    "CNN-SBERT": {
+      "Accuracy": 0.5165133618780452,
+      "Accuracy_std": 0.00039716521482358047,
+      "F1_Score": 0.6811852850106688,
+      "F1_std": 0.00034525356564150126,
+      "Precision": 0.5165133618780452,
+      "Recall": 1.0,
+      "ROC_AUC": 0.4987911515559288,
+      "ROC_AUC_std": 0.019135346172652275
+    },
+    "BLSTM-SBERT": {
+      "Accuracy": 0.5165133618780452,
+      "Accuracy_std": 0.00039716521482358047,
+      "F1_Score": 0.6811852850106688,
+      "F1_std": 0.00034525356564150126,
+      "Precision": 0.5165133618780452,
+      "Recall": 1.0,
+      "ROC_AUC": 0.5122806290622017,
+      "ROC_AUC_std": 0.0260153045680808
+    },
+    "Attention-SBERT": {
+      "Accuracy": 0.5165133618780452,
+      "Accuracy_std": 0.00039716521482358047,
+      "F1_Score": 0.6811852850106688,
+      "F1_std": 0.00034525356564150126,
+      "Precision": 0.5165133618780452,
+      "Recall": 1.0,
+      "ROC_AUC": 0.5036926995505322,
+      "ROC_AUC_std": 0.02204555142242095
+    }
+  },
+  "summary_table": [
+    {
+      "Modelo": "SBERT Clásico (Mean-Pooling)",
+      "STS-B Pearson": 0.8281962410830407,
+      "STS-B Spearman": 0.8230113145584408,
+      "PAWS-X F1": 0.6256906077348067,
+      "XNLI Acc": 0.45461847389558235,
+      "Tesis F1": 0.6811852850106688,
+      "Tesis ROC-AUC": 0.504411297983848,
+      "Score Global Ponderado": 0.6242471649064175
+    },
+    {
+      "Modelo": "CNN-SBERT (Conv1D MaxPool)",
+      "STS-B Pearson": 0.5380565169369791,
+      "STS-B Spearman": 0.538848738262306,
+      "PAWS-X F1": 0.5506077348066298,
+      "XNLI Acc": 0.3333333333333333,
+      "Tesis F1": 0.6811852850106688,
+      "Tesis ROC-AUC": 0.4987911515559288,
+      "Score Global Ponderado": 0.5211717442179822
+    },
+    {
+      "Modelo": "BLSTM-SBERT (BiLSTM MeanPool)",
+      "STS-B Pearson": 0.4942410893555734,
+      "STS-B Spearman": 0.5041018775722245,
+      "PAWS-X F1": 0.563121546961326,
+      "XNLI Acc": 0.39839357429718875,
+      "Tesis F1": 0.6811852850106688,
+      "Tesis ROC-AUC": 0.5122806290622017,
+      "Score Global Ponderado": 0.5199951871950335
+    },
+    {
+      "Modelo": "Attention-SBERT (Weighted Pool)",
+      "STS-B Pearson": 0.5132895294751766,
+      "STS-B Spearman": 0.5213978828561254,
+      "PAWS-X F1": 0.5318370165745857,
+      "XNLI Acc": 0.46265060240963857,
+      "Tesis F1": 0.6811852850106688,
+      "Tesis ROC-AUC": 0.5036926995505322,
+      "Score Global Ponderado": 0.5146331179470209
+    }
+  ],
+  "best_model": "SBERT Clásico (Mean-Pooling)",
+  "worst_paws_errors": [
+    {
+      "s1": "El equipo original fue creado por el escritor Roy Thomas y el artista Sal Buscema en \"Los Vengadores\" #71 (diciembre de 1969).",
+      "s2": "El equipo original fue creado por el escritor Sal Buscema y el artista Roy Thomas en \"Los Vengadores\" # 71 (diciembre de 1969).",
+      "gold": 0,
+      "sim": 0.9969446063041687,
+      "error": 0.9969446063041687
+    },
+    {
+      "s1": "La primera sección, desde Hokitika hasta Ruatapu, abrió el 9 de noviembre de 1906 y la línea completa hacia Ross se completó el 1 de abril de 1909.",
+      "s2": "La primera sección, desde Hokitika hasta Ruatapu, se completó el 9 de noviembre de 1906 y la línea completa hacia Ross se abrió el 1 de abril de 1909.",
+      "gold": 0,
+      "sim": 0.9965364336967468,
+      "error": 0.9965364336967468
+    },
+    {
+      "s1": "Nació el 5 de mayo de 1940 en Constantinopla (Atenas) y falleció de cáncer en Estambul el 19 de noviembre de 2011.",
+      "s2": "Nació el 5 de mayo de 1940 en Constantinopla (Estambul) y falleció de cáncer en Atenas el 19 de noviembre de 2011.",
+      "gold": 0,
+      "sim": 0.9964056015014648,
+      "error": 0.9964056015014648
+    }
+  ]
+}

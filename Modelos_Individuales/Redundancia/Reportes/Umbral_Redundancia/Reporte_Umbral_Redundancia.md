@@ -6,7 +6,7 @@
 **Modelo de Representacion Semantica:** `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2` (117M parametros, $d=384$)  
 **Dataset Base:** `Noticias_entre_70_y_370_palabras (1).xlsx`  
 **Archivo de Salida Generado:** `dataset_con_similitudes.csv`  
-**Figura de Distribucion:** `reportes/imagenes/distribucion_similitud_corpus.png`  
+**Figura de Distribucion:** `imagenes/distribucion_similitud_corpus.png`  
 
 ---
 

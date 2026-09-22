@@ -149,32 +149,32 @@ A continuación se integran los gráficos generados y guardados durante la ejecu
 ### 6.1. Rendimiento y Dispersión en STS Benchmark
 El gráfico muestra la distribución KDE de las puntuaciones de similitud coseno y el diagrama de dispersión frente a los puntajes humanos normalizados.
 
-![Benchmark STS Performance](file:///C:/Users/Usuario/Documents/tesis/reportes/benchmark_performance_sts.png)
+![Benchmark STS Performance](imagenes/benchmark_performance_sts.png)
 
 ### 6.2. Distribución y Umbral Óptimo en PAWS-X
 Distribución de densidad de similitud coseno para pares idénticos (clase 1, verde) versus pares con distorsión sintáctica/diferentes (clase 0, rojo), indicando el umbral óptimo de decisión.
 
-![PAWS-X Performance](file:///C:/Users/Usuario/Documents/tesis/reportes/paws_x_performance.png)
+![PAWS-X Performance](imagenes/paws_x_performance.png)
 
 ### 6.3. Comparativa de Precisión en Inferencia de Lenguaje Natural (XNLI)
 Comparación de Exactitud (Accuracy) y F1-Macro entre las cuatro arquitecturas siamesas.
 
-![XNLI Model Comparison](file:///C:/Users/Usuario/Documents/tesis/reportes/xnli_model_comparison.png)
+![XNLI Model Comparison](imagenes/xnli_model_comparison.png)
 
 ### 6.4. Distribuciones KDE de Métricas de Redundancia en el Corpus de Tesis
 Distribuciones comparativas de Media, Máximo, Percentil 90 y Varianza intra-documento para noticias redundantes (azul) vs no redundantes (rojo) en las cuatro arquitecturas.
 
-![Redundancy Feature Distributions](file:///C:/Users/Usuario/Documents/tesis/reportes/redundancy_feature_distributions.png)
+![Redundancy Feature Distributions](imagenes/redundancy_feature_distributions.png)
 
 ### 6.5. Matriz de Correlación de Características de Redundancia
 Matriz de calor que ilustra la correlación entre las métricas de similitud oracional extraídas y la variable objetivo del corpus de noticias.
 
-![Redundancy Correlation Matrix](file:///C:/Users/Usuario/Documents/tesis/reportes/redundancy_correlation_matrix.png)
+![Redundancy Correlation Matrix](imagenes/redundancy_correlation_matrix.png)
 
 ### 6.6. Ranking Global y Selección Final
 Puntuación global ponderada consolidada que sustenta la selección del modelo ganador.
 
-![Model Selection Summary](file:///C:/Users/Usuario/Documents/tesis/reportes/model_selection_summary.png)
+![Model Selection Summary](imagenes/model_selection_summary.png)
 
 ---
 

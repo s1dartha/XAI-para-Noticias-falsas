@@ -4,8 +4,8 @@
 **Proyecto:** Tesis Doctoral / Maestría - Análisis e Interpretabilidad Mecanicista de Redundancia Semántica  
 **Fecha:** 29 de Agosto de 2026  
 **Modelo Analizado:** SBERT Clásico con Mean-Pooling (`hiiamsid/sentence_similarity_spanish_es`)  
-**Ubicación del Cuadernillo Experimental:** [`XAI_Experimentos_Mejor_Modelo.ipynb`](file:///C:/Users/Usuario/Documents/tesis/modelos_individuales/redundancia/XAI_Experimentos_Mejor_Modelo.ipynb)  
-**Directorio de Evidencias Visuales:** [`reportes/imagenes/`](file:///C:/Users/Usuario/Documents/tesis/reportes/imagenes/)
+**Ubicación del Cuadernillo Experimental:** [`XAI_Experimentos_Mejor_Modelo.ipynb`](../../modelos_individuales/redundancia/XAI_Experimentos_Mejor_Modelo.ipynb)  
+**Directorio de Evidencias Visuales:** [`imagenes/`](imagenes/)
 
 ---
 
@@ -146,7 +146,7 @@ La evaluación se ejecutó íntegramente sobre procesador CPU Intel con cuantiza
 | **LIME-Light** | Perturbación Muestreada | Palabra | 25 inferencias forward | **1,524.3 ms** | $\pm 185.1\text{ ms}$ | Moderada (Batch) |
 | **KernelSHAP-Light** | Núcleo de Shapley | Palabra | 25 inferencias forward | **1,780.6 ms** | $\pm 210.4\text{ ms}$ | Moderada (Batch) |
 
-![Perfil de Latencia](file:///C:/Users/Usuario/Documents/tesis/reportes/imagenes/xai_method_execution_latency.png)
+![Perfil de Latencia](imagenes/xai_method_execution_latency.png)
 
 *Figura 1: Comparativa de latencia promedio por par de oraciones entre los seis métodos XAI implementados en entorno CPU.*
 
@@ -180,14 +180,14 @@ En los pares redundantes, Fast-IG e Input × Gradient asignan valores positivos 
 - En el Par 1: `autopista` ($+0.174$) y `carretera` ($+0.165$), `aceleró` ($+0.141$) y `velocidad`/`veloz` ($+0.182$), `vehículo` ($+0.090$) y `auto` ($+0.095$).
 - Los conectores y determinantes (`El`, `la`, `en`, `de`) reciben atribuciones cercanas a cero ($\approx \pm 0.005$), demostrando que la red siamesa ancla la similitud en los sintagmas nominales y verbales de contenido léxico pesado.
 
-![Heatmaps Pares Redundantes](file:///C:/Users/Usuario/Documents/tesis/reportes/imagenes/xai_token_attribution_heatmaps_redundant.png)
+![Heatmaps Pares Redundantes](imagenes/xai_token_attribution_heatmaps_redundant.png)
 
 *Figura 2: Mapas de calor de atribución Fast-IG para los Pares Redundantes 1 y 2. Se observa una concentración nítida de relevancia en las entidades centrales y acciones.*
 
 #### Pares No Redundantes / Ortogonales (Pares 6 y 7)
 En los pares ortogonales (Par 7: Similitud Coseno de $-0.0146$), los valores de saliencia se dispersan uniformemente o presentan valores negativos, reflejando que los núcleos semánticos (`bolsa de valores` vs `restaurante italiano`) empujan la similitud en direcciones opuestas en el espacio vectorial $\mathbb{R}^{768}$.
 
-![Heatmaps Pares No Redundantes](file:///C:/Users/Usuario/Documents/tesis/reportes/imagenes/xai_token_attribution_heatmaps_non_redundant.png)
+![Heatmaps Pares No Redundantes](imagenes/xai_token_attribution_heatmaps_non_redundant.png)
 
 *Figura 3: Mapas de calor de atribución Fast-IG para los Pares No Redundantes 6 y 7. La similitud colapsa hacia cero y las atribuciones carecen de alineación sinonímica.*
 
@@ -199,7 +199,7 @@ Al computar la matriz de similitud de producto escalar entre los vectores contex
 - En el Par 1, el token `vehículo` muestra una correlación de $0.78$ con `auto`, y `aceleró` muestra $0.72$ con `aumentó` y $0.74$ con `velocidad`.
 - En contraste, en el Par 6 (Perro/Jardín vs Gato/Sofá), la matriz es difusa y no presenta ningún punto focal de alta afinidad semántica.
 
-![Alineación Cruzada](file:///C:/Users/Usuario/Documents/tesis/reportes/imagenes/xai_cross_attention_alignment.png)
+![Alineación Cruzada](imagenes/xai_cross_attention_alignment.png)
 
 *Figura 4: Matrices de alineación semántica inter-oracional $h_A \cdot h_B^\top$ para el Par 1 (Redundante) y el Par 6 (Ortogonal).*
 
@@ -228,7 +228,7 @@ Para trascender la mera inspección visual cualitativa, se aplicaron tres protoc
 | **LIME-Light** | +0.152 | 0.181 | 4 |
 | **Attention Centrality (Capa 12)** | +0.098 | 0.245 | 5 (Menos Fiel) |
 
-![Fidelidad Comprensividad vs Suficiencia](file:///C:/Users/Usuario/Documents/tesis/reportes/imagenes/xai_faithfulness_comprehensiveness_sufficiency.png)
+![Fidelidad Comprensividad vs Suficiencia](imagenes/xai_faithfulness_comprehensiveness_sufficiency.png)
 
 *Figura 5: Comparación de Comprensividad y Suficiencia entre los métodos XAI evaluados.*
 
@@ -250,7 +250,7 @@ Se evaluó la degradación de la similitud coseno promedio al eliminar tokens de
 | **60%** | 0.1823 | 0.3920 | +0.2097 |
 | **80%** | 0.3119 | 0.3002 | -0.0117 |
 
-![Curvas MoRF vs LoRF](file:///C:/Users/Usuario/Documents/tesis/reportes/imagenes/xai_morf_vs_lorf_ablation_curves.png)
+![Curvas MoRF vs LoRF](imagenes/xai_morf_vs_lorf_ablation_curves.png)
 
 *Figura 6: Curvas de ablación MoRF vs. LoRF. La amplia brecha entre 20% y 60% valida empíricamente la alta fidelidad de las atribuciones de Fast-IG.*
 
@@ -271,7 +271,7 @@ Siguiendo el protocolo fundamental de Adebayo et al. (NeurIPS 2018, *Sanity Chec
 | **Top-6 (Capas 11-6)** | 6 Capas | 0.0364 | 0.7091 | Ruptura de Correlación |
 | **Todas (Capas 11-0)** | 12 Capas | **0.2636** | **0.0364** | **Pasa Sanity Check ($\rho \approx 0$)** |
 
-![Sanity Check Aleatorización](file:///C:/Users/Usuario/Documents/tesis/reportes/imagenes/xai_cascading_parameter_randomization_sanity_check.png)
+![Sanity Check Aleatorización](imagenes/xai_cascading_parameter_randomization_sanity_check.png)
 
 *Figura 7: Decaimiento de la correlación de Spearman en la prueba de sanidad de Adebayo et al. Al aleatorizar las 12 capas, la correlación de Fast-IG cae a 0.036, probando que no actúa como un mero detector de bordes.*
 

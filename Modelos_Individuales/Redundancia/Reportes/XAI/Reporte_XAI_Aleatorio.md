@@ -4,14 +4,14 @@
 **Proyecto:** Tesis - Detección de Redundancia Semántica e Interpretabilidad Mecanicista (XAI)  
 **Fecha:** 12 de Septiembre de 2026  
 **Modelo Evaluado:** `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2` ($d=384$, 12 capas, 117M parámetros)  
-**Ubicación del Cuadernillo Experimental:** [`modelos_individuales/redundancia/XAI_Experimentos_Aleatorios.ipynb`](file:///C:/Users/Usuario/Documents/tesis/modelos_individuales/redundancia/XAI_Experimentos_Aleatorios.ipynb)  
-**Directorio de Evidencias Visuales:** [`reportes/imagenes/`](file:///C:/Users/Usuario/Documents/tesis/reportes/imagenes/)  
+**Ubicación del Cuadernillo Experimental:** [`XAI_Experimentos_Aleatorios.ipynb`](../../modelos_individuales/redundancia/XAI_Experimentos_Aleatorios.ipynb)  
+**Directorio de Evidencias Visuales:** [`imagenes/`](imagenes/)  
 
 ---
 
 ## 1. Resumen Ejecutivo y Motivación Científica
 
-En la fase previa de investigación doctoral ([`Reporte_XAI_Redundancia.md`](file:///C:/Users/Usuario/Documents/tesis/reportes/Reporte_XAI_Redundancia.md)), se evaluó la interpretabilidad mecanicista sobre una suite curada manualmente de 10 pares de oraciones seleccionadas estratégicamente para representar arquetipos semánticos canónicos (paráfrasis sintácticas, solapamientos nominales y divergencias temáticas).
+En la fase previa de investigación doctoral ([`Reporte_XAI_Redundancia.md`](Reporte_XAI_Redundancia.md)), se evaluó la interpretabilidad mecanicista sobre una suite curada manualmente de 10 pares de oraciones seleccionadas estratégicamente para representar arquetipos semánticos canónicos (paráfrasis sintácticas, solapamientos nominales y divergencias temáticas).
 
 El presente estudio tiene como objetivo fundamental **validar la robustez y transferibilidad estadística** de dichos hallazgos al evaluar la misma batería algorítmica sobre un conjunto de **10 pares de oraciones completamente ALEATORIOS, no curados y extraídos directamente del corpus de noticias periodísticas en español**.
 

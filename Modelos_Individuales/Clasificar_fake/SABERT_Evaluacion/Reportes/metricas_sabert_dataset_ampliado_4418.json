@@ -1,0 +1,437 @@
+{
+  "GLOBAL": {
+    "nombre": "Global Ampliado (N = 4,418)",
+    "n_total": 4418,
+    "n_real": 2411,
+    "n_fake": 2007,
+    "balance_real_pct": 54.57220461747397,
+    "balance_fake_pct": 45.42779538252603,
+    "accuracy": 0.7858759619737438,
+    "f1_macro": 0.7701970549526344,
+    "f1_fake": 0.710171568627451,
+    "precision_fake": 0.9220365950676214,
+    "recall_fake": 0.5774788241155954,
+    "f1_real": 0.8302225412778177,
+    "precision_real": 0.731730465042708,
+    "recall_real": 0.9593529655744505,
+    "roc_auc": 0.8519315535402119,
+    "tn": 2313,
+    "fp": 98,
+    "fn": 848,
+    "tp": 1159,
+    "cm": [
+      [
+        2313,
+        98
+      ],
+      [
+        848,
+        1159
+      ]
+    ],
+    "false_negative_rate": 0.4225211758844046,
+    "false_positive_rate": 0.040647034425549566
+  },
+  "REGIONES": {
+    "España": {
+      "nombre": "España (En Dominio)",
+      "n_total": 2354,
+      "n_real": 1264,
+      "n_fake": 1090,
+      "balance_real_pct": 53.69583687340697,
+      "balance_fake_pct": 46.30416312659303,
+      "accuracy": 0.897196261682243,
+      "f1_macro": 0.8946209062260215,
+      "f1_fake": 0.878147029204431,
+      "precision_fake": 0.9732142857142857,
+      "recall_fake": 0.8,
+      "f1_real": 0.9110947832476121,
+      "precision_real": 0.850480109739369,
+      "recall_real": 0.9810126582278481,
+      "roc_auc": 0.9535673847404483,
+      "tn": 1240,
+      "fp": 24,
+      "fn": 218,
+      "tp": 872,
+      "cm": [
+        [
+          1240,
+          24
+        ],
+        [
+          218,
+          872
+        ]
+      ],
+      "false_negative_rate": 0.2,
+      "false_positive_rate": 0.0189873417721519
+    },
+    "América Latina": {
+      "nombre": "América Latina (Domain Shift)",
+      "n_total": 2064,
+      "n_real": 1147,
+      "n_fake": 917,
+      "balance_real_pct": 55.57170542635659,
+      "balance_fake_pct": 44.42829457364341,
+      "accuracy": 0.6589147286821705,
+      "f1_macro": 0.6010608681327733,
+      "f1_fake": 0.4491392801251956,
+      "precision_fake": 0.7950138504155124,
+      "recall_fake": 0.31297709923664124,
+      "f1_real": 0.7529824561403509,
+      "precision_real": 0.630064591896653,
+      "recall_real": 0.9354838709677419,
+      "roc_auc": 0.6799692716954475,
+      "tn": 1073,
+      "fp": 74,
+      "fn": 630,
+      "tp": 287,
+      "cm": [
+        [
+          1073,
+          74
+        ],
+        [
+          630,
+          287
+        ]
+      ],
+      "false_negative_rate": 0.6870229007633588,
+      "false_positive_rate": 0.06451612903225806
+    }
+  },
+  "FUENTES": {
+    "https://github.com/jpposadas/FakeNewsCorpusSpanish (MEX-A3T - México)": {
+      "nombre": "Fuente: https://github.com/jpposadas/FakeNewsCorpusSpanish (MEX-A3T - México)",
+      "n_total": 566,
+      "n_real": 231,
+      "n_fake": 335,
+      "balance_real_pct": 40.812720848056536,
+      "balance_fake_pct": 59.187279151943464,
+      "accuracy": 0.7614840989399293,
+      "f1_macro": 0.761017855634893,
+      "f1_fake": 0.7715736040609137,
+      "precision_fake": 0.890625,
+      "recall_fake": 0.6805970149253732,
+      "f1_real": 0.7504621072088724,
+      "precision_real": 0.6548387096774193,
+      "recall_real": 0.8787878787878788,
+      "roc_auc": 0.8450733346255735,
+      "tn": 203,
+      "fp": 28,
+      "fn": 107,
+      "tp": 228,
+      "cm": [
+        [
+          203,
+          28
+        ],
+        [
+          107,
+          228
+        ]
+      ],
+      "false_negative_rate": 0.3194029850746269,
+      "false_positive_rate": 0.12121212121212122
+    },
+    "https://huggingface.co/datasets/Edds/spanish-fake-news-fixed": {
+      "nombre": "Fuente: https://huggingface.co/datasets/Edds/spanish-fake-news-fixed",
+      "n_total": 294,
+      "n_real": 183,
+      "n_fake": 111,
+      "balance_real_pct": 62.244897959183675,
+      "balance_fake_pct": 37.755102040816325,
+      "accuracy": 0.8571428571428571,
+      "f1_macro": 0.8357978723404256,
+      "f1_fake": 0.776595744680851,
+      "precision_fake": 0.948051948051948,
+      "recall_fake": 0.6576576576576577,
+      "f1_real": 0.895,
+      "precision_real": 0.8248847926267281,
+      "recall_real": 0.9781420765027322,
+      "roc_auc": 0.9132082902574705,
+      "tn": 179,
+      "fp": 4,
+      "fn": 38,
+      "tp": 73,
+      "cm": [
+        [
+          179,
+          4
+        ],
+        [
+          38,
+          73
+        ]
+      ],
+      "false_negative_rate": 0.34234234234234234,
+      "false_positive_rate": 0.02185792349726776
+    },
+    "https://huggingface.co/datasets/Freiren/Unified-and-Balanced-Spanish-Fake-News-Corpus": {
+      "nombre": "Fuente: https://huggingface.co/datasets/Freiren/Unified-and-Balanced-Spanish-Fake-News-Corpus",
+      "n_total": 2060,
+      "n_real": 1081,
+      "n_fake": 979,
+      "balance_real_pct": 52.47572815533981,
+      "balance_fake_pct": 47.52427184466019,
+      "accuracy": 0.9029126213592233,
+      "f1_macro": 0.9013163252498948,
+      "f1_fake": 0.8887652947719689,
+      "precision_fake": 0.9755799755799756,
+      "recall_fake": 0.8161389172625128,
+      "f1_real": 0.9138673557278209,
+      "precision_real": 0.854955680902498,
+      "recall_real": 0.9814986123959297,
+      "roc_auc": 0.9604667490000464,
+      "tn": 1061,
+      "fp": 20,
+      "fn": 180,
+      "tp": 799,
+      "cm": [
+        [
+          1061,
+          20
+        ],
+        [
+          180,
+          799
+        ]
+      ],
+      "false_negative_rate": 0.18386108273748722,
+      "false_positive_rate": 0.018501387604070305
+    },
+    "https://huggingface.co/datasets/IsaacRodgz/Fake-news-latam-omdena": {
+      "nombre": "Fuente: https://huggingface.co/datasets/IsaacRodgz/Fake-news-latam-omdena",
+      "n_total": 1250,
+      "n_real": 835,
+      "n_fake": 415,
+      "balance_real_pct": 66.8,
+      "balance_fake_pct": 33.2,
+      "accuracy": 0.6472,
+      "f1_macro": 0.42690058479532167,
+      "f1_fake": 0.07157894736842105,
+      "precision_fake": 0.2833333333333333,
+      "recall_fake": 0.04096385542168675,
+      "f1_real": 0.7822222222222223,
+      "precision_real": 0.6655462184873949,
+      "recall_real": 0.948502994011976,
+      "roc_auc": 0.5335574633864801,
+      "tn": 792,
+      "fp": 43,
+      "fn": 398,
+      "tp": 17,
+      "cm": [
+        [
+          792,
+          43
+        ],
+        [
+          398,
+          17
+        ]
+      ],
+      "false_negative_rate": 0.9590361445783132,
+      "false_positive_rate": 0.05149700598802395
+    },
+    "https://huggingface.co/datasets/mariagrandury/fake_news_corpus_spanish": {
+      "nombre": "Fuente: https://huggingface.co/datasets/mariagrandury/fake_news_corpus_spanish",
+      "n_total": 248,
+      "n_real": 81,
+      "n_fake": 167,
+      "balance_real_pct": 32.66129032258064,
+      "balance_fake_pct": 67.33870967741935,
+      "accuracy": 0.4838709677419355,
+      "f1_macro": 0.4727610948711135,
+      "f1_fake": 0.39622641509433965,
+      "precision_fake": 0.9333333333333333,
+      "recall_fake": 0.25149700598802394,
+      "f1_real": 0.5492957746478874,
+      "precision_real": 0.3842364532019704,
+      "recall_real": 0.9629629629629629,
+      "roc_auc": 0.7029644414873957,
+      "tn": 78,
+      "fp": 3,
+      "fn": 125,
+      "tp": 42,
+      "cm": [
+        [
+          78,
+          3
+        ],
+        [
+          125,
+          42
+        ]
+      ],
+      "false_negative_rate": 0.7485029940119761,
+      "false_positive_rate": 0.037037037037037035
+    }
+  },
+  "DATASETS": {
+    "Edds Fixed (España)": {
+      "nombre": "Dataset: Edds Fixed (España)",
+      "n_total": 294,
+      "n_real": 183,
+      "n_fake": 111,
+      "balance_real_pct": 62.244897959183675,
+      "balance_fake_pct": 37.755102040816325,
+      "accuracy": 0.8571428571428571,
+      "f1_macro": 0.8357978723404256,
+      "f1_fake": 0.776595744680851,
+      "precision_fake": 0.948051948051948,
+      "recall_fake": 0.6576576576576577,
+      "f1_real": 0.895,
+      "precision_real": 0.8248847926267281,
+      "recall_real": 0.9781420765027322,
+      "roc_auc": 0.9132082902574705,
+      "tn": 179,
+      "fp": 4,
+      "fn": 38,
+      "tp": 73,
+      "cm": [
+        [
+          179,
+          4
+        ],
+        [
+          38,
+          73
+        ]
+      ],
+      "false_negative_rate": 0.34234234234234234,
+      "false_positive_rate": 0.02185792349726776
+    },
+    "FakeDeS 2021 (LatAm)": {
+      "nombre": "Dataset: FakeDeS 2021 (LatAm)",
+      "n_total": 248,
+      "n_real": 81,
+      "n_fake": 167,
+      "balance_real_pct": 32.66129032258064,
+      "balance_fake_pct": 67.33870967741935,
+      "accuracy": 0.4838709677419355,
+      "f1_macro": 0.4727610948711135,
+      "f1_fake": 0.39622641509433965,
+      "precision_fake": 0.9333333333333333,
+      "recall_fake": 0.25149700598802394,
+      "f1_real": 0.5492957746478874,
+      "precision_real": 0.3842364532019704,
+      "recall_real": 0.9629629629629629,
+      "roc_auc": 0.7029644414873957,
+      "tn": 78,
+      "fp": 3,
+      "fn": 125,
+      "tp": 42,
+      "cm": [
+        [
+          78,
+          3
+        ],
+        [
+          125,
+          42
+        ]
+      ],
+      "false_negative_rate": 0.7485029940119761,
+      "false_positive_rate": 0.037037037037037035
+    },
+    "Freiren Unified Corpus (España)": {
+      "nombre": "Dataset: Freiren Unified Corpus (España)",
+      "n_total": 2060,
+      "n_real": 1081,
+      "n_fake": 979,
+      "balance_real_pct": 52.47572815533981,
+      "balance_fake_pct": 47.52427184466019,
+      "accuracy": 0.9029126213592233,
+      "f1_macro": 0.9013163252498948,
+      "f1_fake": 0.8887652947719689,
+      "precision_fake": 0.9755799755799756,
+      "recall_fake": 0.8161389172625128,
+      "f1_real": 0.9138673557278209,
+      "precision_real": 0.854955680902498,
+      "recall_real": 0.9814986123959297,
+      "roc_auc": 0.9604667490000464,
+      "tn": 1061,
+      "fp": 20,
+      "fn": 180,
+      "tp": 799,
+      "cm": [
+        [
+          1061,
+          20
+        ],
+        [
+          180,
+          799
+        ]
+      ],
+      "false_negative_rate": 0.18386108273748722,
+      "false_positive_rate": 0.018501387604070305
+    },
+    "MEX-A3T (UNAM / IPN)": {
+      "nombre": "Dataset: MEX-A3T (UNAM / IPN)",
+      "n_total": 566,
+      "n_real": 231,
+      "n_fake": 335,
+      "balance_real_pct": 40.812720848056536,
+      "balance_fake_pct": 59.187279151943464,
+      "accuracy": 0.7614840989399293,
+      "f1_macro": 0.761017855634893,
+      "f1_fake": 0.7715736040609137,
+      "precision_fake": 0.890625,
+      "recall_fake": 0.6805970149253732,
+      "f1_real": 0.7504621072088724,
+      "precision_real": 0.6548387096774193,
+      "recall_real": 0.8787878787878788,
+      "roc_auc": 0.8450733346255735,
+      "tn": 203,
+      "fp": 28,
+      "fn": 107,
+      "tp": 228,
+      "cm": [
+        [
+          203,
+          28
+        ],
+        [
+          107,
+          228
+        ]
+      ],
+      "false_negative_rate": 0.3194029850746269,
+      "false_positive_rate": 0.12121212121212122
+    },
+    "Omdena LATAM (Politics Fake News Detector)": {
+      "nombre": "Dataset: Omdena LATAM (Politics Fake News Detector)",
+      "n_total": 1250,
+      "n_real": 835,
+      "n_fake": 415,
+      "balance_real_pct": 66.8,
+      "balance_fake_pct": 33.2,
+      "accuracy": 0.6472,
+      "f1_macro": 0.42690058479532167,
+      "f1_fake": 0.07157894736842105,
+      "precision_fake": 0.2833333333333333,
+      "recall_fake": 0.04096385542168675,
+      "f1_real": 0.7822222222222223,
+      "precision_real": 0.6655462184873949,
+      "recall_real": 0.948502994011976,
+      "roc_auc": 0.5335574633864801,
+      "tn": 792,
+      "fp": 43,
+      "fn": 398,
+      "tp": 17,
+      "cm": [
+        [
+          792,
+          43
+        ],
+        [
+          398,
+          17
+        ]
+      ],
+      "false_negative_rate": 0.9590361445783132,
+      "false_positive_rate": 0.05149700598802395
+    }
+  }
+}

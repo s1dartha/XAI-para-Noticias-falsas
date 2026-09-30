@@ -20,13 +20,14 @@ from transformers import AutoTokenizer, AutoModel
 
 def main():
     print("=== STEP 1: Configuración de Entorno y Rutas ===", flush=True)
-    BASE_DIR = "C:/Users/Usuario/Documents/tesis"
-    IMAGES_DIR = os.path.join(BASE_DIR, "reportes", "imagenes")
-    REPORT_DIR = os.path.join(BASE_DIR, "reportes")
-    NOTEBOOK_DIR = os.path.join(BASE_DIR, "modelos_individuales", "redundancia")
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    REPORT_DIR = os.path.join(script_dir, "Reportes", "XAI")
+    IMAGES_DIR = os.path.join(REPORT_DIR, "imagenes")
+    NOTEBOOK_DIR = script_dir
     os.makedirs(IMAGES_DIR, exist_ok=True)
     os.makedirs(REPORT_DIR, exist_ok=True)
     os.makedirs(NOTEBOOK_DIR, exist_ok=True)
+
 
     plt.rcParams.update({
         'font.size': 11,
@@ -66,7 +67,9 @@ def main():
 
     # 2. Muestreo de 10 pares aleatorios no curados del dataset
     print("\nCargando corpus y extrayendo 10 pares aleatorios balanceados...", flush=True)
-    dataset_path = os.path.join(BASE_DIR, "dataset_con_similitudes.csv")
+    dataset_path = os.path.join(script_dir, "Dataset", "dataset_con_similitudes.csv")
+    if not os.path.exists(dataset_path):
+        dataset_path = os.path.join(script_dir, "dataset_con_similitudes.csv")
     df = pd.read_csv(dataset_path)
 
     high_candidates = []
@@ -920,14 +923,14 @@ def main():
 **Proyecto:** Tesis - Detección de Redundancia Semántica e Interpretabilidad Mecanicista (XAI)  
 **Fecha:** 12 de Septiembre de 2026  
 **Modelo Evaluado:** `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2` ($d=384$, 12 capas, 117M parámetros)  
-**Ubicación del Cuadernillo Experimental:** [`modelos_individuales/redundancia/XAI_Experimentos_Aleatorios.ipynb`](file:///C:/Users/Usuario/Documents/tesis/modelos_individuales/redundancia/XAI_Experimentos_Aleatorios.ipynb)  
-**Directorio de Evidencias Visuales:** [`reportes/imagenes/`](file:///C:/Users/Usuario/Documents/tesis/reportes/imagenes/)  
+**Ubicación del Cuadernillo Experimental:** [`XAI_Experimentos_Aleatorios.ipynb`](../../modelos_individuales/redundancia/XAI_Experimentos_Aleatorios.ipynb)  
+**Directorio de Evidencias Visuales:** [`imagenes/`](imagenes/)  
 
 ---
 
 ## 1. Resumen Ejecutivo y Motivación Científica
 
-En la fase previa de investigación doctoral ([`Reporte_XAI_Redundancia.md`](file:///C:/Users/Usuario/Documents/tesis/reportes/Reporte_XAI_Redundancia.md)), se evaluó la interpretabilidad mecanicista sobre una suite curada manualmente de 10 pares de oraciones seleccionadas estratégicamente para representar arquetipos semánticos canónicos (paráfrasis sintácticas, solapamientos nominales y divergencias temáticas).
+En la fase previa de investigación doctoral ([`Reporte_XAI_Redundancia.md`](Reporte_XAI_Redundancia.md)), se evaluó la interpretabilidad mecanicista sobre una suite curada manualmente de 10 pares de oraciones seleccionadas estratégicamente para representar arquetipos semánticos canónicos (paráfrasis sintácticas, solapamientos nominales y divergencias temáticas).
 
 El presente estudio tiene como objetivo fundamental **validar la robustez y transferibilidad estadística** de dichos hallazgos al evaluar la misma batería algorítmica sobre un conjunto de **10 pares de oraciones completamente ALEATORIOS, no curados y extraídos directamente del corpus de noticias periodísticas en español**.
 
@@ -937,7 +940,7 @@ El presente estudio tiene como objetivo fundamental **validar la robustez y tran
 ### Veredicto Rápido:
 1. **Confirmación de Robustez:** Fast-IG e IxG demostraron una consistencia sobresaliente. Fast-IG obtuvo una **Comprensividad promedio de +{comp_ig:.3f}** y una **Suficiencia de {suff_ig:.3f}**, confirmando que el 20% de tokens prioritarios gobierna causalmente la similitud semántica en textos aleatorios.
 2. **Resiliencia Frente a la Curación Previa:** La correlación de rango entre los métodos se mantiene coherente: Fast-IG > IxG > LIME/SHAP > Vanilla Saliency > Attention.
-3. **Superación del Sanity Check de Adebayo:** La aleatorización en cascada de los parámetros del Transformer MiniLM-L12 provocó una caída drástica de la correlación de Spearman ($\rho = 1.000 \\to {sanity_results[-1]['spearman_ig']:.3f}$ para Fast-IG), probando que las explicaciones dependen estrictamente de los pesos aprendidos y no de sesgos superficiales de arquitectura.
+3. **Superación del Sanity Check de Adebayo:** La aleatorización en cascada de los parámetros del Transformer MiniLM-L12 provocó una caída drástica de la correlación de Spearman ($\\rho = 1.000 \\to {sanity_results[-1]['spearman_ig']:.3f}$ para Fast-IG), probando que las explicaciones dependen estrictamente de los pesos aprendidos y no de sesgos superficiales de arquitectura.
 
 ---
 
@@ -1023,9 +1026,9 @@ La matriz de similitud cruzada inter-token muestra cómo los embeddings contextu
 
 Para garantizar que las explicaciones no constituyan meros detectores de bordes visuales o artefactos independientes de los pesos del modelo, se ejecutó la prueba de aleatorización en cascada (Adebayo et al., NeurIPS 2018):
 
-### Tabla 3: Decaimiento de la Correlación de Spearman ($\rho$) según Capas Aleatorizadas
+### Tabla 3: Decaimiento de la Correlación de Spearman ($\\rho$) según Capas Aleatorizadas
 
-| Etapa de Aleatorización | Capas Destruidas | Spearman $\rho$ (Fast-IG) | Spearman $\rho$ (IxG) | Interpretación Causal |
+| Etapa de Aleatorización | Capas Destruidas | Spearman $\\rho$ (Fast-IG) | Spearman $\\rho$ (IxG) | Interpretación Causal |
 | :--- | :---: | :---: | :---: | :--- |
 """
 
@@ -1035,7 +1038,7 @@ Para garantizar que las explicaciones no constituyan meros detectores de bordes 
     report_content += f"""
 ![Sanity Check de Adebayo](imagenes/xai_cascading_parameter_randomization_sanity_check_aleatorio.png)
 
-El colapso progresivo de la correlación hacia valores cercanos a cero ($\rho \\approx 0.0$) cuando se aleatorizan las capas superiores valida formalmente que **el pipeline XAI responde a los parámetros entrenados de la red y no a artefactos espurios**.
+El colapso progresivo de la correlación hacia valores cercanos a cero ($\\rho \\approx 0.0$) cuando se aleatorizan las capas superiores valida formalmente que **el pipeline XAI responde a los parámetros entrenados de la red y no a artefactos espurios**.
 
 ---
 

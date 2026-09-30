@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Veritas-5D — Dashboard de Investigación & Explicabilidad de Fake News</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Chart.js para visualizaciones dinámicas de calibración y métricas -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <!-- ========================================================================
+       TOP NAVIGATION BAR
+       ======================================================================== -->
+  <nav class="navbar">
+    <div class="brand-wrapper">
+      <div class="brand-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          <path d="m9 12 2 2 4-4"/>
+        </svg>
+      </div>
+      <div class="brand-info">
+        <h1>VERITAS-5D</h1>
+        <span>Tesis de Maestría | Auditoría & XAI Transatlántica</span>
+      </div>
+    </div>
+
+    <!-- MAIN VIEW TABS -->
+    <div class="nav-tabs-wrapper">
+      <button class="nav-tab-btn active" data-tab="tab-literatura">
+        <span>🏛️</span>
+        <span>Modelos Literatura & Falla</span>
+      </button>
+      <button class="nav-tab-btn" data-tab="tab-ensamble">
+        <span>🚀</span>
+        <span>Solución Ensamble 5D</span>
+      </button>
+      <button class="nav-tab-btn" data-tab="tab-inspector">
+        <span>🔍</span>
+        <span>Explicabilidad Frase a Frase</span>
+      </button>
+      <button class="nav-tab-btn" data-tab="tab-variables">
+        <span>📊</span>
+        <span>Variables & Diccionario</span>
+      </button>
+      <button class="nav-tab-btn" data-tab="tab-benchmark">
+        <span>⚖️</span>
+        <span>Benchmark & Auditoría</span>
+      </button>
+    </div>
+
+    <!-- RIGHT ACTIONS -->
+    <div class="nav-actions">
+      <div id="server-status" class="server-badge standalone">
+        <span>⚡ Modo Standalone (Offline)</span>
+      </div>
+      <button id="btn-theme-toggle" class="theme-btn">
+        <span id="theme-icon">🌙</span>
+        <span id="theme-text">Oscuro</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ========================================================================
+       APP CONTAINER
+       ======================================================================== -->
+  <main class="app-container">
+
+    <!-- ======================================================================
+         TAB 1: MODELO DE LA LITERATURA & LIMITACIONES (CAJA NEGRA)
+         ====================================================================== -->
+    <section id="tab-literatura" class="tab-view active">
+      <div class="view-hero">
+        <div class="view-hero-text">
+          <div class="hero-pill-badge" style="background: rgba(239, 68, 68, 0.1); color: var(--fake-color);">
+            Auditoría de Modelos del Estado del Arte
+          </div>
+          <h2>La Ilusión de Precisión en la Literatura: Opacidad y Colapso por Domain Shift</h2>
+          <p>
+            Los modelos del estado del arte (SaBERT, BETO-FakeNews) operan como <strong>cajas negras unidimensionales</strong>. Al ser evaluados fuera de su entorno de entrenamiento español, sufren una memorización espuria de entidades geopolíticas y colapsan catastróficamente en América Latina.
+          </p>
+        </div>
+      </div>
+
+      <!-- SIMULADOR INTERACTIVO DE CAJA NEGRA -->
+      <div class="card" style="margin-bottom: 1.5rem;">
+        <div class="card-title-row">
+          <h3>
+            <span>🔒</span>
+            <span>Simulador de Caja Negra (Experiencia del Periodista ante SaBERT)</span>
+          </h3>
+          <span class="text-muted" style="font-size: 0.82rem;">Selecciona una noticia para simular la salida del modelo tradicional</span>
+        </div>
+
+        <!-- SELECTOR DE NOTICIA PARA CAJA NEGRA -->
+        <div class="benchmark-picker-row" id="blackbox-picker-row">
+          <!-- Chips renderizados dinámicamente -->
+        </div>
+
+        <div class="black-box-container">
+          <div class="black-box-header">
+            <div>
+              <strong style="color: #cbd5e1; font-size: 0.95rem;">MODELO DE LA LITERATURA: VerificadoProfesional/SaBERT</strong>
+              <div style="color: #64748b; font-size: 0.8rem;">Arquitectura: RoBERTa-BETO (110M Parámetros) | Salida Escalar Unidimensional</div>
+            </div>
+            <div class="black-box-status">
+              <span>●</span> Inferencia Oculta / Cero Trazabilidad
+            </div>
+          </div>
+
+          <div class="black-box-output-grid">
+            <!-- PANTALLA OPACA -->
+            <div class="opaque-screen">
+              <div class="lock-icon">🔒</div>
+              <div id="bb-label" class="opaque-score-badge fake">FALSO</div>
+              <div id="bb-prob" style="font-size: 1.1rem; color: #94a3b8; font-weight: 600;">Probabilidad: 88.4%</div>
+              <div style="font-size: 0.78rem; color: #64748b; margin-top: 0.5rem;">
+                ⚠️ Única información provista por el modelo
+              </div>
+            </div>
+
+            <!-- AUDITORÍA EDITORIAL IMPOSIBLE -->
+            <div class="opaque-audit-list">
+              <strong style="font-size: 0.9rem; color: #f87171; display: flex; align-items: center; gap: 0.4rem;">
+                <span>⚠️</span> Fracaso ante Criterios de Auditoría Periodística:
+              </strong>
+              
+              <div class="audit-item">
+                <span class="badge-x">✕</span>
+                <div>
+                  <strong>¿Qué frase o párrafo contiene la falsedad?</strong><br>
+                  <span class="text-muted">DESCONOCIDO. El modelo no segmenta oraciones ni señala detonantes.</span>
+                </div>
+              </div>
+
+              <div class="audit-item">
+                <span class="badge-x">✕</span>
+                <div>
+                  <strong>¿Qué fuentes o testimonios fueron invalidados?</strong><br>
+                  <span class="text-muted">NO REPORTADO. Ignora la presencia o ausencia de verbos de atribución (dicendi).</span>
+                </div>
+              </div>
+
+              <div class="audit-item">
+                <span class="badge-x">✕</span>
+                <div>
+                  <strong>¿El modelo aprendió desinformación o memorizó entidades?</strong><br>
+                  <span class="text-muted">MEMORIZACIÓN ESPURIA. Altamente sensible a nombres propios locales (Pedro Sánchez, VOX, Madrid).</span>
+                </div>
+              </div>
+
+              <div class="audit-item">
+                <span class="badge-x">✕</span>
+                <div>
+                  <strong>¿Respaldo legal o justificación para desmentir el bulo?</strong><br>
+                  <span class="text-muted">IMPOSIBLE. Un porcentaje plano es inadmisible en una redacción profesional o juzgado.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="bb-news-preview" style="margin-top: 1.25rem; padding: 0.9rem; background: #0f172a; border-radius: var(--radius-md); font-size: 0.88rem; color: #94a3b8; border: 1px solid #1e293b;">
+            <!-- Noticia cargada -->
+          </div>
+        </div>
+      </div>
+
+      <!-- AUDITORÍA FORMAL DEL DOMAIN SHIFT EN AMÉRICA LATINA -->
+      <div class="card">
+        <div class="card-title-row">
+          <h3>
+            <span>📉</span>
+            <span>Evidencia Empírica del Colapso Transatlántico en el Corpus Ampliado ($N = 4.418$)</span>
+          </h3>
+          <span class="hero-pill-badge" style="background: rgba(239, 68, 68, 0.1); color: var(--fake-color);">
+            Domain Shift Catastrófico
+          </span>
+        </div>
+
+        <p class="text-muted" style="margin-bottom: 1.25rem; font-size: 0.92rem;">
+          Al transferir el modelo SaBERT desde noticias verificadas de España hacia medios de América Latina, el rendimiento colapsa. El modelo pierde su capacidad de detectar bulos debido a la ausencia de las entidades políticas con las que sobreajustó durante el entrenamiento:
+        </p>
+
+        <div class="stat-comparison-row">
+          <div class="stat-box">
+            <div class="stat-label">Accuracy España (In-Domain)</div>
+            <div class="stat-val text-success">89.72%</div>
+            <div class="stat-delta success">Validado en España ($N=2.354$)</div>
+          </div>
+
+          <div class="stat-box">
+            <div class="stat-label">Accuracy LatAm (Domain Shift)</div>
+            <div class="stat-val text-danger">65.89%</div>
+            <div class="stat-delta danger">Caída abrupta de -23.83 pts</div>
+          </div>
+
+          <div class="stat-box">
+            <div class="stat-label">Recall Fake España</div>
+            <div class="stat-val text-success">80.00%</div>
+            <div class="stat-delta success">872 bulos detectados</div>
+          </div>
+
+          <div class="stat-box">
+            <div class="stat-label">Recall Fake América Latina</div>
+            <div class="stat-val text-danger">31.30%</div>
+            <div class="stat-delta danger">¡Dejó escapar 630 de 917 bulos!</div>
+          </div>
+        </div>
+
+        <!-- MATRICES DE CONFUSIÓN VISUALES ESPAÑA VS LATAM -->
+        <div class="grid-2" style="margin-top: 1.5rem;">
+          <div style="background: var(--bg-muted); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+            <div style="font-weight: 700; margin-bottom: 0.75rem; font-size: 0.95rem; color: var(--text-main);">
+              🇪🇸 SaBERT en España (Entrenamiento Local)
+            </div>
+            <div class="cm-matrix-visual">
+              <div class="cm-cell tp">
+                <div class="cm-title">Verdaderos Detectados (TN)</div>
+                <div class="cm-val text-success">1.240</div>
+                <div class="cm-sub">Especificidad: 98.1%</div>
+              </div>
+              <div class="cm-cell fn">
+                <div class="cm-title">Falsas Alarmas (FP)</div>
+                <div class="cm-val text-danger">24</div>
+                <div class="cm-sub">Tasa Error: 1.9%</div>
+              </div>
+              <div class="cm-cell fn">
+                <div class="cm-title">Bulos Escapados (FN)</div>
+                <div class="cm-val text-danger">218</div>
+                <div class="cm-sub">FNR: 20.0%</div>
+              </div>
+              <div class="cm-cell tp">
+                <div class="cm-title">Bulos Detectados (TP)</div>
+                <div class="cm-val text-success">872</div>
+                <div class="cm-sub">Sensibilidad: 80.0%</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="background: var(--bg-muted); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+            <div style="font-weight: 700; margin-bottom: 0.75rem; font-size: 0.95rem; color: var(--fake-color);">
+              🌎 SaBERT en América Latina (Colapso por Domain Shift)
+            </div>
+            <div class="cm-matrix-visual">
+              <div class="cm-cell tp">
+                <div class="cm-title">Verdaderos Detectados (TN)</div>
+                <div class="cm-val text-success">1.073</div>
+                <div class="cm-sub">Especificidad: 93.5%</div>
+              </div>
+              <div class="cm-cell fn">
+                <div class="cm-title">Falsas Alarmas (FP)</div>
+                <div class="cm-val text-danger">74</div>
+                <div class="cm-sub">Tasa Error: 6.5%</div>
+              </div>
+              <div class="cm-cell fn" style="background: rgba(239, 68, 68, 0.2); border-color: var(--fake-color);">
+                <div class="cm-title" style="color: var(--fake-color);">🚨 BULOS ESCAPADOS (FN)</div>
+                <div class="cm-val text-danger">630</div>
+                <div class="cm-sub" style="font-weight: 700; color: var(--fake-color);">¡FNR: 68.7% (Ceguera casi total)!</div>
+              </div>
+              <div class="cm-cell tp">
+                <div class="cm-title">Bulos Detectados (TP)</div>
+                <div class="cm-val text-success">287</div>
+                <div class="cm-sub">Sensibilidad: sólo 31.3%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         TAB 2: SOLUCIÓN DESARROLLADA: ENSAMBLE MULTIDIMENSIONAL 5D
+         ====================================================================== -->
+    <section id="tab-ensamble" class="tab-view">
+      <div class="view-hero">
+        <div class="view-hero-text">
+          <div class="hero-pill-badge" style="background: rgba(37, 99, 235, 0.1); color: var(--primary);">
+            Propuesta de Tesis
+          </div>
+          <h2>Solución: Meta-Ensamble 5D Basado en Invariantes Estilométricas y Forenses</h2>
+          <p>
+            Para superar la opacidad y el domain shift, desarrollamos un meta-ensamble entrenado sobre <strong>42 variables lingüísticas, morfológicas y semánticas</strong> organizadas en 5 dimensiones. Inmune a las entidades geopolíticas, el modelo <strong>supera a SaBERT en América Latina</strong> y permite calibrar el umbral operativo.
+          </p>
+        </div>
+      </div>
+
+      <!-- ARQUITECTURA DE LAS 5 DIMENSIONES -->
+      <div class="card" style="margin-bottom: 1.5rem;">
+        <div class="card-title-row">
+          <h3>
+            <span>📐</span>
+            <span>Taxonomía de las 5 Dimensiones del Análisis Textual (+ D0 Base)</span>
+          </h3>
+          <span class="text-muted" style="font-size: 0.82rem;">42 Características Extraídas sin Dependencia de Entidades Geopolíticas</span>
+        </div>
+
+        <div class="grid-3" style="gap: 1rem;">
+          <!-- D0 -->
+          <div class="dim-card d0">
+            <div>
+              <div class="dim-card-header">
+                <h4>D0: Sensacionalismo & Redundancia</h4>
+                <span class="dim-pct-badge" style="color: #ef4444;">31.1% Importancia</span>
+              </div>
+              <p>Captura la reiteración de consignas y la estridencia emocional global, oracional y por ablación ($P_{\text{full}}, P_{\text{max}}, \Delta P$).</p>
+            </div>
+            <div class="dim-tags">
+              <span class="dim-tag">P_full</span>
+              <span class="dim-tag">P_mean</span>
+              <span class="dim-tag">P_max</span>
+              <span class="dim-tag">delta_p_gatillo</span>
+              <span class="dim-tag">SBERT_GMM</span>
+            </div>
+          </div>
+
+          <!-- D5 -->
+          <div class="dim-card d5">
+            <div>
+              <div class="dim-card-header">
+                <h4>D5: Anclajes, Mayúsculas & Signos</h4>
+                <span class="dim-pct-badge" style="color: #ec4899;">24.1% Importancia</span>
+              </div>
+              <p>¡El pilar de invarianza regional! Mayúsculas sostenidas (`ALL CAPS`), signos de admiración (`!`), números y fechas exactas.</p>
+            </div>
+            <div class="dim-tags">
+              <span class="dim-tag">all_caps_ratio</span>
+              <span class="dim-tag">upper_chars_ratio</span>
+              <span class="dim-tag">numbers_density</span>
+              <span class="dim-tag">excl_density</span>
+              <span class="dim-tag">temporal_density</span>
+            </div>
+          </div>
+
+          <!-- D3 -->
+          <div class="dim-card d3">
+            <div>
+              <div class="dim-card-header">
+                <h4>D3: Riqueza Léxica & Legibilidad</h4>
+                <span class="dim-pct-badge" style="color: #10b981;">19.3% Importancia</span>
+              </div>
+              <p>Mide la diversidad de vocabulario invariante al tamaño mediante Guiraud TTR, proporción de palabras únicas (Hapax) y Gutiérrez-Polini.</p>
+            </div>
+            <div class="dim-tags">
+              <span class="dim-tag">hapax_ratio</span>
+              <span class="dim-tag">guiraud_ttr</span>
+              <span class="dim-tag">gutierrez_polini</span>
+              <span class="dim-tag">flesch_szigriszt</span>
+              <span class="dim-tag">words_count</span>
+            </div>
+          </div>
+
+          <!-- D4 -->
+          <div class="dim-card d4">
+            <div>
+              <div class="dim-card-header">
+                <h4>D4: Morfosintaxis & Subjetividad POS</h4>
+                <span class="dim-pct-badge" style="color: #f59e0b;">14.8% Importancia</span>
+              </div>
+              <p>Densidad de adverbios modalizadores (Top 1 individual), apelaciones emocionales en 1.ª persona y sobrecarga adjetival.</p>
+            </div>
+            <div class="dim-tags">
+              <span class="dim-tag">adv_density (Top 1)</span>
+              <span class="dim-tag">pron_1p_density</span>
+              <span class="dim-tag">adj_noun_ratio</span>
+              <span class="dim-tag">pron_3p_density</span>
+            </div>
+          </div>
+
+          <!-- D2 -->
+          <div class="dim-card d2">
+            <div>
+              <div class="dim-card-header">
+                <h4>D2: Lingüística Forense & Epistémica</h4>
+                <span class="dim-pct-badge" style="color: #8b5cf6;">6.6% Importancia</span>
+              </div>
+              <p>Verbos de reporte y atribución de fuentes (dicendi), citas textuales directas entre comillas, atenuadores (hedges) vs aserciones (boosters).</p>
+            </div>
+            <div class="dim-tags">
+              <span class="dim-tag">dicendi_density</span>
+              <span class="dim-tag">quotes_density</span>
+              <span class="dim-tag">hedges_density</span>
+              <span class="dim-tag">boosters_density</span>
+              <span class="dim-tag">epistemic_ratio</span>
+            </div>
+          </div>
+
+          <!-- D1 -->
+          <div class="dim-card d1">
+            <div>
+              <div class="dim-card-header">
+                <h4>D1: Coherencia & Flujo Secuencial</h4>
+                <span class="dim-pct-badge" style="color: #3b82f6;">4.1% Importancia</span>
+              </div>
+              <p>Similitud coseno entre oraciones adyacentes ($s_i \cdot s_{i+1}$) para detectar baches argumentales y saltos temáticos en bulos retaceados.</p>
+            </div>
+            <div class="dim-tags">
+              <span class="dim-tag">consec_sim_mean</span>
+              <span class="dim-tag">consec_sim_min</span>
+              <span class="dim-tag">consec_sim_std</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CALIBRADOR INTERACTIVO DE UMBRAL OPERATIVO (SLIDER) -->
+      <div class="calibrator-container">
+        <div class="card-title-row">
+          <h3>
+            <span>⚙️</span>
+            <span>Calibrador Dinámico de Umbral de Decisión ($\theta \in [0.25, 0.70]$)</span>
+          </h3>
+          <span class="hero-pill-badge" style="background: rgba(16, 185, 129, 0.1); color: var(--true-color);">
+            Optimización Youden & Recall
+          </span>
+        </div>
+
+        <p class="text-muted" style="font-size: 0.92rem;">
+          En la verificación periodística, un falso negativo (dejar pasar un bulo peligroso) es más costoso que una falsa alarma revisable. Ajusta el umbral interactivo para observar cómo se reconfigura la matriz de confusión y se maximiza el <strong>Recall</strong>:
+        </p>
+
+        <!-- PRESETS RÁPIDOS -->
+        <div class="preset-buttons-row">
+          <button class="btn-preset" data-th="0.50">🔵 Estándar ($\theta = 0.50$)</button>
+          <button class="btn-preset active" data-th="0.42">🟢 Óptimo Calibrado ($\theta^* = 0.42$ - Youden J)</button>
+          <button class="btn-preset" data-th="0.35">🟠 Alta Sensibilidad Editorial ($\theta = 0.35$)</button>
+          <button class="btn-preset" data-th="0.58">🟣 Alta Precisión Antialarma ($\theta = 0.58$)</button>
+        </div>
+
+        <!-- SLIDER Y CONTROLES -->
+        <div class="slider-control-row">
+          <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted);">0.25 (Alta Sensibilidad)</span>
+          <input type="range" id="threshold-slider" class="threshold-slider" min="0.25" max="0.70" step="0.01" value="0.42">
+          <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted);">0.70 (Alta Especificidad)</span>
+          <div id="threshold-val-bubble" class="threshold-display-bubble">θ = 0.42</div>
+        </div>
+
+        <!-- STATS EN VIVO -->
+        <div class="stat-comparison-row" style="margin-top: 1.25rem;">
+          <div class="stat-box">
+            <div class="stat-label">Recall Fake (Bulos Capturados)</div>
+            <div id="dyn-recall" class="stat-val text-success">70.05%</div>
+            <div id="dyn-tp-text" class="stat-delta success">1.406 bulos detectados</div>
+          </div>
+
+          <div class="stat-box">
+            <div class="stat-label">Precisión de Falsedad</div>
+            <div id="dyn-precision" class="stat-val">58.51%</div>
+            <div id="dyn-fp-text" class="stat-delta">997 falsas alarmas</div>
+          </div>
+
+          <div class="stat-box">
+            <div class="stat-label">F1-Score Fake</div>
+            <div id="dyn-f1" class="stat-val" style="color: var(--primary);">0.6376</div>
+            <div class="stat-delta text-muted">Balance armónico óptimo</div>
+          </div>
+
+          <div class="stat-box">
+            <div class="stat-label">Accuracy Global</div>
+            <div id="dyn-acc" class="stat-val">63.83%</div>
+            <div id="dyn-fn-text" class="stat-delta text-danger">FN reducidos a sólo 601</div>
+          </div>
+        </div>
+
+        <!-- MATRIZ DE CONFUSIÓN DINÁMICA -->
+        <div style="margin-top: 1.25rem; background: var(--bg-muted); padding: 1.25rem; border-radius: var(--radius-md);">
+          <div style="font-weight: 700; font-size: 0.9rem; margin-bottom: 0.5rem;">
+            Matriz de Confusión Dinámica sobre el Corpus Global ($N = 4.418$)
+          </div>
+          <div class="cm-matrix-visual">
+            <div class="cm-cell tp">
+              <div class="cm-title">Verdaderos Negativos (TN)</div>
+              <div id="cm-tn" class="cm-val text-success">1.414</div>
+              <div class="cm-sub">Noticias Reales Certificadas</div>
+            </div>
+            <div class="cm-cell fn">
+              <div class="cm-title">Falsos Positivos (FP)</div>
+              <div id="cm-fp" class="cm-val text-warning">997</div>
+              <div class="cm-sub">Falsas Alarmas (Revisables por Periodista)</div>
+            </div>
+            <div class="cm-cell fn">
+              <div class="cm-title">Falsos Negativos (FN)</div>
+              <div id="cm-fn" class="cm-val text-danger">601</div>
+              <div class="cm-sub">Bulos Escapados (Minimizado)</div>
+            </div>
+            <div class="cm-cell tp">
+              <div class="cm-title">Verdaderos Positivos (TP)</div>
+              <div id="cm-tp" class="cm-val text-success">1.406</div>
+              <div class="cm-sub">Bulos Correctamente Frenados</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         TAB 3: EXPLICABILIDAD FRASE A FRASE (XAI LOCAL & INSPECTOR)
+         ====================================================================== -->
+    <section id="tab-inspector" class="tab-view">
+      <div class="view-hero">
+        <div class="view-hero-text">
+          <div class="hero-pill-badge" style="background: rgba(16, 185, 129, 0.1); color: var(--true-color);">
+            Módulo de Explicabilidad Local (XAI)
+          </div>
+          <h2>Inspector de Noticias Frase a Frase: Auditoría Estilométrica y Gatillos</h2>
+          <p>
+            Desglosa cualquier noticia oración por oración. Identifica qué oraciones disparan el sensacionalismo ($P_{\text{sent}}$), dónde se producen rupturas de coherencia consecutiva y qué rasgos forenses (mayúsculas sostenidas, densidad adverbial, fuentes dicendi) determinan la sospecha.
+          </p>
+        </div>
+      </div>
+
+      <!-- SELECTOR DE NOTICIAS BENCHMARK -->
+      <div class="card" style="margin-bottom: 1.25rem;">
+        <div class="card-title-row">
+          <h3>
+            <span>📰</span>
+            <span>Noticias Benchmark Reales del Corpus Ampliado</span>
+          </h3>
+          <span class="text-muted" style="font-size: 0.8rem;">Haz clic para cargar ejemplos reales de España y América Latina</span>
+        </div>
+        <div class="benchmark-picker-row" id="inspector-benchmark-row">
+          <!-- Chips cargados dinámicamente -->
+        </div>
+
+        <!-- INPUT DE TEXTO DE LA NOTICIA -->
+        <div class="input-analysis-box">
+          <textarea id="inspector-textarea" class="news-textarea" placeholder="Pega el texto de cualquier noticia aquí para inspeccionar frase por frase..."></textarea>
+          <div class="input-meta-bar">
+            <span id="inspector-counter" class="text-muted" style="font-size: 0.85rem; font-weight: 600;">0 palabras | 0 caracteres</span>
+            <button id="btn-run-inspector" class="btn-analyze-main">
+              <span>⚡</span>
+              <span id="btn-run-inspector-text">Analizar con Pipeline 5D</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARA A CARA: SABERT (LITERATURA) VS ENSAMBLE 5D (PROPUESTO) -->
+      <div class="grid-2" style="margin-bottom: 1.5rem;">
+        <!-- TARJETA SABERT -->
+        <div class="card" style="border-left: 5px solid #64748b;">
+          <div class="card-title-row">
+            <h4>🏛️ Modelo Literatura (SaBERT)</h4>
+            <span id="card-sabert-badge" class="opaque-score-badge fake" style="font-size: 0.9rem; padding: 0.2rem 0.6rem;">FALSO</span>
+          </div>
+          <div style="font-size: 1.3rem; font-weight: 800; margin-bottom: 0.25rem;" id="card-sabert-pct">
+            Prob. Falsedad: 88.4%
+          </div>
+          <div class="text-muted" style="font-size: 0.82rem; margin-bottom: 0.75rem;" id="card-sabert-comment">
+            Predicción opaca escalar sin justificación textual ni identificación de oraciones.
+          </div>
+          <div style="background: var(--bg-muted); padding: 0.6rem 0.8rem; border-radius: var(--radius-sm); font-size: 0.78rem; color: #ef4444; font-weight: 600;">
+            ⚠️ 0% Trazabilidad para el periodista
+          </div>
+        </div>
+
+        <!-- TARJETA ENSAMBLE 5D -->
+        <div class="card" style="border-left: 5px solid var(--primary);">
+          <div class="card-title-row">
+            <h4>🚀 Ensamble Avanzado 5D (Propio)</h4>
+            <span id="card-ensamble-badge" class="opaque-score-badge fake" style="font-size: 0.9rem; padding: 0.2rem 0.6rem; background: rgba(37, 99, 235, 0.15); color: var(--primary); border-color: var(--primary);">FALSO</span>
+          </div>
+          <div style="font-size: 1.3rem; font-weight: 800; margin-bottom: 0.25rem; color: var(--primary);" id="card-ensamble-pct">
+            Prob. Calibrada 5D: 78.8%
+          </div>
+          <div class="text-muted" style="font-size: 0.82rem; margin-bottom: 0.75rem;" id="card-ensamble-comment">
+            Decisión multi-criterio basada en morfología, mayúsculas sostenidas y coherencia secuencial.
+          </div>
+          <div style="display: flex; gap: 0.5rem;">
+            <button id="btn-simulate-ablation" class="btn-preset" style="font-size: 0.78rem;">
+              🧪 Simular Ablación de Gatillos
+            </button>
+            <button id="btn-normalize-caps" class="btn-preset" style="font-size: 0.78rem;">
+              🔤 Normalizar Mayúsculas
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STREAM FRASE A FRASE (HEATMAP) -->
+      <div class="card">
+        <div class="card-title-row">
+          <h3>
+            <span>🔍</span>
+            <span>Desglose y Mapa de Calor Oración por Oración</span>
+          </h3>
+          <div style="display: flex; gap: 0.5rem; align-items: center; font-size: 0.8rem;">
+            <span style="display: flex; align-items: center; gap: 0.3rem;"><span style="width: 10px; height: 10px; background: #10b981; border-radius: 50%;"></span> Factual</span>
+            <span style="display: flex; align-items: center; gap: 0.3rem;"><span style="width: 10px; height: 10px; background: #f59e0b; border-radius: 50%;"></span> Opinativo</span>
+            <span style="display: flex; align-items: center; gap: 0.3rem;"><span style="width: 10px; height: 10px; background: #ef4444; border-radius: 50%;"></span> Gatillo de Sospecha</span>
+          </div>
+        </div>
+
+        <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 1rem;">
+          Haz clic en cualquier oración para inspeccionar sus características individuales, coherencia discursiva y simulación contrafáctica:
+        </p>
+
+        <!-- CONTENEDOR DE ORACIONES -->
+        <div id="sentence-stream-container" class="sentence-stream-container">
+          <!-- Oraciones inyectadas dinámicamente -->
+        </div>
+
+        <!-- DRAWER / PANEL DE DETALLE DE ORACIÓN SELECCIONADA -->
+        <div id="sentence-inspect-box" class="sentence-inspect-box" style="display: none;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
+            <h4 id="inspect-sent-title" style="font-size: 1.05rem; font-weight: 700; color: var(--primary);">
+              🔍 Inspección Forense: Oración 1
+            </h4>
+            <span id="inspect-sent-badge" class="dim-pct-badge">Score: 90.0%</span>
+          </div>
+
+          <blockquote id="inspect-sent-quote" style="background: var(--bg-muted); padding: 0.9rem; border-left: 4px solid var(--primary); font-style: italic; border-radius: var(--radius-sm); margin-bottom: 1rem; font-size: 0.92rem;">
+            "..."
+          </blockquote>
+
+          <div class="grid-4" style="gap: 0.75rem;">
+            <div class="stat-box">
+              <div class="stat-label">Coherencia con Anterior</div>
+              <div id="inspect-sim" class="stat-val" style="font-size: 1.15rem;">0.450</div>
+              <div class="stat-delta text-muted">Similitud Coseno SBERT</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Mayúsculas Sostenidas</div>
+              <div id="inspect-caps" class="stat-val" style="font-size: 1.15rem;">0.0%</div>
+              <div class="stat-delta text-muted">Ratio de palabras en MAYÚS</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Densidad Adverbios</div>
+              <div id="inspect-adv" class="stat-val" style="font-size: 1.15rem;">0.0%</div>
+              <div class="stat-delta text-muted">Tokens adverbiales</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Verbos de Atribución</div>
+              <div id="inspect-dicendi" class="stat-val" style="font-size: 1.15rem;">0</div>
+              <div class="stat-delta text-muted">Verbos dicendi en frase</div>
+            </div>
+          </div>
+
+          <div id="inspect-ablation-note" style="margin-top: 1rem; background: var(--primary-light); padding: 0.75rem 1rem; border-radius: var(--radius-md); font-size: 0.85rem; color: var(--primary); font-weight: 600;">
+            💡 Impacto Causal: Silenciar esta oración reduciría el score de falsedad estimado en aproximadamente -12.4 puntos porcentuales.
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         TAB 4: IMPORTANCIA DE VARIABLES & DICCIONARIO 5D (XAI GLOBAL)
+         ====================================================================== -->
+    <section id="tab-variables" class="tab-view">
+      <div class="view-hero">
+        <div class="view-hero-text">
+          <div class="hero-pill-badge" style="background: rgba(139, 92, 246, 0.1); color: var(--purple-color);">
+            Explicabilidad Global (Global XAI)
+          </div>
+          <h2>Explorador de Variables & Diccionario Exhaustivo de las 5 Dimensiones</h2>
+          <p>
+            Análisis de ganancia de información por dimensión y catálogo completo de las 42 variables extraídas. Consulta la hipótesis lingüística, formulación matemática y efecto clasificatorio de cada rasgo.
+          </p>
+        </div>
+      </div>
+
+      <!-- RESUMEN DE IMPORTANCIA POR DIMENSIÓN -->
+      <div class="grid-2" style="margin-bottom: 1.5rem;">
+        <!-- GRÁFICO POR DIMENSIONES -->
+        <div class="card">
+          <div class="card-title-row">
+            <h3>
+              <span>🍰</span>
+              <span>Contribución Agregada por Dimensión</span>
+            </h3>
+          </div>
+          <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 1rem;">
+            Las dimensiones D5 (Mayúsculas y anclajes) y D4 (Morfosintaxis) suman casi un 40% del poder predictivo, asegurando la invarianza regional frente al domain shift:
+          </p>
+          <div style="height: 260px; position: relative;">
+            <canvas id="chart-dimensions"></canvas>
+          </div>
+        </div>
+
+        <!-- TOP FEATURES INDIVIDUALES -->
+        <div class="card">
+          <div class="card-title-row">
+            <h3>
+              <span>🏆</span>
+              <span>Top 8 Variables Individuales Más Influyentes</span>
+            </h3>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 0.65rem; margin-top: 0.5rem;">
+            <div>
+              <div style="display: flex; justify-content: space-between; font-size: 0.82rem; font-weight: 700; margin-bottom: 0.2rem;">
+                <span>1. adv_density (Densidad Adverbial POS) [D4]</span>
+                <span style="color: var(--primary);">8.41%</span>
+              </div>
+              <div style="height: 6px; background: var(--bg-muted); border-radius: 3px; overflow: hidden;">
+                <div style="width: 84%; height: 100%; background: #f59e0b;"></div>
+              </div>
+            </div>
+
+            <div>
+              <div style="display: flex; justify-content: space-between; font-size: 0.82rem; font-weight: 700; margin-bottom: 0.2rem;">
+                <span>2. upper_chars_ratio (Caracteres Mayúsculos) [D5]</span>
+                <span style="color: var(--primary);">7.49%</span>
+              </div>
+              <div style="height: 6px; background: var(--bg-muted); border-radius: 3px; overflow: hidden;">
+                <div style="width: 75%; height: 100%; background: #ec4899;"></div>
+              </div>
+            </div>
+
+            <div>
+              <div style="display: flex; justify-content: space-between; font-size: 0.82rem; font-weight: 700; margin-bottom: 0.2rem;">
+                <span>3. all_caps_ratio (Mayúsculas Sostenidas) [D5]</span>
+                <span style="color: var(--primary);">6.96%</span>
+              </div>
+              <div style="height: 6px; background: var(--bg-muted); border-radius: 3px; overflow: hidden;">
+                <div style="width: 70%; height: 100%; background: #ec4899;"></div>
+              </div>
+            </div>
+
+            <div>
+              <div style="display: flex; justify-content: space-between; font-size: 0.82rem; font-weight: 700; margin-bottom: 0.2rem;">
+                <span>4. P_full (Sensacionalismo Documental) [D0]</span>
+                <span style="color: var(--primary);">5.83%</span>
+              </div>
+              <div style="height: 6px; background: var(--bg-muted); border-radius: 3px; overflow: hidden;">
+                <div style="width: 58%; height: 100%; background: #ef4444;"></div>
+              </div>
+            </div>
+
+            <div>
+              <div style="display: flex; justify-content: space-between; font-size: 0.82rem; font-weight: 700; margin-bottom: 0.2rem;">
+                <span>5. P_mean (Sensacionalismo Medio Oracional) [D0]</span>
+                <span style="color: var(--primary);">5.49%</span>
+              </div>
+              <div style="height: 6px; background: var(--bg-muted); border-radius: 3px; overflow: hidden;">
+                <div style="width: 55%; height: 100%; background: #ef4444;"></div>
+              </div>
+            </div>
+
+            <div>
+              <div style="display: flex; justify-content: space-between; font-size: 0.82rem; font-weight: 700; margin-bottom: 0.2rem;">
+                <span>6. P_max (Oración Gatillo Extrema) [D0]</span>
+                <span style="color: var(--primary);">5.23%</span>
+              </div>
+              <div style="height: 6px; background: var(--bg-muted); border-radius: 3px; overflow: hidden;">
+                <div style="width: 52%; height: 100%; background: #ef4444;"></div>
+              </div>
+            </div>
+
+            <div>
+              <div style="display: flex; justify-content: space-between; font-size: 0.82rem; font-weight: 700; margin-bottom: 0.2rem;">
+                <span>7. hapax_ratio (Riqueza Léxica Hapax) [D3]</span>
+                <span style="color: var(--primary);">5.21%</span>
+              </div>
+              <div style="height: 6px; background: var(--bg-muted); border-radius: 3px; overflow: hidden;">
+                <div style="width: 52%; height: 100%; background: #10b981;"></div>
+              </div>
+            </div>
+
+            <div>
+              <div style="display: flex; justify-content: space-between; font-size: 0.82rem; font-weight: 700; margin-bottom: 0.2rem;">
+                <span>8. dicendi_density (Verbos de Atribución / Reporte) [D2]</span>
+                <span style="color: var(--primary);">4.88%</span>
+              </div>
+              <div style="height: 6px; background: var(--bg-muted); border-radius: 3px; overflow: hidden;">
+                <div style="width: 49%; height: 100%; background: #8b5cf6;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DICCIONARIO BUSCABLE Y FILTRABLE -->
+      <div class="card">
+        <div class="card-title-row">
+          <h3>
+            <span>📖</span>
+            <span>Diccionario Interactivo de las 42 Variables</span>
+          </h3>
+          <span id="dict-count" class="text-muted" style="font-size: 0.85rem; font-weight: 600;">38 variables documentadas</span>
+        </div>
+
+        <!-- CONTROLES DE BÚSQUEDA Y FILTRADO -->
+        <div class="dictionary-controls-bar">
+          <input type="text" id="dict-search-input" class="search-input" placeholder="Buscar por nombre (ej. all_caps, dicendi, legibilidad)...">
+          
+          <div class="dim-filter-pills">
+            <button class="btn-filter-pill active" data-filter="ALL">Todas</button>
+            <button class="btn-filter-pill" data-filter="D0">D0 Base</button>
+            <button class="btn-filter-pill" data-filter="D1">D1 Coherencia</button>
+            <button class="btn-filter-pill" data-filter="D2">D2 Epistémica</button>
+            <button class="btn-filter-pill" data-filter="D3">D3 Léxica</button>
+            <button class="btn-filter-pill" data-filter="D4">D4 Morfosintaxis</button>
+            <button class="btn-filter-pill" data-filter="D5">D5 Mayúsculas/Puntuación</button>
+          </div>
+        </div>
+
+        <!-- GRID DE TARJETAS DE VARIABLES -->
+        <div id="dictionary-grid" class="dictionary-grid">
+          <!-- Tarjetas renderizadas dinámicamente -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         TAB 5: BENCHMARK COMPARATIVO & AUDITORÍA TRANSATLÁNTICA
+         ====================================================================== -->
+    <section id="tab-benchmark" class="tab-view">
+      <div class="view-hero">
+        <div class="view-hero-text">
+          <div class="hero-pill-badge" style="background: rgba(6, 182, 212, 0.1); color: var(--cyan-color);">
+            Validación Transatlántica Exhaustiva
+          </div>
+          <h2>Benchmark Integral: SaBERT vs Ensamble Base vs Ensamble Avanzado 5D</h2>
+          <p>
+            Comparación cuantitativa rigurosa sobre el <strong>Corpus Ampliado Transatlántico ($N = 4.418$)</strong>. Demostración formal de cómo el Ensamble 5D rescata el Recall y supera a la literatura en entornos multirregionales.
+          </p>
+        </div>
+      </div>
+
+      <!-- TABLA COMPARATIVA PRINCIPAL -->
+      <div class="card" style="margin-bottom: 1.5rem;">
+        <div class="card-title-row">
+          <h3>
+            <span>📋</span>
+            <span>Matriz Comparativa de Rendimiento Cuantitativo ($N = 4.418$)</span>
+          </h3>
+          <span class="hero-pill-badge" style="background: rgba(16, 185, 129, 0.1); color: var(--true-color);">
+            Validación 5-Fold Stratified
+          </span>
+        </div>
+
+        <div class="benchmark-table-wrapper">
+          <table class="benchmark-table">
+            <thead>
+              <tr>
+                <th>Modelo y Configuración</th>
+                <th>Región Evaluada</th>
+                <th>Accuracy</th>
+                <th>Recall Fake</th>
+                <th>Precision Fake</th>
+                <th>F1 Fake</th>
+                <th>ROC-AUC</th>
+                <th>Evaluación Forense</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- SaBERT ESPAÑA -->
+              <tr>
+                <td><strong>SaBERT (Literatura)</strong></td>
+                <td>🇪🇸 España (In-Domain)</td>
+                <td>89.72%</td>
+                <td>80.00%</td>
+                <td>97.32%</td>
+                <td>0.8781</td>
+                <td>0.9536</td>
+                <td><span class="badge-win">Memorización Fuerte</span></td>
+              </tr>
+              <!-- SaBERT LATAM -->
+              <tr style="background: rgba(239, 68, 68, 0.04);">
+                <td><strong>SaBERT (Literatura)</strong></td>
+                <td>🌎 América Latina (Domain Shift)</td>
+                <td>65.89%</td>
+                <td class="text-danger" style="font-weight: 800;">31.30%</td>
+                <td>79.50%</td>
+                <td>0.4491</td>
+                <td>0.6800</td>
+                <td><span class="badge-loss">Colapso (FNR 68.7%)</span></td>
+              </tr>
+              <!-- ENSAMBLE BASE -->
+              <tr>
+                <td>Ensamble Base (12 Vars - θ=0.50)</td>
+                <td>🌎 América Latina</td>
+                <td>63.52%</td>
+                <td>43.95%</td>
+                <td>62.77%</td>
+                <td>0.5170</td>
+                <td>0.6608</td>
+                <td>Sensacionalismo + SBERT</td>
+              </tr>
+              <!-- ENSAMBLE AVANZADO 5D LATAM TH=0.50 -->
+              <tr style="background: rgba(16, 185, 129, 0.04);">
+                <td><strong>Ensamble Avanzado 5D (42 Vars - θ=0.50)</strong></td>
+                <td>🌎 América Latina</td>
+                <td class="text-success" style="font-weight: 800;">68.36% (+2.47 vs SaBERT)</td>
+                <td>50.05% (+18.75 vs SaBERT)</td>
+                <td>70.18%</td>
+                <td>0.5843</td>
+                <td>0.7162</td>
+                <td><span class="badge-win">Supera a SaBERT en LatAm</span></td>
+              </tr>
+              <!-- ENSAMBLE AVANZADO 5D LATAM CALIBRADO -->
+              <tr style="background: rgba(16, 185, 129, 0.08); font-weight: 600;">
+                <td><strong>Ensamble 5D Calibrado (θ*=0.42)</strong></td>
+                <td>🌎 América Latina (Calibrado)</td>
+                <td>65.70%</td>
+                <td class="text-success" style="font-weight: 800;">62.16% (¡Doble que SaBERT!)</td>
+                <td>61.22%</td>
+                <td class="text-success" style="font-weight: 800;">0.6169</td>
+                <td>0.7162</td>
+                <td><span class="badge-win">570 bulos rescatados</span></td>
+              </tr>
+              <!-- ENSAMBLE AVANZADO 5D GLOBAL TH=0.50 -->
+              <tr>
+                <td>Ensamble Avanzado 5D (42 Vars - θ=0.50)</td>
+                <td>🌐 Global Ampliado ($N=4.418$)</td>
+                <td>65.69%</td>
+                <td>50.62%</td>
+                <td>65.93%</td>
+                <td>0.5727</td>
+                <td>0.7178</td>
+                <td>+6.10 pts AUC vs Base</td>
+              </tr>
+              <!-- ENSAMBLE AVANZADO 5D GLOBAL CALIBRADO -->
+              <tr style="background: rgba(37, 99, 235, 0.08); font-weight: 700;">
+                <td><strong>Ensamble 5D Calibrado (θ*=0.42)</strong></td>
+                <td>🌐 Global Ampliado ($N=4.418$)</td>
+                <td>63.83%</td>
+                <td class="text-success" style="font-weight: 800;">70.05%</td>
+                <td>58.51%</td>
+                <td class="text-primary" style="font-weight: 800;">0.6376</td>
+                <td>0.7178</td>
+                <td><span class="badge-win">1.406 bulos detectados</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- CRITERIOS PERIODÍSTICOS CUALITATIVOS -->
+      <div class="card" style="margin-bottom: 1.5rem;">
+        <div class="card-title-row">
+          <h3>
+            <span>⚖️</span>
+            <span>Auditoría de Idoneidad para Redacciones Periodísticas & Fact-Checking</span>
+          </h3>
+        </div>
+
+        <div class="grid-3" style="gap: 1rem;">
+          <div style="background: var(--bg-muted); padding: 1.25rem; border-radius: var(--radius-md);">
+            <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--primary);">
+              1. Trazabilidad & Explicabilidad
+            </h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.45;">
+              <strong>Literatura:</strong> 0% explicabilidad. Sólo provee un porcentaje escalar opaco.<br>
+              <strong>Ensamble 5D:</strong> Desglose completo de oraciones gatillo, mapa de calor, saltos de coherencia y justificación estilométrica.
+            </p>
+          </div>
+
+          <div style="background: var(--bg-muted); padding: 1.25rem; border-radius: var(--radius-md);">
+            <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--primary);">
+              2. Invarianza Regional Transatlántica
+            </h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.45;">
+              <strong>Literatura:</strong> Colapso total de Recall (31.3%) en América Latina.<br>
+              <strong>Ensamble 5D:</strong> Recall estable de 62.2% - 70.1% mediante invariantes como mayúsculas sostenidas y adverbios.
+            </p>
+          </div>
+
+          <div style="background: var(--bg-muted); padding: 1.25rem; border-radius: var(--radius-md);">
+            <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--primary);">
+              3. Calibración de Umbral Operativo
+            </h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.45;">
+              <strong>Literatura:</strong> Umbral rígido de argmax softmax no ajustable.<br>
+              <strong>Ensamble 5D:</strong> Ajuste dinámico de $\theta$ para priorizar sensibilidad según el protocolo de verificación.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- GALERÍA DE FIGURAS OFICIALES DE LA TESIS (300 DPI) -->
+      <div class="card">
+        <div class="card-title-row">
+          <h3>
+            <span>🖼️</span>
+            <span>Galería de Evidencia Visual (Figuras de Publicación a 300 DPI)</span>
+          </h3>
+          <span class="text-muted" style="font-size: 0.82rem;">Haz clic en cualquier figura para ampliar en alta resolución</span>
+        </div>
+
+        <div class="image-gallery-grid">
+          <!-- FIG 1: IMPORTANCIA 5D -->
+          <div class="gallery-card">
+            <img src="images/importancia_features_5_dimensiones.png" alt="Importancia de Características 5D" onclick="openImageModal(this.src, this.alt)">
+            <div class="gallery-card-body">
+              <h4>Importancia de las 5 Dimensiones</h4>
+              <p>Contribución de las 42 variables (Top: adverbios, mayúsculas sostenidas y sensacionalismo).</p>
+            </div>
+          </div>
+
+          <!-- FIG 2: COMPARATIVA BASE VS AVANZADO -->
+          <div class="gallery-card">
+            <img src="images/comparativa_ensamble_base_vs_avanzado_5d.png" alt="Comparativa Base vs Avanzado 5D" onclick="openImageModal(this.src, this.alt)">
+            <div class="gallery-card-body">
+              <h4>Salto Base vs Avanzado 5D</h4>
+              <p>Curvas ROC y Precision-Recall mostrando el incremento de +6.1 pts de AUC.</p>
+            </div>
+          </div>
+
+          <!-- FIG 3: MATRICES CONFUSIÓN 5D -->
+          <div class="gallery-card">
+            <img src="images/matrices_confusion_avanzado_5d_vs_base.png" alt="Matrices de Confusión Avanzado 5D" onclick="openImageModal(this.src, this.alt)">
+            <div class="gallery-card-body">
+              <h4>Matrices de Confusión</h4>
+              <p>Comparación de distribución de aciertos y falsos negativos a $\theta=0.50$ y $\theta^*=0.42$.</p>
+            </div>
+          </div>
+
+          <!-- FIG 4: OPTIMIZACIÓN UMBRAL -->
+          <div class="gallery-card">
+            <img src="images/curva_optimizacion_umbral_recall_precision.png" alt="Curva de Optimización de Umbral" onclick="openImageModal(this.src, this.alt)">
+            <div class="gallery-card-body">
+              <h4>Optimización de Umbral Youden</h4>
+              <p>Curva de compensación Precision-Recall justificando la calibración a $\theta^* = 0.42$.</p>
+            </div>
+          </div>
+
+          <!-- FIG 5: ESPAÑA VS LATAM -->
+          <div class="gallery-card">
+            <img src="images/comparativa_rendimiento_espana_vs_latam_ensamble.png" alt="Rendimiento España vs LatAm" onclick="openImageModal(this.src, this.alt)">
+            <div class="gallery-card-body">
+              <h4>Rendimiento España vs LatAm</h4>
+              <p>Resistencia al domain shift transatlántico en el ensamble adaptativo.</p>
+            </div>
+          </div>
+
+          <!-- FIG 6: LITERATURA VS ENSAMBLE -->
+          <div class="gallery-card">
+            <img src="images/comparativa_metricas_ensamble_vs_literatura.png" alt="Comparativa Literatura vs Ensamble" onclick="openImageModal(this.src, this.alt)">
+            <div class="gallery-card-body">
+              <h4>Literatura vs Ensamble 5D</h4>
+              <p>Desempeño relativo en los subconjuntos regionales del corpus ampliado.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================================================
+       MODAL DE AMPLIACIÓN DE IMÁGENES
+       ======================================================================== -->
+  <div id="img-modal-overlay" class="img-modal-overlay" onclick="closeImageModal()">
+    <div class="img-modal-content" onclick="event.stopPropagation()">
+      <button class="btn-close-img-modal" onclick="closeImageModal()">&times;</button>
+      <img id="modal-img-element" src="" alt="Ampliación">
+      <div id="modal-img-caption" style="color: white; margin-top: 0.75rem; text-align: center; font-size: 0.95rem; font-weight: 600;"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

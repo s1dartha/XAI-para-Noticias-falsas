@@ -1,0 +1,1 @@
+/home/ubuntu/Documentos/Tesis/Modelos_Individuales/Sensacionalismo/reportes/Reporte_Sensacionalismo.md

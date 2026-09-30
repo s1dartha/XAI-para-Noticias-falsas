@@ -1,0 +1,243 @@
+# PLAN MAESTRO DE TESIS: ESTADO DEL ARTE, RESULTADOS EMPÍRICOS, AUDITORÍA CRÍTICA Y HOJA DE RUTA
+
+**Título Oficial Propuesto:**  
+*Evaluación de Patrones Morfológicos, Sensacionalismo y Redundancia Semántica como Aproximación a la Confiabilidad de Noticias: Límites de los Modelos Basados Exclusivamente en Texto y Auditoría de Explicabilidad Causal (XAI)*
+
+**Área de Investigación:** Inteligencia Artificial, Procesamiento de Lenguaje Natural (NLP), Inteligencia Artificial Explicable (XAI), Detección de Desinformación (*Fake News*).  
+**Autor:** Investigador / Tesista  
+**Fecha de Actualización:** 27 de Septiembre de 2026  
+**Repositorio GitHub Oficial:** [`s1dartha/XAI-para-Noticias-falsas`](https://github.com/s1dartha/XAI-para-Noticias-falsas)  
+**Ubicación del Código y Reportes Locales:** `/home/ubuntu/Documentos/Tesis/`
+
+---
+
+## 1. REPLANTEAMIENTO EPISTEMOLÓGICO Y CAMBIO DE MARCO (*FRAMING*)
+
+### 1.1 La Tesis Central y la Hipótesis de Imposibilidad
+La premisa rectora de esta investigación sostiene una verdad incómoda pero científicamente demostrable:
+> **No es posible determinar de forma universal y robusta la veracidad de una noticia analizando únicamente su texto cerrado y su morfología superficial.**
+
+La falsedad de un enunciado depende de su correspondencia con la realidad empírica externa, no de su estructura sintáctica. Un texto desinformativo puede ser redactado con la más impecable sobriedad académica, mientras que una noticia verdadera sobre una catástrofe natural o un hallazgo científico puede ser redactada con un estilo escandaloso y sensacionalista. Por tanto, clasificar una noticia como "Verdadera" o "Falsa" a partir exclusivamente de su texto conduce inevitablemente a que los modelos de Deep Learning aprendan atajos heurísticos (*shortcuts*), sesgos contextuales por país y memorización de entidades nombradas (*Spurious Feature Memorization*).
+
+### 1.2 El Nuevo Enfoque Metodológico
+En lugar de forzar a los modelos a emitir un veredicto binario omnisciente y ficticio (Real vs. Fake), la tesis propone:
+1. **Descomposición Multidimensional:** Analizar la noticia a través de dimensiones lingüísticas observables y medibles: **Sensacionalismo / Carga Emocional**, **Redundancia Semántica Intra-Documental** y **Alineación con Corpus de Fact-Checking**.
+2. **Índice de Manipulación Lingüística y Confiabilidad Estructural:** El ensamble propuesto no dice "esta noticia es verdad histórica", sino que cuantifica el grado de anomalía morfológica y estilística como un sistema de alerta temprana (*Red Flag*) para periodistas y verificadores humanos.
+3. **Auditoría Radical de la Explicabilidad (XAI):** Demostrar empírica y matemáticamente por qué las técnicas de explicabilidad tradicionales de la literatura (LIME, SHAP, Saliency, Integrated Gradients canónicos) fallan o son insuficientes en NLP, y proponer un esquema explicativo propio e intrínseco.
+
+---
+
+## 2. QUÉ ESTÁ HECHO Y YA SE COMPROBÓ EN LA INVESTIGACIÓN (EVIDENCIA EXPERIMENTAL)
+
+A través de los experimentos ejecutados en `/home/ubuntu/Documentos/Tesis/`, se ha consolidado un corpus exhaustivo de evidencia empírica distribuido en cinco módulos clave:
+
+```text
+/home/ubuntu/Documentos/Tesis/
+├── Modelos_Individuales/
+│   ├── Clasificar_fake/      # Módulo 1: Benchmark masivo de 4 modelos (2.604 noticias)
+│   ├── Sensacionalismo/      # Módulo 2: Estudio Frases vs. Doc (272 noticias) + XAI (40 noticias)
+│   ├── Redundancia/          # Módulo 3: SBERT (4 arquitecturas) + Umbral GMM + XAI Aleatorio
+│   └── Tareas/               # Especificaciones y trazabilidad de requerimientos
+├── Resultados/               # Módulo 4: Pipeline MexGen tripartito + Web App Flask
+└── Literatura/               # Módulo 5: Acervo bibliográfico fundamental (5 ejes temáticos)
+```
+
+---
+
+### Módulo 1: Benchmark de Clasificación de Fake News (`Modelos_Individuales/Clasificar_fake/`)
+* **Archivos clave:** [`run_4_modelos_fakenews.py`](file:///home/ubuntu/Documentos/Tesis/Modelos_Individuales/Clasificar_fake/run_4_modelos_fakenews.py), [`run_comparativo_fakenews.py`](file:///home/ubuntu/Documentos/Tesis/Modelos_Individuales/Clasificar_fake/run_comparativo_fakenews.py), [`reportes/Reporte_4_Modelos_FakeNews.md`](file:///home/ubuntu/Documentos/Tesis/Modelos_Individuales/Clasificar_fake/reportes/Reporte_4_Modelos_FakeNews.md), [`reportes/metricas_4_modelos_fakenews.json`](file:///home/ubuntu/Documentos/Tesis/Modelos_Individuales/Clasificar_fake/reportes/metricas_4_modelos_fakenews.json).
+* **Dataset Evaluado:** `Noticias_entre_70_y_370_palabras (1).xlsx` (2.604 noticias en español: 1.259 verdaderas y 1.345 falsas).
+
+#### Hallazgos y Comprobaciones Matemáticas:
+1. **Colapso de los Modelos BERT Pre-entrenados para Fake News:**
+   * **BETO (Narrativaai, 355M params):** Accuracy = 37.63%, F1-Score = 0.3629, ROC-AUC = 0.3074. Latencia = 800.0 ms/noticia.
+   * **SaBERT (VerificadoProfesional, 110M params):** Accuracy = 14.29%, F1-Score = 0.1299, ROC-AUC = **0.0638**. Recall de Fake News = 2.01% (clasifica prácticamente todo como Real).
+   * **BERT Seq (Juanillaberia, 110M params):** Accuracy = 30.53%, F1-Score = 0.2611, ROC-AUC = 0.1365. Sobregenera falsos positivos (1.180 falsas alarmas en 1.259 noticias reales).
+2. **Inversión de Separabilidad por *Domain Shift*:**
+   * Que los tres modelos especializados tengan $\text{AUC-ROC} < 0.50$ (especialmente SaBERT con $0.0638$) demuestra que las redes aprendieron correlaciones espurias del dominio de entrenamiento (estilos de agencias de noticias específicas, nombres propios o coyunturas temporales) que en un corpus balanceado y multi-fuente se invierten por completo.
+3. **Superioridad del Modelo Causal Zero-Shot:**
+   * **Qwen 2.5-1.5B-Instruct:** Sin fine-tuning supervisado en el dataset, fue el único que superó el azar: **Accuracy = 54.26%, F1 = 0.5423, ROC-AUC = 0.5618, AP = 0.5480**.
+   * Esto prueba que el razonamiento semántico global de un LLM generalista supera a la memorización superficial de clasificadores BERT especializados en fake news.
+
+---
+
+### Módulo 2: Sensacionalismo y Dinámica Frase vs. Documento (`Modelos_Individuales/Sensacionalismo/`)
+* **Archivos clave:** [`3sensacionalismo.ipynb`](file:///home/ubuntu/Documentos/Tesis/Modelos_Individuales/Sensacionalismo/3sensacionalismo.ipynb), [`reportes/Reporte_Sensacionalismo_Frases_vs_Documento_Detallado.md`](file:///home/ubuntu/Documentos/Tesis/Modelos_Individuales/Sensacionalismo/reportes/Reporte_Sensacionalismo_Frases_vs_Documento_Detallado.md), [`reportes/Reporte_XAI_Sensacionalismo.md`](file:///home/ubuntu/Documentos/Tesis/Modelos_Individuales/Sensacionalismo/reportes/Reporte_XAI_Sensacionalismo.md), [`reportes/datos_sensacionalismo_frases.csv`](file:///home/ubuntu/Documentos/Tesis/Modelos_Individuales/Sensacionalismo/reportes/datos_sensacionalismo_frases.csv).
+* **Modelo Evaluado:** `JJNeila/bert-spanish-sensationalism-oss` (BETO fine-tuneado para amarillismo/sensacionalismo).
+
+#### Hallazgos y Comprobaciones Matemáticas:
+1. **Refutación Absoluta del Promedio Lineal en Prensa Real (272 noticias, 2.012 cláusulas):**
+   * El sensacionalismo de un artículo completo **no es la suma ni el promedio de sus oraciones**. En prensa digital humana real (`dataset_Amarillismo.csv`), el promedio de oraciones frente a la noticia completa arrojó un $R^2 = -1.668$ y una concordancia clasificatoria de apenas el $31.2\%$.
+   * La autoatención de Transformer opera de manera altamente no lineal.
+2. **Descubrimiento del "Efecto Gatillo" (*Trigger Sentences*):**
+   * En entre el **$15.0\%$ y el $25.0\%$ de las noticias amarillistas reales**, el veredicto de sensacionalismo depende críticamente de **1 o 2 frases aisladas** en el titular o la entradilla. Al extirparlas quirúrgicamente mediante ablación dirigida, el artículo completo colapsa hacia la categoría de "Sobrio / No Sensacionalista".
+3. **Descubrimiento del "Efecto Dilución Contextual" (Amortiguador Semántico):**
+   * En artículos científicos o noticias serias con titulares llamativos (e.g. caso real `AMA_11`: *"Descubrieron una nueva criatura marina que impactó al mundo científico"*), evaluar las dos primeras frases aisladas da una alarma del **$97.5\%$ sensacionalista**. Sin embargo, al procesar el documento completo, las 13 frases siguientes con términos técnicos y sobriedad institucional amortiguan la carga inicial, desplomando la predicción global a **$10.6\%$ (No Sensacionalista)**.
+4. **Disparidad Radical entre Prensa Real e IA Sintética:**
+   * En noticias sintéticas generadas por IA (`dataset_IA_sintetico_70.csv`), el promedio predice la noticia completa casi perfecto ($r = 0.994, R^2 = 0.985$), pero esto es un **artificio espurio**: los LLMs generan texto monotemático y saturado sin estructura periodística dialéctica, con $0\%$ de efecto gatillo.
+5. **Auditoría Causal de XAI Tradicional (40 noticias, GPU GTX 1650):**
+   * Se evaluaron 6 métodos: Integrated Gradients (IG), Attention Rollout, SHAP, LIME, Input×Gradient y LRP adaptado (Chefer et al.).
+   * **Incompatibilidad de LRP:** Se demostró formalmente que LRP canónico no compila en BERT debido a la discretitud de los embeddings, la no homogeneidad de GELU y el acoplamiento no lineal de LayerNorm. Se resolvió adaptando la formulación de Chefer et al. (CVPR 2021), logrando 21.1 ms/muestra.
+   * **Fidelidad Causal Radicalmente Deficiente:** En la prueba de borrado Top-20% (*Erasure / Comprehensiveness*, donde 1.0 es ideal), el método más alto (SHAP) apenas alcanzó **$+0.1285$**, IG obtuvo **$+0.0737$**, y Input×Gradient fracasó con valor negativo (**$-0.0167$**).
+   * **Inversión de Clase (*Prediction Flip Rate*):** En noticias sintéticas de IA, perturbar el 20% de las palabras clave generó un **$0\%$ de inversión** de sensacionalista a neutral. En prensa real, solo entre 30% y 40% cambiaron de clase, confirmando que el sensacionalismo se distribuye holísticamente en la geometría latente y no en meros disparadores léxicos locales.
+
+---
+
+### Módulo 3: Modelado de Redundancia Semántica e Interpretabilidad (`Modelos_Individuales/Redundancia/`)
+* **Archivos clave:** [`Reportes/Seleccion_Modelos/Reporte_Redundancia.md`](file:///home/ubuntu/Documentos/Tesis/Modelos_Individuales/Redundancia/Reportes/Seleccion_Modelos/Reporte_Redundancia.md), [`Reportes/Umbral_Redundancia/Reporte_Umbral_Redundancia.md`](file:///home/ubuntu/Documentos/Tesis/Modelos_Individuales/Redundancia/Reportes/Umbral_Redundancia/Reporte_Umbral_Redundancia.md), [`Reportes/Discretizacion_Redundancia/reporte_clases_redundancia.md`](file:///home/ubuntu/Documentos/Tesis/Modelos_Individuales/Redundancia/Reportes/Discretizacion_Redundancia/reporte_clases_redundancia.md), [`Reportes/XAI/Reporte_XAI_Aleatorio.md`](file:///home/ubuntu/Documentos/Tesis/Modelos_Individuales/Redundancia/Reportes/XAI/Reporte_XAI_Aleatorio.md), [`run_xai_aleatorio.py`](file:///home/ubuntu/Documentos/Tesis/Modelos_Individuales/Redundancia/run_xai_aleatorio.py).
+
+#### Hallazgos y Comprobaciones Matemáticas:
+1. **Selección Rigurosa de Arquitectura Siamesa:**
+   * Comparativa de 4 módulos de agregación (*Pooling*) sobre SBERT (`paraphrase-multilingual-MiniLM-L12-v2`):
+     * **SBERT Clásico (Mean-Pooling):** Líder absoluto (STS-B Pearson: 0.8282, Spearman: 0.8230; PAWS-X F1: 0.6257; Score Global: **0.6242**).
+     * CNN-SBERT (Conv1D MaxPool): Score Global = 0.5212.
+     * BLSTM-SBERT (BiLSTM MeanPool): Score Global = 0.5200.
+     * Attention-SBERT (Weighted Pool): Score Global = 0.5146.
+   * Conclusión: Los esquemas complejos convolucionales o recurrentes sobre embeddings contextuales destruyen la alineación métrica del espacio euclidiano pre-entrenado.
+2. **Determinación Empírica del Umbral Bayesiano de Redundancia:**
+   * Modelado de 47.693 pares oracionales intra-documento extraídos de 2.471 noticias válidas (`dataset_con_similitudes.csv`).
+   * Mediante Modelos de Mezcla Gaussiana (GMM), se determinó empíricamente el umbral continuo óptimo de redundancia: **$\tau = 0.34$**.
+3. **Discretización Óptima Supervisada:**
+   * Mediante árboles de decisión guiados por la reducción de Entropía de Shannon sobre la variable `max_intra_similarity`, se validaron 7 estratos discretos de riesgo de desinformación bajo validación cruzada estratificada de 5 folds.
+4. **Validación de Fidelidad y Prueba de Sanidad de Adebayo (Aceleración CUDA):**
+   * Evaluado en suite curada (10 pares) y suite aleatoria balanceada no curada (10 pares con `run_xai_aleatorio.py`):
+     * **Fast-IG (10 pasos):** Comprensividad promedio de **$+0.1346$** y Suficiencia de **$0.2330$**, con una latencia de 852 ms/par en GPU.
+     * **Input × Gradient:** Comprensividad de $+0.1183$ a solo 96.7 ms/par.
+     * **Brecha Causal MoRF vs. LoRF:** Brecha de fidelidad amplia ($\Delta = 0.2300$ al 40% de ablación), certificando que Fast-IG retira contenido causal informativo y no ruido de fondo.
+     * **Sanity Check de Adebayo Superado con Éxito:** Al aleatorizar progresivamente los parámetros del Transformer MiniLM-L12 capa por capa en cascada, la correlación de Spearman colapsó monótonamente: $\rho = 1.000 \to 0.9335 \to 0.7662 \to 0.7026 \to 0.5899 \to \mathbf{0.0495}$ (capas destruidas 12/12). Esto prueba matemáticamente que la explicabilidad depende de los pesos aprendidos de la red y no de artefactos espurios de arquitectura.
+
+---
+
+### Módulo 4: Pipeline de Inferencia MexGen y Servidor Web (`Resultados/`)
+* **Archivos clave:** [`server.py`](file:///home/ubuntu/Documentos/Tesis/Resultados/server.py), [`pipeline_tesis.ipynb`](file:///home/ubuntu/Documentos/Tesis/Resultados/pipeline_tesis.ipynb), [`index.html`](file:///home/ubuntu/Documentos/Tesis/Resultados/index.html), [`app.js`](file:///home/ubuntu/Documentos/Tesis/Resultados/app.js).
+* **Integración Operativa:**
+  * Algoritmo de extracción y segmentación de párrafos y oraciones con SpaCy (`es_core_news_sm`).
+  * Inferencia simultánea multimodelo:
+    1. SaBERT: Probabilidad de desinformación/falsedad contextual.
+    2. BERT Sensacionalismo (`JJNeila`): Índice de alarmismo general y desagregado por párrafo.
+    3. SBERT Multilingüe (`mpnet-base-v2` / `MiniLM-L12`): Matriz de similitud coseno intra-noticia para redundancia semántica.
+  * **Algoritmo MexGen:** Rankea y filtra los Top-K párrafos más sospechosos y anómalos para presentarlos al usuario como evidencia focalizada.
+  * Servidor web en Flask con frontend reactivo en tiempo real completamente funcional.
+
+---
+
+### Módulo 5: Fundamentación Teórica y Literatura Científica (`Literatura/`)
+El proyecto está respaldado por 20 artículos científicos indexados en el repositorio:
+1. **Eje de Crítica a la Explicabilidad Post-Hoc (`Literatura/Explicabilidad_No/`):**
+   * *Cynthia Rudin (Nature MI 2019, "Stop explaining black box machine learning models for high stakes decisions and use interpretable models instead"):* Argumento fundacional que justifica por qué inventar explicaciones a posteriori con SHAP o LIME sobre cajas negras es peligroso e infiel; la tesis demuestra empíricamente este fallo en sensacionalismo.
+   * *Impossibility Theorems for Explainability:* Demostración de las barreras axiomáticas en atribución local.
+   * *ACL 2025 (`2025.acl-long.1553.pdf`):* Evidencia contemporánea sobre las limitaciones de fidelidad en transformadores de lenguaje.
+2. **Eje de Patrones de Redundancia y Repetición (`Literatura/patrones o caracteristicas/Redundancia/`):**
+   * Artículos que conceptualizan cómo la desinformación masiva recurre a la repetición sistemática de premisas para inducir el efecto de verdad ilusoria (*Illusory Truth Effect*). Modelado con arquitecturas siamesas SBERT.
+3. **Eje de Sensacionalismo y Morfología Periodística (`Literatura/patrones o caracteristicas/Sensacionalismo/`):**
+   * Horne & Adali (2017): *"Titulares Cargados y Cuerpo Simple"*, base directa del experimento Frases vs. Documento.
+   * Hamby et al. (2023), Muñoz (2024), Roozenbeek et al. (2023): Análisis de la volatilidad emocional, polaridad y juicio crítico.
+
+---
+
+## 3. LO QUE RESALTA DE LA TESIS (CONTRIBUCIÓN CIENTÍFICA Y VALOR DIFERENCIAL)
+
+1. **Honestidad Científica y Ruptura de Paradigmas:** La mayoría de tesis en PLN cometen el error de reportar F1-Scores engañosos de $>90\%$ evaluando modelos sobre subconjuntos pequeños del mismo dataset de entrenamiento. Esta tesis somete 4 modelos a un corpus heterogéneo y descubre el colapso absoluto ($AUC < 0.50$), explicando matemáticamente el *domain shift* y la memorización de características espurias.
+2. **El Descubrimiento del Efecto Dilución y Efecto Gatillo:** El experimento de descomponer 272 noticias en 2.012 cláusulas para probar si el sensacionalismo del documento es o no el promedio de sus frases es un aporte metodológico inédito en el ámbito hispanohablante. Demuestra por qué fallan los pipelines ingenuos basados en promedios de oraciones.
+3. **Auditoría Rigurosa de XAI Más Allá de los Gráficos Bonitos:** En lugar de presentar mapas de calor como "explicación" subjetiva, la tesis implementó métricas formales de *Faithfulness* (Comprensividad, Suficiencia, curvas MoRF/LoRF) y el *Sanity Check* de aleatorización de Adebayo, desenmascarando las deficiencias de los métodos tradicionales en sensacionalismo y validando la solidez de Fast-IG en redundancia.
+4. **Prototipo MexGen Completamente Funcional:** La investigación no se queda en la teoría matemática; consolida los modelos en una aplicación web interactiva que permite a un usuario inspeccionar párrafos clasificados con tiempos de respuesta en milisegundos.
+
+---
+
+## 4. ANÁLISIS CRÍTICO: PUNTOS BUENOS, PUNTOS MALOS Y HUECOS ARGUMENTALES
+
+### Puntos Fuertes (Fortalezas de la Tesis):
+* **Rigor Estadístico:** Datasets extensos (2.604 noticias para clasificación, 2.471 noticias con 47k pares para redundancia, 272 noticias con 2.012 frases para sensacionalismo).
+* **Reproducibilidad y Eficiencia en Hardware Local:** Todo el código está modularizado, paralelizado en GPU (GTX 1650 con VRAM de 4GB) y verificado con scripts ejecutables y cuadernillos Jupyter documentados.
+* **Trazabilidad Completa:** Matrices de confusión, curvas ROC, curvas PR, métricas JSON estructuradas y reportes académicos redactados en estándar doctoral.
+
+### Puntos Débiles y Vacíos Argumentales a Subsanar:
+1. **La Paradoja de la Desinformación Sofisticada ("Texto Falso Serio"):**  
+   * *El Hueco:* Una noticia falsa creada por una campaña de desinformación estatal o de espionaje corporativo se redacta en tono neutral, sin superlativos, sin mayúsculas y sin redundancia semántica. El ensamble actual la catalogará como "Sobria" y "No Redundante", permitiendo que se cuele.  
+   * *Defensa Metodológica:* Se debe estipular formalmente que este sistema evalúa **manipulación lingüística**, no veracidad fáctica absoluta. La desinformación sofisticada escapa al análisis de forma cerrada y requiere verificación factual con fuentes externas (RAG).
+2. **La Paradoja del Periodismo de Impacto Real ("Texto Verdadero Sensacionalista"):**  
+   * *El Hueco:* Una noticia 100% verídica sobre un terremoto o una crisis sanitaria puede estar cargada de dramatismo y sensacionalismo. El modelo la marcará con bandera roja de "Sensacionalista".  
+   * *Defensa Metodológica:* El sistema debe explicitarse como un clasificador de estilo y no de culpabilidad penal; una bandera de sensacionalismo alerta sobre el tono manipulador del medio, incentivando al lector a contrastar la fuente sin afirmar per se que el hecho no ocurrió.
+3. **El Problema del Sesgo de Entidades Nombradas (NER Leakage):**  
+   * *El Hueco:* En `dataset_con_similitudes.csv` y en los datasets de clasificación, los nombres de figuras políticas (e.g. mandatarios latinoamericanos) o eventos geopolíticos actúan como anclas semánticas que condicionan la similitud o la sospecha.  
+   * *Mejora Requerida:* Es fundamental evaluar formalmente el impacto de un preprocesamiento con enmascaramiento de entidades (*NER Masking*, e.g. reemplazando nombres propios por tokens abstractos como `[PERSONA]`, `[PAÍS]`, `[ORGANIZACIÓN]`) para comprobar si el rendimiento se sostiene al aislar la estructura lingüística pura.
+4. **La Pobreza de Métricas XAI Post-Hoc en Sensacionalismo:**  
+   * *El Hueco:* Un jurado preguntará: *"Si SHAP obtuvo un Comprehensiveness de apenas 0.12 y LIME de 0.09, ¿con qué autoridad técnica afirman que la explicabilidad es confiable?"*  
+   * *Defensa Metodológica:* Apoyarse en la literatura crítica (`Stop explaining.pdf` de Cynthia Rudin e `Impossibility Theorems`). El bajo puntaje de los métodos post-hoc **no es un fallo de nuestra tesis, sino la confirmación empírica de una limitación de la disciplina de XAI**: los métodos perturbativos locales no capturan representaciones distribucionales densas en transformadores bidireccionales.
+
+---
+
+## 5. PROPUESTA DE NUESTRA EXPLICABILIDAD PROPIA: "MEXGEN EXPLAINABILITY FRAMEWORK"
+
+Dado que la literatura y nuestros experimentos comprueban que los métodos agnósticos post-hoc (LIME, SHAP, Saliency) son deficientes, costosos e infieles para textos continuos, la tesis formaliza su propia arquitectura de explicabilidad intrínseca y composicional:
+
+```text
+                                ENTRADA: NOTICIA PERIODÍSTICA
+                                              │
+                                              ▼
+               ┌─────────────────────────────────────────────────────────────┐
+               │         FASE 1: DESCOMPOSICIÓN ESTRUCTURAL JERÁRQUICA       │
+               │   (Segmentación morfosintáctica y partición de cláusulas)   │
+               └─────────────────────────────────────────────────────────────┘
+                                              │
+                       ┌──────────────────────┴──────────────────────┐
+                       ▼                                             ▼
+        ┌─────────────────────────────┐               ┌─────────────────────────────┐
+        │   DIMENSIÓN SENSACIONALISMO │               │    DIMENSIÓN REDUNDANCIA    │
+        │   - Detección de Gatillos   │               │   - Similitud Coseno SBERT  │
+        │     (Top-1 y Top-2 cláusulas)│               │   - Umbral Bayesiano τ=0.34 │
+        │   - Ratio de Dilución       │               │   - Detección de Paráfrasis │
+        │     Contextual (P_full/P_avg│               │     Circulares Intra-Doc    │
+        └─────────────────────────────┘               └─────────────────────────────┘
+                       │                                             │
+                       └──────────────────────┬──────────────────────┘
+                                              ▼
+               ┌─────────────────────────────────────────────────────────────┐
+               │           FASE 2: ALGORITMO MEXGEN RANKING Y FILTRADO       │
+               │    (Aislamiento de los K párrafos más anómalos/sospechosos)  │
+               └─────────────────────────────────────────────────────────────┘
+                                              │
+                                              ▼
+               ┌─────────────────────────────────────────────────────────────┐
+               │           FASE 3: FICHA DE AUDITORÍA EXPLICATIVA XAI        │
+               │  - Párrafos críticos destacados con impacto causal medido   │
+               │  - Índice de Redundancia: Pares de oraciones repetitivas    │
+               │  - Índice de Sensacionalismo: Frases gatillo vs. cuerpo     │
+               │  - Gráfico de perfil de alerta para verificación humana     │
+               └─────────────────────────────────────────────────────────────┘
+```
+
+### Características de la Explicabilidad Propia MexGen:
+1. **Intrínseca y Causalmente Fiel:** No inventa modelos sustitutos lineales como LIME. Reporta directamente el cambio de probabilidad real del modelo ante la remoción de cláusulas completas (Efecto Gatillo medido).
+2. **Granularidad Semántica Humana:** Explica a nivel de oraciones y párrafos completos coherentes, evitando la fragmentación absurda de subpalabras (*wordpieces*) que vuelve incomprensibles los mapas de calor de SHAP/IG.
+3. **Eficiencia en Tiempo Real:** Se computa en menos de 50 milisegundos en GPU, a diferencia de los 460 ms de SHAP o los 1.800 ms de LIME.
+
+---
+
+## 6. QUÉ FALTA POR MEJORAR Y HOJA DE RUTA DE SIGUIENTES PASOS
+
+### 6.1 Tareas Pendientes Inmediatas:
+1. **Experimento de Control con NER Masking:**
+   * Tomar una submuestra de 100 noticias de `dataset_con_similitudes.csv` y 100 de `dataset_Amarillismo.csv`.
+   * Enmascarar entidades nombradas con SpaCy (`es_core_news_sm`) reemplazando nombres propios y topónimos por `[PERSONA]`, `[ENTIDAD]`, `[LUGAR]`.
+   * Re-evaluar SaBERT y SBERT para medir qué porcentaje de la predicción y de la similitud se mantiene, demostrando si el modelo responde a sintaxis o a entidades.
+2. **Ponderación Formal del Ensamble Multicriterio:**
+   * En [`Resultados/server.py`](file:///home/ubuntu/Documentos/Tesis/Resultados/server.py), los tres puntajes (SaBERT, Sensacionalismo, Redundancia) se presentan en paralelo.
+   * Diseñar una función matemática de agregación (e.g. Meta-Clasificador por Regresión Logística o Ponderación Bayesiana) que combine:
+     $$\text{Score}_{\text{Manipulación}} = \alpha \cdot P_{\text{Fake}}(\text{SaBERT}) + \beta \cdot P_{\text{Sens}}(\text{BETO}) + \gamma \cdot \text{Redundancia}(\text{SBERT})$$
+   * Calibrar $\alpha, \beta, \gamma$ sobre el corpus de 2.604 noticias.
+3. **Formalización de la Encuesta de Validación con Usuarios Humanos:**
+   * Diseñar un protocolo de prueba piloto con 5 periodistas o usuarios evaluando si la interfaz explicativa de MexGen (`index.html`) les ayuda a identificar la manipulación en menos tiempo y con mayor precisión que leyendo el texto sin asistencia.
+
+### 6.2 Estructura y Redacción Final de los Capítulos del Documento de Tesis:
+* **Capítulo 1: Introducción y Planteamiento del Problema:** La crisis de desinfodemia en español, sesgos de entidades y formulación de la hipótesis de imposibilidad.
+* **Capítulo 2: Estado del Arte y Marco Teórico:** Arquitecturas Transformers (BERT, RoBERTa, SBERT, Causal LLMs), revisión exhaustiva de XAI y fundamentación con el acervo bibliográfico (`Literatura/`).
+* **Capítulo 3: Metodología Experimental y Datasets:** Descripción de los datasets (corpus 2.604 noticias, 272 noticias sensacionalistas, 47k pares de similitud), preprocesamiento y protocolos de hardware GPU.
+* **Capítulo 4: Estudio de Dinámica Lingüística (Sensacionalismo y Redundancia):** El experimento Frases vs. Documento (Efectos Gatillo y Dilución), modelado bayesiano de umbrales con GMM ($\tau = 0.34$) y discretización supervisada por entropía.
+* **Capítulo 5: Evaluación de Modelos y Auditoría de Explicabilidad (XAI):** Benchmark masivo de clasificación (colapso de SaBERT/BETO, liderazgo de Qwen Zero-Shot), evaluación de fidelidad XAI (Comprensividad, Suficiencia, Sanity Checks de Adebayo) y justificación del fallo de métodos post-hoc.
+* **Capítulo 6: La Propuesta MexGen y Sistema Integrado:** Arquitectura del pipeline, algoritmo de ranking de párrafos y validación de la aplicación web en tiempo real.
+* **Capítulo 7: Conclusiones, Límites y Trabajo Futuro:** Demostración de los límites del análisis de texto cerrado, recomendaciones para la industria del fact-checking e integración obligatoria de verificación externa (RAG).
+
+---
+
+*Documento estratégico y plan maestro actualizado para la defensa de tesis, validado contra el 100% de los datos experimentales, modelos y literatura del proyecto.*

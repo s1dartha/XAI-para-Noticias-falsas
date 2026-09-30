@@ -48,7 +48,7 @@ XAI-para-Noticias-falsas/
 │   ├── Redundancia/                                   # Módulo de similitud y redundancia semántica
 │   └── Tareas/                                        # Enunciados y especificaciones técnicas
 │
-├── Resultados/                                        # Aplicación Web Interactiva (MexGen)
+├── dashboard/                                         # Dashboard interactivo Web App (Explicabilidad 5D, Literatura vs Ensamble)
 │   ├── index.html                                     # Interfaz web de usuario
 │   ├── style.css                                      # Estilos visuales
 │   ├── app.js                                         # Lógica frontend interactiva
@@ -84,14 +84,14 @@ XAI-para-Noticias-falsas/
 
 ---
 
-## 🌐 Aplicación Web MexGen
+## 🌐 Aplicación Web y Dashboard Interactivo
 
-Para iniciar la aplicación web de inferencia en tiempo real:
+Para iniciar la aplicación web de inferencia y exploración en tiempo real:
 ```bash
-cd Resultados
+cd dashboard
 python3 server.py
 ```
-Abre en tu navegador `http://127.0.0.1:5000` para analizar noticias interactivamente (detección de Fake News con SaBERT, Sensacionalismo a nivel de párrafos y análisis de redundancia semántica con SBERT).
+Abre en tu navegador `http://127.0.0.1:5000` para analizar noticias interactivamente (explicabilidad por frases, comparación con modelos de la literatura, evaluación de las 5 dimensiones y calibración de umbrales).
 
 ---
 

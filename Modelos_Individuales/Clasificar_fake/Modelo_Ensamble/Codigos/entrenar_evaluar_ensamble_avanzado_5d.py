@@ -1,3 +1,21 @@
+"""
+=============================================================================
+ENTRENAMIENTO Y EVALUACIÓN DEL ENSAMBLE AVANZADO 5D (FASE 2 DE LA TESIS)
+=============================================================================
+Módulo: Modelos_Individuales/Clasificar_fake/Modelo_Ensamble/Codigos/entrenar_evaluar_ensamble_avanzado_5d.py
+Tesis: Detección de Fake News mediante Análisis Multidimensional del Texto.
+
+Responde a la pregunta de investigación central:
+¿Es posible clasificar noticias de forma robusta e inmune al Domain Shift
+utilizando exclusivamente las características forenses extraídas por el marco
+de explicabilidad estilométrica de Tesis/Explicabilidad_Propia?
+
+Entrena un meta-clasificador GBDT (140 árboles, profundidad 3, submuestreo 0.85)
+con 5-Fold Stratified Cross-Validation y optimización bayesiana de umbral (θ* = 0.42),
+superando formalmente a SaBERT en América Latina.
+=============================================================================
+"""
+
 import os
 import sys
 import json

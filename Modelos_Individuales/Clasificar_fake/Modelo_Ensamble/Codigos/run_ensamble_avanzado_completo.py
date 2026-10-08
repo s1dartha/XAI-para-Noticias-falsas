@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 """
-Pipeline Maestro: Ensamble Morfológico Avanzado 5D para Clasificación de Fake News
+Pipeline Maestro: Ensamble Morfológico Avanzado 5D (Fase 2 de la Tesis)
+Responde a la pregunta de investigación surgida en Tesis/Explicabilidad_Propia:
+¿Es posible clasificar desinformación de forma robusta e inmune al Domain Shift
+utilizando exclusivamente las características forenses del texto?
+
 Ejecuta la extracción de las 5 dimensiones textuales y el entrenamiento con 5-Fold CV.
 """
 import os

@@ -1,0 +1,510 @@
+{
+  "metadatos": {
+    "titulo": "Noticia Oficial de Salud Pública y Medidas Epidemiológicas",
+    "conteo_palabras": 216,
+    "num_oraciones": 9,
+    "tiempo_analisis_segundos": 0.226,
+    "dispositivo": "cuda",
+    "metadata_adicional": {
+      "id": "noticia_3_verdadera_puebla_salud",
+      "tipo_referencia": "Verdadera (Ground Truth = 0)",
+      "origen": "Prensa Oficial del Estado de Puebla, México (Secretaría de Salud)"
+    }
+  },
+  "sensacionalismo_beto": {
+    "P_full": 0.0033,
+    "P_full_pct": 0.3,
+    "P_mean": 0.0997,
+    "P_max": 0.5372,
+    "P_top2": 0.3372,
+    "sigma_sens": 0.159,
+    "dilution_ratio": 0.0062,
+    "delta_p_gatillo_causal": 0.0,
+    "oracion_gatillo_principal": {
+      "idx": 7,
+      "texto": "En la capital y zona metropolitana es rojo.",
+      "sens_prob": 0.5372
+    },
+    "diagnostico": "Tono Informativo Sobrio / Desprovisto de Amarillismo"
+  },
+  "redundancia_sbert": {
+    "mean_intra_similarity": 0.2287,
+    "max_intra_similarity": 0.5647,
+    "redundant_pairs_count": 7,
+    "num_pairs_total": 36,
+    "redundancy_density_pct": 19.44,
+    "umbral_gmm_tau": 0.34,
+    "shannon_bin_7": 1,
+    "shannon_bin_4": 1,
+    "par_maxima_redundancia": {
+      "oracion_a_idx": 1,
+      "oracion_a_texto": "El Gobierno de Puebla anunció que el confinamiento para evitar que colapse el sistema de salud por la pandemia de coronavirus, se extiende hasta el día 25 de enero.",
+      "oracion_b_idx": 3,
+      "oracion_b_texto": "Indicó que de esta forma se ratifica el llamado de alerta máxima en Puebla hasta el 25 de enero, fecha en que se determinará el comportamiento de la pandemia.",
+      "similitud_coseno": 0.5647,
+      "supera_umbral_gmm": true
+    },
+    "matriz_similitud": [
+      [
+        1.0,
+        0.342,
+        0.5647,
+        0.1741,
+        0.2263,
+        0.084,
+        0.1019,
+        0.4193,
+        0.4188
+      ],
+      [
+        0.342,
+        1.0,
+        0.3338,
+        0.1723,
+        0.3423,
+        0.4387,
+        0.1833,
+        0.2799,
+        0.274
+      ],
+      [
+        0.5647,
+        0.3338,
+        1.0,
+        0.1979,
+        0.2656,
+        0.1393,
+        0.0839,
+        0.234,
+        0.4465
+      ],
+      [
+        0.1741,
+        0.1723,
+        0.1979,
+        1.0,
+        0.2368,
+        0.0773,
+        0.0908,
+        0.1314,
+        0.2056
+      ],
+      [
+        0.2263,
+        0.3423,
+        0.2656,
+        0.2368,
+        1.0,
+        0.27,
+        0.2687,
+        0.0338,
+        0.2859
+      ],
+      [
+        0.084,
+        0.4387,
+        0.1393,
+        0.0773,
+        0.27,
+        1.0,
+        0.2912,
+        0.104,
+        0.1395
+      ],
+      [
+        0.1019,
+        0.1833,
+        0.0839,
+        0.0908,
+        0.2687,
+        0.2912,
+        1.0,
+        0.0222,
+        0.1323
+      ],
+      [
+        0.4193,
+        0.2799,
+        0.234,
+        0.1314,
+        0.0338,
+        0.104,
+        0.0222,
+        1.0,
+        0.2224
+      ],
+      [
+        0.4188,
+        0.274,
+        0.4465,
+        0.2056,
+        0.2859,
+        0.1395,
+        0.1323,
+        0.2224,
+        1.0
+      ]
+    ],
+    "diagnostico": "Discurso Desarticulado / Párrafos Fragmentados"
+  },
+  "las_5_dimensiones_iml": {
+    "D1_Carga_Emocional": {
+      "valor": 0.3,
+      "escala": "[0 - 100]",
+      "interpretacion": "Densidad de superlativos y dramatismo léxico asignado por BETO.",
+      "nivel": "Sobrio / Formal"
+    },
+    "D2_Volatilidad_Gatillo": {
+      "valor": 65.6,
+      "escala": "[0 - 100]",
+      "interpretacion": "Desbalance entre la frase gatillo y la sobriedad media del artículo.",
+      "nivel": "Clickbait Severo / Gatillo Aislado"
+    },
+    "D3_Amortiguacion_Contextual": {
+      "valor": 99.4,
+      "escala": "[0 - 100]",
+      "interpretacion": "Capacidad del cuerpo del texto para diluir o mitigar la alarma del titular.",
+      "nivel": "Amortiguación Alta (Cuerpo Sobrio Neutraliza Titular)"
+    },
+    "D4_Reiteracion_Redundancia": {
+      "valor": 40.1,
+      "escala": "[0 - 100]",
+      "interpretacion": "Circularidad semántica intra-documental mediante paráfrasis y reiteración.",
+      "nivel": "Progresión Normal Temática"
+    },
+    "D5_Cohesion_Fluidez": {
+      "valor": 57.2,
+      "escala": "[0 - 100]",
+      "interpretacion": "Conectividad proposicional y solidez sintáctica en la banda de Shannon.",
+      "nivel": "Cohesión Regular"
+    },
+    "score_global_iml": 25.6,
+    "nivel_riesgo_estilometrico": "Bajo Riesgo de Manipulación Estilométrica (Texto Neutro/Sobrio)",
+    "arquetipo_discursivo": {
+      "id": "ESTILO_II_CLICKBAIT_CABECERA",
+      "nombre": "Estilo II: Cebo Comercial / Clickbait de Cabecera",
+      "descripcion": "Titular o apertura alarmista diseñado para capturar clics, pero con cuerpo informativo formal que amortigua la alarma.",
+      "condicion_activada": "D2 >= 50.0 y D3 >= 50.0"
+    }
+  },
+  "variables_ensamble_avanzado_5d": {
+    "D1_Dinamica_Discursiva": {
+      "consec_sim_mean": 0.2395,
+      "consec_sim_min": 0.0222,
+      "consec_sim_std": 0.095
+    },
+    "D2_Linguistica_Forense_Epistemica": {
+      "hedges_density": 0.0,
+      "boosters_density": 0.463,
+      "epistemic_ratio": 10.1,
+      "quotes_density": 0.222,
+      "dicendi_density": 2.315,
+      "tokens_hedges": [],
+      "tokens_boosters": [
+        "alerta"
+      ],
+      "tokens_dicendi": [
+        "anunció",
+        "Indicó",
+        "indicó"
+      ]
+    },
+    "D3_Riqueza_Lexica_Legibilidad": {
+      "flesch_szigriszt": 55.32,
+      "gutierrez_polini": 25.01,
+      "guiraud_ttr": 7.715,
+      "hapax_ratio_pct": 40.58,
+      "vocabulario_unico": 111,
+      "promedio_silabas_palabra": 2.06,
+      "promedio_palabras_oracion": 23.0
+    },
+    "D4_Perfilado_Morfosintactico_POS": {
+      "adv_density": 0.926,
+      "pron_1p_density": 0.0,
+      "pron_3p_density": 9.259,
+      "adj_noun_ratio": 0.25,
+      "conteo_adjetivos": 14,
+      "conteo_sustantivos": 55,
+      "conteo_adverbios": 2,
+      "conteo_pronombres_1p": 0,
+      "conteo_pronombres_3p": 20
+    },
+    "D5_Anclajes_Factuales_Puntuacion": {
+      "all_caps_count": 0,
+      "all_caps_ratio_pct": 0.0,
+      "upper_chars_ratio_pct": 1.89,
+      "excl_density": 0.0,
+      "quest_density": 0.0,
+      "ellipsis_density": 0.0,
+      "punct_intensity": 0.0,
+      "numbers_density": 4.167,
+      "percent_count": 1,
+      "temporal_density": 1.389,
+      "palabras_mayusculas_encontradas": [],
+      "marcadores_temporales_encontrados": [
+        "enero"
+      ]
+    }
+  },
+  "desglose_oraciones": [
+    {
+      "idx": 1,
+      "texto": "El Gobierno de Puebla anunció que el confinamiento para evitar que colapse el sistema de salud por la pandemia de coronavirus, se extiende hasta el día 25 de enero.",
+      "num_palabras": 28,
+      "sensacionalismo_prob": 0.1372,
+      "sensacionalismo_pct": 13.7,
+      "es_oracion_gatillo": false,
+      "coherencia_consecutiva": null,
+      "similitud_media_documento": 0.2914,
+      "par_mas_redundante": {
+        "idx_oracion_cercana": 3,
+        "similitud": 0.5647,
+        "texto_resumido": "Indicó que de esta forma se ratifica el llamado de alerta máxima en Puebla hasta..."
+      },
+      "mayusculas_ratio": 0.0,
+      "palabras_mayusculas": [],
+      "adverbios_densidad": 0.0,
+      "verbos_dicendi": [
+        "anunció"
+      ],
+      "boosters": [],
+      "hedges": [],
+      "tiene_citas": false,
+      "exclamaciones": 0,
+      "interrogaciones": 0,
+      "banderas_forenses": [
+        "🎙️ Atribución Fuente (anunció)",
+        "🔁 Redundante con Frase #3 (cos=0.56)"
+      ]
+    },
+    {
+      "idx": 2,
+      "texto": "En rueda de prensa, el gobernador Luis Miguel Barbosa indicó que se busca reducir la curva de contagios, pues el estado se mantiene en semáforo naranja con tendencia al alza.",
+      "num_palabras": 30,
+      "sensacionalismo_prob": 0.0117,
+      "sensacionalismo_pct": 1.2,
+      "es_oracion_gatillo": false,
+      "coherencia_consecutiva": 0.342,
+      "similitud_media_documento": 0.2958,
+      "par_mas_redundante": {
+        "idx_oracion_cercana": 6,
+        "similitud": 0.4387,
+        "texto_resumido": "Jesús Ramírez, subsecretario de transparencia, indicó que todo el estado se encu..."
+      },
+      "mayusculas_ratio": 0.0,
+      "palabras_mayusculas": [],
+      "adverbios_densidad": 0.0,
+      "verbos_dicendi": [
+        "indicó"
+      ],
+      "boosters": [],
+      "hedges": [],
+      "tiene_citas": false,
+      "exclamaciones": 0,
+      "interrogaciones": 0,
+      "banderas_forenses": [
+        "🎙️ Atribución Fuente (indicó)",
+        "🔁 Redundante con Frase #6 (cos=0.44)"
+      ]
+    },
+    {
+      "idx": 3,
+      "texto": "Indicó que de esta forma se ratifica el llamado de alerta máxima en Puebla hasta el 25 de enero, fecha en que se determinará el comportamiento de la pandemia.",
+      "num_palabras": 28,
+      "sensacionalismo_prob": 0.0525,
+      "sensacionalismo_pct": 5.2,
+      "es_oracion_gatillo": false,
+      "coherencia_consecutiva": 0.3338,
+      "similitud_media_documento": 0.2832,
+      "par_mas_redundante": {
+        "idx_oracion_cercana": 1,
+        "similitud": 0.5647,
+        "texto_resumido": "El Gobierno de Puebla anunció que el confinamiento para evitar que colapse el si..."
+      },
+      "mayusculas_ratio": 0.0,
+      "palabras_mayusculas": [],
+      "adverbios_densidad": 0.0,
+      "verbos_dicendi": [
+        "Indicó"
+      ],
+      "boosters": [
+        "alerta"
+      ],
+      "hedges": [],
+      "tiene_citas": false,
+      "exclamaciones": 0,
+      "interrogaciones": 0,
+      "banderas_forenses": [
+        "⚡ Intensificador/Booster (alerta)",
+        "🎙️ Atribución Fuente (Indicó)",
+        "🔁 Redundante con Frase #1 (cos=0.56)"
+      ]
+    },
+    {
+      "idx": 4,
+      "texto": "En cuanto a la industria considerada como esencial el aforo permitido es de 30 por ciento con horarios escalonados.",
+      "num_palabras": 18,
+      "sensacionalismo_prob": 0.032,
+      "sensacionalismo_pct": 3.2,
+      "es_oracion_gatillo": false,
+      "coherencia_consecutiva": 0.1979,
+      "similitud_media_documento": 0.1608,
+      "par_mas_redundante": {
+        "idx_oracion_cercana": 5,
+        "similitud": 0.2368,
+        "texto_resumido": "Asimismo se advirtió mayor presencia policíaca en las calles para el cumplimient..."
+      },
+      "mayusculas_ratio": 0.0,
+      "palabras_mayusculas": [],
+      "adverbios_densidad": 0.0,
+      "verbos_dicendi": [],
+      "boosters": [],
+      "hedges": [],
+      "tiene_citas": false,
+      "exclamaciones": 0,
+      "interrogaciones": 0,
+      "banderas_forenses": []
+    },
+    {
+      "idx": 5,
+      "texto": "Asimismo se advirtió mayor presencia policíaca en las calles para el cumplimiento de las medidas y exhortó a la prudencia ciudadana.",
+      "num_palabras": 21,
+      "sensacionalismo_prob": 0.0636,
+      "sensacionalismo_pct": 6.4,
+      "es_oracion_gatillo": false,
+      "coherencia_consecutiva": 0.2368,
+      "similitud_media_documento": 0.2412,
+      "par_mas_redundante": {
+        "idx_oracion_cercana": 2,
+        "similitud": 0.3423,
+        "texto_resumido": "En rueda de prensa, el gobernador Luis Miguel Barbosa indicó que se busca reduci..."
+      },
+      "mayusculas_ratio": 0.0,
+      "palabras_mayusculas": [],
+      "adverbios_densidad": 0.0,
+      "verbos_dicendi": [],
+      "boosters": [],
+      "hedges": [],
+      "tiene_citas": false,
+      "exclamaciones": 0,
+      "interrogaciones": 0,
+      "banderas_forenses": [
+        "🔁 Redundante con Frase #2 (cos=0.34)"
+      ]
+    },
+    {
+      "idx": 6,
+      "texto": "Jesús Ramírez, subsecretario de transparencia, indicó que todo el estado se encuentra en color naranja con tendencia ascendente.",
+      "num_palabras": 18,
+      "sensacionalismo_prob": 0.0291,
+      "sensacionalismo_pct": 2.9,
+      "es_oracion_gatillo": false,
+      "coherencia_consecutiva": 0.27,
+      "similitud_media_documento": 0.193,
+      "par_mas_redundante": {
+        "idx_oracion_cercana": 2,
+        "similitud": 0.4387,
+        "texto_resumido": "En rueda de prensa, el gobernador Luis Miguel Barbosa indicó que se busca reduci..."
+      },
+      "mayusculas_ratio": 0.0,
+      "palabras_mayusculas": [],
+      "adverbios_densidad": 0.0,
+      "verbos_dicendi": [
+        "indicó"
+      ],
+      "boosters": [],
+      "hedges": [],
+      "tiene_citas": false,
+      "exclamaciones": 0,
+      "interrogaciones": 0,
+      "banderas_forenses": [
+        "🎙️ Atribución Fuente (indicó)",
+        "🔁 Redundante con Frase #2 (cos=0.44)"
+      ]
+    },
+    {
+      "idx": 7,
+      "texto": "En la capital y zona metropolitana es rojo.",
+      "num_palabras": 8,
+      "sensacionalismo_prob": 0.5372,
+      "sensacionalismo_pct": 53.7,
+      "es_oracion_gatillo": false,
+      "coherencia_consecutiva": 0.2912,
+      "similitud_media_documento": 0.1468,
+      "par_mas_redundante": {
+        "idx_oracion_cercana": 6,
+        "similitud": 0.2912,
+        "texto_resumido": "Jesús Ramírez, subsecretario de transparencia, indicó que todo el estado se encu..."
+      },
+      "mayusculas_ratio": 0.0,
+      "palabras_mayusculas": [],
+      "adverbios_densidad": 0.0,
+      "verbos_dicendi": [],
+      "boosters": [],
+      "hedges": [],
+      "tiene_citas": false,
+      "exclamaciones": 0,
+      "interrogaciones": 0,
+      "banderas_forenses": []
+    },
+    {
+      "idx": 8,
+      "texto": "El secretario de salud, José Antonio Martínez, indicó que este es el segundo día con más casos registrados de coronavirus con 353 casos en 24 horas y 37 defunciones en 72 horas.",
+      "num_palabras": 28,
+      "sensacionalismo_prob": 0.0099,
+      "sensacionalismo_pct": 1.0,
+      "es_oracion_gatillo": false,
+      "coherencia_consecutiva": 0.0222,
+      "similitud_media_documento": 0.1809,
+      "par_mas_redundante": {
+        "idx_oracion_cercana": 1,
+        "similitud": 0.4193,
+        "texto_resumido": "El Gobierno de Puebla anunció que el confinamiento para evitar que colapse el si..."
+      },
+      "mayusculas_ratio": 0.0,
+      "palabras_mayusculas": [],
+      "adverbios_densidad": 3.57,
+      "verbos_dicendi": [
+        "indicó"
+      ],
+      "boosters": [],
+      "hedges": [],
+      "tiene_citas": false,
+      "exclamaciones": 0,
+      "interrogaciones": 0,
+      "banderas_forenses": [
+        "🎙️ Atribución Fuente (indicó)",
+        "⚠️ Salto Temático Abrupto (Baja Coherencia)",
+        "🔁 Redundante con Frase #1 (cos=0.42)"
+      ]
+    },
+    {
+      "idx": 9,
+      "texto": "De mantenerse la tendencia, al día 14 de enero estaríamos \"a tope\" y el día 18 la capacidad hospitalaria se vería rebasada, por lo que urgió a acatar los decretos.",
+      "num_palabras": 28,
+      "sensacionalismo_prob": 0.0239,
+      "sensacionalismo_pct": 2.4,
+      "es_oracion_gatillo": false,
+      "coherencia_consecutiva": 0.2224,
+      "similitud_media_documento": 0.2656,
+      "par_mas_redundante": {
+        "idx_oracion_cercana": 3,
+        "similitud": 0.4465,
+        "texto_resumido": "Indicó que de esta forma se ratifica el llamado de alerta máxima en Puebla hasta..."
+      },
+      "mayusculas_ratio": 0.0,
+      "palabras_mayusculas": [],
+      "adverbios_densidad": 0.0,
+      "verbos_dicendi": [],
+      "boosters": [],
+      "hedges": [],
+      "tiene_citas": true,
+      "exclamaciones": 0,
+      "interrogaciones": 0,
+      "banderas_forenses": [
+        "📜 Cita Textual Entrecomillada",
+        "🔁 Redundante con Frase #3 (cos=0.45)"
+      ]
+    }
+  ]
+}

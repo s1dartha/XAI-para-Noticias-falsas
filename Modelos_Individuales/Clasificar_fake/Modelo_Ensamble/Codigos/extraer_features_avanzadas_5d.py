@@ -1,3 +1,20 @@
+"""
+=============================================================================
+EXTRACCIÓN DE LAS 5 DIMENSIONES TEXTUALES PARA EL MODELO ENSAMBLE (FASE 2)
+=============================================================================
+Módulo: Modelos_Individuales/Clasificar_fake/Modelo_Ensamble/Codigos/extraer_features_avanzadas_5d.py
+Tesis: Detección de Fake News mediante Análisis Multidimensional del Texto.
+
+Implementa la extracción computacional por lotes sobre GPU de las variables forenses
+definidas en Tesis/Explicabilidad_Propia:
+- D1: Dinámica Discursiva y Coherencia Secuencial SBERT (consec_sim)
+- D2: Lingüística Forense y Marcadores Epistémicos (dicendi, quotes, hedges, boosters)
+- D3: Riqueza Léxica, Legibilidad y Sintaxis (Guiraud, Hapax, Flesch-Szigriszt)
+- D4: Morfosintaxis spaCy POS Tagging (adv_density, pron_1p, pron_3p, adj_noun_ratio)
+- D5: Anclajes Factuales y Mayúsculas Sostenidas (all_caps, numbers, temporal, punct)
+=============================================================================
+"""
+
 import os
 import sys
 import re

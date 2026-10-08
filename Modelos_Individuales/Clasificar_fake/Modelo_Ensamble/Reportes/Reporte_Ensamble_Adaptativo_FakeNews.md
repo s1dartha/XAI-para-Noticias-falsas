@@ -1,11 +1,12 @@
 # Informe de Investigación Experimental: Ensamble Morfológico Avanzado 5D para la Detección de Desinformación (*Fake News*)
 
-## Análisis Multidimensional del Texto: Flujo de Coherencia, Lingüística Forense, Riqueza Léxica, Morfosintaxis y Mayúsculas Sostenidas sobre el Corpus Ampliado ($N = 4.418$)
+## Fase 2 de la Tesis: De la Caracterización Forense Estilométrica al Ensamble Adaptativo Inmune al Domain Shift
 
 ---
 
 **Proyecto de Tesis:** Detección de Noticias Falsas en Español mediante Estilometría Contextual, Redundancia Semántica y Análisis Multidimensional del Texto  
-**Fecha:** Septiembre de 2026  
+**Fecha:** Septiembre de 2026 (Actualizado a Octubre de 2026)  
+**Módulo Complementario de Explicabilidad:** [`Tesis/Explicabilidad_Propia`](../../../Explicabilidad_Propia)  
 **Entorno de Ejecución:** GPU NVIDIA GeForce GTX 1650 (CUDA habilitado, 4 GB VRAM)  
 **Corpus Evaluado:** [`Noticias_entre_70_y_370_palabras_AMPLIADO_LATAM.xlsx`](file:///home/ubuntu/Documentos/Tesis/Modelos_Individuales/Clasificar_fake/Dataset/Noticias_entre_70_y_370_palabras_AMPLIADO_LATAM.xlsx) ($N = 4.418$ noticias)  
 * **Distribución de Clases:** $2.411$ Noticias Verídicas ($54,57\%$) y $2.007$ Noticias Falsas ($45,43\%$) — Corpus Paritario y Balanceado.
@@ -20,12 +21,17 @@
 * **Métricas y Rankings de Importancia en JSON:** [`metricas_ensamble_avanzado_5d.json`](metricas_ensamble_avanzado_5d.json)
 * **Figuras de Alta Resolución (300 DPI):** [`Imagenes/`](Imagenes/)
 * **Reporte de Auditoría SaBERT:** [`Reporte_Evaluacion_SaBERT_Domain_Shift.md`](../../SABERT_Evaluacion/Reportes/Reporte_Evaluacion_SaBERT_Domain_Shift.md)
+* **Marco de Explicabilidad Previo (Fase 1):** [`Reporte_Explicabilidad_Forense_4_Noticias.md`](../../../Explicabilidad_Propia/reportes/Reporte_Explicabilidad_Forense_4_Noticias.md)
 
 ---
 
-## 1. Resumen Ejecutivo y Síntesis Metrológica
+## 1. Resumen Ejecutivo: La Respuesta a la Pregunta Central de Investigación
 
-El presente informe documenta el desarrollo e integración de **5 dimensiones adicionales del análisis textual** sobre el modelo ensamble de la tesis, concebidas para expandir la capacidad discriminativa más allá de la redundancia y el sensacionalismo base, **manteniendo una estricta invarianza territorial (inmunidad al *Domain Shift*)** entre España y América Latina al prescindir de nombres propios o entidades políticas coyunturales.
+Tras culminar la **Fase 1 de Explicabilidad Forense** ([`Explicabilidad_Propia`](../../../Explicabilidad_Propia)), donde se demostró que el texto periodístico contiene huellas estilométricas objetivas (mayúsculas sostenidas, saturación adverbial, ausencia de verbos dicendi y bucles de redundancia semántica), la investigación se planteó la **pregunta científica de transición**:
+
+> *«¿Es posible utilizar este espacio de 36 a 42 características forenses explicables para alimentar un modelo alternativo y adaptativo (GBDT) capaz de clasificar noticias falsas vs. verdaderas, superando la opacidad, el sobreajuste superficial y el colapso por Domain Shift de los modelos tradicionales de caja negra (como SaBERT)?»*
+
+El presente informe documenta experimentalmente que la respuesta es **afirmativa**: el Ensamble Morfológico Avanzado 5D toma como entradas exclusivamente las características extraídas por el marco forense, **manteniendo una estricta invarianza territorial (inmunidad al *Domain Shift*)** entre España y América Latina al prescindir de nombres propios o entidades políticas coyunturales.
 
 La inclusión de rasgos de cohesión secuencial, marcadores epistémicos, legibilidad, morfosintaxis y señales enfáticas (especialmente **mayúsculas sostenidas**) produjo un **salto cuantitativo determinante en el desempeño global**:
 * **Capacidad de Separación Probabilística (ROC-AUC):** Aumenta de **$0,6568$ a $0,7178$** ($+6,1$ puntos porcentuales de ganancia neta).
@@ -287,3 +293,4 @@ A continuación se presentan las tablas comparativas exhaustivas desglosando el 
 2. **Arquitectura Híbrida Recomendada:**
    * **Módulo A (Filtro Peninsular):** Emplear SaBERT para noticias identificadas con alta certeza como procedentes de la política institucional de España.
    * **Módulo B (Auditor Forense 5D):** Emplear el Ensamble Morfológico Avanzado para auditar todo el flujo periodístico de América Latina y noticias de autoría anónima o transatlántica, garantizando un $68\%$ de exactitud y duplicando la detección de engaño frente a los modelos tradicionales.
+3. **Cierre del Bucle Metodológico de la Tesis:** Este modelo ensamble no compite con la explicabilidad ni surge de una clasificación abstracta previa; **es la consecuencia directa de la Fase 1 de Explicabilidad Forense**. La caracterización desarrollada en [`Explicabilidad_Propia`](../../../Explicabilidad_Propia/reportes/Reporte_Explicabilidad_Forense_4_Noticias.md) demostró que el texto periodístico contiene huellas estilométricas objetivas, y este ensamble demuestra que dichas huellas bastan para clasificar desinformación de forma transparente, auditable y generalizable.

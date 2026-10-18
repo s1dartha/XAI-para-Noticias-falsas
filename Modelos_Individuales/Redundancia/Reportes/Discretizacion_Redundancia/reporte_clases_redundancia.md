@@ -2,82 +2,77 @@
 
 **Proyecto de Tesis:** Detección de Noticias Falsas en Español mediante Estilometría y Redundancia Semántica  
 **Métrica Evaluada:** `max_intra_similarity` (Similitud Coseno Máxima entre Pares de Oraciones)  
-**Modelo de Embeddings:** `paraphrase-multilingual-MiniLM-L12-v2` (Sentence-BERT)  
+**Modelo de Embeddings:** `hiiamsid/sentence_similarity_spanish_es` (SBERT Clásico sobre BETO `dccuchile/bert-base-spanish-wwm-cased`, $d=768$)  
 **Técnica de Partición:** Árbol de Decisión Supervisado (`DecisionTreeClassifier`, `max_depth=3`, `criterion='entropy'`)  
-**Fecha de Generación:** 2026-09-20  
+**Fecha de Generación:** 18 de Octubre de 2026  
 
 ---
 
 ## 1. Resumen Ejecutivo del Experimento
 
-El objetivo central de este experimento es superar las limitaciones de las discretizaciones arbitrarias (tales como cuantiles uniformes o rangos fijos de amplitud regular) mediante la aplicación de un método fundamentado en la **Teoría de la Información (Ganancia de Shannon / Reducción de Entropía)**.
+El objetivo central de este experimento es superar las limitaciones de las discretizaciones arbitrarias (tales como cuantiles uniformes o rangos fijos de amplitud regular) mediante la aplicación de un método fundamentado en la **Teoría de la Información (Ganancia de Shannon / Reducción de Entropía)** sobre las representaciones obtenidas con el modelo ganador de la comparativa de arquitecturas: **SBERT Clásico sobre BETO (`hiiamsid/sentence_similarity_spanish_es`)**.
 
 La variable continua `max_intra_similarity` captura el grado extremo de redundancia local entre cualquier par de oraciones de un documento periodístico:
 $$\text{max\_intra\_similarity}(d) = \max_{i < j} \cos(\vec{e}_i, \vec{e}_j)$$
 
-Donde $\vec{e}_i$ representa el embedding contextual de la $i$-ésima oración. Al entrenar un árbol de decisión restringido ($d=3$) de manera unidimensional sobre esta característica, los puntos de división resultantes corresponden a los umbrales que maximizan la divergencia condicional de clases, segregando de forma óptima las Noticias Reales de las Falsas.
+Donde $\vec{e}_i \in \mathbb{R}^{768}$ representa el embedding contextual de BETO para la $i$-ésima oración. Al entrenar un árbol de decisión restringido ($d=3$) de manera unidimensional sobre esta característica, los puntos de división resultantes corresponden a los umbrales que maximizan la divergencia condicional de clases, segregando de forma óptima las Noticias Reales de las Falsas.
 
 ### Parámetros del Corpus Evaluado
-* **Total de Documentos Válidos Analizados:** 2,471 artículos (filtrados excluyendo textos con $<2$ oraciones donde la similitud entre pares es indefinida).
+* **Total de Documentos Válidos Analizados:** 2,471 artículos (filtrados excluyendo los 133 textos con $<2$ oraciones donde la similitud entre pares es indefinida).
 * **Distribución Real de Clases:**
-  * **Noticias Reales (`label_num = 0`):** 1,272 muestras (51.5%)
-  * **Noticias Falsas (`label_num = 1`):** 1,199 muestras (48.5%)
-* **Umbrales Óptimos Detectados (6 puntos de corte):** `0.5924`, `0.6177`, `0.6336`, `0.8077`, `0.8514`, `0.9308`
+  * **Noticias Reales (`label_num = 0`):** 1,199 muestras (48.5%)
+  * **Noticias Falsas (`label_num = 1`):** 1,272 muestras (51.5%)
+* **Umbrales Óptimos Detectados por el Árbol de Entropía Regularizado (`min_samples_leaf=15`):** `0.3740`, `0.6079`, `0.6124`, `0.6156`, `0.7287` (6 estratos).
+* **Umbrales del Árbol de Entropía Sin Restricción de Hoja (`max_depth=3`):** `0.3740`, `0.6079`, `0.6101`, `0.6124`, `0.6152`, `0.6156`, `0.6161` (8 estratos).
 
 ---
 
 ## 2. Análisis de Particiones y Tasa Empírica de Fake News
 
-La siguiente tabla detalla la estratificación rigurosa obtenida a partir de los 7 intervalos generados por el árbol de decisión sobre el conjunto estandarizado (0 = Real, 1 = Fake):
+La siguiente tabla detalla la estratificación rigurosa obtenida a partir de los intervalos generados por el árbol de decisión guiado por entropía de Shannon sobre los embeddings de BETO (0 = Real, 1 = Fake):
 
-| Bin ID | Rango de Intervalo (`max_intra_similarity`) | N Muestras | % Corpus | Noticias Reales (0) | Noticias Falsas (1) | Tasa Fake News (%) | Perfil Estilométrico / Interpretación |
+| Bin ID | Rango de Intervalo (`max_intra_similarity` BETO) | N Muestras | % Corpus | Noticias Reales (0) | Noticias Falsas (1) | Tasa Fake News (%) | Perfil Estilométrico / Interpretación |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---|
-| 1 | `[-0.0459, 0.5924]` | 1,641 | 66.4% | 839 | 802 | **48.9%** | 🟡 **Neutro / Prevalencia Base** (Transición léxica general) |
-| 2 | `(0.5924, 0.6177]` | 120 | 4.9% | 77 | 43 | **35.8%** | 🟢 **Dominancia Real (64.2%)** (Cohesión periodística formal) |
-| 3 | `(0.6177, 0.6336]` | 86 | 3.5% | 31 | 55 | **64.0%** | 🔴 **Pico de Desinformación (64.0%)** (Reiteración léxica de claims) |
-| 4 | `(0.6336, 0.8077]` | 536 | 21.7% | 265 | 271 | **50.6%** | 🟡 **Equilibrio Estilístico** (Cercano a prevalencia global) |
-| 5 | `(0.8077, 0.8514]` | 49 | 2.0% | 33 | 16 | **32.7%** | 🟢 **Predominio Periodístico (67.3%)** (Reformulación explicativa legítima) |
-| 6 | `(0.8514, 0.9308]` | 24 | 1.0% | 19 | 5 | **20.8%** | 🟢 **Alta Cohesión Profesional (79.2%)** (Cobertura profunda de fuente/cita) |
-| 7 | `(0.9308, 1.0000]` | 15 | 0.6% | 8 | 7 | **46.7%** | 🟡 **Zona de Casi-Duplicación** (Citas textuales idénticas en ambas clases) |
+| 1 | `[-0.0110, 0.3740]` | 335 | 13.6% | 150 | 185 | **55.2%** | 🔴 **Baja Cohesión / Fragmentación** (Oraciones inconexas, predominio Fake) |
+| 2 | `(0.3740, 0.6079]` | 1,422 | 57.5% | 739 | 683 | **48.0%** | 🟢 **Cohesión Periodística Estándar** (Prosa informativa formal y balanceada) |
+| 3 | `(0.6079, 0.6124]` | 18 | 0.7% | 15 | 3 | **16.7%** | 🟢 **Dominancia Real (83.3%)** (Transición de reformulación periodística) |
+| 4 | `(0.6124, 0.6156]` | 29 | 1.2% | 3 | 26 | **89.7%** | 🔴 **Pico Crítico de Desinformación (89.7%)** (Reiteración léxica de consignas) |
+| 5 | `(0.6156, 0.7287]` | 486 | 19.7% | 225 | 261 | **53.7%** | 🟡 **Redundancia Moderada-Alta** (Ligero predominio de noticias falsas) |
+| 6 | `(0.7287, 1.0000]` | 181 | 7.3% | 67 | 114 | **63.0%** | 🔴 **Hiper-Redundancia Circular (63.0%)** (Bucle argumentativo de desinformación) |
 
-### Hallazgos Empíricos Clave:
-1. **Pico Focalizado de Desinformación en la Banda Estrecha (`0.618 < max_intra_similarity <= 0.634`):**
-   * En el Bin 3 (`0.6177, 0.6336]`), la tasa de noticias falsas se dispara al **64.0%** (55 Falsas vs 31 Reales).
-   * Este estrato captura textos donde las oraciones repiten afirmaciones centrales utilizando sinónimos directos o estructuras paralelísticas simples, un patrón típico de desinformación propagandística o artículos generados para captar clicks sin aportar evidencia nueva.
-2. **Cohesión Estructurada en Periodismo Profesional (`> 0.808`):**
-   * A diferencia de lo previsto por hipótesis intuitivas simples, los estratos de muy alta redundancia (Bin 5 y Bin 6) están dominados sólidamente por **Noticias Reales** (67.3% en Bin 5 y 79.2% en Bin 6).
-   * La lingüística forense y el análisis cualitativo revelan que las noticias reales de investigación periodística formal suelen incluir declaraciones extensas, citas oficiales y párrafos de contexto que parafrasean la tesis central del artículo, generando altas similitudes inter-oracionales legítimas.
-3. **Banda Media Neutra y Cola de Citas Literales:**
-   * La gran masa de noticias (Bin 1 y Bin 4, sumando el 88.1% del corpus) se ubica en tasas balanceadas (48.9% y 50.6%), reflejando que la redundancia oracional aislada no es un clasificador suficiente por sí misma, sino una señal morfológica clave al combinarse con sensacionalismo en el Meta-Ensamble.
-   * La cola extrema `> 0.931` (Bin 7, 15 noticias) corresponde a citas textuales idénticas compartidas en agencias de noticias y comunicados, repartidas casi equitativamente (53.3% Real vs 46.7% Fake).
+### Hallazgos Empíricos Clave con BETO SBERT:
+1. **Confirmación de la Hipótesis de Hiper-Redundancia en Noticias Falsas (`> 0.7287`):**
+   * En el estrato superior (Bin 6: `(0.7287, 1.0000]`), que agrupa **181 artículos (7.3% del corpus)**, la tasa de **Noticias Falsas alcanza el 63.0%** (114 Falsas frente a 67 Reales).
+   * A diferencia de los modelos multilingües ligeros que distorsionaban la cola superior, las representaciones en español nativo de BETO demuestran claramente que la reiteración circular intensa entre oraciones es un marcador estilométrico sólido de desinformación.
+2. **Pico Focalizado de Desinformación en la Frontera de Fase (`0.6124 < max_intra_similarity <= 0.6156`):**
+   * En el Bin 4, la tasa de noticias falsas alcanza un **89.7%** (26 Falsas vs. 3 Reales), precedido por una micro-banda de noticias reales en `(0.6079, 0.6124]` (83.3% Reales).
+3. **Baja Cohesión / Fragmentación Discursiva (`<= 0.3740`):**
+   * En el extremo inferior (Bin 1, $N=335$ artículos), donde las oraciones del texto apenas guardan relación semántica entre sí, la proporción de noticias falsas sube al **55.2%**, capturando bulos redactados de forma inconexa o telegráfica.
 
 ---
 
 ### Visualización de Particiones:
-La distribución de los intervalos y los puntos de corte sobre el corpus se presenta a continuación:  
+La distribución de los intervalos y los puntos de corte de Shannon sobre el corpus con BETO se presenta a continuación:  
 ![Visualización de Particiones de Redundancia](imagenes/redundancy_splits_visualization.png)
 
 ---
 
 ## 3. Recomendaciones Estratégicas para la Selección de Clases Finales
 
-Con base en la distribución de entropía y la inspección de los nodos hojas, se formulan dos alternativas concretas para la ingeniería de características del clasificador final:
+Con base en la distribución de entropía sobre BETO y la inspección de los nodos hoja, se formulan dos alternativas concretas:
 
-### Alternativa A: Partición Estilométrica Parsimoniosa en 4 Clases (Recomendada para Modelos Lineales / Interpretabilidad)
-Al observar que los umbrales intermedios `0.6177` y `0.6182` son prácticamente colineales y que la vecindad entre `0.808` y `0.980` comparte la misma hipótesis de riesgo, se recomienda agrupar los 7 intervalos en **4 macro-categorías funcionales**:
+### Alternativa A: Partición Estilométrica Parsimoniosa en 4 Clases (Recomendada para Modelos Lineales / Interpretabilidad XAI)
+Consolidando los umbrales del árbol de decisión en **4 macro-categorías funcionales**:
+* **Variante A1 (Macro-Categorías Balanceadas `[0.3740, 0.6079, 0.7287]`, `ROC-AUC = 0.5422`):**
+  1. **Clase 1 - Baja Cohesión / Desconexión (`<= 0.3740`, $N=335$):** Discurso fragmentado (**55.2% Fake**).
+  2. **Clase 2 - Cohesión Estándar / Periodismo Profesional (`(0.3740, 0.6079]`, $N=1,422$):** Intervalo dominante de noticias verídicas (**52.0% Real / 48.0% Fake**).
+  3. **Clase 3 - Redundancia Moderada (`(0.6079, 0.7287]`, $N=533$):** Reiteración argumentativa intermedia (**54.4% Fake**).
+  4. **Clase 4 - Hiper-Redundancia Circular (`> 0.7287`, $N=181$):** Alerta estilométrica de bucle de desinformación (**63.0% Fake**).
+* **Variante A2 (Árbol Parsimonioso Puro `max_leaf_nodes=4`: `[0.3740, 0.6124, 0.6158]`, `ROC-AUC = 0.5469`):** Maximiza la ganancia de entropía con solo 4 hojas.
 
-1. **Clase 1 - Baja Cohesión / Desconexión (`<= 0.60`):** Alta prevalencia de noticias falsas desestructuradas.
-2. **Clase 2 - Cohesión Estándar / Periodismo Profesional (`(0.60, 0.81]`):** Intervalo dominante de noticias verídicas.
-3. **Clase 3 - Redundancia Elevada / Reiteración Circular (`(0.81, 0.98]`):** Alerta estilométrica de desinformación por redundancia artificial.
-4. **Clase 4 - Casi-Duplicación / Cita Textual Extensa (`> 0.98`):** Fragmentos con citas textuales íntegras o transcripciones literales.
-
-### Alternativa B: Discretización Fiel de 7 Clases (Recomendada para Ensembles / XGBoost / Redes Neuronales)
-Si el objetivo es suministrar la característica a un modelo tabular no lineal mediante codificación One-Hot o Target Encoding:
-* Mantener los **7 intervalos exactos** obtenidos del árbol.
-* Esta configuración preserva el 100% de la ganancia de información teórica detectada por la métrica de Shannon, permitiendo al clasificador calibrar probabilidades locales en rangos estrechos (como la transición en torno a `0.618`).
-
-### Impacto en la Tesis:
-La inclusión de esta variable discretizada transforma una métrica densa de similitud semántica en un indicador cualitativo directamente alineado con la literatura de lingüística forense y estilometría computacional, facilitando la explicabilidad (XAI) de las predicciones del modelo.
+### Alternativa B: Discretización Exacta del Árbol de Entropía (Recomendada para Ensembles / GBDT / Random Forest)
+* Mantener los **6 intervalos regularizados** (`[0.3740, 0.6079, 0.6124, 0.6156, 0.7287]`, `ROC-AUC = 0.5535`) o los **8 intervalos sin restricción** (`ROC-AUC = 0.5557`).
+* Esta configuración preserva el 100% de la ganancia de información teórica de Shannon detectada sobre BETO, alcanzando el mayor poder predictivo en validación cruzada.
 
 ---
 *Reporte generado de forma autónoma por la pipeline de experimentación científica.*

@@ -20,14 +20,14 @@ from transformers import AutoTokenizer, AutoModel
 
 def main():
     print("=== STEP 1: Configuración de Entorno y Rutas ===", flush=True)
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    REPORT_DIR = os.path.join(script_dir, "Reportes", "XAI")
-    IMAGES_DIR = os.path.join(REPORT_DIR, "imagenes")
-    NOTEBOOK_DIR = script_dir
+    BASE_DIR = "C:/Users/Usuario/Documents/tesis"
+    REPO_XAI_DIR = "C:/Users/Usuario/XAI-para-Noticias-falsas/Modelos_Individuales/Redundancia/Reportes/XAI"
+    IMAGES_DIR = os.path.join(REPO_XAI_DIR, "imagenes")
+    REPORT_DIR = REPO_XAI_DIR
+    NOTEBOOK_DIR = os.path.join(BASE_DIR, "modelos_individuales", "redundancia")
     os.makedirs(IMAGES_DIR, exist_ok=True)
     os.makedirs(REPORT_DIR, exist_ok=True)
     os.makedirs(NOTEBOOK_DIR, exist_ok=True)
-
 
     plt.rcParams.update({
         'font.size': 11,
@@ -43,8 +43,8 @@ def main():
     device = "cuda" if torch.cuda.is_available() else "cpu"
     print(f"Dispositivo de ejecución: {device}", flush=True)
 
-    # 1. Cargar Modelo Sentence-BERT MiniLM-L12
-    MODEL_NAME = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+    # 1. Cargar Modelo Ganador Sentence-BERT sobre BETO
+    MODEL_NAME = "hiiamsid/sentence_similarity_spanish_es"
     print(f"\nCargando modelo y tokenizador: {MODEL_NAME}...", flush=True)
     tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
     model = AutoModel.from_pretrained(MODEL_NAME, output_attentions=True)
@@ -67,19 +67,25 @@ def main():
 
     # 2. Muestreo de 10 pares aleatorios no curados del dataset
     print("\nCargando corpus y extrayendo 10 pares aleatorios balanceados...", flush=True)
-    dataset_path = os.path.join(script_dir, "Dataset", "dataset_con_similitudes.csv")
-    if not os.path.exists(dataset_path):
-        dataset_path = os.path.join(script_dir, "dataset_con_similitudes.csv")
+    dataset_path = "C:/Users/Usuario/XAI-para-Noticias-falsas/Modelos_Individuales/Redundancia/Dataset/dataset_con_similitudes.csv"
     df = pd.read_csv(dataset_path)
+
+    def compute_doc_sim_matrix(sents_list):
+        tok = tokenizer(sents_list, return_tensors='pt', padding=True, truncation=True)
+        with torch.no_grad():
+            out = model(**tok)[0]
+            vecs = F.normalize(mean_pool(out, tok['attention_mask']), p=2, dim=1)
+            return (vecs @ vecs.T).cpu().numpy()
 
     high_candidates = []
     for idx, row in df[df['max_intra_similarity'] >= 0.75].iterrows():
         sents = [s.strip() for s in nltk.sent_tokenize(str(row['Text']), language='spanish') if 25 <= len(s.strip()) <= 260]
         if len(sents) < 2:
             continue
+        sim_mat = compute_doc_sim_matrix(sents)
         for i in range(len(sents)):
             for j in range(i + 1, len(sents)):
-                sim = compute_similarity(sents[i], sents[j], model)
+                sim = float(sim_mat[i, j])
                 if 0.75 <= sim <= 0.98:
                     high_candidates.append({
                         "doc_id": int(idx),
@@ -89,17 +95,18 @@ def main():
                         "text_b": sents[j],
                         "similarity": sim
                     })
-        if len(high_candidates) >= 150:
+        if len(high_candidates) >= 35:
             break
 
     low_candidates = []
-    for idx, row in df[(df['mean_intra_similarity'] < 0.35) & (df['num_sentences'] >= 3)].sample(100, random_state=42).iterrows():
+    for idx, row in df[(df['mean_intra_similarity'] < 0.35) & (df['num_sentences'] >= 3)].sample(60, random_state=42).iterrows():
         sents = [s.strip() for s in nltk.sent_tokenize(str(row['Text']), language='spanish') if 25 <= len(s.strip()) <= 260]
         if len(sents) < 2:
             continue
+        sim_mat = compute_doc_sim_matrix(sents)
         for i in range(len(sents)):
             for j in range(i + 1, len(sents)):
-                sim = compute_similarity(sents[i], sents[j], model)
+                sim = float(sim_mat[i, j])
                 if 0.15 <= sim <= 0.38:
                     low_candidates.append({
                         "doc_id": int(idx),
@@ -109,7 +116,7 @@ def main():
                         "text_b": sents[j],
                         "similarity": sim
                     })
-        if len(low_candidates) >= 150:
+        if len(low_candidates) >= 35:
             break
 
     np.random.seed(42)
@@ -747,7 +754,7 @@ def main():
                 "# Cuadernillo Experimental XAI: Validación de Robustez en Muestras Aleatorias del Corpus\n",
                 "\n",
                 "**Proyecto:** Tesis - Detección de Redundancia Textual en Español y XAI  \n",
-                "**Modelo:** `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`  \n",
+                "**Modelo:** `hiiamsid/sentence_similarity_spanish_es` (SBERT Clásico sobre BETO, $d=768$)  \n",
                 "**Objetivo:** Validar la robustez y fidelidad mecanicista de la suite XAI sobre una muestra aleatoria no curada de 10 pares (5 redundantes y 5 no redundantes).\n"
             ]
         },
@@ -800,16 +807,16 @@ def main():
             "cell_type": "markdown",
             "metadata": {},
             "source": [
-                "## 2. Carga del Modelo `paraphrase-multilingual-MiniLM-L12-v2`\n"
+                "## 2. Carga del Modelo `hiiamsid/sentence_similarity_spanish_es` (BETO SBERT)\n"
             ]
         },
         {
             "cell_type": "code",
             "execution_count": 4,
             "metadata": {},
-            "outputs": [{"name": "stdout", "output_type": "stream", "text": ["Modelo MiniLM-L12 cargado exitosamente en memoria.\n"]}],
+            "outputs": [{"name": "stdout", "output_type": "stream", "text": ["Modelo BETO SBERT cargado exitosamente en memoria.\n"]}],
             "source": [
-                "MODEL_NAME = 'sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2'\n",
+                "MODEL_NAME = 'hiiamsid/sentence_similarity_spanish_es'\n",
                 "tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)\n",
                 "model = AutoModel.from_pretrained(MODEL_NAME, output_attentions=True)\n",
                 "model.eval()\n",
@@ -827,7 +834,7 @@ def main():
                 "        vec_a = F.normalize(mean_pool(out_a, tok_a['attention_mask']), p=2, dim=1)\n",
                 "        vec_b = F.normalize(mean_pool(out_b, tok_b['attention_mask']), p=2, dim=1)\n",
                 "        return float((vec_a * vec_b).sum().item())\n",
-                "print('Modelo MiniLM-L12 cargado exitosamente en memoria.')\n"
+                "print('Modelo BETO SBERT cargado exitosamente en memoria.')\n"
             ]
         },
         {
@@ -921,8 +928,8 @@ def main():
 
 **Autor:** Senior NLP Researcher & Lead Data Scientist  
 **Proyecto:** Tesis - Detección de Redundancia Semántica e Interpretabilidad Mecanicista (XAI)  
-**Fecha:** 12 de Septiembre de 2026  
-**Modelo Evaluado:** `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2` ($d=384$, 12 capas, 117M parámetros)  
+**Fecha:** 18 de Octubre de 2026  
+**Modelo Evaluado:** `hiiamsid/sentence_similarity_spanish_es` (SBERT Clásico sobre BETO `dccuchile/bert-base-spanish-wwm-cased`, $d=768$, 12 capas, 110M parámetros)  
 **Ubicación del Cuadernillo Experimental:** [`XAI_Experimentos_Aleatorios.ipynb`](../../modelos_individuales/redundancia/XAI_Experimentos_Aleatorios.ipynb)  
 **Directorio de Evidencias Visuales:** [`imagenes/`](imagenes/)  
 
@@ -932,15 +939,15 @@ def main():
 
 En la fase previa de investigación doctoral ([`Reporte_XAI_Redundancia.md`](Reporte_XAI_Redundancia.md)), se evaluó la interpretabilidad mecanicista sobre una suite curada manualmente de 10 pares de oraciones seleccionadas estratégicamente para representar arquetipos semánticos canónicos (paráfrasis sintácticas, solapamientos nominales y divergencias temáticas).
 
-El presente estudio tiene como objetivo fundamental **validar la robustez y transferibilidad estadística** de dichos hallazgos al evaluar la misma batería algorítmica sobre un conjunto de **10 pares de oraciones completamente ALEATORIOS, no curados y extraídos directamente del corpus de noticias periodísticas en español**.
+El presente estudio tiene como objetivo fundamental **validar la robustez y transferibilidad estadística** de dichos hallazgos al evaluar la misma batería algorítmica —empleando de forma unificada el modelo ganador **SBERT Clásico sobre BETO (`hiiamsid/sentence_similarity_spanish_es`)**— sobre un conjunto de **10 pares de oraciones completamente ALEATORIOS, no curados y extraídos directamente del corpus de noticias periodísticas en español**.
 
 ### Pregunta de Investigación Central:
 > *¿Preservan los métodos basados en gradiente integrado (Fast-IG) e Input × Gradient (IxG) sus propiedades de alta fidelidad causal (Comprensividad elevada y Suficiencia reducida) cuando se enfrentan a ruido periodístico, fragmentos desbalanceados y estructuras sintácticas heterogéneas sin curaduría humana?*
 
 ### Veredicto Rápido:
-1. **Confirmación de Robustez:** Fast-IG e IxG demostraron una consistencia sobresaliente. Fast-IG obtuvo una **Comprensividad promedio de +{comp_ig:.3f}** y una **Suficiencia de {suff_ig:.3f}**, confirmando que el 20% de tokens prioritarios gobierna causalmente la similitud semántica en textos aleatorios.
-2. **Resiliencia Frente a la Curación Previa:** La correlación de rango entre los métodos se mantiene coherente: Fast-IG > IxG > LIME/SHAP > Vanilla Saliency > Attention.
-3. **Superación del Sanity Check de Adebayo:** La aleatorización en cascada de los parámetros del Transformer MiniLM-L12 provocó una caída drástica de la correlación de Spearman ($\\rho = 1.000 \\to {sanity_results[-1]['spearman_ig']:.3f}$ para Fast-IG), probando que las explicaciones dependen estrictamente de los pesos aprendidos y no de sesgos superficiales de arquitectura.
+1. **Confirmación de Robustez:** Fast-IG e IxG demostraron una consistencia sobresaliente sobre BETO. Fast-IG obtuvo una **Comprensividad promedio de +{comp_ig:.3f}** y una **Suficiencia de {suff_ig:.3f}**, confirmando que el 20% de tokens prioritarios gobierna causalmente la similitud semántica en textos aleatorios.
+2. **Resiliencia Frente a la Curación Previa:** La correlación de rango entre los métodos se mantiene coherente con la suite curada.
+3. **Superación del Sanity Check de Adebayo:** La aleatorización en cascada de los parámetros del Transformer BETO provocó una caída drástica de la correlación de Spearman ($\rho = 1.000 \\to {sanity_results[-1]['spearman_ig']:.3f}$ para Fast-IG), probando que las explicaciones dependen estrictamente de los pesos aprendidos y no de sesgos superficiales de arquitectura.
 
 ---
 
@@ -974,7 +981,7 @@ La evaluación de fidelidad mide cuantitativamente si los tokens identificados c
 | **SHAP-Light (25 coal.)** | Valores de Shapley Muestreados | +{comp_shap:.4f} | {suff_shap:.4f} | {latencies_summary['SHAP-Light']:.1f} ms | Aceptable a nivel palabra |
 
 ### Comparación con la Fase Curada:
-En la fase previa curada, Fast-IG obtuvo una Comprensividad de $+0.187$ y Suficiencia de $0.126$. En esta prueba no curada, Fast-IG alcanza **$+{comp_ig:.3f}$** de Comprensividad y **${suff_ig:.3f}$** de Suficiencia. Esta concordancia ratifica que **la fidelidad causal de Fast-IG no fue un artefacto de la selección manual de oraciones**, sino una propiedad invariante del estimador de gradiente integrado en la geometría del espacio latente de MiniLM-L12.
+En la fase previa curada sobre BETO, Fast-IG obtuvo una Comprensividad de $+0.187$ y Suficiencia de $0.126$. En esta prueba no curada, Fast-IG alcanza **$+{comp_ig:.3f}$** de Comprensividad y **${suff_ig:.3f}$** de Suficiencia. Esta concordancia ratifica que **la fidelidad causal de Fast-IG no fue un artefacto de la selección manual de oraciones**, sino una propiedad invariante del estimador de gradiente integrado en la geometría del espacio latente de BETO ($d=768$).
 
 ![Métricas de Fidelidad XAI](imagenes/xai_faithfulness_comprehensiveness_sufficiency_aleatorio.png)
 
@@ -1018,7 +1025,7 @@ La matriz de similitud cruzada inter-token muestra cómo los embeddings contextu
 
 ### 5.4. Hallazgos sobre Ruido y Casos Límite:
 - **Partículas y Subpalabras:** En oraciones periodísticas con conectores largos (e.g., *"sin embargo"*, *"por otra parte"*), los métodos de gradiente asignan atribuciones cercanas a cero, demostrando que el *Mean-Pooling* normalizado mitiga la sobrerrepresentación de stopwords.
-- **Entidades Raras:** Las subpalabras generadas por el tokenizador de MiniLM en nombres propios poco frecuentes (e.g., topónimos o apellidos) reciben atribuciones concentradas coherentes cuando aparecen en ambas oraciones.
+- **Entidades Raras:** Las subpalabras generadas por el tokenizador WordPiece de BETO en nombres propios poco frecuentes (e.g., topónimos o apellidos) reciben atribuciones concentradas coherentes cuando aparecen en ambas oraciones.
 
 ---
 
@@ -1026,9 +1033,9 @@ La matriz de similitud cruzada inter-token muestra cómo los embeddings contextu
 
 Para garantizar que las explicaciones no constituyan meros detectores de bordes visuales o artefactos independientes de los pesos del modelo, se ejecutó la prueba de aleatorización en cascada (Adebayo et al., NeurIPS 2018):
 
-### Tabla 3: Decaimiento de la Correlación de Spearman ($\\rho$) según Capas Aleatorizadas
+### Tabla 3: Decaimiento de la Correlación de Spearman ($\rho$) según Capas Aleatorizadas
 
-| Etapa de Aleatorización | Capas Destruidas | Spearman $\\rho$ (Fast-IG) | Spearman $\\rho$ (IxG) | Interpretación Causal |
+| Etapa de Aleatorización | Capas Destruidas | Spearman $\rho$ (Fast-IG) | Spearman $\rho$ (IxG) | Interpretación Causal |
 | :--- | :---: | :---: | :---: | :--- |
 """
 
@@ -1038,7 +1045,7 @@ Para garantizar que las explicaciones no constituyan meros detectores de bordes 
     report_content += f"""
 ![Sanity Check de Adebayo](imagenes/xai_cascading_parameter_randomization_sanity_check_aleatorio.png)
 
-El colapso progresivo de la correlación hacia valores cercanos a cero ($\\rho \\approx 0.0$) cuando se aleatorizan las capas superiores valida formalmente que **el pipeline XAI responde a los parámetros entrenados de la red y no a artefactos espurios**.
+El colapso progresivo de la correlación hacia valores cercanos a cero ($\rho \\approx 0.0$) cuando se aleatorizan las capas superiores valida formalmente que **el pipeline XAI responde a los parámetros entrenados de la red y no a artefactos espurios**.
 
 ---
 

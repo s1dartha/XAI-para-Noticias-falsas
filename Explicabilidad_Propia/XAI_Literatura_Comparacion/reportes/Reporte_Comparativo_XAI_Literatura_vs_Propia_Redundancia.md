@@ -60,7 +60,9 @@ Al ejecutar los tres operadores de perturbación estándar sobre el Top 20% de t
 
 Evaluamos primero los 7 métodos sobre la suite combinada de **20 pares de oraciones** (los 10 pares de prueba controlada del reporte de literatura + los 10 pares extraídos aleatoriamente del corpus de noticias).
 
-![Fidelidad Causal en Redundancia Semántica: Suite de 20 Pares y 40 Documentos](/home/ubuntu/Documentos/Tesis/Explicabilidad_Propia/XAI_Literatura_Comparacion/reportes/imagenes/redundancia/fig1_fidelidad_redundancia_pares_y_documentos.png)
+![Fidelidad Causal en Redundancia Semántica: Suite de 20 Pares y 40 Documentos](imagenes/redundancia/fig1_fidelidad_redundancia_pares_y_documentos.png)
+
+![Efecto del Baseline MASK y Síntesis Multidimensional en Redundancia](imagenes/redundancia/fig6_artefacto_mask_y_sintesis_multidimensional_redundancia.png)
 
 ### 3.1. Tabla Maestra de Resultados en la Cohorte A ($N=20$ Pares: 10 Redundantes $\ge 0.5996$ y 10 No Redundantes $< 0.5996$)
 
@@ -74,7 +76,7 @@ Evaluamos primero los 7 métodos sobre la suite combinada de **20 pares de oraci
 | **6.°** | **2. Input $\times$ Gradient** | $+0.0911 \pm 0.1583$ | $+0.1823$ | $-0.0145$ | $+0.1567$ | $0.3143 \pm 0.2151$ | $0.3918$ | $0.3728$ | $-0.0191$ | $4/10$ ($40\%$) / $3/10$ / $7/10$ ($70\%$) | $16.5\text{ ms}$ |
 | **7.°** | **3. Saliency Vanilla ($\ell_2$)** | $+0.0740 \pm 0.1046$ | $+0.1066$ | $-0.0085$ | $+0.1235$ | **$0.1290 \pm 0.0928$** *(1.° Mejor)* | $0.3792$ | $0.3603$ | $-0.0189$ | $3/10$ ($30\%$) / $3/10$ / $6/10$ ($60\%$) | $15.7\text{ ms}$ |
 
-![Curvas de Ablación Progresiva MoRF vs LoRF en Similitud Coseno SBERT](/home/ubuntu/Documentos/Tesis/Explicabilidad_Propia/XAI_Literatura_Comparacion/reportes/imagenes/redundancia/fig2_curvas_morf_lorf_redundancia_7_metodos.png)
+![Curvas de Ablación Progresiva MoRF vs LoRF en Similitud Coseno SBERT](imagenes/redundancia/fig2_curvas_morf_lorf_redundancia_7_metodos.png)
 
 > [!NOTE]
 > **Interpretación Rigurosa en Pares de Oraciones Aislados (Cohorte A):**
@@ -90,7 +92,7 @@ Evaluamos primero los 7 métodos sobre la suite combinada de **20 pares de oraci
 
 Aquí realizamos una prueba inédita en la tesis: aplicamos cada uno de los 6 métodos token-level de la literatura para borrar el Top 20% de tokens del par más redundante $(i^*, j^*)$ dentro del documento, y **recalculamos toda la matriz de similitud del documento $\mathbf{S}' \in \mathbb{R}^{K \times K}$** para verificar si el documento realmente dejó de ser redundante ($\max_{i<j} S'_{ij} < 0.5996$). Simultáneamente, aplicamos nuestra **Explicabilidad Propia (MexGen Oracional)** sobre los mismos 40 documentos.
 
-![Cambio de Etiqueta de Redundancia en Documentos y Topología Multi-Bucle MexGen](/home/ubuntu/Documentos/Tesis/Explicabilidad_Propia/XAI_Literatura_Comparacion/reportes/imagenes/redundancia/fig3_cambio_estado_redundancia_y_multibucle_mexgen.png)
+![Cambio de Etiqueta de Redundancia en Documentos y Topología Multi-Bucle MexGen](imagenes/redundancia/fig3_cambio_estado_redundancia_y_multibucle_mexgen.png)
 
 ### 4.1. Tabla Comparativa en los $N=40$ Documentos Completos (Nivel Par Maximal vs. Nivel Documento Global)
 
@@ -121,7 +123,7 @@ La Figura 3A y la Tabla 4.1 revelan el hallazgo más profundo del estudio compar
 
 ## 5. Validación No Tautológica de MexGen ($\Delta \bar{S}_{\text{doc}}$), Hallazgo Forense en Noticias Falsas y Control de Adebayo
 
-![Prueba Causal No Tautológica y Control de Sanidad de Adebayo en SBERT](/home/ubuntu/Documentos/Tesis/Explicabilidad_Propia/XAI_Literatura_Comparacion/reportes/imagenes/redundancia/fig4_ablacion_no_tautologica_y_adebayo_sbert.png)
+![Prueba Causal No Tautológica y Control de Sanidad de Adebayo en SBERT](imagenes/redundancia/fig4_ablacion_no_tautologica_y_adebayo_sbert.png)
 
 ### 5.1. Resolución de la Tautología del Máximo: Prueba MoRF vs. Azar Irrestricto ($1/K$) vs. LoRF sobre la Similitud Media ($\bar{S}_{\text{doc}}$)
 
@@ -158,7 +160,7 @@ Como se demuestra en la Figura 3B, mientras que los 6 métodos token-level se li
 | **6. KernelSHAP-Light** | $1.0000$ | $-0.1592$ | $-0.2512$ | $-0.1897$ | $-0.1426$ | $-0.3143$ | $64.9\text{ ms}$ | $1,441.5\text{ ms}$ | **APROBADO ($\checkmark$):** Sólido pero superado por Fast-IG, LIME y MexGen en Suficiencia. |
 | **7. Propio (MexGen)** | $1.0000$ | **$-0.0972$** | **$-0.2206$** | **$-0.2507$** | **$-0.1513$** | **$-0.2738$** | **$9.3\text{ ms}$** *(par)* | **$0.65\text{ ms}$** *(grafo doc)* | **APROBADO ($\checkmark$):** Sensible a pesos, 3.° en par aislado y **1.° absoluto en nivel documento**. |
 
-![Latencia Computacional en GPU de los 7 Métodos de Redundancia](/home/ubuntu/Documentos/Tesis/Explicabilidad_Propia/XAI_Literatura_Comparacion/reportes/imagenes/redundancia/fig5_latencia_computacional_redundancia.png)
+![Latencia Computacional en GPU de los 7 Métodos de Redundancia](imagenes/redundancia/fig5_latencia_computacional_redundancia.png)
 
 ---
 

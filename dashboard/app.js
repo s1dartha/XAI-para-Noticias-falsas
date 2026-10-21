@@ -13,7 +13,9 @@ let sampleRotationIdx = 0;
 
 let imlRadarChart = null;
 let sensTrajectoryChart = null;
+let modalSensChart = null;
 let forenseExamples = window.EMBEDDED_FORENSE_EXAMPLES || [];
+let currentDetectedArchetypeKey = 'ESTILO_V';
 
 const SAMPLE_TEXTS = [
   `Boooomm\nMUJERES VACUNADAS DE COVID ESTÁN MOSTRANDO EFECTOS SECUNDARIOS TÍPICOS DE CANCER DE MAMA\nLos médicos de Intermountain Healthcare’s Breast Care Centre de Utah, USA, anuncian nuevas pautas de mamografías para las mujeres vacunadas contra Covid-19 recientemente.\nLos médicos han observado inflamación de los ganglios linfáticos en las mamografías de detección de mujeres que se vacunaron recientemente contra COVID-19.\n"Siempre que los vemos en una mamografía de detección normal, llamamos a esas pacientes porque puede significar cáncer de mama metastásico que viaja a los ganglios linfáticos o linfoma o leucemia".\n“Con la vacuna Moderna están habiendo estos síntomas aproximadamente un 11% después de la primera dosis y un 16% después de la segunda dosis. Creemos que también es comparable para la vacuna Pfizer.`,
@@ -22,12 +24,57 @@ const SAMPLE_TEXTS = [
   `Rusia quiere recrear el comienzo del Universo. Redacción DUBNÁ EFE En Dubná, a unos 100 kilómetros al norte de Moscú, se comienza a vislumbrar lo que será un enorme acelerador de partículas destinado a recrear los primeros instantes del Universo tras el Big Bang. La construcción del NICA (Nuclotron based Ion Collider Facility)en el Instituto Conjunto para la Investigación Nuclear (JINR, por sus siglas en inglés) de Dubná avanza a pasos agigantados. El deseo de los aproximadamente mil científicos e ingenieros que trabajan en el megaproyecto es poner en marcha el colisionador en 2022. El objetivo es estudiar la transición de la materia ordinaria al plasma quark-gluón que existía en los primeros microsegundos después de la gran explosión. Para ello en Dubná se harán colisionar haces de iones de oro.`
 ];
 
-const ARCHETYPE_DEFINITIONS = {
-  ESTILO_I: "🔥 Estilo I (Desinformación Estridente): Se activa cuando D1 ≥ 65 y D4 ≥ 65. Combina alarma emocional extrema con repetición circular de consignas.",
-  ESTILO_II: "🎯 Estilo II (Cebo Comercial / Clickbait): Se activa cuando D2 ≥ 50 y D3 ≥ 50. El titular dispara un pico de alarma, pero el cuerpo técnico lo amortigua con datos.",
-  ESTILO_III: "🕵️ Estilo III (Propaganda Institucional / Astroturfing): Se activa cuando D1 < 45 y D4 ≥ 65. Tono formal y frío, pero repite una consigna en bucle para inducir verdad ilusoria.",
-  ESTILO_IV: "🧩 Estilo IV (Incoherencia Estructural): Se activa cuando D5 ≤ 55 y D4 < 40. Sintaxis fragmentada, saltos abruptos entre frases o recortes inconexos.",
-  ESTILO_V: "✅ Estilo V (Periodismo Profesional Balanceado): Progresión temática lineal en la Banda Óptima de Shannon sin bucles ni estridencia sostenida."
+const ARCHETYPE_CONFIG = {
+  ESTILO_I: {
+    id: "ESTILO_I",
+    nombre: "Estilo I: Desinformación Estridente",
+    tagline: "Alarma Emocional Sostenida + Nula Amortiguación + Repetición Circular",
+    regla: "Afinidad dominante: D1 alta + D3 baja + D4 bucle",
+    color: "#ef4444",
+    radarRef: [85.0, 80.0, 20.0, 85.0, 40.0],
+    tecnica: "Perfil flexible de afinidad: combina alta carga afectiva y dramatismo (D1 ≥ 40..75) con falta de amortiguación en el cuerpo (D3 ≤ 60..10) y reiteración circular (D4). Se activa por máxima afinidad morfoestilométrica, superando la rigidez de umbrales binarios fijos.",
+    ciudadano: "⚠️ ALERTA MÁXIMA (Muy baja confiabilidad): Esta noticia busca provocar alarma, indignación o pánico urgente repitiendo consignas en bucle y usando palabras de alto impacto emocional sin pruebas reales. Desconfía y no la compartas sin contrastarla en fuentes oficiales."
+  },
+  ESTILO_II: {
+    id: "ESTILO_II",
+    nombre: "Estilo II: Cebo Comercial (Clickbait)",
+    tagline: "Titular / Frase Inicial Alarmista con Cuerpo Amortiguado",
+    regla: "Afinidad dominante: D2 gatillo alto + D3 amortiguación alta",
+    color: "#f59e0b",
+    radarRef: [55.0, 75.0, 75.0, 30.0, 75.0],
+    tecnica: "Perfil flexible de afinidad: pico gatillo en cabecera (D2 ≥ 35..65) contrastado con alta amortiguación contextual del cuerpo (D3 ≥ 40..75). Captura titulares de impacto o cebos comerciales neutralizados por el cuerpo técnico.",
+    ciudadano: "🟡 CUIDADO (Confianza parcial / Lectura crítica): El titular o las primeras líneas exageran la noticia para atrapar tu clic y generar visitas, pero el cuerpo del texto explica los hechos con más calma y datos. Lee siempre el artículo completo antes de creer solo lo que dice el título."
+  },
+  ESTILO_III: {
+    id: "ESTILO_III",
+    nombre: "Estilo III: Propaganda Institucional (Astroturfing)",
+    tagline: "Tono Sobrio y Frío pero con Reiteración Temática en Bucle",
+    regla: "Afinidad dominante: D4 bucle alto + D1 sobria/baja + D2 sin gatillo",
+    color: "#8b5cf6",
+    radarRef: [25.0, 30.0, 60.0, 85.0, 80.0],
+    tecnica: "Perfil flexible de afinidad: alta reiteración semántica (D4 ≥ 45..80) enmascarada bajo un tono formal y frío (D1 ≤ 60..20) y sin gatillo clickbait (D2 ≤ 65..25) para inducir verdad ilusoria por repetición continua.",
+    ciudadano: "🟠 ATENCIÓN (Mensaje persuasivo / Propaganda): Está escrito con un tono serio, educado y formal, pero insiste una y otra vez en el mismo mensaje o consigna política/corporativa para convencerte por repetición. Comprueba quién financia o emite la información."
+  },
+  ESTILO_IV: {
+    id: "ESTILO_IV",
+    nombre: "Estilo IV: Incoherencia Estructural",
+    tagline: "Sintaxis Fragmentada, Saltos Abruptos o Recortes Inconexos",
+    regla: "Afinidad dominante: D5 cohesión rota + D4 baja/dispersa",
+    color: "#ec4899",
+    radarRef: [50.0, 50.0, 35.0, 25.0, 30.0],
+    tecnica: "Perfil flexible de afinidad: fractura en la conectividad discursiva (D5 ≤ 70..38) acompañada de baja continuidad proposicional (D4 ≤ 55..25) y baja amortiguación (D3). Refleja recortes desarticulados o generación automática defectuosa.",
+    ciudadano: "🔴 SOSPECHOSO (Baja confiabilidad): El texto parece un conjunto de frases pegadas sin orden lógico, rumores de redes sociales o una mala traducción. Carece de redacción periodística coherente y pierde el hilo argumental con facilidad."
+  },
+  ESTILO_V: {
+    id: "ESTILO_V",
+    nombre: "Estilo V: Periodismo Profesional Balanceado",
+    tagline: "Banda Óptima de Shannon, Coherencia Lineal y Atribución Factual",
+    regla: "Afinidad dominante: D5 óptima + D1 sobria + D4 progresión lineal + D2 equilibrada",
+    color: "#10b981",
+    radarRef: [15.0, 25.0, 88.0, 40.0, 92.0],
+    tecnica: "Perfil flexible de afinidad: redacción balanceada en la Banda Óptima de Shannon (D5 ≥ 45..75), baja alarma (D1 ≤ 55..20), progresión temática lineal sin bucles circulares (D4 en 25..65) y tono cabecera-cuerpo uniforme (D2 ≤ 55..25).",
+    ciudadano: "🟢 ALTA CONFIABILIDAD (Estilo periodístico riguroso): El texto informa con sobriedad, cita fuentes identificables ('declaró', 'indicó'), incluye datos verificables y no busca manipular tus emociones ni venderte una postura. Sigue el estándar de agencias profesionales."
+  }
 };
 
 // DOM Elements
@@ -93,22 +140,22 @@ document.addEventListener('DOMContentLoaded', () => {
     updateCharCounter();
   });
 
-  // Toggle Matrix Table button
-  document.getElementById('btn-toggle-matrix').addEventListener('click', () => {
-    const card = document.getElementById('matrix-audit-card');
-    card.style.display = card.style.display === 'none' ? 'block' : 'none';
-  });
-
-  // Interactive Archetype Pills
+  // Interactive Archetype Selection (Updates Radar Reference & Descriptions)
   document.querySelectorAll('#archetypes-5-strip .arch-pill').forEach(pill => {
     pill.addEventListener('click', () => {
       const key = pill.getAttribute('data-arch');
-      const infoEl = document.getElementById('arch-hover-info');
-      if (infoEl && ARCHETYPE_DEFINITIONS[key]) {
-        infoEl.textContent = ARCHETYPE_DEFINITIONS[key];
-      }
+      selectArchetype(key, true);
     });
   });
+
+  const btnResetArch = document.getElementById('btn-reset-arch-view');
+  if (btnResetArch) {
+    btnResetArch.addEventListener('click', () => {
+      if (currentDetectedArchetypeKey) {
+        selectArchetype(currentDetectedArchetypeKey, false);
+      }
+    });
+  }
 
   // Toggle SBERT Heatmap vs Top Pair
   const btnHeat = document.getElementById('btn-sbert-view-heat');
@@ -393,6 +440,9 @@ function renderCarouselAndSentencesTable(data) {
           ${mexgenBadge}
           ${scoreBadge}
         </div>
+        <div class="progress-track" style="height: 4px; margin-bottom: 0.45rem;">
+          <div class="progress-fill" style="width: ${Math.min(100, s.sensacionalismo_pct)}%; background: ${scoreColor};"></div>
+        </div>
         <div class="carousel-card-text">"${s.texto}"</div>
         <div class="carousel-flags-wrap">${flagsChips}</div>
       </div>
@@ -430,30 +480,52 @@ function renderCarouselAndSentencesTable(data) {
   });
 }
 
-// 3. Perfil IML (Gráfica de Araña) & 5 Arquetipos Discursivos
+// 3. Perfil IML (Gráfica de Araña Ampliada) & 5 Arquetipos Discursivos
 function renderIMLAndArchetypes(data) {
   const iml = data.las_5_dimensiones_iml;
   const arch = iml.arquetipo_discursivo;
 
-  document.getElementById('arch-assigned-name').textContent = arch.nombre;
-  document.getElementById('arch-assigned-desc').textContent = arch.descripcion;
-  document.getElementById('arch-assigned-rule').textContent = `Regla: ${arch.condicion_activada}`;
-
-  document.querySelectorAll('#archetypes-5-strip .arch-pill').forEach(pill => {
-    const key = pill.getAttribute('data-arch');
-    if (arch.id.startsWith(key)) {
-      pill.classList.add('active-arch');
-    } else {
-      pill.classList.remove('active-arch');
+  // Detectar arquetipo activo
+  let detectedKey = 'ESTILO_V';
+  for (const k of Object.keys(ARCHETYPE_CONFIG)) {
+    if (arch.id && arch.id.startsWith(k)) {
+      detectedKey = k;
+      break;
     }
-  });
+  }
+  currentDetectedArchetypeKey = detectedKey;
 
   const dimsOrder = [
-    { key: 'D1_Carga_Emocional', label: 'D1: Carga Emocional', color: '#ef4444' },
-    { key: 'D2_Volatilidad_Gatillo', label: 'D2: Volatilidad de Gatillo', color: '#f59e0b' },
-    { key: 'D3_Amortiguacion_Contextual', label: 'D3: Amortiguación Contextual', color: '#10b981' },
-    { key: 'D4_Reiteracion_Redundancia', label: 'D4: Reiteración / Redundancia', color: '#8b5cf6' },
-    { key: 'D5_Cohesion_Fluidez', label: 'D5: Cohesión y Fluidez', color: '#3b82f6' }
+    {
+      key: 'D1_Carga_Emocional',
+      label: 'D1: Carga Emocional',
+      color: '#ef4444',
+      tooltip: 'Mide si el texto busca alterarte, asustarte o causarte indignación con palabras provocadoras en vez de informar con serenidad.'
+    },
+    {
+      key: 'D2_Volatilidad_Gatillo',
+      label: 'D2: Volatilidad de Gatillo',
+      color: '#f59e0b',
+      tooltip: 'Detecta si hay frases bomba o explosivas diseñadas para atraparte de golpe, comparado con el cuerpo de la noticia que suele ser más calmado.'
+    },
+    {
+      key: 'D3_Amortiguacion_Contextual',
+      label: 'D3: Amortiguación Contextual',
+      color: '#10b981',
+      tooltip: 'Evalúa si la noticia aporta datos, citas de testigos o explicaciones que calman la duda y dan contexto real al lector.'
+    },
+    {
+      key: 'D4_Reiteracion_Redundancia',
+      label: 'D4: Reiteración / Redundancia',
+      color: '#8b5cf6',
+      tooltip: 'Mide si la noticia repite la misma idea una y otra vez con distintas palabras para grabarte un mensaje en la cabeza.'
+    },
+    {
+      key: 'D5_Cohesion_Fluidez',
+      label: 'D5: Cohesión y Fluidez',
+      color: '#3b82f6',
+      tooltip: 'Revisa si el texto está bien redactado y ordenado como prensa profesional, o si son frases cortadas y pegadas sin sentido lógico.'
+    }
   ];
 
   const container = document.getElementById('iml-dimensions-container');
@@ -462,24 +534,104 @@ function renderIMLAndArchetypes(data) {
   dimsOrder.forEach(d => {
     const dObj = iml[d.key];
     const val = dObj ? dObj.valor : 0;
-    const row = document.createElement('div');
-    row.className = 'iml-dim-compact-row';
-    row.innerHTML = `
-      <div class="iml-dim-top">
-        <span>${d.label} <small style="font-weight: 500; color: var(--text-muted);">(${dObj.nivel})</small></span>
-        <span style="color: ${d.color}; font-family: 'Outfit', sans-serif;">${val.toFixed(1)} / 100</span>
+    const card = document.createElement('div');
+    card.className = 'iml-dim-card-h';
+    card.innerHTML = `
+      <div>
+        <div class="dim-card-header">
+          <span class="dim-card-title" style="color: ${d.color};">
+            ${d.label}
+            <span class="help-tip" tabindex="0">?
+              <span class="help-content">${d.tooltip}</span>
+            </span>
+          </span>
+          <span class="dim-card-level">${dObj ? dObj.nivel : '--'}</span>
+        </div>
+        <div class="dim-card-score" style="color: var(--text-primary); margin: 0.25rem 0;">
+          ${val.toFixed(1)} <small style="font-size: 0.72rem; color: var(--text-muted); font-weight: 500;">/ 100</small>
+        </div>
       </div>
       <div class="progress-track" style="height: 6px;">
         <div class="progress-fill" style="width: ${Math.min(100, val)}%; background: ${d.color};"></div>
       </div>
     `;
-    container.appendChild(row);
+    container.appendChild(card);
   });
 
-  renderIMLRadarChart(iml);
+  renderIMLRadarChart(iml, detectedKey);
+  selectArchetype(detectedKey, false);
 }
 
-function renderIMLRadarChart(iml) {
+function selectArchetype(key, isExploration = true) {
+  const cfg = ARCHETYPE_CONFIG[key] || ARCHETYPE_CONFIG.ESTILO_V;
+
+  // Actualizar píldoras activas
+  document.querySelectorAll('#archetypes-5-strip .arch-pill').forEach(pill => {
+    if (pill.getAttribute('data-arch') === key) {
+      pill.classList.add('active-arch');
+    } else {
+      pill.classList.remove('active-arch');
+    }
+  });
+
+  // Título y regla
+  const nameEl = document.getElementById('arch-assigned-name');
+  if (nameEl) nameEl.textContent = cfg.nombre;
+
+  const descEl = document.getElementById('arch-assigned-desc');
+  if (descEl) descEl.textContent = cfg.tagline;
+
+  const ruleEl = document.getElementById('arch-assigned-rule');
+  if (ruleEl) ruleEl.textContent = `Regla: ${cfg.regla}`;
+
+  // Mini-descripción para técnico y para lector común
+  const techEl = document.getElementById('arch-tech-desc');
+  if (techEl) techEl.textContent = cfg.tecnica;
+
+  const comEl = document.getElementById('arch-common-desc');
+  if (comEl) comEl.textContent = cfg.ciudadano;
+
+  // Badge en cabecera de la telaraña
+  const badgeRef = document.getElementById('radar-reference-badge');
+  if (badgeRef) {
+    badgeRef.textContent = `🟢 Referencia: ${cfg.nombre}`;
+    badgeRef.style.color = cfg.color;
+  }
+
+  // Estado de exploración
+  const badgeView = document.getElementById('arch-view-badge');
+  const btnResetArch = document.getElementById('btn-reset-arch-view');
+
+  const isActuallyExploration = isExploration && (key !== currentDetectedArchetypeKey);
+
+  if (isActuallyExploration) {
+    if (badgeView) {
+      badgeView.textContent = `Explorando: ${cfg.nombre.split(':')[0]}`;
+      badgeView.style.background = 'rgba(245, 158, 11, 0.15)';
+      badgeView.style.color = '#b45309';
+    }
+    if (btnResetArch) btnResetArch.style.display = 'inline-flex';
+  } else {
+    if (badgeView) {
+      badgeView.textContent = 'Detectado en Noticia';
+      badgeView.style.background = 'rgba(99, 102, 241, 0.12)';
+      badgeView.style.color = 'var(--primary)';
+    }
+    if (btnResetArch) btnResetArch.style.display = 'none';
+  }
+
+  // Actualizar dinámicamente la serie de referencia verde en el Radar
+  if (imlRadarChart && imlRadarChart.data && imlRadarChart.data.datasets.length > 1) {
+    imlRadarChart.data.datasets[1].data = [...cfg.radarRef];
+    imlRadarChart.data.datasets[1].label = `Ref: ${cfg.nombre}`;
+    imlRadarChart.data.datasets[1].borderColor = cfg.color;
+    imlRadarChart.data.datasets[1].pointBackgroundColor = cfg.color;
+    imlRadarChart.data.datasets[1].backgroundColor = `${cfg.color}18`;
+    imlRadarChart.update();
+  }
+}
+
+function renderIMLRadarChart(iml, refArchKey = null) {
   const canvas = document.getElementById('iml-radar-chart');
   if (!canvas || typeof Chart === 'undefined') return;
 
@@ -496,6 +648,9 @@ function renderIMLRadarChart(iml) {
     iml.D4_Reiteracion_Redundancia.valor,
     iml.D5_Cohesion_Fluidez.valor
   ];
+
+  const targetKey = (refArchKey && ARCHETYPE_CONFIG[refArchKey]) ? refArchKey : (currentDetectedArchetypeKey || 'ESTILO_V');
+  const refConfig = ARCHETYPE_CONFIG[targetKey] || ARCHETYPE_CONFIG.ESTILO_V;
 
   imlRadarChart = new Chart(canvas, {
     type: 'radar',
@@ -515,22 +670,26 @@ function renderIMLRadarChart(iml) {
           borderColor: '#ec4899',
           pointBackgroundColor: '#ec4899',
           pointBorderColor: '#fff',
-          borderWidth: 2.4
+          pointHoverRadius: 6,
+          borderWidth: 2.5
         },
         {
-          label: 'Referencia Prensa Sobria',
-          data: [15.0, 35.0, 88.0, 45.0, 92.0],
-          backgroundColor: 'rgba(16, 185, 129, 0.08)',
-          borderColor: '#10b981',
-          borderDash: [4, 4],
-          pointBackgroundColor: '#10b981',
-          borderWidth: 1.6
+          label: `Ref: ${refConfig.nombre}`,
+          data: [...refConfig.radarRef],
+          backgroundColor: `${refConfig.color}18`,
+          borderColor: refConfig.color,
+          borderDash: [5, 4],
+          pointBackgroundColor: refConfig.color,
+          pointBorderColor: '#fff',
+          pointHoverRadius: 5,
+          borderWidth: 2.0
         }
       ]
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
+      animation: { duration: 400 },
       scales: {
         r: {
           min: 0,
@@ -539,13 +698,13 @@ function renderIMLRadarChart(iml) {
             stepSize: 25,
             color: isDark ? '#94a3b8' : '#64748b',
             backdropColor: 'transparent',
-            font: { size: 9 }
+            font: { size: 9.5 }
           },
           grid: { color: gridColor },
           angleLines: { color: gridColor },
           pointLabels: {
             color: textColor,
-            font: { size: 10.5, weight: '700' }
+            font: { size: 11, weight: '700' }
           }
         }
       },
@@ -848,11 +1007,20 @@ window.openModal = function(sentenceIdx, initialTab = 'sens') {
 };
 
 function closeModal() {
+  if (modalSensChart) {
+    modalSensChart.destroy();
+    modalSensChart = null;
+  }
   modalOverlay.classList.remove('active');
 }
 
 function setModalTab(tab) {
   modalActiveTab = tab;
+
+  if (modalSensChart) {
+    modalSensChart.destroy();
+    modalSensChart = null;
+  }
 
   btnModalSens.className = `modal-act-btn ${tab === 'sens' ? 'active-sens' : ''}`;
   btnModalRedun.className = `modal-act-btn ${tab === 'redun' ? 'active-redun' : ''}`;
@@ -865,81 +1033,351 @@ function setModalTab(tab) {
   let html = '';
 
   if (tab === 'sens') {
+    const isGat = s.es_oracion_gatillo;
+    const sensP = s.sensacionalismo_pct;
+    const pMean = sensDoc.P_mean * 100;
+    const pMax = sensDoc.P_max * 100;
+    const diffMean = sensP - pMean;
+
+    let sensBadgeText = "Sobria / Neutra";
+    let sensBadgeColor = "var(--true-color)";
+    let sensZone = "Zona Factual Neutra";
+    if (isGat) {
+      sensBadgeText = "🔥 ORACIÓN GATILLO PRINCIPAL";
+      sensBadgeColor = "var(--fake-color)";
+      sensZone = "Gatillo de Impacto Máximo";
+    } else if (sensP >= 60) {
+      sensBadgeText = "Alto Sensacionalismo";
+      sensBadgeColor = "var(--sens-color)";
+      sensZone = "Alerta Emocional Elevada";
+    } else if (sensP >= 40) {
+      sensBadgeText = "Moderadamente Sensacionalista";
+      sensBadgeColor = "var(--warning)";
+      sensZone = "Alarma Moderada";
+    }
+
     html = `
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.7rem;">
-        <strong style="color: var(--text-primary);">🔥 Modelo Sensacionalismo (BETO):</strong>
-        <span style="font-weight: 800; color: ${s.es_oracion_gatillo ? 'var(--fake-color)' : 'var(--sens-color)'};">
-          ${s.es_oracion_gatillo ? '🔥 ORACIÓN GATILLO DETECTADA' : (s.sensacionalismo_pct >= 50 ? 'Sensacionalista' : 'Sobria / Neutra')}
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.4rem;">
+        <div style="font-weight: 700; color: var(--text-primary); font-size: 0.9rem;">
+          🔥 Sensacionalismo Local (BETO): <span style="color: ${sensBadgeColor};">${sensBadgeText}</span>
+        </div>
+        <span class="section-badge" style="background: ${isGat ? 'var(--fake-light)' : 'var(--sens-light)'}; color: ${sensBadgeColor}; font-weight: 700;">
+          ${sensZone}
         </span>
       </div>
-      <div style="margin-bottom: 0.7rem;">
-        <div style="display: flex; justify-content: space-between; font-size: 0.83rem; color: var(--text-secondary); margin-bottom: 0.25rem;">
-          <span>Score Sensacionalismo Local P(s_${s.idx}):</span>
-          <strong>${s.sensacionalismo_pct.toFixed(1)}% (prob = ${s.sensacionalismo_prob.toFixed(4)})</strong>
+
+      <!-- GRÁFICA COMPARATIVA DENTRO DE CADA FRASE (CHART.JS CANVAS) -->
+      <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 0.65rem 0.85rem; margin-bottom: 0.75rem;">
+        <div style="font-size: 0.76rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.35rem; display: flex; justify-content: space-between; align-items: center;">
+          <span>📊 Comparativa Gráfica: Frase #${s.idx} vs. Noticia</span>
+          <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 500;">BETO (Escala 0–100%)</span>
         </div>
-        <div class="progress-track">
-          <div class="progress-fill" style="width: ${s.sensacionalismo_pct}%; background: ${s.es_oracion_gatillo ? 'var(--fake-color)' : 'var(--sens-color)'};"></div>
+        <div style="height: 115px; position: relative;">
+          <canvas id="modal-sentence-chart"></canvas>
         </div>
       </div>
-      <div style="font-size: 0.81rem; color: var(--text-secondary); line-height: 1.5; background: var(--bg-card); padding: 0.7rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
-        <div>• <strong>Respecto a la Media Documental (${(sensDoc.P_mean * 100).toFixed(1)}%):</strong> ${(s.sensacionalismo_pct - sensDoc.P_mean * 100 >= 0 ? '+' : '')}${(s.sensacionalismo_pct - sensDoc.P_mean * 100).toFixed(1)} pts.</div>
-        <div style="margin-top: 0.3rem;">• <strong>Impacto Contrafáctico (ΔP = ${sensDoc.delta_p_gatillo_causal.toFixed(4)}):</strong> ${s.es_oracion_gatillo ? 'Actúa como detonante emocional principal del artículo.' : 'Frase de soporte contextual sin pico alarmista.'}</div>
+
+      <!-- BARRAS COMPARATIVAS ESTILIZADAS -->
+      <div class="sens-bars-container">
+        <!-- BARRA 1: ESTA FRASE -->
+        <div class="sens-bar-item" style="border-left: 4px solid ${sensBadgeColor};">
+          <div class="sens-bar-header">
+            <span>Frase Actual (#${s.idx}):</span>
+            <strong style="color: ${sensBadgeColor};">${sensP.toFixed(1)}% (prob = ${s.sensacionalismo_prob.toFixed(4)})</strong>
+          </div>
+          <div class="progress-track" style="height: 7px;">
+            <div class="progress-fill" style="width: ${Math.min(100, sensP)}%; background: ${sensBadgeColor};"></div>
+          </div>
+        </div>
+
+        <!-- BARRA 2: PROMEDIO DOCUMENTAL -->
+        <div class="sens-bar-item">
+          <div class="sens-bar-header">
+            <span style="color: var(--text-secondary);">Promedio de la Noticia (P_mean):</span>
+            <strong style="color: var(--sens-color);">${pMean.toFixed(1)}%</strong>
+          </div>
+          <div class="progress-track" style="height: 6px;">
+            <div class="progress-fill" style="width: ${Math.min(100, pMean)}%; background: var(--sens-color);"></div>
+          </div>
+        </div>
+
+        <!-- BARRA 3: PICO MÁXIMO DE LA NOTICIA -->
+        <div class="sens-bar-item">
+          <div class="sens-bar-header">
+            <span style="color: var(--text-secondary);">Pico Máximo Documental (P_max):</span>
+            <strong style="color: var(--fake-color);">${pMax.toFixed(1)}%</strong>
+          </div>
+          <div class="progress-track" style="height: 6px;">
+            <div class="progress-fill" style="width: ${Math.min(100, pMax)}%; background: var(--fake-color);"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CAJA DE ANÁLISIS FORENSE Y CONTRAFÁCTICO -->
+      <div style="font-size: 0.81rem; color: var(--text-secondary); line-height: 1.5; background: var(--bg-card); padding: 0.75rem 0.9rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+        <div>• <strong>Desviación frente a la Media (${pMean.toFixed(1)}%):</strong> <span style="font-weight: 700; color: ${diffMean >= 0 ? 'var(--sens-color)' : 'var(--true-color)'};">${diffMean >= 0 ? '+' : ''}${diffMean.toFixed(1)} pts</span>.</div>
+        <div style="margin-top: 0.35rem;">• <strong>Impacto Causal Contrafáctico (ΔP = ${sensDoc.delta_p_gatillo_causal.toFixed(4)}):</strong> ${isGat ? 'Actúa como el principal detonante alarmista del artículo. Al silenciar esta frase la alarma cae drásticamente.' : 'Frase de desarrollo argumental o contextual sin pico detonante.'}</div>
       </div>
     `;
   } else if (tab === 'redun') {
     const pmr = s.par_mas_redundante;
-    const consecText = s.coherencia_consecutiva !== null ? `${s.coherencia_consecutiva.toFixed(4)} (${(s.coherencia_consecutiva * 100).toFixed(1)}%)` : 'Primera frase del texto (—)';
+    const matrix = (currentAnalysis.redundancia_sbert && currentAnalysis.redundancia_sbert.matriz_similitud) || [];
+    const simRow = matrix[selectedSentenceIndex] || [];
+    const consecText = s.coherencia_consecutiva !== null ? `${s.coherencia_consecutiva.toFixed(4)} (${(s.coherencia_consecutiva * 100).toFixed(1)}%)` : 'Primera frase (—)';
+
+    // Generar tabla mapa de calor idéntica a la sección de redundancia (1 fila x K columnas)
+    let theadCols = '';
+    let tbodyCols = '';
+    simRow.forEach((simVal, j) => {
+      const isSelf = (j === selectedSentenceIndex);
+      const isTopRedun = (pmr && pmr.idx_oracion_cercana === (j + 1) && !isSelf);
+      
+      theadCols += `<th>F${j + 1}</th>`;
+
+      let bg = 'transparent';
+      let col = 'var(--text-primary)';
+      if (isSelf) {
+        bg = 'var(--bg-card-subtle)';
+        col = 'var(--text-muted)';
+      } else if (simVal >= 0.59) {
+        bg = `rgba(139, 92, 246, ${Math.min(0.9, simVal * 0.9)})`;
+        col = '#ffffff';
+      } else if (simVal >= 0.34) {
+        bg = `rgba(59, 130, 246, ${Math.min(0.65, simVal * 0.75)})`;
+        col = '#ffffff';
+      } else {
+        bg = 'rgba(148, 163, 184, 0.12)';
+      }
+
+      const outlineStyle = isTopRedun ? 'outline: 2px solid var(--redun-color); z-index: 1; position: relative;' : '';
+
+      tbodyCols += `
+        <td onclick="inspectSentencePairInModal(${selectedSentenceIndex}, ${j})"
+            title="Comparar Frase #${s.idx} con Frase #${j + 1}: Similitud Coseno = ${simVal.toFixed(4)}"
+            style="background: ${bg}; color: ${col}; font-weight: ${simVal >= 0.34 && !isSelf ? '700' : '400'}; ${outlineStyle}">
+          ${isSelf ? '1.0' : simVal.toFixed(2)}
+        </td>
+      `;
+    });
+
     html = `
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.7rem;">
-        <strong style="color: var(--text-primary);">🔄 Geometría Semántica SBERT (τ = 0.34):</strong>
-        <span style="font-weight: 800; color: var(--redun-color);">
-          ${pmr && pmr.similitud >= 0.34 ? `Redundante con Frase #${pmr.idx_oracion_cercana}` : 'Sin Redundancia Cíclica'}
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.55rem; flex-wrap: wrap; gap: 0.4rem;">
+        <strong style="color: var(--text-primary);">🔄 Mapa de Calor Oracional: Frase #${s.idx} vs. Todas las Frases</strong>
+        <span style="font-size: 0.74rem; font-weight: 700; color: var(--redun-color);">
+          ${pmr && pmr.similitud >= 0.34 ? `🔁 Redundante con Frase #${pmr.idx_oracion_cercana}` : 'Sin bucle de redundancia'}
         </span>
       </div>
-      <div style="margin-bottom: 0.7rem;">
-        <div style="display: flex; justify-content: space-between; font-size: 0.83rem; color: var(--text-secondary); margin-bottom: 0.25rem;">
-          <span>Similitud Máxima con otra frase:</span>
-          <strong>${pmr ? (pmr.similitud * 100).toFixed(1) + '% (cos = ' + pmr.similitud.toFixed(4) + ')' : '0%'}</strong>
-        </div>
-        <div class="progress-track">
-          <div class="progress-fill" style="width: ${pmr ? Math.min(100, pmr.similitud * 100) : 0}%; background: var(--redun-color);"></div>
-        </div>
+
+      <!-- TABLA MAPA DE CALOR ESTILO SBERT (1 FILA X K COLUMNAS) -->
+      <div style="overflow-x: auto; margin-bottom: 0.55rem; border: 1px solid var(--border-color); border-radius: var(--radius-sm);">
+        <table class="sbert-heatmap-table" style="width: 100%; margin: 0;">
+          <thead>
+            <tr>
+              <th style="padding: 0.35rem 0.55rem; background: var(--bg-card-subtle);">Frase</th>
+              ${theadCols}
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th style="padding: 0.35rem 0.55rem; color: var(--primary); font-weight: 800; background: var(--bg-card-subtle);">F${s.idx}</th>
+              ${tbodyCols}
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <div style="font-size: 0.81rem; color: var(--text-secondary); line-height: 1.5; background: var(--bg-card); padding: 0.7rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+      <div style="font-size: 0.71rem; color: var(--text-muted); text-align: center; margin-bottom: 0.65rem;">
+        💡 Haz clic en cualquier celda <strong>F_j</strong> de la tabla para comparar el texto completo entre Frase #${s.idx} y esa frase.
+      </div>
+
+      <!-- CAJA COMPARATIVA DE PARES (DINÁMICA) -->
+      <div id="sentence-pair-detail-box" class="quote-callout-compact" style="border-left-color: var(--redun-color); margin-bottom: 0.65rem;">
+        ${pmr ? `
+          <div style="font-weight: 700; color: var(--redun-color); margin-bottom: 0.25rem;">
+            🔁 Par de Máxima Similitud: Frase #${s.idx} ↔ Frase #${pmr.idx_oracion_cercana} (cos = ${pmr.similitud.toFixed(4)})
+          </div>
+          <div><em>"${pmr.texto_resumido}"</em></div>
+        ` : `
+          <div>Documento de una sola frase o sin pares.</div>
+        `}
+      </div>
+
+      <!-- RESUMEN DE COHERENCIA -->
+      <div style="font-size: 0.81rem; color: var(--text-secondary); line-height: 1.5; background: var(--bg-card); padding: 0.65rem 0.85rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
         <div>• <strong>Coherencia Consecutiva Adyacente (D1):</strong> <code>${consecText}</code></div>
-        <div>• <strong>Similitud Media con el Documento:</strong> <code>${s.similitud_media_documento.toFixed(4)}</code></div>
-        ${pmr ? `<div style="margin-top: 0.35rem;">• <strong>Frase Más Similar (Frase #${pmr.idx_oracion_cercana}):</strong><br><em>"${pmr.texto_resumido}"</em></div>` : ''}
+        <div style="margin-top: 0.2rem;">• <strong>Similitud Media con el Documento:</strong> <code>${s.similitud_media_documento.toFixed(4)}</code></div>
       </div>
     `;
   } else if (tab === 'sabert') {
+    // 1. Mayúsculas
+    const capsWords = s.palabras_mayusculas || [];
+    const capsChips = capsWords.length > 0
+      ? capsWords.map(w => `<span class="ortho-chip" style="background: rgba(239, 68, 68, 0.15); color: var(--fake-color); border: 1px solid rgba(239, 68, 68, 0.3);">${w}</span>`).join('')
+      : '<span style="font-size: 0.75rem; color: var(--true-color); font-weight: 600;">✅ Sin palabras en MAYÚSCULAS</span>';
+
+    // 2. Puntuación no neutra (!, ?, ...)
+    const punctMatches = s.texto.match(/[!?¡¿…]/g) || [];
+    const punctChips = punctMatches.length > 0
+      ? punctMatches.map(p => `<span class="ortho-chip" style="background: rgba(245, 158, 11, 0.15); color: var(--warning); border: 1px solid rgba(245, 158, 11, 0.3);">${p}</span>`).join('')
+      : '<span style="font-size: 0.75rem; color: var(--text-muted);">Puntuación neutra (estándar)</span>';
+
+    // 3. Verbos dicendi (de atribución)
+    const dicendi = s.verbos_dicendi || [];
+    const dicendiChips = dicendi.length > 0
+      ? dicendi.map(v => `<span class="ortho-chip" style="background: rgba(16, 185, 129, 0.15); color: #059669; border: 1px solid rgba(16, 185, 129, 0.3);">🎙️ ${v}</span>`).join('')
+      : '<span style="font-size: 0.75rem; color: var(--text-muted);">⚠️ Sin verbos de atribución explícita</span>';
+
+    // 4. Boosters / Hedges
+    const boostersFound = [];
+    const lowerText = s.texto.toLowerCase();
+    ['sin duda', 'obvio', 'evidente', 'claramente', 'boooomm', 'seguro'].forEach(b => {
+      if (lowerText.includes(b)) boostersFound.push(`⚡ ${b}`);
+    });
+    ['podría', 'posiblemente', 'al parecer', 'presunto', 'según parece'].forEach(h => {
+      if (lowerText.includes(h)) boostersFound.push(`🛡️ ${h}`);
+    });
+    const epistemicChips = boostersFound.length > 0
+      ? boostersFound.map(e => `<span class="ortho-chip" style="background: rgba(99, 102, 241, 0.15); color: var(--primary); border: 1px solid rgba(99, 102, 241, 0.3);">${e}</span>`).join('')
+      : '<span style="font-size: 0.75rem; color: var(--text-muted);">Registro equilibrado (sin sesgo asertivo)</span>';
+
+    // Banderas forenses
     const flagsList = (s.banderas_forenses && s.banderas_forenses.length > 0)
-      ? s.banderas_forenses.map(f => `<div style="margin-bottom: 0.2rem;">• ${f}</div>`).join('')
-      : '<div>• ✅ Tono neutro / Sin anomalías morfosintácticas</div>';
+      ? s.banderas_forenses.map(f => `<div style="margin-bottom: 0.25rem;">• ${f}</div>`).join('')
+      : '<div>• ✅ Tono sobrio / Sin anomalías estilométricas</div>';
 
     html = `
-      <div class="kpi-mini-grid" style="margin-bottom: 0.7rem;">
-        <div class="kpi-mini-box" style="background: var(--bg-card);">
-          <div class="kpi-mini-label">Mayúsculas (D5)</div>
-          <div class="kpi-mini-val" style="color: ${s.mayusculas_ratio >= 12 ? 'var(--fake-color)' : 'var(--text-primary)'};">${s.mayusculas_ratio.toFixed(1)}%</div>
+      <!-- GRID DE 4 TARJETAS VISUALES DE MARCADORES -->
+      <div class="ortho-badges-grid">
+        <!-- 1. MAYÚSCULAS -->
+        <div class="ortho-card">
+          <div class="ortho-card-title">
+            <span>📢 Mayúsculas (D5)</span>
+            <span style="color: ${s.mayusculas_ratio > 10 ? 'var(--fake-color)' : 'var(--text-primary)'};">${s.mayusculas_ratio.toFixed(1)}%</span>
+          </div>
+          <div class="ortho-token-chips">${capsChips}</div>
         </div>
-        <div class="kpi-mini-box" style="background: var(--bg-card);">
-          <div class="kpi-mini-label">Adverbios (D4)</div>
-          <div class="kpi-mini-val" style="color: ${s.adverbios_densidad >= 6 ? 'var(--sens-color)' : 'var(--text-primary)'};">${s.adverbios_densidad.toFixed(1)}%</div>
+
+        <!-- 2. PUNTUACIÓN EXPRESIVA -->
+        <div class="ortho-card">
+          <div class="ortho-card-title">
+            <span>❗ Puntuación Expresiva (D5)</span>
+            <span style="color: ${punctMatches.length > 0 ? 'var(--warning)' : 'var(--text-primary)'};">${punctMatches.length} signos</span>
+          </div>
+          <div class="ortho-token-chips">${punctChips}</div>
         </div>
-        <div class="kpi-mini-box" style="background: var(--bg-card);">
-          <div class="kpi-mini-label">Verbos Dicendi (D2)</div>
-          <div class="kpi-mini-val" style="color: ${(s.verbos_dicendi && s.verbos_dicendi.length) ? 'var(--true-color)' : 'var(--text-muted)'};">${(s.verbos_dicendi || []).length}</div>
+
+        <!-- 3. VERBOS DE ATRIBUCIÓN (DICENDI) -->
+        <div class="ortho-card">
+          <div class="ortho-card-title">
+            <span>🎙️ Atribución Factual (D2)</span>
+            <span style="color: ${dicendi.length > 0 ? '#059669' : 'var(--text-muted)'};">${dicendi.length} verbos</span>
+          </div>
+          <div class="ortho-token-chips">${dicendiChips}</div>
+        </div>
+
+        <!-- 4. GATILLOS EPISTÉMICOS -->
+        <div class="ortho-card">
+          <div class="ortho-card-title">
+            <span>⚡ Certeza / Cautela (D2)</span>
+            <span style="color: var(--primary);">${boostersFound.length} marcas</span>
+          </div>
+          <div class="ortho-token-chips">${epistemicChips}</div>
         </div>
       </div>
-      <div style="font-size: 0.81rem; color: var(--text-secondary); background: var(--bg-card); padding: 0.7rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
-        <strong>Banderas y Advertencias Forenses Activas:</strong>
-        <div style="margin-top: 0.3rem;">${flagsList}</div>
+
+      <!-- BARRITA DE ADVERBIOS Y RESUMEN FORENSE -->
+      <div style="font-size: 0.81rem; color: var(--text-secondary); background: var(--bg-card); padding: 0.75rem 0.9rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 0.4rem;">
+          <span><strong>Densidad de Adverbios Modales (D4):</strong></span>
+          <strong style="color: ${s.adverbios_densidad >= 6 ? 'var(--sens-color)' : 'var(--text-primary)'};">${s.adverbios_densidad.toFixed(1)}%</strong>
+        </div>
+        <div style="margin-top: 0.35rem; font-weight: 700; color: var(--text-primary);">Banderas Forenses Detectadas en esta Oración:</div>
+        <div style="margin-top: 0.25rem;">${flagsList}</div>
       </div>
     `;
   }
 
   modalDetailPanel.innerHTML = html;
+
+  // Si estamos en la pestaña de sensacionalismo, instanciar la gráfica visual de Chart.js
+  if (tab === 'sens') {
+    const canvasModal = document.getElementById('modal-sentence-chart');
+    if (canvasModal && typeof Chart !== 'undefined') {
+      const isDark = currentTheme === 'dark';
+      const textColor = isDark ? '#e2e8f0' : '#1e293b';
+      const sensP = s.sensacionalismo_pct;
+      const pMean = sensDoc.P_mean * 100;
+      const pMax = sensDoc.P_max * 100;
+      const sensBarCol = s.es_oracion_gatillo ? '#ef4444' : (sensP >= 50 ? '#f59e0b' : '#10b981');
+
+      modalSensChart = new Chart(canvasModal, {
+        type: 'bar',
+        data: {
+          labels: [`Frase #${s.idx}`, 'Media Noticia', 'Pico Gatillo'],
+          datasets: [{
+            label: 'Sensacionalismo (%)',
+            data: [
+              parseFloat(sensP.toFixed(1)),
+              parseFloat(pMean.toFixed(1)),
+              parseFloat(pMax.toFixed(1))
+            ],
+            backgroundColor: [
+              sensBarCol,
+              'rgba(245, 158, 11, 0.75)',
+              'rgba(239, 68, 68, 0.8)'
+            ],
+            borderRadius: 4,
+            barThickness: 15
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: { duration: 350 },
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: ctx => ` ${ctx.parsed.x}% sensacionalismo`
+              }
+            }
+          },
+          scales: {
+            x: {
+              min: 0,
+              max: 100,
+              grid: { color: isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)' },
+              ticks: { font: { size: 9 }, color: isDark ? '#94a3b8' : '#64748b' }
+            },
+            y: {
+              grid: { display: false },
+              ticks: { font: { size: 9.5, weight: '700' }, color: textColor }
+            }
+          }
+        }
+      });
+    }
+  }
 }
+
+window.inspectSentencePairInModal = function(srcIdx, tgtIdx) {
+  if (!currentAnalysis || !currentAnalysis.desglose_oraciones) return;
+  const sents = currentAnalysis.desglose_oraciones;
+  const matrix = (currentAnalysis.redundancia_sbert && currentAnalysis.redundancia_sbert.matriz_similitud) || [];
+  const val = (matrix[srcIdx] && matrix[srcIdx][tgtIdx] !== undefined) ? matrix[srcIdx][tgtIdx] : 0;
+  
+  const box = document.getElementById('sentence-pair-detail-box');
+  if (!box) return;
+
+  const isSelf = srcIdx === tgtIdx;
+  box.innerHTML = `
+    <div style="font-weight: 700; color: ${val >= 0.34 && !isSelf ? 'var(--redun-color)' : 'var(--primary)'}; margin-bottom: 0.35rem;">
+      🔍 Comparación: Frase #${srcIdx + 1} ↔ Frase #${tgtIdx + 1} (Similitud Coseno = ${isSelf ? '1.0000 (Misma frase)' : val.toFixed(4)})
+    </div>
+    <div style="margin-bottom: 0.3rem;"><strong>Frase #${srcIdx + 1}:</strong> <em>"${sents[srcIdx].texto}"</em></div>
+    <div><strong>Frase #${tgtIdx + 1}:</strong> <em>"${sents[tgtIdx].texto}"</em></div>
+  `;
+};
 
 // 7. Simulaciones Contrafácticas Interactivas
 function simulateLiveAblation() {
@@ -1139,32 +1577,81 @@ function buildClientForensicAudit(text) {
 
   const imlScore = Math.min(100, Math.max(0, d1_iml * 0.35 + d2_iml * 0.20 + (100 - d3_iml) * 0.15 + d4_iml * 0.20 + (100 - d5_iml) * 0.10));
 
-  let archId = "ESTILO_V_PERIODISMO_EQUILIBRADO";
-  let archName = "Estilo V: Periodismo Profesional Balanceado";
-  let archDesc = "Redacción equilibrada con variedad léxica, desarrollo temático progresivo y ausencia de manipulaciones estilísticas.";
-  let archRule = "Comportamiento estilométrico equilibrado sin anomalías severas";
-
-  if (d1_iml >= 65 && d4_iml >= 65) {
-    archId = "ESTILO_I_DESINFO_ESTRIDENTE";
-    archName = "Estilo I: Desinformación Estridente / Cliché Hiperbólico";
-    archDesc = "Texto saturado homogéneamente de emociones extremas con reiteración circular de premisas.";
-    archRule = "D1 >= 65.0 y D4 >= 65.0";
-  } else if (d2_iml >= 50 && d3_iml >= 50) {
-    archId = "ESTILO_II_CLICKBAIT_CABECERA";
-    archName = "Estilo II: Cebo Comercial / Clickbait de Cabecera";
-    archDesc = "Titular o apertura alarmista diseñado para capturar clics, pero con cuerpo informativo formal que amortigua la alarma.";
-    archRule = "D2 >= 50.0 y D3 >= 50.0";
-  } else if (d1_iml < 45 && d4_iml >= 65) {
-    archId = "ESTILO_III_PROPAGANDA_SOBRIA";
-    archName = "Estilo III: Propaganda Institucional / Astroturfing Encubierto";
-    archDesc = "Tono aparentemente sobrio y académico, pero con bucles de repetición semántica calculados para inducir verdad ilusoria.";
-    archRule = "D1 < 45.0 y D4 >= 65.0";
-  } else if (d5_iml <= 55 && d4_iml < 40) {
-    archId = "ESTILO_IV_DESARTICULADO";
-    archName = "Estilo IV: Incoherencia Estructural / Generación Rota";
-    archDesc = "Texto con baja conectividad proposicional, fragmentación sintáctica o párrafos desvinculados.";
-    archRule = "D5 <= 55.0 y D4 < 40.0";
+  // Clasificación flexible por afinidad estilométrica continua (mismo cálculo que arquetipos_flexibles.py)
+  function rampUp(x, lo, hi) {
+    if (x <= lo) return 0.0;
+    if (x >= hi) return 1.0;
+    return (x - lo) / (hi - lo);
   }
+  function rampDown(x, hi, lo) {
+    return 1.0 - rampUp(x, lo, hi);
+  }
+  function bellBand(x, lo, midLo, midHi, hi) {
+    if (x <= lo || x >= hi) return 0.0;
+    if (x >= midLo && x <= midHi) return 1.0;
+    if (x < midLo) return (x - lo) / (midLo - lo);
+    return (hi - x) / (hi - midHi);
+  }
+
+  const arquetiposMeta = [
+    {
+      id: "ESTILO_I_DESINFO_ESTRIDENTE",
+      nombre: "Estilo I: Desinformación Estridente / Cliché Hiperbólico",
+      descripcion: "Alarma emocional sostenida en todo el texto, sin amortiguación del cuerpo; la repetición circular de premisas agrava la estridencia.",
+      regla: "Afinidad = 0.45·(D1 alta) + 0.30·(D3 baja/sin amortiguar) + 0.25·(D4 bucle circular)"
+    },
+    {
+      id: "ESTILO_II_CLICKBAIT_CABECERA",
+      nombre: "Estilo II: Cebo Comercial / Clickbait de Cabecera",
+      descripcion: "Titular o apertura alarmista diseñado para capturar clics, pero con cuerpo informativo formal que amortigua y diluye la alarma.",
+      regla: "Afinidad = 0.45·(D2 gatillo alto) + 0.40·(D3 amortiguación alta) + 0.15·(D1 moderada/baja)"
+    },
+    {
+      id: "ESTILO_III_PROPAGANDA_SOBRIA",
+      nombre: "Estilo III: Propaganda Institucional / Astroturfing Encubierto",
+      descripcion: "Tono formal, sobrio y frío, pero con bucles de repetición semántica calculados para inducir verdad ilusoria.",
+      regla: "Afinidad = 0.45·(D4 bucle alto) + 0.35·(D1 sobria/baja) + 0.20·(D2 gatillo bajo/homogéneo)"
+    },
+    {
+      id: "ESTILO_IV_DESARTICULADO",
+      nombre: "Estilo IV: Incoherencia Estructural / Generación Rota",
+      descripcion: "Texto con baja conectividad proposicional, fragmentación sintáctica o párrafos desvinculados sin hilo temático.",
+      regla: "Afinidad = 0.50·(D5 cohesión rota) + 0.35·(D4 redundancia dispersa) + 0.15·(D3 baja)"
+    },
+    {
+      id: "ESTILO_V_PERIODISMO_EQUILIBRADO",
+      nombre: "Estilo V: Periodismo Profesional Balanceado",
+      descripcion: "Redacción equilibrada con variedad léxica, desarrollo temático progresivo en Banda de Shannon y ausencia de estridencias.",
+      regla: "Afinidad = 0.35·(D5 cohesión óptima) + 0.30·(D1 sobria) + 0.20·(D4 progresión lineal) + 0.15·(D2 equilibrada)"
+    }
+  ];
+
+  const a1 = 0.45 * rampUp(d1_iml, 40.0, 75.0) + 0.30 * rampDown(d3_iml, 60.0, 10.0) + 0.25 * rampUp(d4_iml, 35.0, 75.0);
+  const a2 = 0.45 * rampUp(d2_iml, 35.0, 65.0) + 0.40 * rampUp(d3_iml, 40.0, 75.0) + 0.15 * rampDown(d1_iml, 70.0, 30.0);
+  const a3 = 0.45 * rampUp(d4_iml, 45.0, 80.0) + 0.35 * rampDown(d1_iml, 60.0, 20.0) + 0.20 * rampDown(d2_iml, 65.0, 25.0);
+  const a4 = 0.50 * rampDown(d5_iml, 70.0, 38.0) + 0.35 * rampDown(d4_iml, 55.0, 25.0) + 0.15 * rampDown(d3_iml, 60.0, 20.0);
+  const a5 = 0.35 * rampUp(d5_iml, 45.0, 75.0) + 0.30 * rampDown(d1_iml, 55.0, 20.0) + 0.20 * bellBand(d4_iml, 20.0, 30.0, 60.0, 75.0) + 0.15 * rampDown(d2_iml, 55.0, 25.0);
+
+  const afs = [a1, a2, a3, a4, a5];
+  const orden = [0, 1, 2, 3, 4].sort((i, j) => afs[j] - afs[i]);
+  const ganadorIdx = orden[0];
+  const segundoIdx = orden[1];
+
+  const archGanador = arquetiposMeta[ganadorIdx];
+  const archSegundo = arquetiposMeta[segundoIdx];
+
+  const afinidadGanadorPct = parseFloat((afs[ganadorIdx] * 100).toFixed(1));
+  const afinidadSegundoPct = parseFloat((afs[segundoIdx] * 100).toFixed(1));
+
+  const afinidadesDict = {};
+  arquetiposMeta.forEach((meta, idx) => {
+    afinidadesDict[meta.id] = parseFloat((afs[idx] * 100).toFixed(1));
+  });
+
+  const archId = archGanador.id;
+  const archName = archGanador.nombre;
+  const archDesc = archGanador.descripcion;
+  const archRule = `Afinidad dominante = ${afinidadGanadorPct}% (${archGanador.regla}); 2.º arquetipo afín: ${archSegundo.nombre.split(':')[0]} (${afinidadSegundoPct}%)`;
 
   const desglose = oraciones.map((sText, i) => {
     const ws = sText.match(/[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+/g) || [];
@@ -1272,7 +1759,16 @@ function buildClientForensicAudit(text) {
       D5_Cohesion_Fluidez: { valor: parseFloat(d5_iml.toFixed(1)), nivel: d5_iml >= 75 ? "Cohesión Óptima" : (d5_iml >= 50 ? "Regular" : "Roto"), interpretacion: "Conectividad proposicional en la Banda de Shannon." },
       score_global_iml: parseFloat(imlScore.toFixed(1)),
       nivel_riesgo_estilometrico: imlScore > 60 ? "Alto Riesgo Estilométrico" : (imlScore > 35 ? "Riesgo Moderado" : "Bajo Riesgo (Sobrio)"),
-      arquetipo_discursivo: { id: archId, nombre: archName, descripcion: archDesc, condicion_activada: archRule }
+      arquetipo_discursivo: {
+        id: archId,
+        nombre: archName,
+        descripcion: archDesc,
+        afinidad_pct: afinidadGanadorPct,
+        arquetipo_secundario: archSegundo.nombre,
+        afinidad_secundaria_pct: afinidadSegundoPct,
+        afinidades_pct: afinidadesDict,
+        condicion_activada: archRule
+      }
     },
     variables_ensamble_avanzado_5d: {
       D1_Dinamica_Discursiva: {

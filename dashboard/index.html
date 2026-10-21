@@ -124,7 +124,14 @@
 
       <!-- 1. PREDICCIÓN Y RESUMEN GENERAL (4 TARJETAS LIMPIAS) -->
       <div class="section-heading">
-        <span>📊 Predicción y Diagnóstico General de la Noticia</span>
+        <div style="display: flex; align-items: center;">
+          <span>📊 Predicción y Diagnóstico General de la Noticia</span>
+          <span class="help-tip" tabindex="0">?
+            <span class="help-content">
+              Diagnóstico general de credibilidad. Te indica si la noticia tiene alta probabilidad de ser falsa o verdadera analizando su estilo, vocabulario y patrones de redacción.
+            </span>
+          </span>
+        </div>
         <div style="display: flex; gap: 0.45rem; flex-wrap: wrap;">
           <button id="btn-ablation-live" class="nav-btn" style="color: var(--primary); border-color: var(--primary);">
             🧪 Simular Ablación de Gatillos
@@ -201,113 +208,18 @@
       </div>
 
       <!-- ====================================================================
-           2. AUDITORÍA FRASE A FRASE (CARRUSEL DESLIZANTE MEXGEN + MATRIZ ORACIONAL)
-           (En primer plano como pidió el usuario)
+           2. DINÁMICA INTERACTIVA: SENSACIONALISMO (BETO) & REDUNDANCIA (SBERT)
+           (Debajo de la Predicción General a petición del usuario)
            ==================================================================== -->
       <div class="section-heading">
-        <span>📋 Auditoría Frase a Frase (Explicabilidad Local) — Carrusel Deslizante MexGen & Banderas Forenses</span>
-        <div style="display: flex; align-items: center; gap: 0.5rem;">
-          <button id="btn-toggle-matrix" class="nav-btn" style="font-size: 0.76rem;">
-            📑 Ocultar/Mostrar Tabla Matriz
-          </button>
-          <div class="carousel-controls">
-            <button id="btn-scroll-left" class="btn-arrow" title="Anterior">&larr;</button>
-            <button id="btn-scroll-right" class="btn-arrow" title="Siguiente">&rarr;</button>
-          </div>
+        <div style="display: flex; align-items: center;">
+          <span>📈 Dinámica Interactiva: Sensacionalismo Oracional (BETO) & Redundancia Semántica (SBERT)</span>
+          <span class="help-tip" tabindex="0">?
+            <span class="help-content">
+              Evalúa dos tácticas comunes de manipulación: frases exageradas diseñadas para asustar o generar indignación (sensacionalismo) y la repetición constante de la misma idea en bucle (redundancia).
+            </span>
+          </span>
         </div>
-      </div>
-
-      <!-- CARRUSEL HORIZONTAL DESLIZANTE -->
-      <div class="carousel-wrapper">
-        <div id="carousel-track" class="carousel-track">
-          <!-- Tarjetas de frases inyectadas dinámicamente -->
-        </div>
-      </div>
-
-      <!-- MATRIZ DE AUDITORÍA LOCAL ORACIÓN POR ORACIÓN -->
-      <div id="matrix-audit-card" class="forensic-card">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.65rem; flex-wrap: wrap; gap: 0.5rem;">
-          <h3 style="font-family: 'Outfit', sans-serif; font-size: 0.98rem; font-weight: 700;">
-            📑 Matriz de Auditoría Local Oración por Oración <span style="font-weight: 500; font-size: 0.8rem; color: var(--text-muted);">(Haz clic en cualquier fila para abrir en miniventana)</span>
-          </h3>
-        </div>
-        <div class="forensic-table-wrapper">
-          <table class="forensic-table">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th style="min-width: 260px;">Texto de la Frase</th>
-                <th>Sensac. (%)</th>
-                <th>Coher. Consec.</th>
-                <th>Gatillo</th>
-                <th>Mayúsc.</th>
-                <th>Adverbios</th>
-                <th>Banderas y Advertencias Forenses</th>
-              </tr>
-            </thead>
-            <tbody id="sentences-audit-tbody">
-              <!-- Filas de frases inyectadas dinámicamente -->
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- ====================================================================
-           3. PERFIL IML (GRÁFICA DE ARAÑA) Y LOS 5 ARQUETIPOS DISCURSIVOS
-           ==================================================================== -->
-      <div class="section-heading">
-        <span>🕸️ Perfil Estilométrico IML (5 Dimensiones) y Arquetipo Discursivo</span>
-      </div>
-
-      <div class="forensic-card">
-        <div class="grid-2-cols" style="margin-bottom: 0; align-items: center;">
-          <!-- COLUMNA IZQUIERDA: GRÁFICA DE ARAÑA (RADAR PENTAGONAL) -->
-          <div style="background: var(--bg-card-subtle); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 0.9rem;">
-            <div style="font-size: 0.82rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.25rem; text-align: center;">
-              Huella Estilométrica en las 5 Dimensiones del IML (Escala 0–100)
-            </div>
-            <div style="height: 280px; position: relative;">
-              <canvas id="iml-radar-chart"></canvas>
-            </div>
-          </div>
-
-          <!-- COLUMNA DERECHA: ARQUETIPO ACTIVO + SELECTOR INTERACTIVO DE LOS 5 ARQUETIPOS + 5 BARRAS COMPACTAS -->
-          <div>
-            <!-- CAJA COMPACTA DEL ARQUETIPO -->
-            <div class="archetype-compact-box">
-              <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem;">
-                <span style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: var(--iml-color);">Arquetipo Detectado</span>
-                <span id="arch-assigned-rule" class="archetype-rule-badge">--</span>
-              </div>
-              <div id="arch-assigned-name" style="font-family: 'Outfit', sans-serif; font-size: 1.08rem; font-weight: 800; color: var(--text-primary);">Estilo --</div>
-              <div id="arch-assigned-desc" style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.15rem; line-height: 1.4;">--</div>
-
-              <!-- PÍLDORAS INTERACTIVAS DE LOS 5 ARQUETIPOS -->
-              <div class="arch-pills-row" id="archetypes-5-strip">
-                <button type="button" class="arch-pill" data-arch="ESTILO_I" title="D1 ≥ 65 y D4 ≥ 65: Emoción extrema + bucle circular">Estilo I: Estridente</button>
-                <button type="button" class="arch-pill" data-arch="ESTILO_II" title="D2 ≥ 50 y D3 ≥ 50: Titular alarmista amortiguado por cuerpo sobrio">Estilo II: Clickbait</button>
-                <button type="button" class="arch-pill" data-arch="ESTILO_III" title="D1 < 45 y D4 ≥ 65: Tono sobrio pero repite consigna en bucle">Estilo III: Propaganda</button>
-                <button type="button" class="arch-pill" data-arch="ESTILO_IV" title="D5 ≤ 55 y D4 < 40: Sintaxis fragmentada o párrafos inconexos">Estilo IV: Incoherente</button>
-                <button type="button" class="arch-pill" data-arch="ESTILO_V" title="Equilibrio estilométrico en la Banda Óptima de Shannon">Estilo V: Balanceado</button>
-              </div>
-              <div id="arch-hover-info" style="font-size: 0.74rem; color: var(--text-muted); margin-top: 0.35rem; min-height: 1.1rem;">
-                💡 Haz clic en cualquier Estilo (I a V) para consultar su regla de activación.
-              </div>
-            </div>
-
-            <!-- 5 BARRAS COMPACTAS DE LAS DIMENSIONES DEL IML -->
-            <div id="iml-dimensions-container" class="iml-dim-list-compact">
-              <!-- Injected dynamically -->
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ====================================================================
-           4. SENSACIONALISMO (BETO) & REDUNDANCIA (SBERT) — COMPACTO E INTERACTIVO
-           ==================================================================== -->
-      <div class="section-heading">
-        <span>📈 Dinámica Interactiva: Sensacionalismo Oracional (BETO) & Redundancia Semántica (SBERT)</span>
       </div>
 
       <div class="grid-2-cols">
@@ -391,13 +303,204 @@
       </div>
 
       <!-- ====================================================================
-           5. SECCIÓN DESPLEGABLE (<details>): LAS 36 VARIABLES CUANTITATIVAS (D0 A D5)
+           3. AUDITORÍA FRASE A FRASE (EXPLICABILIDAD LOCAL) — CARRUSEL MEXGEN
            ==================================================================== -->
-      <details class="collapsible-details">
+      <div class="section-heading">
+        <div style="display: flex; align-items: center;">
+          <span>📋 Auditoría Frase a Frase (Explicabilidad Local) — Carrusel Deslizante MexGen & Banderas Forenses</span>
+          <span class="help-tip" tabindex="0">?
+            <span class="help-content">
+              Audita la noticia frase a frase. Podrás ver el aporte emocional de cada oración y descubrir qué frases concretas son las responsables del veredicto final.
+            </span>
+          </span>
+        </div>
+        <div class="carousel-controls">
+          <button id="btn-scroll-left" class="btn-arrow" title="Anterior">&larr;</button>
+          <button id="btn-scroll-right" class="btn-arrow" title="Siguiente">&rarr;</button>
+        </div>
+      </div>
+
+      <!-- CARRUSEL HORIZONTAL DESLIZANTE -->
+      <div class="carousel-wrapper">
+        <div id="carousel-track" class="carousel-track">
+          <!-- Tarjetas de frases inyectadas dinámicamente -->
+        </div>
+      </div>
+
+      <!-- ====================================================================
+           4. PERFIL IML (GRÁFICA DE ARAÑA) Y LOS 5 ARQUETIPOS DISCURSIVOS
+           ==================================================================== -->
+      <div class="section-heading">
+        <div style="display: flex; align-items: center;">
+          <span>🕸️ Perfil Estilométrico IML (5 Dimensiones) y Arquetipo Discursivo</span>
+          <span class="help-tip" tabindex="0">?
+            <span class="help-content">
+              El Índice de Manipulación Lingüística (IML) traza la huella de redacción en 5 dimensiones y clasifica la noticia en un arquetipo (clickbait, propaganda, desinformación estridente o periodismo profesional).
+            </span>
+          </span>
+        </div>
+      </div>
+
+      <div class="forensic-card">
+        <!-- FILA 1: TELARAÑA (ALTURA AJUSTADA A 315px) Y ARQUETIPO (ALTURAS IGUALADAS) -->
+        <div class="grid-2-cols" style="margin-bottom: 0; align-items: stretch;">
+          <!-- COLUMNA IZQUIERDA: GRÁFICA DE ARAÑA -->
+          <div style="background: var(--bg-card-subtle); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1rem; display: flex; flex-direction: column;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem; flex-wrap: wrap; gap: 0.4rem;">
+              <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-primary);">
+                Huella Estilométrica en las 5 Dimensiones del IML (0–100)
+              </div>
+              <span id="radar-reference-badge" class="section-badge" style="background: rgba(16, 185, 129, 0.12); color: #059669; font-size: 0.72rem;">
+                🟢 Referencia: Estilo V (Prensa Sobria)
+              </span>
+            </div>
+            <!-- Radar Canvas con altura ajustada (315px) para igualar exactamente la caja de arquetipos -->
+            <div style="height: 315px; position: relative; flex-grow: 1;">
+              <canvas id="iml-radar-chart"></canvas>
+            </div>
+            <div style="font-size: 0.72rem; color: var(--text-muted); text-align: center; margin-top: 0.35rem;">
+              💡 <strong>Rosa:</strong> Noticia Actual &bull; <strong>Verde punteado:</strong> Referencia del Estilo seleccionado.
+            </div>
+          </div>
+
+          <!-- COLUMNA DERECHA: ARQUETIPO ACTIVO + SELECTOR INTERACTIVO + DOBLE DESCRIPCIÓN (TÉCNICA + LECTOR CIUDADANO) -->
+          <div style="display: flex; flex-direction: column; justify-content: space-between;">
+            <!-- CAJA PRINCIPAL DEL ARQUETIPO -->
+            <div class="archetype-compact-box" style="margin-bottom: 0; height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; margin-bottom: 0.3rem; flex-wrap: wrap;">
+                  <div style="display: flex; align-items: center; gap: 0.4rem;">
+                    <span style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; color: var(--iml-color);">Arquetipo Discursivo</span>
+                    <span id="arch-view-badge" class="section-badge" style="background: rgba(99, 102, 241, 0.12); color: var(--primary); font-size: 0.7rem;">Detectado en Noticia</span>
+                  </div>
+                  <div style="display: flex; align-items: center; gap: 0.35rem;">
+                    <span id="arch-assigned-rule" class="archetype-rule-badge">--</span>
+                    <button type="button" id="btn-reset-arch-view" class="sample-chip" style="display: none; padding: 0.15rem 0.45rem; font-size: 0.68rem;" title="Restaurar visualización al arquetipo detectado en la noticia">
+                      ↺ Restaurar Detectado
+                    </button>
+                  </div>
+                </div>
+
+                <div id="arch-assigned-name" style="font-family: 'Outfit', sans-serif; font-size: 1.12rem; font-weight: 800; color: var(--text-primary); margin-bottom: 0.15rem;">Estilo --</div>
+                <div id="arch-assigned-desc" style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.4; margin-bottom: 0.55rem;">--</div>
+
+                <!-- PÍLDORAS INTERACTIVAS DE LOS 5 ARQUETIPOS -->
+                <div style="font-size: 0.72rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.25rem;">
+                  Explorar Arquetipos & Comparar en Gráfica de Araña:
+                </div>
+                <div class="arch-pills-row" id="archetypes-5-strip">
+                  <button type="button" class="arch-pill" data-arch="ESTILO_I" title="Afinidad D1 alta + D3 sin amortiguar + D4 bucle: Emoción extrema sostenida">Estilo I: Estridente</button>
+                  <button type="button" class="arch-pill" data-arch="ESTILO_II" title="Afinidad D2 gatillo alto + D3 amortiguación alta: Titular cebo amortiguado por cuerpo sobrio">Estilo II: Clickbait</button>
+                  <button type="button" class="arch-pill" data-arch="ESTILO_III" title="Afinidad D4 bucle alto + D1 sobria + D2 sin gatillo: Consigna reiterada en bucle formal">Estilo III: Propaganda</button>
+                  <button type="button" class="arch-pill" data-arch="ESTILO_IV" title="Afinidad D5 rota + D4 dispersa: Sintaxis fragmentada o desconexión proposicional">Estilo IV: Incoherente</button>
+                  <button type="button" class="arch-pill" data-arch="ESTILO_V" title="Afinidad D5 óptima + D1 sobrio + D4 progresión lineal: Equilibrio profesional">Estilo V: Balanceado</button>
+                </div>
+              </div>
+
+              <!-- DOBLE DESCRIPCIÓN: TÉCNICA Y CIUDADANA -->
+              <div style="display: flex; flex-direction: column; gap: 0.45rem; margin-top: 0.55rem;">
+                <!-- FICHA TÉCNICA (FORENSE) -->
+                <div class="arch-box-tech" style="padding: 0.5rem 0.75rem;">
+                  <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 700; color: var(--primary); font-size: 0.76rem; margin-bottom: 0.15rem;">
+                    <span>🔬 Ficha Técnica Forense:</span>
+                  </div>
+                  <div id="arch-tech-desc" style="font-size: 0.76rem; line-height: 1.35; color: var(--text-secondary);">
+                    --
+                  </div>
+                </div>
+
+                <!-- GUÍA PARA EL CIUDADANO (¿QUÉ TANTO CONFIAR?) -->
+                <div class="arch-box-common" style="padding: 0.5rem 0.75rem;">
+                  <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 700; color: #b45309; font-size: 0.76rem; margin-bottom: 0.15rem;">
+                    <span>👥 Guía para el Lector (¿Qué tanto confiar?):</span>
+                  </div>
+                  <div id="arch-common-desc" style="font-size: 0.77rem; line-height: 1.4; color: var(--text-primary); font-weight: 500;">
+                    --
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FILA 2: SECCIÓN HORIZONTAL PARA LAS 5 DIMENSIONES DEL IML (DEBAJO DE TELARAÑA Y ARQUETIPO) -->
+        <div style="margin-top: 1rem; padding-top: 0.85rem; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.4rem;">
+          <div style="font-size: 0.84rem; font-weight: 700; color: var(--text-primary); display: flex; align-items: center;">
+            <span>Desglose Horizontal de las 5 Dimensiones Estilométricas (D1–D5)</span>
+            <span class="help-tip" tabindex="0">?
+              <span class="help-content">
+                Las 5 dimensiones evalúan cómo está escrita la noticia. Pasa el ratón sobre el (?) de cada una para ver cómo detecta trucos de manipulación o neutralidad periodística.
+              </span>
+            </span>
+          </div>
+          <div style="font-size: 0.74rem; color: var(--text-muted);">
+            💡 Pasa el ratón sobre el <strong>(?)</strong> de cada dimensión para ver su significado sin tecnicismos.
+          </div>
+        </div>
+
+        <!-- 5 TARJETAS HORIZONTALES DINÁMICAS (D1 A D5) -->
+        <div id="iml-dimensions-container" class="iml-dims-grid-5">
+          <!-- Injected dynamically across 5 horizontal cards -->
+        </div>
+      </div>
+
+      <!-- ====================================================================
+           5. SECCIÓN DESPLEGABLE 1 (<details>): MATRIZ DE AUDITORÍA LOCAL ORACIÓN POR ORACIÓN
+           (Reubicada al final como acordeón a petición del usuario)
+           ==================================================================== -->
+      <details class="collapsible-details" id="details-matrix-audit">
+        <summary class="collapsible-summary">
+          <div style="display: flex; align-items: center; gap: 0.55rem;">
+            <span>📑</span>
+            <span>Matriz de Auditoría Local Oración por Oración (Inspección Fila por Fila)</span>
+            <span class="help-tip" tabindex="0">?
+              <span class="help-content">
+                Tabla exhaustiva donde puedes auditar cada oración por separado con su puntaje de sensacionalismo, coherencia y banderas forenses detectadas.
+              </span>
+            </span>
+          </div>
+          <span class="summary-hint">Haz clic para desplegar / ocultar ▾</span>
+        </summary>
+
+        <div class="collapsible-body">
+          <div style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 0.75rem;">
+            💡 <strong>Tip:</strong> Haz clic en cualquier fila de la tabla para abrir la miniventana interactiva de análisis forense con el minimapa de calor, gráfica de sensacionalismo y marcadores ortotipográficos.
+          </div>
+          <div class="forensic-table-wrapper">
+            <table class="forensic-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th style="min-width: 260px;">Texto de la Frase</th>
+                  <th>Sensac. (%)</th>
+                  <th>Coher. Consec.</th>
+                  <th>Gatillo</th>
+                  <th>Mayúsc.</th>
+                  <th>Adverbios</th>
+                  <th>Banderas y Advertencias Forenses</th>
+                </tr>
+              </thead>
+              <tbody id="sentences-audit-tbody">
+                <!-- Filas de frases inyectadas dinámicamente -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </details>
+
+      <!-- ====================================================================
+           6. SECCIÓN DESPLEGABLE 2 (<details>): LAS 36 VARIABLES CUANTITATIVAS (D0 A D5)
+           ==================================================================== -->
+      <details class="collapsible-details" id="details-36-vars">
         <summary class="collapsible-summary">
           <div style="display: flex; align-items: center; gap: 0.55rem;">
             <span>🧬</span>
             <span>Ver Desglose Completo de las 36 Variables Cuantitativas Base (Dimensiones D0 a D5)</span>
+            <span class="help-tip" tabindex="0">?
+              <span class="help-content">
+                Muestra las 36 características lingüísticas y matemáticas analizadas por el modelo, con sus fórmulas, pesos de importancia y valores calculados.
+              </span>
+            </span>
           </div>
           <span class="summary-hint">Haz clic para desplegar / ocultar ▾</span>
         </summary>
@@ -461,20 +564,47 @@
 
       <div class="modal-action-buttons">
         <button id="btn-modal-sens" class="modal-act-btn active-sens">
-          <span>🔥 Sensacionalismo & Gatillo</span>
-          <small style="font-weight: 400; opacity: 0.85;">BETO + Impacto Causal</small>
+          <div style="display: flex; align-items: center; justify-content: center; gap: 0.15rem;">
+            <span>🔥 Sensacionalismo</span>
+            <span class="help-tip" tabindex="0">?
+              <span class="help-content">
+                Mide qué tan alarmista o emocional es esta frase comparada con el resto de la noticia.
+              </span>
+            </span>
+          </div>
+          <small style="font-weight: 400; opacity: 0.85;">BETO + Gráfica Comparativa</small>
         </button>
 
         <button id="btn-modal-redun" class="modal-act-btn">
-          <span>🔄 Redundancia & Coherencia</span>
-          <small style="font-weight: 400; opacity: 0.85;">SBERT Par Más Similar</small>
+          <div style="display: flex; align-items: center; justify-content: center; gap: 0.15rem;">
+            <span>🔄 Redundancia</span>
+            <span class="help-tip" tabindex="0">?
+              <span class="help-content">
+                Mapa de calor donde la fila es esta frase y las columnas son el resto, para ver si repite las mismas ideas.
+              </span>
+            </span>
+          </div>
+          <small style="font-weight: 400; opacity: 0.85;">SBERT Mapa de Calor 1×K</small>
         </button>
 
         <button id="btn-modal-sabert" class="modal-act-btn">
-          <span>🧬 Rasgos D2–D5 & Banderas</span>
-          <small style="font-weight: 400; opacity: 0.85;">Mayúsc., Adverbios, Dicendi</small>
+          <div style="display: flex; align-items: center; justify-content: center; gap: 0.15rem;">
+            <span>✍️ Marcadores Ortotipográficos</span>
+            <span class="help-tip" tabindex="0">?
+              <span class="help-content">
+                Analiza mayúsculas vociferadas, signos de exclamación exagerados, citas a fuentes y tono de redacción.
+              </span>
+            </span>
+          </div>
+          <small style="font-weight: 400; opacity: 0.85;">Mayúsc., Puntuación & Verbos</small>
         </button>
       </div>
+
+      <div id="modal-detail-panel" class="modal-detail-panel">
+        <!-- Dynamic sentence metrics loaded here -->
+      </div>
+    </div>
+  </div>
 
       <div id="modal-detail-panel" class="modal-detail-panel">
         <!-- Dynamic sentence metrics loaded here -->

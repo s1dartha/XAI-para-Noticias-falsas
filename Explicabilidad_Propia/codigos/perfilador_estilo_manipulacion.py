@@ -19,6 +19,9 @@ import json
 import numpy as np
 import pandas as pd
 
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+from arquetipos_flexibles import clasificar_arquetipo
+
 def run_manipulation_profiler():
     features_csv = "/home/ubuntu/Documentos/Tesis/Modelos_Individuales/Clasificar_fake/Modelo_Ensamble/Codigos/features_ensamble_2604.csv"
     if not os.path.exists(features_csv):
@@ -69,27 +72,27 @@ def run_manipulation_profiler():
             cohesion = max(35.0, 95.0 - (max_sim - 0.6500) / 0.2500 * 60.0)  # Bucle circular (Bin 4)
         d5_cohesion = float(np.clip(cohesion, 0.0, 100.0))
 
-        # 2. Clasificación en 5 Arquetipos de Estilo Discursivo
-        if d1_sensacionalismo >= 65.0 and d4_redundancia >= 65.0:
-            estilo = "Estilo I: Desinformación Estridente / Cliché Hiperbólico"
-            arquetipo_id = "DESINFO_ESTRIDENTE"
-            desc = "Texto saturado homogéneamente de emociones extremas con reiteración circular de premisas."
-        elif d2_volatilidad_gatillo >= 50.0 and d3_amortiguacion >= 50.0:
-            estilo = "Estilo II: Cebo Comercial / Clickbait de Cabecera"
-            arquetipo_id = "CLICKBAIT_CABECERA"
-            desc = "Titular o apertura alarmista diseñado para capturar clics, pero con cuerpo informativo formal que amortigua la alarma."
-        elif d1_sensacionalismo < 45.0 and d4_redundancia >= 65.0:
-            estilo = "Estilo III: Propaganda Institucional / Astroturfing Encubierto"
-            arquetipo_id = "PROPAGANDA_SOBRIA"
-            desc = "Tono aparentemente sobrio y académico, pero con bucles de repetición semántica calculados para inducir verdad ilusoria."
-        elif d5_cohesion <= 55.0 and d4_redundancia < 45.0:
-            estilo = "Estilo IV: Incoherencia Estructural / Generación Rota"
-            arquetipo_id = "DESARTICULADO"
-            desc = "Texto con baja conectividad proposicional, fragmentación sintáctica o párrafos desvinculados."
-        else:
-            estilo = "Estilo V: Periodismo Profesional Balanceado"
-            arquetipo_id = "PERIODISMO_EQUILIBRADO"
-            desc = "Redacción equilibrada con variedad léxica, desarrollo temático progresivo y ausencia de manipulaciones estilísticas."
+        # 2. Clasificación Flexible en los 5 Arquetipos Estilométricos por Afinidad
+        arq = clasificar_arquetipo(
+            d1_sensacionalismo,
+            d2_volatilidad_gatillo,
+            d3_amortiguacion,
+            d4_redundancia,
+            d5_cohesion
+        )
+        estilo = arq["nombre"]
+        id_map = {
+            "ESTILO_I_DESINFO_ESTRIDENTE": "DESINFO_ESTRIDENTE",
+            "ESTILO_II_CLICKBAIT_CABECERA": "CLICKBAIT_CABECERA",
+            "ESTILO_III_PROPAGANDA_SOBRIA": "PROPAGANDA_SOBRIA",
+            "ESTILO_IV_DESARTICULADO": "DESARTICULADO",
+            "ESTILO_V_PERIODISMO_EQUILIBRADO": "PERIODISMO_EQUILIBRADO"
+        }
+        arquetipo_id = id_map.get(arq["id"], arq["id"])
+        desc = arq["descripcion"]
+        afinidad = arq["afinidad_pct"]
+        arquetipo_sec = arq["arquetipo_secundario"]
+        afinidad_sec = arq["afinidad_secundaria_pct"]
 
         # Índice Global de Manipulación Estilométrica (IML de 0 a 100)
         iml_score = (d1_sensacionalismo * 0.35 +
@@ -107,7 +110,10 @@ def run_manipulation_profiler():
                 round(iml_score, 1),
                 estilo,
                 arquetipo_id,
-                desc)
+                desc,
+                afinidad,
+                arquetipo_sec,
+                afinidad_sec)
 
     print("⏳ Computando perfil estilométrico y dimensiones IML (BETO SBERT) para las 2,604 noticias...")
     perfiles = [compute_manipulation_dimensions(row) for _, row in df.iterrows()]
@@ -120,6 +126,10 @@ def run_manipulation_profiler():
     df['indice_manipulacion_iml'] = [p[5] for p in perfiles]
     df['estilo_manipulacion'] = [p[6] for p in perfiles]
     df['arquetipo_id'] = [p[7] for p in perfiles]
+    df['descripcion_estilo'] = [p[8] for p in perfiles]
+    df['afinidad_pct'] = [p[9] for p in perfiles]
+    df['arquetipo_secundario'] = [p[10] for p in perfiles]
+    df['afinidad_secundaria_pct'] = [p[11] for p in perfiles]
     df['descripcion_estilo'] = [p[8] for p in perfiles]
 
     print("\n" + "="*80)
@@ -155,7 +165,8 @@ def run_manipulation_profiler():
     out_perfiles_legacy = "/home/ubuntu/Documentos/Tesis/Modelos_Individuales/Clasificar_fake/Modelo_Ensamble/Codigos/perfiles_estilos_manipulacion_2604.csv"
 
     cols_export = ['class', 'label_num', 'Text', 'Fuente', 'indice_manipulacion_iml', 'estilo_manipulacion', 'arquetipo_id',
-                   'dim_sensacionalismo', 'dim_volatilidad_gatillo', 'dim_amortiguacion', 'dim_redundancia', 'dim_cohesion']
+                   'dim_sensacionalismo', 'dim_volatilidad_gatillo', 'dim_amortiguacion', 'dim_redundancia', 'dim_cohesion',
+                   'afinidad_pct', 'arquetipo_secundario', 'afinidad_secundaria_pct']
     df[cols_export].to_csv(out_perfiles_propia, index=False)
     df[cols_export].to_csv(out_perfiles_legacy, index=False)
     print(f"\n💾 Base de datos de perfilado guardada en:\n  • {out_perfiles_propia}\n  • {out_perfiles_legacy}")

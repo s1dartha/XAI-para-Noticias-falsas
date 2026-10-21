@@ -166,12 +166,12 @@ flowchart TD
                                        └─────────────────────┘
 ```
 
-### C. Aclaración Fundamental: ¿Por qué en la Tabla Comparativa los Estilos no Aparecen en Orden I a V?
-En el informe de investigación teórico ([`Reporte_Estilos_Manipulacion_Textual.md`](Reporte_Estilos_Manipulacion_Textual.md)), los 5 Arquetipos se definen de forma abstracta en orden conceptual (del Estilo I al Estilo V). Sin embargo, en la **Matriz Comparativa de las 4 Noticias**, las columnas corresponden a **noticias individuales concretas** (Noticia 1, Noticia 2, Noticia 3, Noticia 4). Cada una de ellas es clasificada de forma independiente según sus métricas:
-- **Noticia 1 (Bulo COVID) $\to$ Estilo V:** ¿Por qué no fue Estilo I? Porque el Estilo I exige simultáneamente $D_1 \ge 65$ (Carga Emocional) **Y** $D_4 \ge 65$ (Hiper-Redundancia). La Noticia 1 tiene una carga emocional altísima ($D_1 = 97.2$), pero su redundancia fue moderada ($D_4 = 54.2 < 65$). Al no entrar en Estilo I, II, III o IV, el clasificador le asigna Estilo V por exclusión (árbol de decisión estricto). Esto revela un hallazgo empírico sobre la necesidad de calibrar reglas de frontera para textos de alta emoción sin bucle.
-- **Noticia 2 (Negacionismo) $\to$ Estilo IV:** Presenta sintaxis fracturada y párrafos inconexos ($D_5 = 41.0 \le 55$ y $D_4 = 11.6 < 40$).
-- **Noticia 3 (Oficial Puebla) $\to$ Estilo II:** El semáforo de alerta genera un pico aislado ($P_{max} = 0.537$), pero el cuerpo técnico formal amortigua la alarma en un 99.4% ($D_2 \ge 50 \land D_3 \ge 50$).
-- **Noticia 4 (Ciencia EFE) $\to$ Estilo II:** El titular sobre el Big Bang dispara $P_{max} = 0.968$, pero el cuerpo técnico riguroso lo amortigua en un 78.8% ($D_2 \ge 50 \land D_3 \ge 50$).
+### C. Clasificación Flexible por Afinidad Morfoestilométrica en las 4 Noticias de Control
+En la **Matriz Forense de las 4 Noticias**, las columnas corresponden a **noticias individuales concretas** (Noticia 1, Noticia 2, Noticia 3, Noticia 4). Bajo el modelo de clasificación por **afinidad morfoestilométrica continua**, cada noticia se evalúa sobre las 5 funciones de pertenencia y se asigna al arquetipo cuyo perfil estilométrico reproduce con mayor fidelidad, reportando también su arquetipo secundario:
+- **Noticia 1 (Bulo Salud Mayúsculas) $\to$ Estilo I (Afinidad: 100.0%):** Alarma emocional extrema ($D_1 = 97.2$), nula amortiguación contextual ($D_3 = 2.0$) y bucle redundante estricto ($D_4 = 81.2$). Segundo arquetipo afín: Estilo II ($45.0\%$).
+- **Noticia 2 (Negacionismo Coronacirco) $\to$ Estilo I (Afinidad: 85.6%):** Alarma extrema visceral sostenida ($D_1 = 99.4$) y nula amortiguación ($D_3 = 0.1$). Aunque presenta redundancia intermedia ($D_4 = 52.0$), la afinidad continua evita el error del árbol rígido anterior (que la descartaba a Estilo V) y la clasifica certeramente como Desinformación Estridente. Segundo arquetipo afín: Estilo IV ($52.9\%$).
+- **Noticia 3 (Oficial Puebla) $\to$ Estilo II (Afinidad: 100.0%):** Alerta sanitaria inicial amortiguada casi en su totalidad por el cuerpo técnico y cifras oficiales ($D_2 = 64.9$, $D_3 = 99.4$). Segundo arquetipo afín: Estilo III ($80.0\%$).
+- **Noticia 4 (Ciencia EFE) $\to$ Estilo II (Afinidad: 100.0%):** Titular llamativo sobre recrear el origen del Universo ($P_{max} = 0.968$, $D_2 = 82.7$) seguido de un cuerpo técnico riguroso de agencia que amortigua la alarma ($D_3 = 78.8\%$). Segundo arquetipo afín: Estilo III ($70.9\%$).
 
 ## 5. El Mecanismo de la Oración Gatillo y la Prueba de Causalidad Contrafáctica
 
@@ -214,7 +214,7 @@ A continuación se presentan las 4 radiografías forenses generadas por el siste
 | **D4: Reiteración / Redundancia** | `81.2 (Bucle)` | `52.0 (Progresión)` | `100.0 (Bucle)` | `73.3 (Bucle)` | Grado de circularidad semántica y bucle argumental ($S_{max}$ SBERT) |
 | **D5: Cohesión y Fluidez** | `87.5 (Cohesión)` | `48.0 (Texto)` | `67.5 (Cohesión)` | `90.5 (Cohesión)` | Continuidad temática natural en la Banda Óptima de Shannon |
 | **Score Global IML (/100)** | **`82.2`** | **`70.4`** | **`36.6`** | **`39.9`** | Índice ponderado: $\le 35$ Neutro, $35-60$ Comercial, $>60$ Anomalía Severa |
-| **Arquetipo Asignado** | **Estilo I** | **Estilo V** | **Estilo II** | **Estilo II** | Clasificación cualitativa de estilo retórico |
+| **Arquetipo Asignado** | **Estilo I** | **Estilo I** | **Estilo II** | **Estilo II** | Clasificación cualitativa de estilo retórico |
 
 ### 6.2 Matriz Exhaustiva y Completa de las 45 Variables Cuantitativas Base (D0 a D5)
 
@@ -283,12 +283,12 @@ Los médicos han observado inflamación de los ganglios linfáticos en las mamog
 “Con la vacuna Moderna están habiendo estos síntomas aproximadamente un 11% después de la primera dosis y un 16% después de la segunda dosis. Creemos que también es comparable para la vacuna Pfizer.
 
 # Auditoría Forense Explicable de Noticia: Bulo de Salud con Mayúsculas Sostenidas y Alarma Oncológica
-**Longitud:** 126 palabras | **Oraciones:** 5 | **Tiempo de Análisis:** 0.351 s
+**Longitud:** 126 palabras | **Oraciones:** 5 | **Tiempo de Análisis:** 0.926 s
 
 ## 1. Perfil Estilométrico y Las 5 Dimensiones del IML
 **Score Global IML:** `82.2 / 100` — *Alto Riesgo de Manipulación Estilométrica (Anomalía Forense Severa)*  
 **Arquetipo de Estilo Asignado:** **Estilo I: Desinformación Estridente / Cliché Hiperbólico**  
-> **Justificación:** Texto saturado homogéneamente de emociones extremas con reiteración circular de premisas. (Regla: `D1 >= 65.0 y D4 >= 65.0`)
+> **Justificación:** Alarma emocional sostenida en todo el texto, sin amortiguación del cuerpo; la repetición circular de premisas agrava la estridencia. (Regla: `Afinidad dominante = 100.0% (Afinidad = 0.45·(D1 alta) + 0.30·(D3 baja/sin amortiguar) + 0.25·(D4 bucle circular)); 2.º arquetipo afín: Estilo II (45.0%)`)
 
 | Dimensión IML | Puntuación (0-100) | Nivel Forense | Descripción |
 |---|:---:|---|---|
@@ -375,12 +375,12 @@ Los médicos de Intermountain Healthcare’s Breast Care Centre de Utah, USA, an
 > Victoria Abril ha dejado a todo el mundo con la boca abierta con su discurso anti-plandemia a la que ha llegado a denominar coronacirco. Más claro y con más lógica no se pueden decir las cosas, se la ha entendido todo perfectamente. Entre otras cosas ha dicho: «Ya no son tesis conspiracionistas, llevamos un año de coronacirco y epidemia de miedo y la tele nos bombardea con muertos y enfermos». Antes iban metiendo miedo para decir que la única solución es la vacuna, pero la vacuna no es la solución, nos están usando como conejillos de indias. Ponemos el vídeo a continuación, no tiene desperdicio.
 
 # Auditoría Forense Explicable de Noticia: Desinformación Conspiracionista y Negacionista de Redes
-**Longitud:** 106 palabras | **Oraciones:** 5 | **Tiempo de Análisis:** 0.119 s
+**Longitud:** 106 palabras | **Oraciones:** 5 | **Tiempo de Análisis:** 0.376 s
 
 ## 1. Perfil Estilométrico y Las 5 Dimensiones del IML
 **Score Global IML:** `70.4 / 100` — *Alto Riesgo de Manipulación Estilométrica (Anomalía Forense Severa)*  
-**Arquetipo de Estilo Asignado:** **Estilo V: Periodismo Profesional Balanceado**  
-> **Justificación:** Redacción equilibrada con variedad léxica, desarrollo temático progresivo y ausencia de manipulaciones estilísticas. (Regla: `Comportamiento estilométrico equilibrado sin anomalías severas`)
+**Arquetipo de Estilo Asignado:** **Estilo I: Desinformación Estridente / Cliché Hiperbólico**  
+> **Justificación:** Alarma emocional sostenida en todo el texto, sin amortiguación del cuerpo; la repetición circular de premisas agrava la estridencia. (Regla: `Afinidad dominante = 85.6% (Afinidad = 0.45·(D1 alta) + 0.30·(D3 baja/sin amortiguar) + 0.25·(D4 bucle circular)); 2.º arquetipo afín: Estilo IV (52.9%)`)
 
 | Dimensión IML | Puntuación (0-100) | Nivel Forense | Descripción |
 |---|:---:|---|---|
@@ -461,12 +461,12 @@ Los médicos de Intermountain Healthcare’s Breast Care Centre de Utah, USA, an
 > El Gobierno de Puebla anunció que el confinamiento para evitar que colapse el sistema de salud por la pandemia de coronavirus, se extiende hasta el día 25 de enero. En rueda de prensa, el gobernador Luis Miguel Barbosa indicó que se busca reducir la curva de contagios, pues el estado se mantiene en semáforo naranja con tendencia al alza. Indicó que de esta forma se ratifica el llamado de alerta máxima en Puebla hasta el 25 de enero, fecha en que se determinará el comportamiento de la pandemia. En cuanto a la industria considerada como esencial el aforo permitido es de 30 por ciento con horarios escalonados. Asimismo se advirtió mayor presencia policíaca en las calles para el cumplimiento de las medidas y exhortó a la prudencia ciudadana. Jesús Ramírez, subsecretario de transparencia, indicó que todo el estado se encuentra en color naranja con tendencia ascendente. En la capital y zona metropolitana es rojo. El secretario de salud, José Antonio Martínez, indicó que este es el segundo día con más casos registrados de coronavirus con 353 casos en 24 horas y 37 defunciones en 72 horas. De mantenerse la tendencia, al día 14 de enero estaríamos "a tope" y el día 18 la capacidad hospitalaria se vería rebasada, por lo que urgió a acatar los decretos.
 
 # Auditoría Forense Explicable de Noticia: Noticia Oficial de Salud Pública y Medidas Epidemiológicas
-**Longitud:** 216 palabras | **Oraciones:** 9 | **Tiempo de Análisis:** 0.194 s
+**Longitud:** 216 palabras | **Oraciones:** 9 | **Tiempo de Análisis:** 0.707 s
 
 ## 1. Perfil Estilométrico y Las 5 Dimensiones del IML
 **Score Global IML:** `36.6 / 100` — *Riesgo Moderado de Manipulación (Retórica Comercial o Polarizada)*  
 **Arquetipo de Estilo Asignado:** **Estilo II: Cebo Comercial / Clickbait de Cabecera**  
-> **Justificación:** Titular o apertura alarmista diseñado para capturar clics, pero con cuerpo informativo formal que amortigua la alarma. (Regla: `D2 >= 50.0 y D3 >= 50.0`)
+> **Justificación:** Titular o apertura alarmista diseñado para capturar clics, pero con cuerpo informativo formal que amortigua y diluye la alarma. (Regla: `Afinidad dominante = 100.0% (Afinidad = 0.45·(D2 gatillo alto) + 0.40·(D3 amortiguación alta) + 0.15·(D1 moderada/baja)); 2.º arquetipo afín: Estilo III (80.0%)`)
 
 | Dimensión IML | Puntuación (0-100) | Nivel Forense | Descripción |
 |---|:---:|---|---|
@@ -551,12 +551,12 @@ Los médicos de Intermountain Healthcare’s Breast Care Centre de Utah, USA, an
 > Rusia quiere recrear el comienzo del Universo. Redacción DUBNÁ EFE En Dubná, a unos 100 kilómetros al norte de Moscú, se comienza a vislumbrar lo que será un enorme acelerador de partículas destinado a recrear los primeros instantes del Universo tras el Big Bang. La construcción del NICA (Nuclotron based Ion Collider Facility)en el Instituto Conjunto para la Investigación Nuclear (JINR, por sus siglas en inglés) de Dubná avanza a pasos agigantados. El deseo de los aproximadamente mil científicos e ingenieros que trabajan en el megaproyecto es poner en marcha el colisionador en 2022. El objetivo es estudiar la transición de la materia ordinaria al plasma quark-gluón que existía en los primeros microsegundos después de la gran explosión. Para ello en Dubná se harán colisionar haces de iones de oro.
 
 # Auditoría Forense Explicable de Noticia: Crónica Científica sobre el Megaproyecto NICA de Dubná
-**Longitud:** 132 palabras | **Oraciones:** 6 | **Tiempo de Análisis:** 0.17 s
+**Longitud:** 132 palabras | **Oraciones:** 6 | **Tiempo de Análisis:** 0.546 s
 
 ## 1. Perfil Estilométrico y Las 5 Dimensiones del IML
 **Score Global IML:** `39.9 / 100` — *Riesgo Moderado de Manipulación (Retórica Comercial o Polarizada)*  
 **Arquetipo de Estilo Asignado:** **Estilo II: Cebo Comercial / Clickbait de Cabecera**  
-> **Justificación:** Titular o apertura alarmista diseñado para capturar clics, pero con cuerpo informativo formal que amortigua la alarma. (Regla: `D2 >= 50.0 y D3 >= 50.0`)
+> **Justificación:** Titular o apertura alarmista diseñado para capturar clics, pero con cuerpo informativo formal que amortigua y diluye la alarma. (Regla: `Afinidad dominante = 100.0% (Afinidad = 0.45·(D2 gatillo alto) + 0.40·(D3 amortiguación alta) + 0.15·(D1 moderada/baja)); 2.º arquetipo afín: Estilo III (70.9%)`)
 
 | Dimensión IML | Puntuación (0-100) | Nivel Forense | Descripción |
 |---|:---:|---|---|

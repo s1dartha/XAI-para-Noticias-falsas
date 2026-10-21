@@ -3,7 +3,7 @@
     "titulo": "Noticia Oficial de Salud Pública y Medidas Epidemiológicas",
     "conteo_palabras": 216,
     "num_oraciones": 9,
-    "tiempo_analisis_segundos": 0.194,
+    "tiempo_analisis_segundos": 0.707,
     "dispositivo": "cuda",
     "modelo_redundancia": "hiiamsid/sentence_similarity_spanish_es",
     "metadata_adicional": {
@@ -206,8 +206,18 @@
     "arquetipo_discursivo": {
       "id": "ESTILO_II_CLICKBAIT_CABECERA",
       "nombre": "Estilo II: Cebo Comercial / Clickbait de Cabecera",
-      "descripcion": "Titular o apertura alarmista diseñado para capturar clics, pero con cuerpo informativo formal que amortigua la alarma.",
-      "condicion_activada": "D2 >= 50.0 y D3 >= 50.0"
+      "descripcion": "Titular o apertura alarmista diseñado para capturar clics, pero con cuerpo informativo formal que amortigua y diluye la alarma.",
+      "afinidad_pct": 100.0,
+      "arquetipo_secundario": "Estilo III: Propaganda Institucional / Astroturfing Encubierto",
+      "afinidad_secundaria_pct": 80.0,
+      "afinidades_pct": {
+        "ESTILO_I_DESINFO_ESTRIDENTE": 25.0,
+        "ESTILO_II_CLICKBAIT_CABECERA": 100.0,
+        "ESTILO_III_PROPAGANDA_SOBRIA": 80.0,
+        "ESTILO_IV_DESARTICULADO": 3.8,
+        "ESTILO_V_PERIODISMO_EQUILIBRADO": 56.3
+      },
+      "condicion_activada": "Afinidad dominante = 100.0% (Afinidad = 0.45·(D2 gatillo alto) + 0.40·(D3 amortiguación alta) + 0.15·(D1 moderada/baja)); 2.º arquetipo afín: Estilo III (80.0%)"
     }
   },
   "variables_ensamble_avanzado_5d": {
@@ -227,9 +237,9 @@
         "alerta"
       ],
       "tokens_dicendi": [
-        "anunció",
+        "Indicó",
         "indicó",
-        "Indicó"
+        "anunció"
       ]
     },
     "D3_Riqueza_Lexica_Legibilidad": {

@@ -56,6 +56,31 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from sentence_transformers import SentenceTransformer
 import spacy
 
+# Import de arquetipos flexibles
+try:
+    from codigos.arquetipos_flexibles import clasificar_arquetipo, calcular_afinidades
+except Exception:
+    try:
+        from arquetipos_flexibles import clasificar_arquetipo, calcular_afinidades
+    except Exception:
+        # Definición fallback si no se encuentra el módulo
+        def clasificar_arquetipo(d1, d2, d3, d4, d5):
+            a1 = 0.45 * max(0.0, min(1.0, (d1 - 40) / 35)) + 0.30 * (1.0 - max(0.0, min(1.0, (d3 - 10) / 50))) + 0.25 * max(0.0, min(1.0, (d4 - 35) / 40))
+            a2 = 0.45 * max(0.0, min(1.0, (d2 - 35) / 30)) + 0.40 * max(0.0, min(1.0, (d3 - 40) / 35)) + 0.15 * (1.0 - max(0.0, min(1.0, (d1 - 30) / 40)))
+            a3 = 0.45 * max(0.0, min(1.0, (d4 - 45) / 35)) + 0.35 * (1.0 - max(0.0, min(1.0, (d1 - 20) / 40))) + 0.20 * (1.0 - max(0.0, min(1.0, (d2 - 25) / 40)))
+            a4 = 0.50 * (1.0 - max(0.0, min(1.0, (d5 - 38) / 32))) + 0.35 * (1.0 - max(0.0, min(1.0, (d4 - 25) / 30))) + 0.15 * (1.0 - max(0.0, min(1.0, (d3 - 20) / 40)))
+            a5 = 0.35 * max(0.0, min(1.0, (d5 - 45) / 30)) + 0.30 * (1.0 - max(0.0, min(1.0, (d1 - 20) / 35))) + 0.20 * (1.0 - abs(d4 - 45) / 30) + 0.15 * (1.0 - max(0.0, min(1.0, (d2 - 25) / 30)))
+            afs = [a1, a2, a3, a4, a5]
+            idx = int(np.argmax(afs))
+            names = [
+                ("ESTILO_I_DESINFO_ESTRIDENTE", "Estilo I: Desinformación Estridente / Cliché Hiperbólico", "Alarma emocional sostenida en todo el texto, sin amortiguación del cuerpo."),
+                ("ESTILO_II_CLICKBAIT_CABECERA", "Estilo II: Cebo Comercial / Clickbait de Cabecera", "Titular alarmista pero con cuerpo informativo formal que amortigua."),
+                ("ESTILO_III_PROPAGANDA_SOBRIA", "Estilo III: Propaganda Institucional / Astroturfing Encubierto", "Tono sobrio pero con bucles de repetición semántica calculados."),
+                ("ESTILO_IV_DESARTICULADO", "Estilo IV: Incoherencia Estructural / Generación Rota", "Texto con baja conectividad proposicional o fragmentación."),
+                ("ESTILO_V_PERIODISMO_EQUILIBRADO", "Estilo V: Periodismo Profesional Balanceado", "Redacción equilibrada con variedad léxica y progresión en Banda de Shannon.")
+            ]
+            return {"id": names[idx][0], "nombre": names[idx][1], "descripcion": names[idx][2], "afinidad_pct": round(afs[idx]*100, 1), "arquetipo_secundario": "", "afinidad_secundaria_pct": 0.0, "afinidades_pct": {}, "condicion_activada": f"Afinidad dominante = {afs[idx]*100:.1f}%"}
+
 # Descargas silenciosas de NLTK
 nltk.download('punkt', quiet=True)
 nltk.download('punkt_tab', quiet=True)
@@ -422,32 +447,18 @@ class AuditorExplicabilidadNoticia:
         )
         iml_score = float(np.clip(iml_score, 0.0, 100.0))
 
-        # Clasificación en los 5 Arquetipos Estilométricos
-        if d1_sensacionalismo >= 65.0 and d4_redundancia >= 65.0:
-            arquetipo_id = "ESTILO_I_DESINFO_ESTRIDENTE"
-            arquetipo_nombre = "Estilo I: Desinformación Estridente / Cliché Hiperbólico"
-            arquetipo_desc = "Texto saturado homogéneamente de emociones extremas con reiteración circular de premisas."
-            arquetipo_activador = "D1 >= 65.0 y D4 >= 65.0"
-        elif d2_volatilidad_gatillo >= 50.0 and d3_amortiguacion >= 50.0:
-            arquetipo_id = "ESTILO_II_CLICKBAIT_CABECERA"
-            arquetipo_nombre = "Estilo II: Cebo Comercial / Clickbait de Cabecera"
-            arquetipo_desc = "Titular o apertura alarmista diseñado para capturar clics, pero con cuerpo informativo formal que amortigua la alarma."
-            arquetipo_activador = "D2 >= 50.0 y D3 >= 50.0"
-        elif d1_sensacionalismo < 45.0 and d4_redundancia >= 65.0:
-            arquetipo_id = "ESTILO_III_PROPAGANDA_SOBRIA"
-            arquetipo_nombre = "Estilo III: Propaganda Institucional / Astroturfing Encubierto"
-            arquetipo_desc = "Tono aparentemente sobrio y académico, pero con bucles de repetición semántica calculados para inducir verdad ilusoria."
-            arquetipo_activador = "D1 < 45.0 y D4 >= 65.0"
-        elif d5_cohesion <= 55.0 and d4_redundancia < 45.0:
-            arquetipo_id = "ESTILO_IV_DESARTICULADO"
-            arquetipo_nombre = "Estilo IV: Incoherencia Estructural / Generación Rota"
-            arquetipo_desc = "Texto con baja conectividad proposicional, fragmentación sintáctica o párrafos desvinculados."
-            arquetipo_activador = "D5 <= 55.0 y D4 < 45.0"
-        else:
-            arquetipo_id = "ESTILO_V_PERIODISMO_EQUILIBRADO"
-            arquetipo_nombre = "Estilo V: Periodismo Profesional Balanceado"
-            arquetipo_desc = "Redacción equilibrada con variedad léxica, desarrollo temático progresivo y ausencia de manipulaciones estilísticas."
-            arquetipo_activador = "Comportamiento estilométrico equilibrado sin anomalías severas"
+        # Clasificación Flexible en los 5 Arquetipos Estilométricos por Afinidad
+        arq_info = clasificar_arquetipo(
+            d1_sensacionalismo,
+            d2_volatilidad_gatillo,
+            d3_amortiguacion,
+            d4_redundancia,
+            d5_cohesion
+        )
+        arquetipo_id = arq_info["id"]
+        arquetipo_nombre = arq_info["nombre"]
+        arquetipo_desc = arq_info["descripcion"]
+        arquetipo_activador = arq_info["condicion_activada"]
 
         if iml_score <= 35.0:
             riesgo_iml = "Bajo Riesgo de Manipulación Estilométrica (Texto Neutro/Sobrio)"
@@ -755,6 +766,10 @@ class AuditorExplicabilidadNoticia:
                     "id": arquetipo_id,
                     "nombre": arquetipo_nombre,
                     "descripcion": arquetipo_desc,
+                    "afinidad_pct": arq_info.get("afinidad_pct", 100.0),
+                    "arquetipo_secundario": arq_info.get("arquetipo_secundario", ""),
+                    "afinidad_secundaria_pct": arq_info.get("afinidad_secundaria_pct", 0.0),
+                    "afinidades_pct": arq_info.get("afinidades_pct", {}),
                     "condicion_activada": arquetipo_activador
                 }
             },

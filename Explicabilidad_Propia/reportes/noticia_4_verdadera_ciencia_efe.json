@@ -3,7 +3,7 @@
     "titulo": "Crónica Científica sobre el Megaproyecto NICA de Dubná",
     "conteo_palabras": 132,
     "num_oraciones": 6,
-    "tiempo_analisis_segundos": 0.17,
+    "tiempo_analisis_segundos": 0.546,
     "dispositivo": "cuda",
     "modelo_redundancia": "hiiamsid/sentence_similarity_spanish_es",
     "metadata_adicional": {
@@ -155,8 +155,18 @@
     "arquetipo_discursivo": {
       "id": "ESTILO_II_CLICKBAIT_CABECERA",
       "nombre": "Estilo II: Cebo Comercial / Clickbait de Cabecera",
-      "descripcion": "Titular o apertura alarmista diseñado para capturar clics, pero con cuerpo informativo formal que amortigua la alarma.",
-      "condicion_activada": "D2 >= 50.0 y D3 >= 50.0"
+      "descripcion": "Titular o apertura alarmista diseñado para capturar clics, pero con cuerpo informativo formal que amortigua y diluye la alarma.",
+      "afinidad_pct": 100.0,
+      "arquetipo_secundario": "Estilo III: Propaganda Institucional / Astroturfing Encubierto",
+      "afinidad_secundaria_pct": 70.9,
+      "afinidades_pct": {
+        "ESTILO_I_DESINFO_ESTRIDENTE": 23.9,
+        "ESTILO_II_CLICKBAIT_CABECERA": 100.0,
+        "ESTILO_III_PROPAGANDA_SOBRIA": 70.9,
+        "ESTILO_IV_DESARTICULADO": 0.0,
+        "ESTILO_V_PERIODISMO_EQUILIBRADO": 66.8
+      },
+      "condicion_activada": "Afinidad dominante = 100.0% (Afinidad = 0.45·(D2 gatillo alto) + 0.40·(D3 amortiguación alta) + 0.15·(D1 moderada/baja)); 2.º arquetipo afín: Estilo III (70.9%)"
     }
   },
   "variables_ensamble_avanzado_5d": {

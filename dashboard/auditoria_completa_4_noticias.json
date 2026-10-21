@@ -4,7 +4,7 @@
       "titulo": "Bulo de Salud con Mayúsculas Sostenidas y Alarma Oncológica",
       "conteo_palabras": 126,
       "num_oraciones": 5,
-      "tiempo_analisis_segundos": 0.351,
+      "tiempo_analisis_segundos": 0.926,
       "dispositivo": "cuda",
       "modelo_redundancia": "hiiamsid/sentence_similarity_spanish_es",
       "metadata_adicional": {
@@ -143,8 +143,18 @@
       "arquetipo_discursivo": {
         "id": "ESTILO_I_DESINFO_ESTRIDENTE",
         "nombre": "Estilo I: Desinformación Estridente / Cliché Hiperbólico",
-        "descripcion": "Texto saturado homogéneamente de emociones extremas con reiteración circular de premisas.",
-        "condicion_activada": "D1 >= 65.0 y D4 >= 65.0"
+        "descripcion": "Alarma emocional sostenida en todo el texto, sin amortiguación del cuerpo; la repetición circular de premisas agrava la estridencia.",
+        "afinidad_pct": 100.0,
+        "arquetipo_secundario": "Estilo II: Cebo Comercial / Clickbait de Cabecera",
+        "afinidad_secundaria_pct": 45.0,
+        "afinidades_pct": {
+          "ESTILO_I_DESINFO_ESTRIDENTE": 100.0,
+          "ESTILO_II_CLICKBAIT_CABECERA": 45.0,
+          "ESTILO_III_PROPAGANDA_SOBRIA": 45.0,
+          "ESTILO_IV_DESARTICULADO": 15.0,
+          "ESTILO_V_PERIODISMO_EQUILIBRADO": 35.0
+        },
+        "condicion_activada": "Afinidad dominante = 100.0% (Afinidad = 0.45·(D1 alta) + 0.30·(D3 baja/sin amortiguar) + 0.25·(D4 bucle circular)); 2.º arquetipo afín: Estilo II (45.0%)"
       }
     },
     "variables_ensamble_avanzado_5d": {
@@ -371,7 +381,7 @@
       "titulo": "Desinformación Conspiracionista y Negacionista de Redes",
       "conteo_palabras": 106,
       "num_oraciones": 5,
-      "tiempo_analisis_segundos": 0.119,
+      "tiempo_analisis_segundos": 0.376,
       "dispositivo": "cuda",
       "modelo_redundancia": "hiiamsid/sentence_similarity_spanish_es",
       "metadata_adicional": {
@@ -508,10 +518,20 @@
       "score_global_iml": 70.4,
       "nivel_riesgo_estilometrico": "Alto Riesgo de Manipulación Estilométrica (Anomalía Forense Severa)",
       "arquetipo_discursivo": {
-        "id": "ESTILO_V_PERIODISMO_EQUILIBRADO",
-        "nombre": "Estilo V: Periodismo Profesional Balanceado",
-        "descripcion": "Redacción equilibrada con variedad léxica, desarrollo temático progresivo y ausencia de manipulaciones estilísticas.",
-        "condicion_activada": "Comportamiento estilométrico equilibrado sin anomalías severas"
+        "id": "ESTILO_I_DESINFO_ESTRIDENTE",
+        "nombre": "Estilo I: Desinformación Estridente / Cliché Hiperbólico",
+        "descripcion": "Alarma emocional sostenida en todo el texto, sin amortiguación del cuerpo; la repetición circular de premisas agrava la estridencia.",
+        "afinidad_pct": 85.6,
+        "arquetipo_secundario": "Estilo IV: Incoherencia Estructural / Generación Rota",
+        "afinidad_secundaria_pct": 52.9,
+        "afinidades_pct": {
+          "ESTILO_I_DESINFO_ESTRIDENTE": 85.6,
+          "ESTILO_II_CLICKBAIT_CABECERA": 0.0,
+          "ESTILO_III_PROPAGANDA_SOBRIA": 29.0,
+          "ESTILO_IV_DESARTICULADO": 52.9,
+          "ESTILO_V_PERIODISMO_EQUILIBRADO": 38.5
+        },
+        "condicion_activada": "Afinidad dominante = 85.6% (Afinidad = 0.45·(D1 alta) + 0.30·(D3 baja/sin amortiguar) + 0.25·(D4 bucle circular)); 2.º arquetipo afín: Estilo IV (52.9%)"
       }
     },
     "variables_ensamble_avanzado_5d": {
@@ -712,7 +732,7 @@
       "titulo": "Noticia Oficial de Salud Pública y Medidas Epidemiológicas",
       "conteo_palabras": 216,
       "num_oraciones": 9,
-      "tiempo_analisis_segundos": 0.194,
+      "tiempo_analisis_segundos": 0.707,
       "dispositivo": "cuda",
       "modelo_redundancia": "hiiamsid/sentence_similarity_spanish_es",
       "metadata_adicional": {
@@ -915,8 +935,18 @@
       "arquetipo_discursivo": {
         "id": "ESTILO_II_CLICKBAIT_CABECERA",
         "nombre": "Estilo II: Cebo Comercial / Clickbait de Cabecera",
-        "descripcion": "Titular o apertura alarmista diseñado para capturar clics, pero con cuerpo informativo formal que amortigua la alarma.",
-        "condicion_activada": "D2 >= 50.0 y D3 >= 50.0"
+        "descripcion": "Titular o apertura alarmista diseñado para capturar clics, pero con cuerpo informativo formal que amortigua y diluye la alarma.",
+        "afinidad_pct": 100.0,
+        "arquetipo_secundario": "Estilo III: Propaganda Institucional / Astroturfing Encubierto",
+        "afinidad_secundaria_pct": 80.0,
+        "afinidades_pct": {
+          "ESTILO_I_DESINFO_ESTRIDENTE": 25.0,
+          "ESTILO_II_CLICKBAIT_CABECERA": 100.0,
+          "ESTILO_III_PROPAGANDA_SOBRIA": 80.0,
+          "ESTILO_IV_DESARTICULADO": 3.8,
+          "ESTILO_V_PERIODISMO_EQUILIBRADO": 56.3
+        },
+        "condicion_activada": "Afinidad dominante = 100.0% (Afinidad = 0.45·(D2 gatillo alto) + 0.40·(D3 amortiguación alta) + 0.15·(D1 moderada/baja)); 2.º arquetipo afín: Estilo III (80.0%)"
       }
     },
     "variables_ensamble_avanzado_5d": {
@@ -936,9 +966,9 @@
           "alerta"
         ],
         "tokens_dicendi": [
-          "anunció",
+          "Indicó",
           "indicó",
-          "Indicó"
+          "anunció"
         ]
       },
       "D3_Riqueza_Lexica_Legibilidad": {
@@ -1238,7 +1268,7 @@
       "titulo": "Crónica Científica sobre el Megaproyecto NICA de Dubná",
       "conteo_palabras": 132,
       "num_oraciones": 6,
-      "tiempo_analisis_segundos": 0.17,
+      "tiempo_analisis_segundos": 0.546,
       "dispositivo": "cuda",
       "modelo_redundancia": "hiiamsid/sentence_similarity_spanish_es",
       "metadata_adicional": {
@@ -1390,8 +1420,18 @@
       "arquetipo_discursivo": {
         "id": "ESTILO_II_CLICKBAIT_CABECERA",
         "nombre": "Estilo II: Cebo Comercial / Clickbait de Cabecera",
-        "descripcion": "Titular o apertura alarmista diseñado para capturar clics, pero con cuerpo informativo formal que amortigua la alarma.",
-        "condicion_activada": "D2 >= 50.0 y D3 >= 50.0"
+        "descripcion": "Titular o apertura alarmista diseñado para capturar clics, pero con cuerpo informativo formal que amortigua y diluye la alarma.",
+        "afinidad_pct": 100.0,
+        "arquetipo_secundario": "Estilo III: Propaganda Institucional / Astroturfing Encubierto",
+        "afinidad_secundaria_pct": 70.9,
+        "afinidades_pct": {
+          "ESTILO_I_DESINFO_ESTRIDENTE": 23.9,
+          "ESTILO_II_CLICKBAIT_CABECERA": 100.0,
+          "ESTILO_III_PROPAGANDA_SOBRIA": 70.9,
+          "ESTILO_IV_DESARTICULADO": 0.0,
+          "ESTILO_V_PERIODISMO_EQUILIBRADO": 66.8
+        },
+        "condicion_activada": "Afinidad dominante = 100.0% (Afinidad = 0.45·(D2 gatillo alto) + 0.40·(D3 amortiguación alta) + 0.15·(D1 moderada/baja)); 2.º arquetipo afín: Estilo III (70.9%)"
       }
     },
     "variables_ensamble_avanzado_5d": {

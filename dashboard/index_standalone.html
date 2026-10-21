@@ -1095,6 +1095,301 @@ textarea.news-textarea:focus {
   padding: 1rem;
 }
 
+/* =============================================================================
+   ENHANCED ARCHETYPE & MODAL VISUALIZATIONS
+   ============================================================================= */
+
+/* Dual Archetype Description Boxes */
+.arch-box-tech {
+  background: rgba(99, 102, 241, 0.06);
+  border: 1px solid rgba(99, 102, 241, 0.24);
+  border-radius: var(--radius-sm);
+  padding: 0.65rem 0.85rem;
+}
+
+.arch-box-common {
+  background: rgba(245, 158, 11, 0.07);
+  border: 1px solid rgba(245, 158, 11, 0.28);
+  border-radius: var(--radius-sm);
+  padding: 0.65rem 0.85rem;
+}
+
+/* Sentence Modal: Mini Heatmap Strip (1 row x K columns) */
+.sentence-mini-heatmap {
+  display: flex;
+  gap: 0.3rem;
+  overflow-x: auto;
+  padding: 0.45rem 0.2rem;
+  margin-bottom: 0.75rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+}
+
+.sentence-mini-heat-cell {
+  min-width: 48px;
+  flex: 0 0 auto;
+  padding: 0.4rem 0.25rem;
+  border-radius: var(--radius-sm);
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.sentence-mini-heat-cell:hover {
+  transform: translateY(-2px);
+  border-color: var(--primary);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+.sentence-mini-heat-cell.is-self {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 1.5px var(--primary);
+}
+
+.sentence-mini-heat-cell.is-top-redundant {
+  border-color: var(--redun-color);
+  box-shadow: 0 0 0 1.5px var(--redun-color);
+}
+
+/* Sentence Modal: Sensationalism Comparative Bars */
+.sens-bars-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  margin-bottom: 0.85rem;
+}
+
+.sens-bar-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 0.75rem;
+}
+
+.sens-bar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+  margin-bottom: 0.28rem;
+}
+
+/* Sentence Modal: Orthotypographic Visual Grid */
+.ortho-badges-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.6rem;
+  margin-bottom: 0.75rem;
+}
+
+@media (max-width: 600px) {
+  .ortho-badges-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ortho-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.ortho-card-title {
+  font-size: 0.73rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ortho-token-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin-top: 0.25rem;
+}
+
+.ortho-chip {
+  padding: 0.15rem 0.42rem;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.71rem;
+  font-weight: 700;
+}
+
+/* =============================================================================
+   HELP TIPS (TOOLTIPS) FOR NON-TECHNICAL USERS
+   ============================================================================= */
+.help-tip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: var(--bg-card-subtle);
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  font-size: 0.68rem;
+  font-weight: 800;
+  cursor: help;
+  position: relative;
+  vertical-align: middle;
+  margin-left: 0.4rem;
+  transition: all var(--transition);
+  user-select: none;
+  line-height: 1;
+}
+
+.help-tip:hover,
+.help-tip:focus {
+  background: var(--primary);
+  color: #ffffff;
+  border-color: var(--primary);
+  transform: scale(1.08);
+}
+
+.help-tip .help-content {
+  visibility: hidden;
+  opacity: 0;
+  width: 260px;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  text-align: left;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 0.65rem 0.8rem;
+  font-size: 0.76rem;
+  font-weight: 400;
+  font-family: 'Inter', sans-serif;
+  line-height: 1.45;
+  box-shadow: var(--shadow-lg);
+  position: absolute;
+  z-index: 2000;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+  pointer-events: none;
+}
+
+.help-tip:hover .help-content,
+.help-tip:focus .help-content {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(-50%) translateY(-2px);
+}
+
+.help-tip .help-content::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: var(--bg-card) transparent transparent transparent;
+}
+
+/* Tooltip on right edge */
+.help-tip.help-tip-left .help-content {
+  left: auto;
+  right: -8px;
+  transform: none;
+}
+.help-tip.help-tip-left:hover .help-content {
+  transform: translateY(-2px);
+}
+.help-tip.help-tip-left .help-content::after {
+  left: auto;
+  right: 12px;
+}
+
+/* =============================================================================
+   HORIZONTAL 5-COLUMN GRID FOR IML DIMENSIONS (D1–D5)
+   ============================================================================= */
+.iml-dims-grid-5 {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.65rem;
+  margin-top: 0.75rem;
+}
+
+@media (max-width: 1080px) {
+  .iml-dims-grid-5 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 720px) {
+  .iml-dims-grid-5 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .iml-dims-grid-5 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.iml-dim-card-h {
+  background: var(--bg-card-subtle);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 0.65rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.35rem;
+  transition: transform var(--transition), border-color var(--transition);
+}
+
+.iml-dim-card-h:hover {
+  border-color: var(--primary);
+  transform: translateY(-1.5px);
+}
+
+.iml-dim-card-h .dim-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.iml-dim-card-h .dim-card-title {
+  font-size: 0.75rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.iml-dim-card-h .dim-card-score {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.iml-dim-card-h .dim-card-level {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
@@ -1255,7 +1550,14 @@ textarea.news-textarea:focus {
 
       <!-- 1. PREDICCIÓN Y RESUMEN GENERAL (4 TARJETAS LIMPIAS) -->
       <div class="section-heading">
-        <span>📊 Predicción y Diagnóstico General de la Noticia</span>
+        <div style="display: flex; align-items: center;">
+          <span>📊 Predicción y Diagnóstico General de la Noticia</span>
+          <span class="help-tip" tabindex="0">?
+            <span class="help-content">
+              Diagnóstico general de credibilidad. Te indica si la noticia tiene alta probabilidad de ser falsa o verdadera analizando su estilo, vocabulario y patrones de redacción.
+            </span>
+          </span>
+        </div>
         <div style="display: flex; gap: 0.45rem; flex-wrap: wrap;">
           <button id="btn-ablation-live" class="nav-btn" style="color: var(--primary); border-color: var(--primary);">
             🧪 Simular Ablación de Gatillos
@@ -1332,113 +1634,18 @@ textarea.news-textarea:focus {
       </div>
 
       <!-- ====================================================================
-           2. AUDITORÍA FRASE A FRASE (CARRUSEL DESLIZANTE MEXGEN + MATRIZ ORACIONAL)
-           (En primer plano como pidió el usuario)
+           2. DINÁMICA INTERACTIVA: SENSACIONALISMO (BETO) & REDUNDANCIA (SBERT)
+           (Debajo de la Predicción General a petición del usuario)
            ==================================================================== -->
       <div class="section-heading">
-        <span>📋 Auditoría Frase a Frase (Explicabilidad Local) — Carrusel Deslizante MexGen & Banderas Forenses</span>
-        <div style="display: flex; align-items: center; gap: 0.5rem;">
-          <button id="btn-toggle-matrix" class="nav-btn" style="font-size: 0.76rem;">
-            📑 Ocultar/Mostrar Tabla Matriz
-          </button>
-          <div class="carousel-controls">
-            <button id="btn-scroll-left" class="btn-arrow" title="Anterior">&larr;</button>
-            <button id="btn-scroll-right" class="btn-arrow" title="Siguiente">&rarr;</button>
-          </div>
+        <div style="display: flex; align-items: center;">
+          <span>📈 Dinámica Interactiva: Sensacionalismo Oracional (BETO) & Redundancia Semántica (SBERT)</span>
+          <span class="help-tip" tabindex="0">?
+            <span class="help-content">
+              Evalúa dos tácticas comunes de manipulación: frases exageradas diseñadas para asustar o generar indignación (sensacionalismo) y la repetición constante de la misma idea en bucle (redundancia).
+            </span>
+          </span>
         </div>
-      </div>
-
-      <!-- CARRUSEL HORIZONTAL DESLIZANTE -->
-      <div class="carousel-wrapper">
-        <div id="carousel-track" class="carousel-track">
-          <!-- Tarjetas de frases inyectadas dinámicamente -->
-        </div>
-      </div>
-
-      <!-- MATRIZ DE AUDITORÍA LOCAL ORACIÓN POR ORACIÓN -->
-      <div id="matrix-audit-card" class="forensic-card">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.65rem; flex-wrap: wrap; gap: 0.5rem;">
-          <h3 style="font-family: 'Outfit', sans-serif; font-size: 0.98rem; font-weight: 700;">
-            📑 Matriz de Auditoría Local Oración por Oración <span style="font-weight: 500; font-size: 0.8rem; color: var(--text-muted);">(Haz clic en cualquier fila para abrir en miniventana)</span>
-          </h3>
-        </div>
-        <div class="forensic-table-wrapper">
-          <table class="forensic-table">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th style="min-width: 260px;">Texto de la Frase</th>
-                <th>Sensac. (%)</th>
-                <th>Coher. Consec.</th>
-                <th>Gatillo</th>
-                <th>Mayúsc.</th>
-                <th>Adverbios</th>
-                <th>Banderas y Advertencias Forenses</th>
-              </tr>
-            </thead>
-            <tbody id="sentences-audit-tbody">
-              <!-- Filas de frases inyectadas dinámicamente -->
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- ====================================================================
-           3. PERFIL IML (GRÁFICA DE ARAÑA) Y LOS 5 ARQUETIPOS DISCURSIVOS
-           ==================================================================== -->
-      <div class="section-heading">
-        <span>🕸️ Perfil Estilométrico IML (5 Dimensiones) y Arquetipo Discursivo</span>
-      </div>
-
-      <div class="forensic-card">
-        <div class="grid-2-cols" style="margin-bottom: 0; align-items: center;">
-          <!-- COLUMNA IZQUIERDA: GRÁFICA DE ARAÑA (RADAR PENTAGONAL) -->
-          <div style="background: var(--bg-card-subtle); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 0.9rem;">
-            <div style="font-size: 0.82rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.25rem; text-align: center;">
-              Huella Estilométrica en las 5 Dimensiones del IML (Escala 0–100)
-            </div>
-            <div style="height: 280px; position: relative;">
-              <canvas id="iml-radar-chart"></canvas>
-            </div>
-          </div>
-
-          <!-- COLUMNA DERECHA: ARQUETIPO ACTIVO + SELECTOR INTERACTIVO DE LOS 5 ARQUETIPOS + 5 BARRAS COMPACTAS -->
-          <div>
-            <!-- CAJA COMPACTA DEL ARQUETIPO -->
-            <div class="archetype-compact-box">
-              <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem;">
-                <span style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: var(--iml-color);">Arquetipo Detectado</span>
-                <span id="arch-assigned-rule" class="archetype-rule-badge">--</span>
-              </div>
-              <div id="arch-assigned-name" style="font-family: 'Outfit', sans-serif; font-size: 1.08rem; font-weight: 800; color: var(--text-primary);">Estilo --</div>
-              <div id="arch-assigned-desc" style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.15rem; line-height: 1.4;">--</div>
-
-              <!-- PÍLDORAS INTERACTIVAS DE LOS 5 ARQUETIPOS -->
-              <div class="arch-pills-row" id="archetypes-5-strip">
-                <button type="button" class="arch-pill" data-arch="ESTILO_I" title="D1 ≥ 65 y D4 ≥ 65: Emoción extrema + bucle circular">Estilo I: Estridente</button>
-                <button type="button" class="arch-pill" data-arch="ESTILO_II" title="D2 ≥ 50 y D3 ≥ 50: Titular alarmista amortiguado por cuerpo sobrio">Estilo II: Clickbait</button>
-                <button type="button" class="arch-pill" data-arch="ESTILO_III" title="D1 < 45 y D4 ≥ 65: Tono sobrio pero repite consigna en bucle">Estilo III: Propaganda</button>
-                <button type="button" class="arch-pill" data-arch="ESTILO_IV" title="D5 ≤ 55 y D4 < 40: Sintaxis fragmentada o párrafos inconexos">Estilo IV: Incoherente</button>
-                <button type="button" class="arch-pill" data-arch="ESTILO_V" title="Equilibrio estilométrico en la Banda Óptima de Shannon">Estilo V: Balanceado</button>
-              </div>
-              <div id="arch-hover-info" style="font-size: 0.74rem; color: var(--text-muted); margin-top: 0.35rem; min-height: 1.1rem;">
-                💡 Haz clic en cualquier Estilo (I a V) para consultar su regla de activación.
-              </div>
-            </div>
-
-            <!-- 5 BARRAS COMPACTAS DE LAS DIMENSIONES DEL IML -->
-            <div id="iml-dimensions-container" class="iml-dim-list-compact">
-              <!-- Injected dynamically -->
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ====================================================================
-           4. SENSACIONALISMO (BETO) & REDUNDANCIA (SBERT) — COMPACTO E INTERACTIVO
-           ==================================================================== -->
-      <div class="section-heading">
-        <span>📈 Dinámica Interactiva: Sensacionalismo Oracional (BETO) & Redundancia Semántica (SBERT)</span>
       </div>
 
       <div class="grid-2-cols">
@@ -1522,13 +1729,204 @@ textarea.news-textarea:focus {
       </div>
 
       <!-- ====================================================================
-           5. SECCIÓN DESPLEGABLE (<details>): LAS 36 VARIABLES CUANTITATIVAS (D0 A D5)
+           3. AUDITORÍA FRASE A FRASE (EXPLICABILIDAD LOCAL) — CARRUSEL MEXGEN
            ==================================================================== -->
-      <details class="collapsible-details">
+      <div class="section-heading">
+        <div style="display: flex; align-items: center;">
+          <span>📋 Auditoría Frase a Frase (Explicabilidad Local) — Carrusel Deslizante MexGen & Banderas Forenses</span>
+          <span class="help-tip" tabindex="0">?
+            <span class="help-content">
+              Audita la noticia frase a frase. Podrás ver el aporte emocional de cada oración y descubrir qué frases concretas son las responsables del veredicto final.
+            </span>
+          </span>
+        </div>
+        <div class="carousel-controls">
+          <button id="btn-scroll-left" class="btn-arrow" title="Anterior">&larr;</button>
+          <button id="btn-scroll-right" class="btn-arrow" title="Siguiente">&rarr;</button>
+        </div>
+      </div>
+
+      <!-- CARRUSEL HORIZONTAL DESLIZANTE -->
+      <div class="carousel-wrapper">
+        <div id="carousel-track" class="carousel-track">
+          <!-- Tarjetas de frases inyectadas dinámicamente -->
+        </div>
+      </div>
+
+      <!-- ====================================================================
+           4. PERFIL IML (GRÁFICA DE ARAÑA) Y LOS 5 ARQUETIPOS DISCURSIVOS
+           ==================================================================== -->
+      <div class="section-heading">
+        <div style="display: flex; align-items: center;">
+          <span>🕸️ Perfil Estilométrico IML (5 Dimensiones) y Arquetipo Discursivo</span>
+          <span class="help-tip" tabindex="0">?
+            <span class="help-content">
+              El Índice de Manipulación Lingüística (IML) traza la huella de redacción en 5 dimensiones y clasifica la noticia en un arquetipo (clickbait, propaganda, desinformación estridente o periodismo profesional).
+            </span>
+          </span>
+        </div>
+      </div>
+
+      <div class="forensic-card">
+        <!-- FILA 1: TELARAÑA (ALTURA AJUSTADA A 315px) Y ARQUETIPO (ALTURAS IGUALADAS) -->
+        <div class="grid-2-cols" style="margin-bottom: 0; align-items: stretch;">
+          <!-- COLUMNA IZQUIERDA: GRÁFICA DE ARAÑA -->
+          <div style="background: var(--bg-card-subtle); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1rem; display: flex; flex-direction: column;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem; flex-wrap: wrap; gap: 0.4rem;">
+              <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-primary);">
+                Huella Estilométrica en las 5 Dimensiones del IML (0–100)
+              </div>
+              <span id="radar-reference-badge" class="section-badge" style="background: rgba(16, 185, 129, 0.12); color: #059669; font-size: 0.72rem;">
+                🟢 Referencia: Estilo V (Prensa Sobria)
+              </span>
+            </div>
+            <!-- Radar Canvas con altura ajustada (315px) para igualar exactamente la caja de arquetipos -->
+            <div style="height: 315px; position: relative; flex-grow: 1;">
+              <canvas id="iml-radar-chart"></canvas>
+            </div>
+            <div style="font-size: 0.72rem; color: var(--text-muted); text-align: center; margin-top: 0.35rem;">
+              💡 <strong>Rosa:</strong> Noticia Actual &bull; <strong>Verde punteado:</strong> Referencia del Estilo seleccionado.
+            </div>
+          </div>
+
+          <!-- COLUMNA DERECHA: ARQUETIPO ACTIVO + SELECTOR INTERACTIVO + DOBLE DESCRIPCIÓN (TÉCNICA + LECTOR CIUDADANO) -->
+          <div style="display: flex; flex-direction: column; justify-content: space-between;">
+            <!-- CAJA PRINCIPAL DEL ARQUETIPO -->
+            <div class="archetype-compact-box" style="margin-bottom: 0; height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; margin-bottom: 0.3rem; flex-wrap: wrap;">
+                  <div style="display: flex; align-items: center; gap: 0.4rem;">
+                    <span style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; color: var(--iml-color);">Arquetipo Discursivo</span>
+                    <span id="arch-view-badge" class="section-badge" style="background: rgba(99, 102, 241, 0.12); color: var(--primary); font-size: 0.7rem;">Detectado en Noticia</span>
+                  </div>
+                  <div style="display: flex; align-items: center; gap: 0.35rem;">
+                    <span id="arch-assigned-rule" class="archetype-rule-badge">--</span>
+                    <button type="button" id="btn-reset-arch-view" class="sample-chip" style="display: none; padding: 0.15rem 0.45rem; font-size: 0.68rem;" title="Restaurar visualización al arquetipo detectado en la noticia">
+                      ↺ Restaurar Detectado
+                    </button>
+                  </div>
+                </div>
+
+                <div id="arch-assigned-name" style="font-family: 'Outfit', sans-serif; font-size: 1.12rem; font-weight: 800; color: var(--text-primary); margin-bottom: 0.15rem;">Estilo --</div>
+                <div id="arch-assigned-desc" style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.4; margin-bottom: 0.55rem;">--</div>
+
+                <!-- PÍLDORAS INTERACTIVAS DE LOS 5 ARQUETIPOS -->
+                <div style="font-size: 0.72rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.25rem;">
+                  Explorar Arquetipos & Comparar en Gráfica de Araña:
+                </div>
+                <div class="arch-pills-row" id="archetypes-5-strip">
+                  <button type="button" class="arch-pill" data-arch="ESTILO_I" title="Afinidad D1 alta + D3 sin amortiguar + D4 bucle: Emoción extrema sostenida">Estilo I: Estridente</button>
+                  <button type="button" class="arch-pill" data-arch="ESTILO_II" title="Afinidad D2 gatillo alto + D3 amortiguación alta: Titular cebo amortiguado por cuerpo sobrio">Estilo II: Clickbait</button>
+                  <button type="button" class="arch-pill" data-arch="ESTILO_III" title="Afinidad D4 bucle alto + D1 sobria + D2 sin gatillo: Consigna reiterada en bucle formal">Estilo III: Propaganda</button>
+                  <button type="button" class="arch-pill" data-arch="ESTILO_IV" title="Afinidad D5 rota + D4 dispersa: Sintaxis fragmentada o desconexión proposicional">Estilo IV: Incoherente</button>
+                  <button type="button" class="arch-pill" data-arch="ESTILO_V" title="Afinidad D5 óptima + D1 sobrio + D4 progresión lineal: Equilibrio profesional">Estilo V: Balanceado</button>
+                </div>
+              </div>
+
+              <!-- DOBLE DESCRIPCIÓN: TÉCNICA Y CIUDADANA -->
+              <div style="display: flex; flex-direction: column; gap: 0.45rem; margin-top: 0.55rem;">
+                <!-- FICHA TÉCNICA (FORENSE) -->
+                <div class="arch-box-tech" style="padding: 0.5rem 0.75rem;">
+                  <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 700; color: var(--primary); font-size: 0.76rem; margin-bottom: 0.15rem;">
+                    <span>🔬 Ficha Técnica Forense:</span>
+                  </div>
+                  <div id="arch-tech-desc" style="font-size: 0.76rem; line-height: 1.35; color: var(--text-secondary);">
+                    --
+                  </div>
+                </div>
+
+                <!-- GUÍA PARA EL CIUDADANO (¿QUÉ TANTO CONFIAR?) -->
+                <div class="arch-box-common" style="padding: 0.5rem 0.75rem;">
+                  <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 700; color: #b45309; font-size: 0.76rem; margin-bottom: 0.15rem;">
+                    <span>👥 Guía para el Lector (¿Qué tanto confiar?):</span>
+                  </div>
+                  <div id="arch-common-desc" style="font-size: 0.77rem; line-height: 1.4; color: var(--text-primary); font-weight: 500;">
+                    --
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FILA 2: SECCIÓN HORIZONTAL PARA LAS 5 DIMENSIONES DEL IML (DEBAJO DE TELARAÑA Y ARQUETIPO) -->
+        <div style="margin-top: 1rem; padding-top: 0.85rem; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.4rem;">
+          <div style="font-size: 0.84rem; font-weight: 700; color: var(--text-primary); display: flex; align-items: center;">
+            <span>Desglose Horizontal de las 5 Dimensiones Estilométricas (D1–D5)</span>
+            <span class="help-tip" tabindex="0">?
+              <span class="help-content">
+                Las 5 dimensiones evalúan cómo está escrita la noticia. Pasa el ratón sobre el (?) de cada una para ver cómo detecta trucos de manipulación o neutralidad periodística.
+              </span>
+            </span>
+          </div>
+          <div style="font-size: 0.74rem; color: var(--text-muted);">
+            💡 Pasa el ratón sobre el <strong>(?)</strong> de cada dimensión para ver su significado sin tecnicismos.
+          </div>
+        </div>
+
+        <!-- 5 TARJETAS HORIZONTALES DINÁMICAS (D1 A D5) -->
+        <div id="iml-dimensions-container" class="iml-dims-grid-5">
+          <!-- Injected dynamically across 5 horizontal cards -->
+        </div>
+      </div>
+
+      <!-- ====================================================================
+           5. SECCIÓN DESPLEGABLE 1 (<details>): MATRIZ DE AUDITORÍA LOCAL ORACIÓN POR ORACIÓN
+           (Reubicada al final como acordeón a petición del usuario)
+           ==================================================================== -->
+      <details class="collapsible-details" id="details-matrix-audit">
+        <summary class="collapsible-summary">
+          <div style="display: flex; align-items: center; gap: 0.55rem;">
+            <span>📑</span>
+            <span>Matriz de Auditoría Local Oración por Oración (Inspección Fila por Fila)</span>
+            <span class="help-tip" tabindex="0">?
+              <span class="help-content">
+                Tabla exhaustiva donde puedes auditar cada oración por separado con su puntaje de sensacionalismo, coherencia y banderas forenses detectadas.
+              </span>
+            </span>
+          </div>
+          <span class="summary-hint">Haz clic para desplegar / ocultar ▾</span>
+        </summary>
+
+        <div class="collapsible-body">
+          <div style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 0.75rem;">
+            💡 <strong>Tip:</strong> Haz clic en cualquier fila de la tabla para abrir la miniventana interactiva de análisis forense con el minimapa de calor, gráfica de sensacionalismo y marcadores ortotipográficos.
+          </div>
+          <div class="forensic-table-wrapper">
+            <table class="forensic-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th style="min-width: 260px;">Texto de la Frase</th>
+                  <th>Sensac. (%)</th>
+                  <th>Coher. Consec.</th>
+                  <th>Gatillo</th>
+                  <th>Mayúsc.</th>
+                  <th>Adverbios</th>
+                  <th>Banderas y Advertencias Forenses</th>
+                </tr>
+              </thead>
+              <tbody id="sentences-audit-tbody">
+                <!-- Filas de frases inyectadas dinámicamente -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </details>
+
+      <!-- ====================================================================
+           6. SECCIÓN DESPLEGABLE 2 (<details>): LAS 36 VARIABLES CUANTITATIVAS (D0 A D5)
+           ==================================================================== -->
+      <details class="collapsible-details" id="details-36-vars">
         <summary class="collapsible-summary">
           <div style="display: flex; align-items: center; gap: 0.55rem;">
             <span>🧬</span>
             <span>Ver Desglose Completo de las 36 Variables Cuantitativas Base (Dimensiones D0 a D5)</span>
+            <span class="help-tip" tabindex="0">?
+              <span class="help-content">
+                Muestra las 36 características lingüísticas y matemáticas analizadas por el modelo, con sus fórmulas, pesos de importancia y valores calculados.
+              </span>
+            </span>
           </div>
           <span class="summary-hint">Haz clic para desplegar / ocultar ▾</span>
         </summary>
@@ -1592,18 +1990,39 @@ textarea.news-textarea:focus {
 
       <div class="modal-action-buttons">
         <button id="btn-modal-sens" class="modal-act-btn active-sens">
-          <span>🔥 Sensacionalismo & Gatillo</span>
-          <small style="font-weight: 400; opacity: 0.85;">BETO + Impacto Causal</small>
+          <div style="display: flex; align-items: center; justify-content: center; gap: 0.15rem;">
+            <span>🔥 Sensacionalismo</span>
+            <span class="help-tip" tabindex="0">?
+              <span class="help-content">
+                Mide qué tan alarmista o emocional es esta frase comparada con el resto de la noticia.
+              </span>
+            </span>
+          </div>
+          <small style="font-weight: 400; opacity: 0.85;">BETO + Gráfica Comparativa</small>
         </button>
 
         <button id="btn-modal-redun" class="modal-act-btn">
-          <span>🔄 Redundancia & Coherencia</span>
-          <small style="font-weight: 400; opacity: 0.85;">SBERT Par Más Similar</small>
+          <div style="display: flex; align-items: center; justify-content: center; gap: 0.15rem;">
+            <span>🔄 Redundancia</span>
+            <span class="help-tip" tabindex="0">?
+              <span class="help-content">
+                Mapa de calor donde la fila es esta frase y las columnas son el resto, para ver si repite las mismas ideas.
+              </span>
+            </span>
+          </div>
+          <small style="font-weight: 400; opacity: 0.85;">SBERT Mapa de Calor 1×K</small>
         </button>
 
         <button id="btn-modal-sabert" class="modal-act-btn">
-          <span>🧬 Rasgos D2–D5 & Banderas</span>
-          <small style="font-weight: 400; opacity: 0.85;">Mayúsc., Adverbios, Dicendi</small>
+          <div style="display: flex; align-items: center; justify-content: center; gap: 0.15rem;">
+            <span>✍️ Marcadores Ortotipográficos</span>
+            <span class="help-tip" tabindex="0">?
+              <span class="help-content">
+                Analiza mayúsculas vociferadas, signos de exclamación exagerados, citas a fuentes y tono de redacción.
+              </span>
+            </span>
+          </div>
+          <small style="font-weight: 400; opacity: 0.85;">Mayúsc., Puntuación & Verbos</small>
         </button>
       </div>
 
@@ -1613,8 +2032,14 @@ textarea.news-textarea:focus {
     </div>
   </div>
 
+      <div id="modal-detail-panel" class="modal-detail-panel">
+        <!-- Dynamic sentence metrics loaded here -->
+      </div>
+    </div>
+  </div>
+
   <script>
-window.EMBEDDED_FORENSE_EXAMPLES = [{"metadatos": {"titulo": "Bulo de Salud con Mayúsculas Sostenidas y Alarma Oncológica", "conteo_palabras": 126, "num_oraciones": 5, "tiempo_analisis_segundos": 0.393, "dispositivo": "cuda", "metadata_adicional": {"id": "noticia_1_falsa_salud_mayusculas", "tipo_referencia": "Falsa (Ground Truth = 1)", "origen": "FakeDeS 2021 (Hispanoamérica / Redes Sociales)"}}, "sensacionalismo_beto": {"P_full": 0.9717, "P_full_pct": 97.2, "P_mean": 0.4564, "P_max": 0.9912, "P_top2": 0.8102, "sigma_sens": 0.3235, "dilution_ratio": 0.9803, "delta_p_gatillo_causal": 0.9332, "oracion_gatillo_principal": {"idx": 1, "texto": "Boooomm\nMUJERES VACUNADAS DE COVID ESTÁN MOSTRANDO EFECTOS SECUNDARIOS TÍPICOS DE CANCER DE MAMA\nLos médicos de Intermountain Healthcare’s Breast Care Centre de Utah, USA, anuncian nuevas pautas de mamografías para las mujeres vacunadas contra Covid-19 recientemente.", "sens_prob": 0.9912}, "diagnostico": "Alarma Sensacionalista Sostenida"}, "redundancia_sbert": {"mean_intra_similarity": 0.4553, "max_intra_similarity": 0.6436, "redundant_pairs_count": 8, "num_pairs_total": 10, "redundancy_density_pct": 80.0, "umbral_gmm_tau": 0.34, "shannon_bin_7": 4, "shannon_bin_4": 2, "par_maxima_redundancia": {"oracion_a_idx": 1, "oracion_a_texto": "Boooomm\nMUJERES VACUNADAS DE COVID ESTÁN MOSTRANDO EFECTOS SECUNDARIOS TÍPICOS DE CANCER DE MAMA\nLos médicos de Intermountain Healthcare’s Breast Care Centre de Utah, USA, anuncian nuevas pautas de mamografías para las mujeres vacunadas contra Covid-19 recientemente.", "oracion_b_idx": 2, "oracion_b_texto": "Los médicos han observado inflamación de los ganglios linfáticos en las mamografías de detección de mujeres que se vacunaron recientemente contra COVID-19.", "similitud_coseno": 0.6436, "supera_umbral_gmm": true}, "matriz_similitud": [[1.0, 0.6436, 0.4778, 0.3813, 0.4016], [0.6436, 1.0, 0.5028, 0.5277, 0.4864], [0.4778, 0.5028, 1.0, 0.2999, 0.3291], [0.3813, 0.5277, 0.2999, 1.0, 0.5023], [0.4016, 0.4864, 0.3291, 0.5023, 1.0]], "diagnostico": "Redundancia Balanceada de Prensa Profesional (Banda Óptima Shannon)"}, "las_5_dimensiones_iml": {"D1_Carga_Emocional": {"valor": 97.2, "escala": "[0 - 100]", "interpretacion": "Densidad de superlativos y dramatismo léxico asignado por BETO.", "nivel": "Crítico / Alarmismo Extremo"}, "D2_Volatilidad_Gatillo": {"valor": 80.2, "escala": "[0 - 100]", "interpretacion": "Desbalance entre la frase gatillo y la sobriedad media del artículo.", "nivel": "Clickbait Severo / Gatillo Aislado"}, "D3_Amortiguacion_Contextual": {"valor": 2.0, "escala": "[0 - 100]", "interpretacion": "Capacidad del cuerpo del texto para diluir o mitigar la alarma del titular.", "nivel": "Sin Amortiguación (Pánico Sostenido en Todo el Texto)"}, "D4_Reiteracion_Redundancia": {"valor": 54.2, "escala": "[0 - 100]", "interpretacion": "Circularidad semántica intra-documental mediante paráfrasis y reiteración.", "nivel": "Progresión Normal Temática"}, "D5_Cohesion_Fluidez": {"valor": 99.0, "escala": "[0 - 100]", "interpretacion": "Conectividad proposicional y solidez sintáctica en la banda de Shannon.", "nivel": "Cohesión Profesional Óptima"}, "score_global_iml": 75.7, "nivel_riesgo_estilometrico": "Alto Riesgo de Manipulación Estilométrica (Anomalía Forense Severa)", "arquetipo_discursivo": {"id": "ESTILO_V_PERIODISMO_EQUILIBRADO", "nombre": "Estilo V: Periodismo Profesional Balanceado", "descripcion": "Redacción equilibrada con variedad léxica, desarrollo temático progresivo y ausencia de manipulaciones estilísticas.", "condicion_activada": "Comportamiento estilométrico equilibrado sin anomalías severas"}}, "variables_ensamble_avanzado_5d": {"D1_Dinamica_Discursiva": {"consec_sim_mean": 0.4871, "consec_sim_min": 0.2999, "consec_sim_std": 0.1225}, "D2_Linguistica_Forense_Epistemica": {"hedges_density": 0.0, "boosters_density": 0.794, "epistemic_ratio": 10.1, "quotes_density": 0.6, "dicendi_density": 0.0, "tokens_hedges": [], "tokens_boosters": ["Boooomm"], "tokens_dicendi": []}, "D3_Riqueza_Lexica_Legibilidad": {"flesch_szigriszt": 47.11, "gutierrez_polini": 17.21, "guiraud_ttr": 6.971, "hapax_ratio_pct": 42.62, "vocabulario_unico": 77, "promedio_silabas_palabra": 2.17, "promedio_palabras_oracion": 24.4}, "D4_Perfilado_Morfosintactico_POS": {"adv_density": 5.556, "pron_1p_density": 0.0, "pron_3p_density": 9.524, "adj_noun_ratio": 0.478, "conteo_adjetivos": 11, "conteo_sustantivos": 22, "conteo_adverbios": 7, "conteo_pronombres_1p": 0, "conteo_pronombres_3p": 12}, "D5_Anclajes_Factuales_Puntuacion": {"all_caps_count": 11, "all_caps_ratio_pct": 8.73, "upper_chars_ratio_pct": 14.69, "excl_density": 0.0, "quest_density": 0.0, "ellipsis_density": 0.0, "punct_intensity": 0.0, "numbers_density": 3.175, "percent_count": 2, "temporal_density": 0.0, "palabras_mayusculas_encontradas": ["MUJERES", "VACUNADAS", "COVID", "ESTÁN", "MOSTRANDO", "EFECTOS", "SECUNDARIOS", "TÍPICOS", "CANCER", "MAMA"], "marcadores_temporales_encontrados": []}}, "desglose_oraciones": [{"idx": 1, "texto": "Boooomm\nMUJERES VACUNADAS DE COVID ESTÁN MOSTRANDO EFECTOS SECUNDARIOS TÍPICOS DE CANCER DE MAMA\nLos médicos de Intermountain Healthcare’s Breast Care Centre de Utah, USA, anuncian nuevas pautas de mamografías para las mujeres vacunadas contra Covid-19 recientemente.", "num_palabras": 38, "sensacionalismo_prob": 0.9912, "sensacionalismo_pct": 99.1, "es_oracion_gatillo": true, "coherencia_consecutiva": null, "similitud_media_documento": 0.4761, "par_mas_redundante": {"idx_oracion_cercana": 2, "similitud": 0.6436, "texto_resumido": "Los médicos han observado inflamación de los ganglios linfáticos en las mamograf..."}, "mayusculas_ratio": 26.32, "palabras_mayusculas": ["MUJERES", "VACUNADAS", "COVID", "ESTÁN", "MOSTRANDO", "EFECTOS", "SECUNDARIOS", "TÍPICOS", "CANCER", "MAMA"], "adverbios_densidad": 2.63, "verbos_dicendi": [], "boosters": ["Boooomm"], "hedges": [], "tiene_citas": false, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": ["🔥 Pico Sensacionalista (99.1%)", "📢 MAYÚSCULAS Sostenidas (26.3%)", "⚡ Intensificador/Booster (Boooomm)", "🔁 Redundante con Frase #2 (cos=0.64)"]}, {"idx": 2, "texto": "Los médicos han observado inflamación de los ganglios linfáticos en las mamografías de detección de mujeres que se vacunaron recientemente contra COVID-19.", "num_palabras": 22, "sensacionalismo_prob": 0.2768, "sensacionalismo_pct": 27.7, "es_oracion_gatillo": false, "coherencia_consecutiva": 0.6436, "similitud_media_documento": 0.5401, "par_mas_redundante": {"idx_oracion_cercana": 1, "similitud": 0.6436, "texto_resumido": "Boooomm\nMUJERES VACUNADAS DE COVID ESTÁN MOSTRANDO EFECTOS SECUNDARIOS TÍPICOS D..."}, "mayusculas_ratio": 4.55, "palabras_mayusculas": ["COVID"], "adverbios_densidad": 4.55, "verbos_dicendi": [], "boosters": [], "hedges": [], "tiene_citas": false, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": ["🔁 Redundante con Frase #1 (cos=0.64)"]}, {"idx": 3, "texto": "\"Siempre que los vemos en una mamografía de detección normal, llamamos a esas pacientes porque puede significar cáncer de mama metastásico que viaja a los ganglios linfáticos o linfoma o leucemia\".", "num_palabras": 31, "sensacionalismo_prob": 0.6292, "sensacionalismo_pct": 62.9, "es_oracion_gatillo": false, "coherencia_consecutiva": 0.5028, "similitud_media_documento": 0.4024, "par_mas_redundante": {"idx_oracion_cercana": 2, "similitud": 0.5028, "texto_resumido": "Los médicos han observado inflamación de los ganglios linfáticos en las mamograf..."}, "mayusculas_ratio": 0.0, "palabras_mayusculas": [], "adverbios_densidad": 3.23, "verbos_dicendi": [], "boosters": [], "hedges": [], "tiene_citas": true, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": ["📜 Cita Textual Entrecomillada", "🔁 Redundante con Frase #2 (cos=0.50)"]}, {"idx": 4, "texto": "“Con la vacuna Moderna están habiendo estos síntomas aproximadamente un 11% después de la primera dosis y un 16% después de la segunda dosis.", "num_palabras": 22, "sensacionalismo_prob": 0.0585, "sensacionalismo_pct": 5.8, "es_oracion_gatillo": false, "coherencia_consecutiva": 0.2999, "similitud_media_documento": 0.4278, "par_mas_redundante": {"idx_oracion_cercana": 2, "similitud": 0.5277, "texto_resumido": "Los médicos han observado inflamación de los ganglios linfáticos en las mamograf..."}, "mayusculas_ratio": 0.0, "palabras_mayusculas": [], "adverbios_densidad": 4.55, "verbos_dicendi": [], "boosters": [], "hedges": [], "tiene_citas": true, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": ["📜 Cita Textual Entrecomillada", "🔁 Redundante con Frase #2 (cos=0.53)"]}, {"idx": 5, "texto": "Creemos que también es comparable para la vacuna Pfizer.", "num_palabras": 9, "sensacionalismo_prob": 0.3264, "sensacionalismo_pct": 32.6, "es_oracion_gatillo": false, "coherencia_consecutiva": 0.5023, "similitud_media_documento": 0.4299, "par_mas_redundante": {"idx_oracion_cercana": 4, "similitud": 0.5023, "texto_resumido": "“Con la vacuna Moderna están habiendo estos síntomas aproximadamente un 11% desp..."}, "mayusculas_ratio": 0.0, "palabras_mayusculas": [], "adverbios_densidad": 0.0, "verbos_dicendi": [], "boosters": [], "hedges": [], "tiene_citas": false, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": ["🔁 Redundante con Frase #4 (cos=0.50)"]}]}, {"metadatos": {"titulo": "Desinformación Conspiracionista y Negacionista de Redes", "conteo_palabras": 106, "num_oraciones": 5, "tiempo_analisis_segundos": 0.135, "dispositivo": "cuda", "metadata_adicional": {"id": "noticia_2_falsa_conspiracion_coronacirco", "tipo_referencia": "Falsa (Ground Truth = 1)", "origen": "Corpus Fact-Checking Hispanoamérica (Redes / Mensajería)"}}, "sensacionalismo_beto": {"P_full": 0.9941, "P_full_pct": 99.4, "P_mean": 0.8282, "P_max": 0.9955, "P_top2": 0.9903, "sigma_sens": 0.2154, "dilution_ratio": 0.9985, "delta_p_gatillo_causal": 0.0251, "oracion_gatillo_principal": {"idx": 1, "texto": "Victoria Abril ha dejado a todo el mundo con la boca abierta con su discurso anti-plandemia a la que ha llegado a denominar coronacirco.", "sens_prob": 0.9955}, "diagnostico": "Alarma Sensacionalista Sostenida"}, "redundancia_sbert": {"mean_intra_similarity": 0.1942, "max_intra_similarity": 0.4051, "redundant_pairs_count": 1, "num_pairs_total": 10, "redundancy_density_pct": 10.0, "umbral_gmm_tau": 0.34, "shannon_bin_7": 1, "shannon_bin_4": 1, "par_maxima_redundancia": {"oracion_a_idx": 3, "oracion_a_texto": "Entre otras cosas ha dicho: «Ya no son tesis conspiracionistas, llevamos un año de coronacirco y epidemia de miedo y la tele nos bombardea con muertos y enfermos».", "oracion_b_idx": 4, "oracion_b_texto": "Antes iban metiendo miedo para decir que la única solución es la vacuna, pero la vacuna no es la solución, nos están usando como conejillos de indias.", "similitud_coseno": 0.4051, "supera_umbral_gmm": true}, "matriz_similitud": [[1.0, 0.1993, 0.2712, 0.2313, 0.0729], [0.1993, 1.0, 0.1593, 0.1379, 0.2291], [0.2712, 0.1593, 1.0, 0.4051, 0.1977], [0.2313, 0.1379, 0.4051, 1.0, 0.0381], [0.0729, 0.2291, 0.1977, 0.0381, 1.0]], "diagnostico": "Discurso Desarticulado / Párrafos Fragmentados"}, "las_5_dimensiones_iml": {"D1_Carga_Emocional": {"valor": 99.4, "escala": "[0 - 100]", "interpretacion": "Densidad de superlativos y dramatismo léxico asignado por BETO.", "nivel": "Crítico / Alarmismo Extremo"}, "D2_Volatilidad_Gatillo": {"valor": 25.1, "escala": "[0 - 100]", "interpretacion": "Desbalance entre la frase gatillo y la sobriedad media del artículo.", "nivel": "Desbalance Leve"}, "D3_Amortiguacion_Contextual": {"valor": 0.1, "escala": "[0 - 100]", "interpretacion": "Capacidad del cuerpo del texto para diluir o mitigar la alarma del titular.", "nivel": "Sin Amortiguación (Pánico Sostenido en Todo el Texto)"}, "D4_Reiteracion_Redundancia": {"valor": 11.6, "escala": "[0 - 100]", "interpretacion": "Circularidad semántica intra-documental mediante paráfrasis y reiteración.", "nivel": "Diversidad Temática / Sin Repeticiones"}, "D5_Cohesion_Fluidez": {"valor": 41.0, "escala": "[0 - 100]", "interpretacion": "Conectividad proposicional y solidez sintáctica en la banda de Shannon.", "nivel": "Texto Desarticulado / Roto"}, "score_global_iml": 63.0, "nivel_riesgo_estilometrico": "Alto Riesgo de Manipulación Estilométrica (Anomalía Forense Severa)", "arquetipo_discursivo": {"id": "ESTILO_IV_DESARTICULADO", "nombre": "Estilo IV: Incoherencia Estructural / Generación Rota", "descripcion": "Texto con baja conectividad proposicional, fragmentación sintáctica o párrafos desvinculados.", "condicion_activada": "D5 <= 55.0 y D4 < 40.0"}}, "variables_ensamble_avanzado_5d": {"D1_Dinamica_Discursiva": {"consec_sim_mean": 0.2005, "consec_sim_min": 0.0381, "consec_sim_std": 0.1322}, "D2_Linguistica_Forense_Epistemica": {"hedges_density": 0.0, "boosters_density": 0.0, "epistemic_ratio": 0.1, "quotes_density": 0.4, "dicendi_density": 0.0, "tokens_hedges": [], "tokens_boosters": [], "tokens_dicendi": []}, "D3_Riqueza_Lexica_Legibilidad": {"flesch_szigriszt": 63.97, "gutierrez_polini": 29.71, "guiraud_ttr": 6.702, "hapax_ratio_pct": 46.23, "vocabulario_unico": 69, "promedio_silabas_palabra": 1.95, "promedio_palabras_oracion": 21.2}, "D4_Perfilado_Morfosintactico_POS": {"adv_density": 8.491, "pron_1p_density": 1.887, "pron_3p_density": 11.321, "adj_noun_ratio": 0.2, "conteo_adjetivos": 5, "conteo_sustantivos": 24, "conteo_adverbios": 9, "conteo_pronombres_1p": 2, "conteo_pronombres_3p": 12}, "D5_Anclajes_Factuales_Puntuacion": {"all_caps_count": 0, "all_caps_ratio_pct": 0.0, "upper_chars_ratio_pct": 1.45, "excl_density": 0.0, "quest_density": 0.0, "ellipsis_density": 0.0, "punct_intensity": 0.0, "numbers_density": 0.0, "percent_count": 0, "temporal_density": 0.943, "palabras_mayusculas_encontradas": [], "marcadores_temporales_encontrados": ["Abril"]}}, "desglose_oraciones": [{"idx": 1, "texto": "Victoria Abril ha dejado a todo el mundo con la boca abierta con su discurso anti-plandemia a la que ha llegado a denominar coronacirco.", "num_palabras": 25, "sensacionalismo_prob": 0.9955, "sensacionalismo_pct": 99.6, "es_oracion_gatillo": true, "coherencia_consecutiva": null, "similitud_media_documento": 0.1937, "par_mas_redundante": {"idx_oracion_cercana": 3, "similitud": 0.2712, "texto_resumido": "Entre otras cosas ha dicho: «Ya no son tesis conspiracionistas, llevamos un año ..."}, "mayusculas_ratio": 0.0, "palabras_mayusculas": [], "adverbios_densidad": 0.0, "verbos_dicendi": [], "boosters": [], "hedges": [], "tiene_citas": false, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": ["🔥 Pico Sensacionalista (99.6%)"]}, {"idx": 2, "texto": "Más claro y con más lógica no se pueden decir las cosas, se la ha entendido todo perfectamente.", "num_palabras": 18, "sensacionalismo_prob": 0.7413, "sensacionalismo_pct": 74.1, "es_oracion_gatillo": true, "coherencia_consecutiva": 0.1993, "similitud_media_documento": 0.1814, "par_mas_redundante": {"idx_oracion_cercana": 5, "similitud": 0.2291, "texto_resumido": "Ponemos el vídeo a continuación, no tiene desperdicio."}, "mayusculas_ratio": 0.0, "palabras_mayusculas": [], "adverbios_densidad": 16.67, "verbos_dicendi": [], "boosters": [], "hedges": [], "tiene_citas": false, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": ["🔥 Pico Sensacionalista (74.1%)", "💬 Densidad Adverbial Alta (16.7%)"]}, {"idx": 3, "texto": "Entre otras cosas ha dicho: «Ya no son tesis conspiracionistas, llevamos un año de coronacirco y epidemia de miedo y la tele nos bombardea con muertos y enfermos».", "num_palabras": 28, "sensacionalismo_prob": 0.985, "sensacionalismo_pct": 98.5, "es_oracion_gatillo": true, "coherencia_consecutiva": 0.1593, "similitud_media_documento": 0.2583, "par_mas_redundante": {"idx_oracion_cercana": 4, "similitud": 0.4051, "texto_resumido": "Antes iban metiendo miedo para decir que la única solución es la vacuna, pero la..."}, "mayusculas_ratio": 0.0, "palabras_mayusculas": [], "adverbios_densidad": 3.57, "verbos_dicendi": [], "boosters": [], "hedges": [], "tiene_citas": true, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": ["🔥 Pico Sensacionalista (98.5%)", "📜 Cita Textual Entrecomillada", "🔁 Redundante con Frase #4 (cos=0.41)"]}, {"idx": 4, "texto": "Antes iban metiendo miedo para decir que la única solución es la vacuna, pero la vacuna no es la solución, nos están usando como conejillos de indias.", "num_palabras": 27, "sensacionalismo_prob": 0.9778, "sensacionalismo_pct": 97.8, "es_oracion_gatillo": true, "coherencia_consecutiva": 0.4051, "similitud_media_documento": 0.2031, "par_mas_redundante": {"idx_oracion_cercana": 3, "similitud": 0.4051, "texto_resumido": "Entre otras cosas ha dicho: «Ya no son tesis conspiracionistas, llevamos un año ..."}, "mayusculas_ratio": 0.0, "palabras_mayusculas": [], "adverbios_densidad": 0.0, "verbos_dicendi": [], "boosters": [], "hedges": [], "tiene_citas": false, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": ["🔥 Pico Sensacionalista (97.8%)", "🔁 Redundante con Frase #3 (cos=0.41)"]}, {"idx": 5, "texto": "Ponemos el vídeo a continuación, no tiene desperdicio.", "num_palabras": 8, "sensacionalismo_prob": 0.4416, "sensacionalismo_pct": 44.2, "es_oracion_gatillo": false, "coherencia_consecutiva": 0.0381, "similitud_media_documento": 0.1345, "par_mas_redundante": {"idx_oracion_cercana": 2, "similitud": 0.2291, "texto_resumido": "Más claro y con más lógica no se pueden decir las cosas, se la ha entendido todo..."}, "mayusculas_ratio": 0.0, "palabras_mayusculas": [], "adverbios_densidad": 0.0, "verbos_dicendi": [], "boosters": [], "hedges": [], "tiene_citas": false, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": ["⚠️ Salto Temático Abrupto (Baja Coherencia)"]}]}, {"metadatos": {"titulo": "Noticia Oficial de Salud Pública y Medidas Epidemiológicas", "conteo_palabras": 216, "num_oraciones": 9, "tiempo_analisis_segundos": 0.226, "dispositivo": "cuda", "metadata_adicional": {"id": "noticia_3_verdadera_puebla_salud", "tipo_referencia": "Verdadera (Ground Truth = 0)", "origen": "Prensa Oficial del Estado de Puebla, México (Secretaría de Salud)"}}, "sensacionalismo_beto": {"P_full": 0.0033, "P_full_pct": 0.3, "P_mean": 0.0997, "P_max": 0.5372, "P_top2": 0.3372, "sigma_sens": 0.159, "dilution_ratio": 0.0062, "delta_p_gatillo_causal": 0.0, "oracion_gatillo_principal": {"idx": 7, "texto": "En la capital y zona metropolitana es rojo.", "sens_prob": 0.5372}, "diagnostico": "Tono Informativo Sobrio / Desprovisto de Amarillismo"}, "redundancia_sbert": {"mean_intra_similarity": 0.2287, "max_intra_similarity": 0.5647, "redundant_pairs_count": 7, "num_pairs_total": 36, "redundancy_density_pct": 19.44, "umbral_gmm_tau": 0.34, "shannon_bin_7": 1, "shannon_bin_4": 1, "par_maxima_redundancia": {"oracion_a_idx": 1, "oracion_a_texto": "El Gobierno de Puebla anunció que el confinamiento para evitar que colapse el sistema de salud por la pandemia de coronavirus, se extiende hasta el día 25 de enero.", "oracion_b_idx": 3, "oracion_b_texto": "Indicó que de esta forma se ratifica el llamado de alerta máxima en Puebla hasta el 25 de enero, fecha en que se determinará el comportamiento de la pandemia.", "similitud_coseno": 0.5647, "supera_umbral_gmm": true}, "matriz_similitud": [[1.0, 0.342, 0.5647, 0.1741, 0.2263, 0.084, 0.1019, 0.4193, 0.4188], [0.342, 1.0, 0.3338, 0.1723, 0.3423, 0.4387, 0.1833, 0.2799, 0.274], [0.5647, 0.3338, 1.0, 0.1979, 0.2656, 0.1393, 0.0839, 0.234, 0.4465], [0.1741, 0.1723, 0.1979, 1.0, 0.2368, 0.0773, 0.0908, 0.1314, 0.2056], [0.2263, 0.3423, 0.2656, 0.2368, 1.0, 0.27, 0.2687, 0.0338, 0.2859], [0.084, 0.4387, 0.1393, 0.0773, 0.27, 1.0, 0.2912, 0.104, 0.1395], [0.1019, 0.1833, 0.0839, 0.0908, 0.2687, 0.2912, 1.0, 0.0222, 0.1323], [0.4193, 0.2799, 0.234, 0.1314, 0.0338, 0.104, 0.0222, 1.0, 0.2224], [0.4188, 0.274, 0.4465, 0.2056, 0.2859, 0.1395, 0.1323, 0.2224, 1.0]], "diagnostico": "Discurso Desarticulado / Párrafos Fragmentados"}, "las_5_dimensiones_iml": {"D1_Carga_Emocional": {"valor": 0.3, "escala": "[0 - 100]", "interpretacion": "Densidad de superlativos y dramatismo léxico asignado por BETO.", "nivel": "Sobrio / Formal"}, "D2_Volatilidad_Gatillo": {"valor": 65.6, "escala": "[0 - 100]", "interpretacion": "Desbalance entre la frase gatillo y la sobriedad media del artículo.", "nivel": "Clickbait Severo / Gatillo Aislado"}, "D3_Amortiguacion_Contextual": {"valor": 99.4, "escala": "[0 - 100]", "interpretacion": "Capacidad del cuerpo del texto para diluir o mitigar la alarma del titular.", "nivel": "Amortiguación Alta (Cuerpo Sobrio Neutraliza Titular)"}, "D4_Reiteracion_Redundancia": {"valor": 40.1, "escala": "[0 - 100]", "interpretacion": "Circularidad semántica intra-documental mediante paráfrasis y reiteración.", "nivel": "Progresión Normal Temática"}, "D5_Cohesion_Fluidez": {"valor": 57.2, "escala": "[0 - 100]", "interpretacion": "Conectividad proposicional y solidez sintáctica en la banda de Shannon.", "nivel": "Cohesión Regular"}, "score_global_iml": 25.6, "nivel_riesgo_estilometrico": "Bajo Riesgo de Manipulación Estilométrica (Texto Neutro/Sobrio)", "arquetipo_discursivo": {"id": "ESTILO_II_CLICKBAIT_CABECERA", "nombre": "Estilo II: Cebo Comercial / Clickbait de Cabecera", "descripcion": "Titular o apertura alarmista diseñado para capturar clics, pero con cuerpo informativo formal que amortigua la alarma.", "condicion_activada": "D2 >= 50.0 y D3 >= 50.0"}}, "variables_ensamble_avanzado_5d": {"D1_Dinamica_Discursiva": {"consec_sim_mean": 0.2395, "consec_sim_min": 0.0222, "consec_sim_std": 0.095}, "D2_Linguistica_Forense_Epistemica": {"hedges_density": 0.0, "boosters_density": 0.463, "epistemic_ratio": 10.1, "quotes_density": 0.222, "dicendi_density": 2.315, "tokens_hedges": [], "tokens_boosters": ["alerta"], "tokens_dicendi": ["anunció", "Indicó", "indicó"]}, "D3_Riqueza_Lexica_Legibilidad": {"flesch_szigriszt": 55.32, "gutierrez_polini": 25.01, "guiraud_ttr": 7.715, "hapax_ratio_pct": 40.58, "vocabulario_unico": 111, "promedio_silabas_palabra": 2.06, "promedio_palabras_oracion": 23.0}, "D4_Perfilado_Morfosintactico_POS": {"adv_density": 0.926, "pron_1p_density": 0.0, "pron_3p_density": 9.259, "adj_noun_ratio": 0.25, "conteo_adjetivos": 14, "conteo_sustantivos": 55, "conteo_adverbios": 2, "conteo_pronombres_1p": 0, "conteo_pronombres_3p": 20}, "D5_Anclajes_Factuales_Puntuacion": {"all_caps_count": 0, "all_caps_ratio_pct": 0.0, "upper_chars_ratio_pct": 1.89, "excl_density": 0.0, "quest_density": 0.0, "ellipsis_density": 0.0, "punct_intensity": 0.0, "numbers_density": 4.167, "percent_count": 1, "temporal_density": 1.389, "palabras_mayusculas_encontradas": [], "marcadores_temporales_encontrados": ["enero"]}}, "desglose_oraciones": [{"idx": 1, "texto": "El Gobierno de Puebla anunció que el confinamiento para evitar que colapse el sistema de salud por la pandemia de coronavirus, se extiende hasta el día 25 de enero.", "num_palabras": 28, "sensacionalismo_prob": 0.1372, "sensacionalismo_pct": 13.7, "es_oracion_gatillo": false, "coherencia_consecutiva": null, "similitud_media_documento": 0.2914, "par_mas_redundante": {"idx_oracion_cercana": 3, "similitud": 0.5647, "texto_resumido": "Indicó que de esta forma se ratifica el llamado de alerta máxima en Puebla hasta..."}, "mayusculas_ratio": 0.0, "palabras_mayusculas": [], "adverbios_densidad": 0.0, "verbos_dicendi": ["anunció"], "boosters": [], "hedges": [], "tiene_citas": false, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": ["🎙️ Atribución Fuente (anunció)", "🔁 Redundante con Frase #3 (cos=0.56)"]}, {"idx": 2, "texto": "En rueda de prensa, el gobernador Luis Miguel Barbosa indicó que se busca reducir la curva de contagios, pues el estado se mantiene en semáforo naranja con tendencia al alza.", "num_palabras": 30, "sensacionalismo_prob": 0.0117, "sensacionalismo_pct": 1.2, "es_oracion_gatillo": false, "coherencia_consecutiva": 0.342, "similitud_media_documento": 0.2958, "par_mas_redundante": {"idx_oracion_cercana": 6, "similitud": 0.4387, "texto_resumido": "Jesús Ramírez, subsecretario de transparencia, indicó que todo el estado se encu..."}, "mayusculas_ratio": 0.0, "palabras_mayusculas": [], "adverbios_densidad": 0.0, "verbos_dicendi": ["indicó"], "boosters": [], "hedges": [], "tiene_citas": false, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": ["🎙️ Atribución Fuente (indicó)", "🔁 Redundante con Frase #6 (cos=0.44)"]}, {"idx": 3, "texto": "Indicó que de esta forma se ratifica el llamado de alerta máxima en Puebla hasta el 25 de enero, fecha en que se determinará el comportamiento de la pandemia.", "num_palabras": 28, "sensacionalismo_prob": 0.0525, "sensacionalismo_pct": 5.2, "es_oracion_gatillo": false, "coherencia_consecutiva": 0.3338, "similitud_media_documento": 0.2832, "par_mas_redundante": {"idx_oracion_cercana": 1, "similitud": 0.5647, "texto_resumido": "El Gobierno de Puebla anunció que el confinamiento para evitar que colapse el si..."}, "mayusculas_ratio": 0.0, "palabras_mayusculas": [], "adverbios_densidad": 0.0, "verbos_dicendi": ["Indicó"], "boosters": ["alerta"], "hedges": [], "tiene_citas": false, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": ["⚡ Intensificador/Booster (alerta)", "🎙️ Atribución Fuente (Indicó)", "🔁 Redundante con Frase #1 (cos=0.56)"]}, {"idx": 4, "texto": "En cuanto a la industria considerada como esencial el aforo permitido es de 30 por ciento con horarios escalonados.", "num_palabras": 18, "sensacionalismo_prob": 0.032, "sensacionalismo_pct": 3.2, "es_oracion_gatillo": false, "coherencia_consecutiva": 0.1979, "similitud_media_documento": 0.1608, "par_mas_redundante": {"idx_oracion_cercana": 5, "similitud": 0.2368, "texto_resumido": "Asimismo se advirtió mayor presencia policíaca en las calles para el cumplimient..."}, "mayusculas_ratio": 0.0, "palabras_mayusculas": [], "adverbios_densidad": 0.0, "verbos_dicendi": [], "boosters": [], "hedges": [], "tiene_citas": false, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": []}, {"idx": 5, "texto": "Asimismo se advirtió mayor presencia policíaca en las calles para el cumplimiento de las medidas y exhortó a la prudencia ciudadana.", "num_palabras": 21, "sensacionalismo_prob": 0.0636, "sensacionalismo_pct": 6.4, "es_oracion_gatillo": false, "coherencia_consecutiva": 0.2368, "similitud_media_documento": 0.2412, "par_mas_redundante": {"idx_oracion_cercana": 2, "similitud": 0.3423, "texto_resumido": "En rueda de prensa, el gobernador Luis Miguel Barbosa indicó que se busca reduci..."}, "mayusculas_ratio": 0.0, "palabras_mayusculas": [], "adverbios_densidad": 0.0, "verbos_dicendi": [], "boosters": [], "hedges": [], "tiene_citas": false, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": ["🔁 Redundante con Frase #2 (cos=0.34)"]}, {"idx": 6, "texto": "Jesús Ramírez, subsecretario de transparencia, indicó que todo el estado se encuentra en color naranja con tendencia ascendente.", "num_palabras": 18, "sensacionalismo_prob": 0.0291, "sensacionalismo_pct": 2.9, "es_oracion_gatillo": false, "coherencia_consecutiva": 0.27, "similitud_media_documento": 0.193, "par_mas_redundante": {"idx_oracion_cercana": 2, "similitud": 0.4387, "texto_resumido": "En rueda de prensa, el gobernador Luis Miguel Barbosa indicó que se busca reduci..."}, "mayusculas_ratio": 0.0, "palabras_mayusculas": [], "adverbios_densidad": 0.0, "verbos_dicendi": ["indicó"], "boosters": [], "hedges": [], "tiene_citas": false, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": ["🎙️ Atribución Fuente (indicó)", "🔁 Redundante con Frase #2 (cos=0.44)"]}, {"idx": 7, "texto": "En la capital y zona metropolitana es rojo.", "num_palabras": 8, "sensacionalismo_prob": 0.5372, "sensacionalismo_pct": 53.7, "es_oracion_gatillo": false, "coherencia_consecutiva": 0.2912, "similitud_media_documento": 0.1468, "par_mas_redundante": {"idx_oracion_cercana": 6, "similitud": 0.2912, "texto_resumido": "Jesús Ramírez, subsecretario de transparencia, indicó que todo el estado se encu..."}, "mayusculas_ratio": 0.0, "palabras_mayusculas": [], "adverbios_densidad": 0.0, "verbos_dicendi": [], "boosters": [], "hedges": [], "tiene_citas": false, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": []}, {"idx": 8, "texto": "El secretario de salud, José Antonio Martínez, indicó que este es el segundo día con más casos registrados de coronavirus con 353 casos en 24 horas y 37 defunciones en 72 horas.", "num_palabras": 28, "sensacionalismo_prob": 0.0099, "sensacionalismo_pct": 1.0, "es_oracion_gatillo": false, "coherencia_consecutiva": 0.0222, "similitud_media_documento": 0.1809, "par_mas_redundante": {"idx_oracion_cercana": 1, "similitud": 0.4193, "texto_resumido": "El Gobierno de Puebla anunció que el confinamiento para evitar que colapse el si..."}, "mayusculas_ratio": 0.0, "palabras_mayusculas": [], "adverbios_densidad": 3.57, "verbos_dicendi": ["indicó"], "boosters": [], "hedges": [], "tiene_citas": false, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": ["🎙️ Atribución Fuente (indicó)", "⚠️ Salto Temático Abrupto (Baja Coherencia)", "🔁 Redundante con Frase #1 (cos=0.42)"]}, {"idx": 9, "texto": "De mantenerse la tendencia, al día 14 de enero estaríamos \"a tope\" y el día 18 la capacidad hospitalaria se vería rebasada, por lo que urgió a acatar los decretos.", "num_palabras": 28, "sensacionalismo_prob": 0.0239, "sensacionalismo_pct": 2.4, "es_oracion_gatillo": false, "coherencia_consecutiva": 0.2224, "similitud_media_documento": 0.2656, "par_mas_redundante": {"idx_oracion_cercana": 3, "similitud": 0.4465, "texto_resumido": "Indicó que de esta forma se ratifica el llamado de alerta máxima en Puebla hasta..."}, "mayusculas_ratio": 0.0, "palabras_mayusculas": [], "adverbios_densidad": 0.0, "verbos_dicendi": [], "boosters": [], "hedges": [], "tiene_citas": true, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": ["📜 Cita Textual Entrecomillada", "🔁 Redundante con Frase #3 (cos=0.45)"]}]}, {"metadatos": {"titulo": "Crónica Científica sobre el Megaproyecto NICA de Dubná", "conteo_palabras": 132, "num_oraciones": 6, "tiempo_analisis_segundos": 0.2, "dispositivo": "cuda", "metadata_adicional": {"id": "noticia_4_verdadera_ciencia_efe", "tipo_referencia": "Verdadera (Ground Truth = 0)", "origen": "Agencia EFE (Sección Ciencia y Tecnología / Rusia)"}}, "sensacionalismo_beto": {"P_full": 0.2054, "P_full_pct": 20.5, "P_mean": 0.503, "P_max": 0.9678, "P_top2": 0.8377, "sigma_sens": 0.291, "dilution_ratio": 0.2122, "delta_p_gatillo_causal": 0.1888, "oracion_gatillo_principal": {"idx": 1, "texto": "Rusia quiere recrear el comienzo del Universo.", "sens_prob": 0.9678}, "diagnostico": "Cebo Sensacionalista Aislado (Gatillo Cabecera)"}, "redundancia_sbert": {"mean_intra_similarity": 0.3454, "max_intra_similarity": 0.6279, "redundant_pairs_count": 8, "num_pairs_total": 15, "redundancy_density_pct": 53.33, "umbral_gmm_tau": 0.34, "shannon_bin_7": 3, "shannon_bin_4": 2, "par_maxima_redundancia": {"oracion_a_idx": 1, "oracion_a_texto": "Rusia quiere recrear el comienzo del Universo.", "oracion_b_idx": 2, "oracion_b_texto": "Redacción DUBNÁ EFE En Dubná, a unos 100 kilómetros al norte de Moscú, se comienza a vislumbrar lo que será un enorme acelerador de partículas destinado a recrear los primeros instantes del Universo tras el Big Bang.", "similitud_coseno": 0.6279, "supera_umbral_gmm": true}, "matriz_similitud": [[1.0, 0.6279, 0.1463, 0.3103, 0.2599, 0.0347], [0.6279, 1.0, 0.5032, 0.4594, 0.4698, 0.3477], [0.1463, 0.5032, 1.0, 0.4959, 0.3859, 0.4533], [0.3103, 0.4594, 0.4959, 1.0, 0.2948, 0.178], [0.2599, 0.4698, 0.3859, 0.2948, 1.0, 0.2144], [0.0347, 0.3477, 0.4533, 0.178, 0.2144, 1.0]], "diagnostico": "Redundancia Balanceada de Prensa Profesional (Banda Óptima Shannon)"}, "las_5_dimensiones_iml": {"D1_Carga_Emocional": {"valor": 20.5, "escala": "[0 - 100]", "interpretacion": "Densidad de superlativos y dramatismo léxico asignado por BETO.", "nivel": "Sobrio / Formal"}, "D2_Volatilidad_Gatillo": {"valor": 69.7, "escala": "[0 - 100]", "interpretacion": "Desbalance entre la frase gatillo y la sobriedad media del artículo.", "nivel": "Clickbait Severo / Gatillo Aislado"}, "D3_Amortiguacion_Contextual": {"valor": 78.8, "escala": "[0 - 100]", "interpretacion": "Capacidad del cuerpo del texto para diluir o mitigar la alarma del titular.", "nivel": "Amortiguación Alta (Cuerpo Sobrio Neutraliza Titular)"}, "D4_Reiteracion_Redundancia": {"valor": 51.4, "escala": "[0 - 100]", "interpretacion": "Circularidad semántica intra-documental mediante paráfrasis y reiteración.", "nivel": "Progresión Normal Temática"}, "D5_Cohesion_Fluidez": {"valor": 99.8, "escala": "[0 - 100]", "interpretacion": "Conectividad proposicional y solidez sintáctica en la banda de Shannon.", "nivel": "Cohesión Profesional Óptima"}, "score_global_iml": 34.6, "nivel_riesgo_estilometrico": "Bajo Riesgo de Manipulación Estilométrica (Texto Neutro/Sobrio)", "arquetipo_discursivo": {"id": "ESTILO_II_CLICKBAIT_CABECERA", "nombre": "Estilo II: Cebo Comercial / Clickbait de Cabecera", "descripcion": "Titular o apertura alarmista diseñado para capturar clics, pero con cuerpo informativo formal que amortigua la alarma.", "condicion_activada": "D2 >= 50.0 y D3 >= 50.0"}}, "variables_ensamble_avanzado_5d": {"D1_Dinamica_Discursiva": {"consec_sim_mean": 0.4272, "consec_sim_min": 0.2144, "consec_sim_std": 0.1507}, "D2_Linguistica_Forense_Epistemica": {"hedges_density": 0.0, "boosters_density": 0.0, "epistemic_ratio": 0.1, "quotes_density": 0.0, "dicendi_density": 0.0, "tokens_hedges": [], "tokens_boosters": [], "tokens_dicendi": []}, "D3_Riqueza_Lexica_Legibilidad": {"flesch_szigriszt": 58.65, "gutierrez_polini": 24.51, "guiraud_ttr": 7.63, "hapax_ratio_pct": 54.62, "vocabulario_unico": 87, "promedio_silabas_palabra": 2.03, "promedio_palabras_oracion": 21.67}, "D4_Perfilado_Morfosintactico_POS": {"adv_density": 1.515, "pron_1p_density": 0.0, "pron_3p_density": 9.848, "adj_noun_ratio": 0.37, "conteo_adjetivos": 10, "conteo_sustantivos": 26, "conteo_adverbios": 2, "conteo_pronombres_1p": 0, "conteo_pronombres_3p": 13}, "D5_Anclajes_Factuales_Puntuacion": {"all_caps_count": 2, "all_caps_ratio_pct": 1.52, "upper_chars_ratio_pct": 5.94, "excl_density": 0.0, "quest_density": 0.0, "ellipsis_density": 0.0, "punct_intensity": 0.0, "numbers_density": 1.515, "percent_count": 0, "temporal_density": 0.758, "palabras_mayusculas_encontradas": ["DUBNÁ", "JINR"], "marcadores_temporales_encontrados": ["2022"]}}, "desglose_oraciones": [{"idx": 1, "texto": "Rusia quiere recrear el comienzo del Universo.", "num_palabras": 7, "sensacionalismo_prob": 0.9678, "sensacionalismo_pct": 96.8, "es_oracion_gatillo": true, "coherencia_consecutiva": null, "similitud_media_documento": 0.2758, "par_mas_redundante": {"idx_oracion_cercana": 2, "similitud": 0.6279, "texto_resumido": "Redacción DUBNÁ EFE En Dubná, a unos 100 kilómetros al norte de Moscú, se comien..."}, "mayusculas_ratio": 0.0, "palabras_mayusculas": [], "adverbios_densidad": 0.0, "verbos_dicendi": [], "boosters": [], "hedges": [], "tiene_citas": false, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": ["🔥 Pico Sensacionalista (96.8%)", "🔁 Redundante con Frase #2 (cos=0.63)"]}, {"idx": 2, "texto": "Redacción DUBNÁ EFE En Dubná, a unos 100 kilómetros al norte de Moscú, se comienza a vislumbrar lo que será un enorme acelerador de partículas destinado a recrear los primeros instantes del Universo tras el Big Bang.", "num_palabras": 36, "sensacionalismo_prob": 0.591, "sensacionalismo_pct": 59.1, "es_oracion_gatillo": false, "coherencia_consecutiva": 0.6279, "similitud_media_documento": 0.4816, "par_mas_redundante": {"idx_oracion_cercana": 1, "similitud": 0.6279, "texto_resumido": "Rusia quiere recrear el comienzo del Universo."}, "mayusculas_ratio": 2.78, "palabras_mayusculas": ["DUBNÁ"], "adverbios_densidad": 0.0, "verbos_dicendi": [], "boosters": [], "hedges": [], "tiene_citas": false, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": ["🔁 Redundante con Frase #1 (cos=0.63)"]}, {"idx": 3, "texto": "La construcción del NICA (Nuclotron based Ion Collider Facility)en el Instituto Conjunto para la Investigación Nuclear (JINR, por sus siglas en inglés) de Dubná avanza a pasos agigantados.", "num_palabras": 29, "sensacionalismo_prob": 0.4303, "sensacionalismo_pct": 43.0, "es_oracion_gatillo": false, "coherencia_consecutiva": 0.5032, "similitud_media_documento": 0.3969, "par_mas_redundante": {"idx_oracion_cercana": 2, "similitud": 0.5032, "texto_resumido": "Redacción DUBNÁ EFE En Dubná, a unos 100 kilómetros al norte de Moscú, se comien..."}, "mayusculas_ratio": 3.45, "palabras_mayusculas": ["JINR"], "adverbios_densidad": 0.0, "verbos_dicendi": [], "boosters": [], "hedges": [], "tiene_citas": false, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": ["🔁 Redundante con Frase #2 (cos=0.50)"]}, {"idx": 4, "texto": "El deseo de los aproximadamente mil científicos e ingenieros que trabajan en el megaproyecto es poner en marcha el colisionador en 2022.", "num_palabras": 21, "sensacionalismo_prob": 0.197, "sensacionalismo_pct": 19.7, "es_oracion_gatillo": false, "coherencia_consecutiva": 0.4959, "similitud_media_documento": 0.3477, "par_mas_redundante": {"idx_oracion_cercana": 3, "similitud": 0.4959, "texto_resumido": "La construcción del NICA (Nuclotron based Ion Collider Facility)en el Instituto ..."}, "mayusculas_ratio": 0.0, "palabras_mayusculas": [], "adverbios_densidad": 4.76, "verbos_dicendi": [], "boosters": [], "hedges": [], "tiene_citas": false, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": ["🔁 Redundante con Frase #3 (cos=0.50)"]}, {"idx": 5, "texto": "El objetivo es estudiar la transición de la materia ordinaria al plasma quark-gluón que existía en los primeros microsegundos después de la gran explosión.", "num_palabras": 25, "sensacionalismo_prob": 0.1244, "sensacionalismo_pct": 12.4, "es_oracion_gatillo": false, "coherencia_consecutiva": 0.2948, "similitud_media_documento": 0.325, "par_mas_redundante": {"idx_oracion_cercana": 2, "similitud": 0.4698, "texto_resumido": "Redacción DUBNÁ EFE En Dubná, a unos 100 kilómetros al norte de Moscú, se comien..."}, "mayusculas_ratio": 0.0, "palabras_mayusculas": [], "adverbios_densidad": 0.0, "verbos_dicendi": [], "boosters": [], "hedges": [], "tiene_citas": false, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": ["🔁 Redundante con Frase #2 (cos=0.47)"]}, {"idx": 6, "texto": "Para ello en Dubná se harán colisionar haces de iones de oro.", "num_palabras": 12, "sensacionalismo_prob": 0.7076, "sensacionalismo_pct": 70.8, "es_oracion_gatillo": true, "coherencia_consecutiva": 0.2144, "similitud_media_documento": 0.2456, "par_mas_redundante": {"idx_oracion_cercana": 3, "similitud": 0.4533, "texto_resumido": "La construcción del NICA (Nuclotron based Ion Collider Facility)en el Instituto ..."}, "mayusculas_ratio": 0.0, "palabras_mayusculas": [], "adverbios_densidad": 0.0, "verbos_dicendi": [], "boosters": [], "hedges": [], "tiene_citas": false, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": ["🔥 Pico Sensacionalista (70.8%)", "🔁 Redundante con Frase #3 (cos=0.45)"]}]}];
+window.EMBEDDED_FORENSE_EXAMPLES = [{"metadatos": {"titulo": "Bulo de Salud con Mayúsculas Sostenidas y Alarma Oncológica", "conteo_palabras": 126, "num_oraciones": 5, "tiempo_analisis_segundos": 0.926, "dispositivo": "cuda", "modelo_redundancia": "hiiamsid/sentence_similarity_spanish_es", "metadata_adicional": {"id": "noticia_1_falsa_salud_mayusculas", "tipo_referencia": "Falsa (Ground Truth = 1)", "origen": "FakeDeS 2021 (Hispanoamérica / Redes Sociales)"}}, "sensacionalismo_beto": {"P_full": 0.9717, "P_full_pct": 97.2, "P_mean": 0.4564, "P_max": 0.9912, "P_top2": 0.8102, "sigma_sens": 0.3235, "dilution_ratio": 0.9803, "delta_p_gatillo_causal": 0.9332, "oracion_gatillo_principal": {"idx": 1, "texto": "Boooomm\nMUJERES VACUNADAS DE COVID ESTÁN MOSTRANDO EFECTOS SECUNDARIOS TÍPICOS DE CANCER DE MAMA\nLos médicos de Intermountain Healthcare’s Breast Care Centre de Utah, USA, anuncian nuevas pautas de mamografías para las mujeres vacunadas contra Covid-19 recientemente.", "sens_prob": 0.9912}, "diagnostico": "Alarma Sensacionalista Sostenida"}, "redundancia_sbert": {"mean_intra_similarity": 0.3904, "max_intra_similarity": 0.6454, "second_max_intra_similarity": 0.6374, "top3_mean_intra_similarity": 0.5947, "p90_intra_similarity": 0.6382, "var_intra_similarity": 0.0235, "max_post_ablation_mexgen": 0.5012, "mexgen_persistence_gap": 0.1442, "delta_mean_sim_morf": 0.0656, "topologia_mexgen": "Bucle Único Focalizado (S_post < 0.60: se desactiva al retirar 1 oración)", "topic_continuity_pairs_count": 5, "topic_continuity_density_pct": 50.0, "paraphrase_pairs_count_p90": 2, "paraphrase_density_p90_pct": 20.0, "strict_redundant_pairs_count_p95": 2, "strict_redundancy_density_p95_pct": 20.0, "hyper_redundant_pairs_count": 0, "hyper_redundancy_density_pct": 0.0, "redundant_pairs_count": 2, "num_pairs_total": 10, "redundancy_density_pct": 20.0, "umbral_gmm_tau": 0.3434, "umbral_pawsx_tau": 0.534, "umbral_estricto_tau": 0.5996, "umbral_hiper_tau": 0.7287, "shannon_bin_7": 5, "shannon_bin_4": 3, "par_maxima_redundancia": {"oracion_a_idx": 1, "oracion_a_texto": "Boooomm\nMUJERES VACUNADAS DE COVID ESTÁN MOSTRANDO EFECTOS SECUNDARIOS TÍPICOS DE CANCER DE MAMA\nLos médicos de Intermountain Healthcare’s Breast Care Centre de Utah, USA, anuncian nuevas pautas de mamografías para las mujeres vacunadas contra Covid-19 recientemente.", "oracion_b_idx": 2, "oracion_b_texto": "Los médicos han observado inflamación de los ganglios linfáticos en las mamografías de detección de mujeres que se vacunaron recientemente contra COVID-19.", "similitud_coseno": 0.6454, "supera_continuidad_gmm_034": true, "supera_parafrasis_pawsx_053": true, "supera_redundancia_estricta_060": true, "supera_hiper_redundancia_073": false}, "matriz_similitud": [[1.0, 0.6454, 0.5012, 0.4242, 0.3282], [0.6454, 1.0, 0.6374, 0.3593, 0.3132], [0.5012, 0.6374, 1.0, 0.1533, 0.2606], [0.4242, 0.3593, 0.1533, 1.0, 0.281], [0.3282, 0.3132, 0.2606, 0.281, 1.0]], "diagnostico": "Redundancia Semántica Estricta (Reiteración Proposicional, >= 0.60)"}, "las_5_dimensiones_iml": {"D1_Carga_Emocional": {"valor": 97.2, "escala": "[0 - 100]", "interpretacion": "Densidad de superlativos y dramatismo léxico asignado por BETO.", "nivel": "Crítico / Alarmismo Extremo"}, "D2_Volatilidad_Gatillo": {"valor": 80.2, "escala": "[0 - 100]", "interpretacion": "Desbalance entre la frase gatillo y la sobriedad media del artículo.", "nivel": "Clickbait Severo / Gatillo Aislado"}, "D3_Amortiguacion_Contextual": {"valor": 2.0, "escala": "[0 - 100]", "interpretacion": "Capacidad del cuerpo del texto para diluir o mitigar la alarma del titular.", "nivel": "Sin Amortiguación (Pánico Sostenido en Todo el Texto)"}, "D4_Reiteracion_Redundancia": {"valor": 81.2, "escala": "[0 - 100]", "interpretacion": "Circularidad semántica intra-documental (S_(1), S_(2) y paráfrasis BETO SBERT).", "nivel": "Bucle Argumental / Redundancia Estricta"}, "D5_Cohesion_Fluidez": {"valor": 87.5, "escala": "[0 - 100]", "interpretacion": "Conectividad proposicional y solidez sintáctica en la banda In-Fold de Shannon.", "nivel": "Cohesión Profesional Óptima"}, "score_global_iml": 82.2, "nivel_riesgo_estilometrico": "Alto Riesgo de Manipulación Estilométrica (Anomalía Forense Severa)", "arquetipo_discursivo": {"id": "ESTILO_I_DESINFO_ESTRIDENTE", "nombre": "Estilo I: Desinformación Estridente / Cliché Hiperbólico", "descripcion": "Alarma emocional sostenida en todo el texto, sin amortiguación del cuerpo; la repetición circular de premisas agrava la estridencia.", "afinidad_pct": 100.0, "arquetipo_secundario": "Estilo II: Cebo Comercial / Clickbait de Cabecera", "afinidad_secundaria_pct": 45.0, "afinidades_pct": {"ESTILO_I_DESINFO_ESTRIDENTE": 100.0, "ESTILO_II_CLICKBAIT_CABECERA": 45.0, "ESTILO_III_PROPAGANDA_SOBRIA": 45.0, "ESTILO_IV_DESARTICULADO": 15.0, "ESTILO_V_PERIODISMO_EQUILIBRADO": 35.0}, "condicion_activada": "Afinidad dominante = 100.0% (Afinidad = 0.45·(D1 alta) + 0.30·(D3 baja/sin amortiguar) + 0.25·(D4 bucle circular)); 2.º arquetipo afín: Estilo II (45.0%)"}}, "variables_ensamble_avanzado_5d": {"D1_Dinamica_Discursiva": {"consec_sim_mean": 0.4293, "consec_sim_min": 0.1533, "consec_sim_std": 0.2169}, "D2_Linguistica_Forense_Epistemica": {"hedges_density": 0.0, "boosters_density": 0.794, "epistemic_ratio": 10.1, "quotes_density": 0.6, "dicendi_density": 0.0, "tokens_hedges": [], "tokens_boosters": ["Boooomm"], "tokens_dicendi": []}, "D3_Riqueza_Lexica_Legibilidad": {"flesch_szigriszt": 47.11, "gutierrez_polini": 17.21, "guiraud_ttr": 6.971, "hapax_ratio_pct": 42.62, "vocabulario_unico": 77, "promedio_silabas_palabra": 2.17, "promedio_palabras_oracion": 24.4}, "D4_Perfilado_Morfosintactico_POS": {"adv_density": 5.556, "pron_1p_density": 0.0, "pron_3p_density": 9.524, "adj_noun_ratio": 0.478, "conteo_adjetivos": 11, "conteo_sustantivos": 22, "conteo_adverbios": 7, "conteo_pronombres_1p": 0, "conteo_pronombres_3p": 12}, "D5_Anclajes_Factuales_Puntuacion": {"all_caps_count": 11, "all_caps_ratio_pct": 8.73, "upper_chars_ratio_pct": 14.69, "excl_density": 0.0, "quest_density": 0.0, "ellipsis_density": 0.0, "punct_intensity": 0.0, "numbers_density": 3.175, "percent_count": 2, "temporal_density": 0.0, "palabras_mayusculas_encontradas": ["MUJERES", "VACUNADAS", "COVID", "ESTÁN", "MOSTRANDO", "EFECTOS", "SECUNDARIOS", "TÍPICOS", "CANCER", "MAMA"], "marcadores_temporales_encontrados": []}}, "desglose_oraciones": [{"idx": 1, "texto": "Boooomm\nMUJERES VACUNADAS DE COVID ESTÁN MOSTRANDO EFECTOS SECUNDARIOS TÍPICOS DE CANCER DE MAMA\nLos médicos de Intermountain Healthcare’s Breast Care Centre de Utah, USA, anuncian nuevas pautas de mamografías para las mujeres vacunadas contra Covid-19 recientemente.", "num_palabras": 38, "sensacionalismo_prob": 0.9912, "sensacionalismo_pct": 99.1, "es_oracion_gatillo": true, "coherencia_consecutiva": null, "similitud_media_documento": 0.4748, "par_mas_redundante": {"idx_oracion_cercana": 2, "similitud": 0.6454, "texto_resumido": "Los médicos han observado inflamación de los ganglios linfáticos en las mamograf..."}, "mayusculas_ratio": 26.32, "palabras_mayusculas": ["MUJERES", "VACUNADAS", "COVID", "ESTÁN", "MOSTRANDO", "EFECTOS", "SECUNDARIOS", "TÍPICOS", "CANCER", "MAMA"], "adverbios_densidad": 2.63, "verbos_dicendi": [], "boosters": ["Boooomm"], "hedges": [], "tiene_citas": false, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": ["🔥 Pico Sensacionalista (99.1%)", "📢 MAYÚSCULAS Sostenidas (26.3%)", "⚡ Intensificador/Booster (Boooomm)", "🔁 Redundancia Estricta con Frase #2 (cos=0.65 >= 0.60)"]}, {"idx": 2, "texto": "Los médicos han observado inflamación de los ganglios linfáticos en las mamografías de detección de mujeres que se vacunaron recientemente contra COVID-19.", "num_palabras": 22, "sensacionalismo_prob": 0.2768, "sensacionalismo_pct": 27.7, "es_oracion_gatillo": false, "coherencia_consecutiva": 0.6454, "similitud_media_documento": 0.4888, "par_mas_redundante": {"idx_oracion_cercana": 1, "similitud": 0.6454, "texto_resumido": "Boooomm\nMUJERES VACUNADAS DE COVID ESTÁN MOSTRANDO EFECTOS SECUNDARIOS TÍPICOS D..."}, "mayusculas_ratio": 4.55, "palabras_mayusculas": ["COVID"], "adverbios_densidad": 4.55, "verbos_dicendi": [], "boosters": [], "hedges": [], "tiene_citas": false, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": ["🔁 Redundancia Estricta con Frase #1 (cos=0.65 >= 0.60)"]}, {"idx": 3, "texto": "\"Siempre que los vemos en una mamografía de detección normal, llamamos a esas pacientes porque puede significar cáncer de mama metastásico que viaja a los ganglios linfáticos o linfoma o leucemia\".", "num_palabras": 31, "sensacionalismo_prob": 0.6292, "sensacionalismo_pct": 62.9, "es_oracion_gatillo": false, "coherencia_consecutiva": 0.6374, "similitud_media_documento": 0.3881, "par_mas_redundante": {"idx_oracion_cercana": 2, "similitud": 0.6374, "texto_resumido": "Los médicos han observado inflamación de los ganglios linfáticos en las mamograf..."}, "mayusculas_ratio": 0.0, "palabras_mayusculas": [], "adverbios_densidad": 3.23, "verbos_dicendi": [], "boosters": [], "hedges": [], "tiene_citas": true, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": ["📜 Cita Textual Entrecomillada", "🔁 Redundancia Estricta con Frase #2 (cos=0.64 >= 0.60)"]}, {"idx": 4, "texto": "“Con la vacuna Moderna están habiendo estos síntomas aproximadamente un 11% después de la primera dosis y un 16% después de la segunda dosis.", "num_palabras": 22, "sensacionalismo_prob": 0.0585, "sensacionalismo_pct": 5.8, "es_oracion_gatillo": false, "coherencia_consecutiva": 0.1533, "similitud_media_documento": 0.3045, "par_mas_redundante": {"idx_oracion_cercana": 1, "similitud": 0.4242, "texto_resumido": "Boooomm\nMUJERES VACUNADAS DE COVID ESTÁN MOSTRANDO EFECTOS SECUNDARIOS TÍPICOS D..."}, "mayusculas_ratio": 0.0, "palabras_mayusculas": [], "adverbios_densidad": 4.55, "verbos_dicendi": [], "boosters": [], "hedges": [], "tiene_citas": true, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": ["📜 Cita Textual Entrecomillada"]}, {"idx": 5, "texto": "Creemos que también es comparable para la vacuna Pfizer.", "num_palabras": 9, "sensacionalismo_prob": 0.3264, "sensacionalismo_pct": 32.6, "es_oracion_gatillo": false, "coherencia_consecutiva": 0.281, "similitud_media_documento": 0.2958, "par_mas_redundante": {"idx_oracion_cercana": 1, "similitud": 0.3282, "texto_resumido": "Boooomm\nMUJERES VACUNADAS DE COVID ESTÁN MOSTRANDO EFECTOS SECUNDARIOS TÍPICOS D..."}, "mayusculas_ratio": 0.0, "palabras_mayusculas": [], "adverbios_densidad": 0.0, "verbos_dicendi": [], "boosters": [], "hedges": [], "tiene_citas": false, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": []}]}, {"metadatos": {"titulo": "Desinformación Conspiracionista y Negacionista de Redes", "conteo_palabras": 106, "num_oraciones": 5, "tiempo_analisis_segundos": 0.376, "dispositivo": "cuda", "modelo_redundancia": "hiiamsid/sentence_similarity_spanish_es", "metadata_adicional": {"id": "noticia_2_falsa_conspiracion_coronacirco", "tipo_referencia": "Falsa (Ground Truth = 1)", "origen": "Corpus Fact-Checking Hispanoamérica (Redes / Mensajería)"}}, "sensacionalismo_beto": {"P_full": 0.9941, "P_full_pct": 99.4, "P_mean": 0.8282, "P_max": 0.9955, "P_top2": 0.9903, "sigma_sens": 0.2154, "dilution_ratio": 0.9985, "delta_p_gatillo_causal": 0.0251, "oracion_gatillo_principal": {"idx": 1, "texto": "Victoria Abril ha dejado a todo el mundo con la boca abierta con su discurso anti-plandemia a la que ha llegado a denominar coronacirco.", "sens_prob": 0.9955}, "diagnostico": "Alarma Sensacionalista Sostenida"}, "redundancia_sbert": {"mean_intra_similarity": 0.2656, "max_intra_similarity": 0.5257, "second_max_intra_similarity": 0.3864, "top3_mean_intra_similarity": 0.4105, "p90_intra_similarity": 0.4003, "var_intra_similarity": 0.0193, "max_post_ablation_mexgen": 0.3, "mexgen_persistence_gap": 0.2257, "delta_mean_sim_morf": 0.0812, "topologia_mexgen": "Progresión Lineal sin Bucles Redundantes (< 0.534)", "topic_continuity_pairs_count": 2, "topic_continuity_density_pct": 20.0, "paraphrase_pairs_count_p90": 0, "paraphrase_density_p90_pct": 0.0, "strict_redundant_pairs_count_p95": 0, "strict_redundancy_density_p95_pct": 0.0, "hyper_redundant_pairs_count": 0, "hyper_redundancy_density_pct": 0.0, "redundant_pairs_count": 0, "num_pairs_total": 10, "redundancy_density_pct": 0.0, "umbral_gmm_tau": 0.3434, "umbral_pawsx_tau": 0.534, "umbral_estricto_tau": 0.5996, "umbral_hiper_tau": 0.7287, "shannon_bin_7": 3, "shannon_bin_4": 2, "par_maxima_redundancia": {"oracion_a_idx": 1, "oracion_a_texto": "Victoria Abril ha dejado a todo el mundo con la boca abierta con su discurso anti-plandemia a la que ha llegado a denominar coronacirco.", "oracion_b_idx": 3, "oracion_b_texto": "Entre otras cosas ha dicho: «Ya no son tesis conspiracionistas, llevamos un año de coronacirco y epidemia de miedo y la tele nos bombardea con muertos y enfermos».", "similitud_coseno": 0.5257, "supera_continuidad_gmm_034": true, "supera_parafrasis_pawsx_053": false, "supera_redundancia_estricta_060": false, "supera_hiper_redundancia_073": false}, "matriz_similitud": [[1.0, 0.2043, 0.5257, 0.3, 0.1133], [0.2043, 1.0, 0.3179, 0.2955, 0.1948], [0.5257, 0.3179, 1.0, 0.3864, 0.3196], [0.3, 0.2955, 0.3864, 1.0, -0.0017], [0.1133, 0.1948, 0.3196, -0.0017, 1.0]], "diagnostico": "Cohesión Periodística Estándar en Banda de Shannon (0.37 - 0.60)"}, "las_5_dimensiones_iml": {"D1_Carga_Emocional": {"valor": 99.4, "escala": "[0 - 100]", "interpretacion": "Densidad de superlativos y dramatismo léxico asignado por BETO.", "nivel": "Crítico / Alarmismo Extremo"}, "D2_Volatilidad_Gatillo": {"valor": 25.1, "escala": "[0 - 100]", "interpretacion": "Desbalance entre la frase gatillo y la sobriedad media del artículo.", "nivel": "Desbalance Leve"}, "D3_Amortiguacion_Contextual": {"valor": 0.1, "escala": "[0 - 100]", "interpretacion": "Capacidad del cuerpo del texto para diluir o mitigar la alarma del titular.", "nivel": "Sin Amortiguación (Pánico Sostenido en Todo el Texto)"}, "D4_Reiteracion_Redundancia": {"valor": 52.0, "escala": "[0 - 100]", "interpretacion": "Circularidad semántica intra-documental (S_(1), S_(2) y paráfrasis BETO SBERT).", "nivel": "Progresión Normal Temática"}, "D5_Cohesion_Fluidez": {"valor": 48.0, "escala": "[0 - 100]", "interpretacion": "Conectividad proposicional y solidez sintáctica en la banda In-Fold de Shannon.", "nivel": "Texto Desarticulado / Roto"}, "score_global_iml": 70.4, "nivel_riesgo_estilometrico": "Alto Riesgo de Manipulación Estilométrica (Anomalía Forense Severa)", "arquetipo_discursivo": {"id": "ESTILO_I_DESINFO_ESTRIDENTE", "nombre": "Estilo I: Desinformación Estridente / Cliché Hiperbólico", "descripcion": "Alarma emocional sostenida en todo el texto, sin amortiguación del cuerpo; la repetición circular de premisas agrava la estridencia.", "afinidad_pct": 85.6, "arquetipo_secundario": "Estilo IV: Incoherencia Estructural / Generación Rota", "afinidad_secundaria_pct": 52.9, "afinidades_pct": {"ESTILO_I_DESINFO_ESTRIDENTE": 85.6, "ESTILO_II_CLICKBAIT_CABECERA": 0.0, "ESTILO_III_PROPAGANDA_SOBRIA": 29.0, "ESTILO_IV_DESARTICULADO": 52.9, "ESTILO_V_PERIODISMO_EQUILIBRADO": 38.5}, "condicion_activada": "Afinidad dominante = 85.6% (Afinidad = 0.45·(D1 alta) + 0.30·(D3 baja/sin amortiguar) + 0.25·(D4 bucle circular)); 2.º arquetipo afín: Estilo IV (52.9%)"}}, "variables_ensamble_avanzado_5d": {"D1_Dinamica_Discursiva": {"consec_sim_mean": 0.2267, "consec_sim_min": -0.0017, "consec_sim_std": 0.147}, "D2_Linguistica_Forense_Epistemica": {"hedges_density": 0.0, "boosters_density": 0.0, "epistemic_ratio": 0.1, "quotes_density": 0.4, "dicendi_density": 0.0, "tokens_hedges": [], "tokens_boosters": [], "tokens_dicendi": []}, "D3_Riqueza_Lexica_Legibilidad": {"flesch_szigriszt": 63.97, "gutierrez_polini": 29.71, "guiraud_ttr": 6.702, "hapax_ratio_pct": 46.23, "vocabulario_unico": 69, "promedio_silabas_palabra": 1.95, "promedio_palabras_oracion": 21.2}, "D4_Perfilado_Morfosintactico_POS": {"adv_density": 8.491, "pron_1p_density": 1.887, "pron_3p_density": 11.321, "adj_noun_ratio": 0.2, "conteo_adjetivos": 5, "conteo_sustantivos": 24, "conteo_adverbios": 9, "conteo_pronombres_1p": 2, "conteo_pronombres_3p": 12}, "D5_Anclajes_Factuales_Puntuacion": {"all_caps_count": 0, "all_caps_ratio_pct": 0.0, "upper_chars_ratio_pct": 1.45, "excl_density": 0.0, "quest_density": 0.0, "ellipsis_density": 0.0, "punct_intensity": 0.0, "numbers_density": 0.0, "percent_count": 0, "temporal_density": 0.943, "palabras_mayusculas_encontradas": [], "marcadores_temporales_encontrados": ["Abril"]}}, "desglose_oraciones": [{"idx": 1, "texto": "Victoria Abril ha dejado a todo el mundo con la boca abierta con su discurso anti-plandemia a la que ha llegado a denominar coronacirco.", "num_palabras": 25, "sensacionalismo_prob": 0.9955, "sensacionalismo_pct": 99.6, "es_oracion_gatillo": true, "coherencia_consecutiva": null, "similitud_media_documento": 0.2858, "par_mas_redundante": {"idx_oracion_cercana": 3, "similitud": 0.5257, "texto_resumido": "Entre otras cosas ha dicho: «Ya no son tesis conspiracionistas, llevamos un año ..."}, "mayusculas_ratio": 0.0, "palabras_mayusculas": [], "adverbios_densidad": 0.0, "verbos_dicendi": [], "boosters": [], "hedges": [], "tiene_citas": false, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": ["🔥 Pico Sensacionalista (99.6%)"]}, {"idx": 2, "texto": "Más claro y con más lógica no se pueden decir las cosas, se la ha entendido todo perfectamente.", "num_palabras": 18, "sensacionalismo_prob": 0.7413, "sensacionalismo_pct": 74.1, "es_oracion_gatillo": true, "coherencia_consecutiva": 0.2043, "similitud_media_documento": 0.2531, "par_mas_redundante": {"idx_oracion_cercana": 3, "similitud": 0.3179, "texto_resumido": "Entre otras cosas ha dicho: «Ya no son tesis conspiracionistas, llevamos un año ..."}, "mayusculas_ratio": 0.0, "palabras_mayusculas": [], "adverbios_densidad": 16.67, "verbos_dicendi": [], "boosters": [], "hedges": [], "tiene_citas": false, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": ["🔥 Pico Sensacionalista (74.1%)", "💬 Densidad Adverbial Alta (16.7%)"]}, {"idx": 3, "texto": "Entre otras cosas ha dicho: «Ya no son tesis conspiracionistas, llevamos un año de coronacirco y epidemia de miedo y la tele nos bombardea con muertos y enfermos».", "num_palabras": 28, "sensacionalismo_prob": 0.985, "sensacionalismo_pct": 98.5, "es_oracion_gatillo": true, "coherencia_consecutiva": 0.3179, "similitud_media_documento": 0.3874, "par_mas_redundante": {"idx_oracion_cercana": 1, "similitud": 0.5257, "texto_resumido": "Victoria Abril ha dejado a todo el mundo con la boca abierta con su discurso ant..."}, "mayusculas_ratio": 0.0, "palabras_mayusculas": [], "adverbios_densidad": 3.57, "verbos_dicendi": [], "boosters": [], "hedges": [], "tiene_citas": true, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": ["🔥 Pico Sensacionalista (98.5%)", "📜 Cita Textual Entrecomillada"]}, {"idx": 4, "texto": "Antes iban metiendo miedo para decir que la única solución es la vacuna, pero la vacuna no es la solución, nos están usando como conejillos de indias.", "num_palabras": 27, "sensacionalismo_prob": 0.9778, "sensacionalismo_pct": 97.8, "es_oracion_gatillo": true, "coherencia_consecutiva": 0.3864, "similitud_media_documento": 0.245, "par_mas_redundante": {"idx_oracion_cercana": 3, "similitud": 0.3864, "texto_resumido": "Entre otras cosas ha dicho: «Ya no son tesis conspiracionistas, llevamos un año ..."}, "mayusculas_ratio": 0.0, "palabras_mayusculas": [], "adverbios_densidad": 0.0, "verbos_dicendi": [], "boosters": [], "hedges": [], "tiene_citas": false, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": ["🔥 Pico Sensacionalista (97.8%)"]}, {"idx": 5, "texto": "Ponemos el vídeo a continuación, no tiene desperdicio.", "num_palabras": 8, "sensacionalismo_prob": 0.4416, "sensacionalismo_pct": 44.2, "es_oracion_gatillo": false, "coherencia_consecutiva": -0.0017, "similitud_media_documento": 0.1565, "par_mas_redundante": {"idx_oracion_cercana": 3, "similitud": 0.3196, "texto_resumido": "Entre otras cosas ha dicho: «Ya no son tesis conspiracionistas, llevamos un año ..."}, "mayusculas_ratio": 0.0, "palabras_mayusculas": [], "adverbios_densidad": 0.0, "verbos_dicendi": [], "boosters": [], "hedges": [], "tiene_citas": false, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": ["⚠️ Salto Temático Abrupto (Baja Coherencia)"]}]}, {"metadatos": {"titulo": "Noticia Oficial de Salud Pública y Medidas Epidemiológicas", "conteo_palabras": 216, "num_oraciones": 9, "tiempo_analisis_segundos": 0.707, "dispositivo": "cuda", "modelo_redundancia": "hiiamsid/sentence_similarity_spanish_es", "metadata_adicional": {"id": "noticia_3_verdadera_puebla_salud", "tipo_referencia": "Verdadera (Ground Truth = 0)", "origen": "Prensa Oficial del Estado de Puebla, México (Secretaría de Salud)"}}, "sensacionalismo_beto": {"P_full": 0.0033, "P_full_pct": 0.3, "P_mean": 0.0997, "P_max": 0.5372, "P_top2": 0.3372, "sigma_sens": 0.159, "dilution_ratio": 0.0062, "delta_p_gatillo_causal": 0.0, "oracion_gatillo_principal": {"idx": 7, "texto": "En la capital y zona metropolitana es rojo.", "sens_prob": 0.5372}, "diagnostico": "Tono Informativo Sobrio / Desprovisto de Amarillismo"}, "redundancia_sbert": {"mean_intra_similarity": 0.3039, "max_intra_similarity": 0.7644, "second_max_intra_similarity": 0.5337, "top3_mean_intra_similarity": 0.608, "p90_intra_similarity": 0.4942, "var_intra_similarity": 0.0199, "max_post_ablation_mexgen": 0.5258, "mexgen_persistence_gap": 0.2386, "delta_mean_sim_morf": 0.0311, "topologia_mexgen": "Bucle Único Focalizado (S_post < 0.60: se desactiva al retirar 1 oración)", "topic_continuity_pairs_count": 13, "topic_continuity_density_pct": 36.11, "paraphrase_pairs_count_p90": 1, "paraphrase_density_p90_pct": 2.78, "strict_redundant_pairs_count_p95": 1, "strict_redundancy_density_p95_pct": 2.78, "hyper_redundant_pairs_count": 1, "hyper_redundancy_density_pct": 2.78, "redundant_pairs_count": 1, "num_pairs_total": 36, "redundancy_density_pct": 2.78, "umbral_gmm_tau": 0.3434, "umbral_pawsx_tau": 0.534, "umbral_estricto_tau": 0.5996, "umbral_hiper_tau": 0.7287, "shannon_bin_7": 7, "shannon_bin_4": 4, "par_maxima_redundancia": {"oracion_a_idx": 1, "oracion_a_texto": "El Gobierno de Puebla anunció que el confinamiento para evitar que colapse el sistema de salud por la pandemia de coronavirus, se extiende hasta el día 25 de enero.", "oracion_b_idx": 3, "oracion_b_texto": "Indicó que de esta forma se ratifica el llamado de alerta máxima en Puebla hasta el 25 de enero, fecha en que se determinará el comportamiento de la pandemia.", "similitud_coseno": 0.7644, "supera_continuidad_gmm_034": true, "supera_parafrasis_pawsx_053": true, "supera_redundancia_estricta_060": true, "supera_hiper_redundancia_073": true}, "matriz_similitud": [[1.0, 0.3478, 0.7644, 0.171, 0.3125, 0.2561, 0.1952, 0.3872, 0.2801], [0.3478, 1.0, 0.5337, 0.1461, 0.4844, 0.5258, 0.2627, 0.3021, 0.4026], [0.7644, 0.5337, 1.0, 0.1672, 0.4076, 0.3651, 0.2337, 0.4257, 0.4056], [0.171, 0.1461, 0.1672, 1.0, 0.2282, 0.1339, 0.2009, 0.0892, 0.2365], [0.3125, 0.4844, 0.4076, 0.2282, 1.0, 0.3001, 0.3129, 0.2236, 0.3654], [0.2561, 0.5258, 0.3651, 0.1339, 0.3001, 1.0, 0.5041, 0.2794, 0.102], [0.1952, 0.2627, 0.2337, 0.2009, 0.3129, 0.5041, 1.0, 0.1566, 0.1674], [0.3872, 0.3021, 0.4257, 0.0892, 0.2236, 0.2794, 0.1566, 1.0, 0.2643], [0.2801, 0.4026, 0.4056, 0.2365, 0.3654, 0.102, 0.1674, 0.2643, 1.0]], "diagnostico": "Hiper-Redundancia Circular (Bucle de Verdad Ilusoria, >= 0.73)"}, "las_5_dimensiones_iml": {"D1_Carga_Emocional": {"valor": 0.3, "escala": "[0 - 100]", "interpretacion": "Densidad de superlativos y dramatismo léxico asignado por BETO.", "nivel": "Sobrio / Formal"}, "D2_Volatilidad_Gatillo": {"valor": 65.6, "escala": "[0 - 100]", "interpretacion": "Desbalance entre la frase gatillo y la sobriedad media del artículo.", "nivel": "Clickbait Severo / Gatillo Aislado"}, "D3_Amortiguacion_Contextual": {"valor": 99.4, "escala": "[0 - 100]", "interpretacion": "Capacidad del cuerpo del texto para diluir o mitigar la alarma del titular.", "nivel": "Amortiguación Alta (Cuerpo Sobrio Neutraliza Titular)"}, "D4_Reiteracion_Redundancia": {"valor": 100.0, "escala": "[0 - 100]", "interpretacion": "Circularidad semántica intra-documental (S_(1), S_(2) y paráfrasis BETO SBERT).", "nivel": "Bucle Argumental / Redundancia Estricta"}, "D5_Cohesion_Fluidez": {"valor": 67.5, "escala": "[0 - 100]", "interpretacion": "Conectividad proposicional y solidez sintáctica en la banda In-Fold de Shannon.", "nivel": "Cohesión Regular"}, "score_global_iml": 36.6, "nivel_riesgo_estilometrico": "Riesgo Moderado de Manipulación (Retórica Comercial o Polarizada)", "arquetipo_discursivo": {"id": "ESTILO_II_CLICKBAIT_CABECERA", "nombre": "Estilo II: Cebo Comercial / Clickbait de Cabecera", "descripcion": "Titular o apertura alarmista diseñado para capturar clics, pero con cuerpo informativo formal que amortigua y diluye la alarma.", "afinidad_pct": 100.0, "arquetipo_secundario": "Estilo III: Propaganda Institucional / Astroturfing Encubierto", "afinidad_secundaria_pct": 80.0, "afinidades_pct": {"ESTILO_I_DESINFO_ESTRIDENTE": 25.0, "ESTILO_II_CLICKBAIT_CABECERA": 100.0, "ESTILO_III_PROPAGANDA_SOBRIA": 80.0, "ESTILO_IV_DESARTICULADO": 3.8, "ESTILO_V_PERIODISMO_EQUILIBRADO": 56.3}, "condicion_activada": "Afinidad dominante = 100.0% (Afinidad = 0.45·(D2 gatillo alto) + 0.40·(D3 amortiguación alta) + 0.15·(D1 moderada/baja)); 2.º arquetipo afín: Estilo III (80.0%)"}}, "variables_ensamble_avanzado_5d": {"D1_Dinamica_Discursiva": {"consec_sim_mean": 0.3127, "consec_sim_min": 0.1566, "consec_sim_std": 0.1332}, "D2_Linguistica_Forense_Epistemica": {"hedges_density": 0.0, "boosters_density": 0.463, "epistemic_ratio": 10.1, "quotes_density": 0.222, "dicendi_density": 2.315, "tokens_hedges": [], "tokens_boosters": ["alerta"], "tokens_dicendi": ["Indicó", "indicó", "anunció"]}, "D3_Riqueza_Lexica_Legibilidad": {"flesch_szigriszt": 55.32, "gutierrez_polini": 25.01, "guiraud_ttr": 7.715, "hapax_ratio_pct": 40.58, "vocabulario_unico": 111, "promedio_silabas_palabra": 2.06, "promedio_palabras_oracion": 23.0}, "D4_Perfilado_Morfosintactico_POS": {"adv_density": 0.926, "pron_1p_density": 0.0, "pron_3p_density": 9.259, "adj_noun_ratio": 0.25, "conteo_adjetivos": 14, "conteo_sustantivos": 55, "conteo_adverbios": 2, "conteo_pronombres_1p": 0, "conteo_pronombres_3p": 20}, "D5_Anclajes_Factuales_Puntuacion": {"all_caps_count": 0, "all_caps_ratio_pct": 0.0, "upper_chars_ratio_pct": 1.89, "excl_density": 0.0, "quest_density": 0.0, "ellipsis_density": 0.0, "punct_intensity": 0.0, "numbers_density": 4.167, "percent_count": 1, "temporal_density": 1.389, "palabras_mayusculas_encontradas": [], "marcadores_temporales_encontrados": ["enero"]}}, "desglose_oraciones": [{"idx": 1, "texto": "El Gobierno de Puebla anunció que el confinamiento para evitar que colapse el sistema de salud por la pandemia de coronavirus, se extiende hasta el día 25 de enero.", "num_palabras": 28, "sensacionalismo_prob": 0.1372, "sensacionalismo_pct": 13.7, "es_oracion_gatillo": false, "coherencia_consecutiva": null, "similitud_media_documento": 0.3393, "par_mas_redundante": {"idx_oracion_cercana": 3, "similitud": 0.7644, "texto_resumido": "Indicó que de esta forma se ratifica el llamado de alerta máxima en Puebla hasta..."}, "mayusculas_ratio": 0.0, "palabras_mayusculas": [], "adverbios_densidad": 0.0, "verbos_dicendi": ["anunció"], "boosters": [], "hedges": [], "tiene_citas": false, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": ["🎙️ Atribución Fuente (anunció)", "🔁 Redundancia Estricta con Frase #3 (cos=0.76 >= 0.60)"]}, {"idx": 2, "texto": "En rueda de prensa, el gobernador Luis Miguel Barbosa indicó que se busca reducir la curva de contagios, pues el estado se mantiene en semáforo naranja con tendencia al alza.", "num_palabras": 30, "sensacionalismo_prob": 0.0117, "sensacionalismo_pct": 1.2, "es_oracion_gatillo": false, "coherencia_consecutiva": 0.3478, "similitud_media_documento": 0.3756, "par_mas_redundante": {"idx_oracion_cercana": 3, "similitud": 0.5337, "texto_resumido": "Indicó que de esta forma se ratifica el llamado de alerta máxima en Puebla hasta..."}, "mayusculas_ratio": 0.0, "palabras_mayusculas": [], "adverbios_densidad": 0.0, "verbos_dicendi": ["indicó"], "boosters": [], "hedges": [], "tiene_citas": false, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": ["🎙️ Atribución Fuente (indicó)"]}, {"idx": 3, "texto": "Indicó que de esta forma se ratifica el llamado de alerta máxima en Puebla hasta el 25 de enero, fecha en que se determinará el comportamiento de la pandemia.", "num_palabras": 28, "sensacionalismo_prob": 0.0525, "sensacionalismo_pct": 5.2, "es_oracion_gatillo": false, "coherencia_consecutiva": 0.5337, "similitud_media_documento": 0.4129, "par_mas_redundante": {"idx_oracion_cercana": 1, "similitud": 0.7644, "texto_resumido": "El Gobierno de Puebla anunció que el confinamiento para evitar que colapse el si..."}, "mayusculas_ratio": 0.0, "palabras_mayusculas": [], "adverbios_densidad": 0.0, "verbos_dicendi": ["Indicó"], "boosters": ["alerta"], "hedges": [], "tiene_citas": false, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": ["⚡ Intensificador/Booster (alerta)", "🎙️ Atribución Fuente (Indicó)", "🔁 Redundancia Estricta con Frase #1 (cos=0.76 >= 0.60)"]}, {"idx": 4, "texto": "En cuanto a la industria considerada como esencial el aforo permitido es de 30 por ciento con horarios escalonados.", "num_palabras": 18, "sensacionalismo_prob": 0.032, "sensacionalismo_pct": 3.2, "es_oracion_gatillo": false, "coherencia_consecutiva": 0.1672, "similitud_media_documento": 0.1716, "par_mas_redundante": {"idx_oracion_cercana": 9, "similitud": 0.2365, "texto_resumido": "De mantenerse la tendencia, al día 14 de enero estaríamos \"a tope\" y el día 18 l..."}, "mayusculas_ratio": 0.0, "palabras_mayusculas": [], "adverbios_densidad": 0.0, "verbos_dicendi": [], "boosters": [], "hedges": [], "tiene_citas": false, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": []}, {"idx": 5, "texto": "Asimismo se advirtió mayor presencia policíaca en las calles para el cumplimiento de las medidas y exhortó a la prudencia ciudadana.", "num_palabras": 21, "sensacionalismo_prob": 0.0636, "sensacionalismo_pct": 6.4, "es_oracion_gatillo": false, "coherencia_consecutiva": 0.2282, "similitud_media_documento": 0.3293, "par_mas_redundante": {"idx_oracion_cercana": 2, "similitud": 0.4844, "texto_resumido": "En rueda de prensa, el gobernador Luis Miguel Barbosa indicó que se busca reduci..."}, "mayusculas_ratio": 0.0, "palabras_mayusculas": [], "adverbios_densidad": 0.0, "verbos_dicendi": [], "boosters": [], "hedges": [], "tiene_citas": false, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": []}, {"idx": 6, "texto": "Jesús Ramírez, subsecretario de transparencia, indicó que todo el estado se encuentra en color naranja con tendencia ascendente.", "num_palabras": 18, "sensacionalismo_prob": 0.0291, "sensacionalismo_pct": 2.9, "es_oracion_gatillo": false, "coherencia_consecutiva": 0.3001, "similitud_media_documento": 0.3083, "par_mas_redundante": {"idx_oracion_cercana": 2, "similitud": 0.5258, "texto_resumido": "En rueda de prensa, el gobernador Luis Miguel Barbosa indicó que se busca reduci..."}, "mayusculas_ratio": 0.0, "palabras_mayusculas": [], "adverbios_densidad": 0.0, "verbos_dicendi": ["indicó"], "boosters": [], "hedges": [], "tiene_citas": false, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": ["🎙️ Atribución Fuente (indicó)"]}, {"idx": 7, "texto": "En la capital y zona metropolitana es rojo.", "num_palabras": 8, "sensacionalismo_prob": 0.5372, "sensacionalismo_pct": 53.7, "es_oracion_gatillo": false, "coherencia_consecutiva": 0.5041, "similitud_media_documento": 0.2542, "par_mas_redundante": {"idx_oracion_cercana": 6, "similitud": 0.5041, "texto_resumido": "Jesús Ramírez, subsecretario de transparencia, indicó que todo el estado se encu..."}, "mayusculas_ratio": 0.0, "palabras_mayusculas": [], "adverbios_densidad": 0.0, "verbos_dicendi": [], "boosters": [], "hedges": [], "tiene_citas": false, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": []}, {"idx": 8, "texto": "El secretario de salud, José Antonio Martínez, indicó que este es el segundo día con más casos registrados de coronavirus con 353 casos en 24 horas y 37 defunciones en 72 horas.", "num_palabras": 28, "sensacionalismo_prob": 0.0099, "sensacionalismo_pct": 1.0, "es_oracion_gatillo": false, "coherencia_consecutiva": 0.1566, "similitud_media_documento": 0.266, "par_mas_redundante": {"idx_oracion_cercana": 3, "similitud": 0.4257, "texto_resumido": "Indicó que de esta forma se ratifica el llamado de alerta máxima en Puebla hasta..."}, "mayusculas_ratio": 0.0, "palabras_mayusculas": [], "adverbios_densidad": 3.57, "verbos_dicendi": ["indicó"], "boosters": [], "hedges": [], "tiene_citas": false, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": ["🎙️ Atribución Fuente (indicó)"]}, {"idx": 9, "texto": "De mantenerse la tendencia, al día 14 de enero estaríamos \"a tope\" y el día 18 la capacidad hospitalaria se vería rebasada, por lo que urgió a acatar los decretos.", "num_palabras": 28, "sensacionalismo_prob": 0.0239, "sensacionalismo_pct": 2.4, "es_oracion_gatillo": false, "coherencia_consecutiva": 0.2643, "similitud_media_documento": 0.278, "par_mas_redundante": {"idx_oracion_cercana": 3, "similitud": 0.4056, "texto_resumido": "Indicó que de esta forma se ratifica el llamado de alerta máxima en Puebla hasta..."}, "mayusculas_ratio": 0.0, "palabras_mayusculas": [], "adverbios_densidad": 0.0, "verbos_dicendi": [], "boosters": [], "hedges": [], "tiene_citas": true, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": ["📜 Cita Textual Entrecomillada"]}]}, {"metadatos": {"titulo": "Crónica Científica sobre el Megaproyecto NICA de Dubná", "conteo_palabras": 132, "num_oraciones": 6, "tiempo_analisis_segundos": 0.546, "dispositivo": "cuda", "modelo_redundancia": "hiiamsid/sentence_similarity_spanish_es", "metadata_adicional": {"id": "noticia_4_verdadera_ciencia_efe", "tipo_referencia": "Verdadera (Ground Truth = 0)", "origen": "Agencia EFE (Sección Ciencia y Tecnología / Rusia)"}}, "sensacionalismo_beto": {"P_full": 0.2054, "P_full_pct": 20.5, "P_mean": 0.503, "P_max": 0.9678, "P_top2": 0.8377, "sigma_sens": 0.291, "dilution_ratio": 0.2122, "delta_p_gatillo_causal": 0.1888, "oracion_gatillo_principal": {"idx": 1, "texto": "Rusia quiere recrear el comienzo del Universo.", "sens_prob": 0.9678}, "diagnostico": "Cebo Sensacionalista Aislado (Gatillo Cabecera)"}, "redundancia_sbert": {"mean_intra_similarity": 0.4245, "max_intra_similarity": 0.615, "second_max_intra_similarity": 0.5756, "top3_mean_intra_similarity": 0.5835, "p90_intra_similarity": 0.5693, "var_intra_similarity": 0.012, "max_post_ablation_mexgen": 0.4992, "mexgen_persistence_gap": 0.1159, "delta_mean_sim_morf": 0.0514, "topologia_mexgen": "Bucle Único Focalizado (S_post < 0.60: se desactiva al retirar 1 oración)", "topic_continuity_pairs_count": 11, "topic_continuity_density_pct": 73.33, "paraphrase_pairs_count_p90": 3, "paraphrase_density_p90_pct": 20.0, "strict_redundant_pairs_count_p95": 1, "strict_redundancy_density_p95_pct": 6.67, "hyper_redundant_pairs_count": 0, "hyper_redundancy_density_pct": 0.0, "redundant_pairs_count": 1, "num_pairs_total": 15, "redundancy_density_pct": 6.67, "umbral_gmm_tau": 0.3434, "umbral_pawsx_tau": 0.534, "umbral_estricto_tau": 0.5996, "umbral_hiper_tau": 0.7287, "shannon_bin_7": 5, "shannon_bin_4": 3, "par_maxima_redundancia": {"oracion_a_idx": 2, "oracion_a_texto": "Redacción DUBNÁ EFE En Dubná, a unos 100 kilómetros al norte de Moscú, se comienza a vislumbrar lo que será un enorme acelerador de partículas destinado a recrear los primeros instantes del Universo tras el Big Bang.", "oracion_b_idx": 3, "oracion_b_texto": "La construcción del NICA (Nuclotron based Ion Collider Facility)en el Instituto Conjunto para la Investigación Nuclear (JINR, por sus siglas en inglés) de Dubná avanza a pasos agigantados.", "similitud_coseno": 0.615, "supera_continuidad_gmm_034": true, "supera_parafrasis_pawsx_053": true, "supera_redundancia_estricta_060": true, "supera_hiper_redundancia_073": false}, "matriz_similitud": [[1.0, 0.4439, 0.2536, 0.3176, 0.3064, 0.2219], [0.4439, 1.0, 0.615, 0.5597, 0.5756, 0.442], [0.2536, 0.615, 1.0, 0.4992, 0.4467, 0.411], [0.3176, 0.5597, 0.4992, 1.0, 0.4328, 0.4212], [0.3064, 0.5756, 0.4467, 0.4328, 1.0, 0.4206], [0.2219, 0.442, 0.411, 0.4212, 0.4206, 1.0]], "diagnostico": "Redundancia Semántica Estricta (Reiteración Proposicional, >= 0.60)"}, "las_5_dimensiones_iml": {"D1_Carga_Emocional": {"valor": 20.5, "escala": "[0 - 100]", "interpretacion": "Densidad de superlativos y dramatismo léxico asignado por BETO.", "nivel": "Sobrio / Formal"}, "D2_Volatilidad_Gatillo": {"valor": 69.7, "escala": "[0 - 100]", "interpretacion": "Desbalance entre la frase gatillo y la sobriedad media del artículo.", "nivel": "Clickbait Severo / Gatillo Aislado"}, "D3_Amortiguacion_Contextual": {"valor": 78.8, "escala": "[0 - 100]", "interpretacion": "Capacidad del cuerpo del texto para diluir o mitigar la alarma del titular.", "nivel": "Amortiguación Alta (Cuerpo Sobrio Neutraliza Titular)"}, "D4_Reiteracion_Redundancia": {"valor": 73.3, "escala": "[0 - 100]", "interpretacion": "Circularidad semántica intra-documental (S_(1), S_(2) y paráfrasis BETO SBERT).", "nivel": "Bucle Argumental / Redundancia Estricta"}, "D5_Cohesion_Fluidez": {"valor": 90.5, "escala": "[0 - 100]", "interpretacion": "Conectividad proposicional y solidez sintáctica en la banda In-Fold de Shannon.", "nivel": "Cohesión Profesional Óptima"}, "score_global_iml": 39.9, "nivel_riesgo_estilometrico": "Riesgo Moderado de Manipulación (Retórica Comercial o Polarizada)", "arquetipo_discursivo": {"id": "ESTILO_II_CLICKBAIT_CABECERA", "nombre": "Estilo II: Cebo Comercial / Clickbait de Cabecera", "descripcion": "Titular o apertura alarmista diseñado para capturar clics, pero con cuerpo informativo formal que amortigua y diluye la alarma.", "afinidad_pct": 100.0, "arquetipo_secundario": "Estilo III: Propaganda Institucional / Astroturfing Encubierto", "afinidad_secundaria_pct": 70.9, "afinidades_pct": {"ESTILO_I_DESINFO_ESTRIDENTE": 23.9, "ESTILO_II_CLICKBAIT_CABECERA": 100.0, "ESTILO_III_PROPAGANDA_SOBRIA": 70.9, "ESTILO_IV_DESARTICULADO": 0.0, "ESTILO_V_PERIODISMO_EQUILIBRADO": 66.8}, "condicion_activada": "Afinidad dominante = 100.0% (Afinidad = 0.45·(D2 gatillo alto) + 0.40·(D3 amortiguación alta) + 0.15·(D1 moderada/baja)); 2.º arquetipo afín: Estilo III (70.9%)"}}, "variables_ensamble_avanzado_5d": {"D1_Dinamica_Discursiva": {"consec_sim_mean": 0.4823, "consec_sim_min": 0.4206, "consec_sim_std": 0.0716}, "D2_Linguistica_Forense_Epistemica": {"hedges_density": 0.0, "boosters_density": 0.0, "epistemic_ratio": 0.1, "quotes_density": 0.0, "dicendi_density": 0.0, "tokens_hedges": [], "tokens_boosters": [], "tokens_dicendi": []}, "D3_Riqueza_Lexica_Legibilidad": {"flesch_szigriszt": 58.65, "gutierrez_polini": 24.51, "guiraud_ttr": 7.63, "hapax_ratio_pct": 54.62, "vocabulario_unico": 87, "promedio_silabas_palabra": 2.03, "promedio_palabras_oracion": 21.67}, "D4_Perfilado_Morfosintactico_POS": {"adv_density": 1.515, "pron_1p_density": 0.0, "pron_3p_density": 9.848, "adj_noun_ratio": 0.37, "conteo_adjetivos": 10, "conteo_sustantivos": 26, "conteo_adverbios": 2, "conteo_pronombres_1p": 0, "conteo_pronombres_3p": 13}, "D5_Anclajes_Factuales_Puntuacion": {"all_caps_count": 2, "all_caps_ratio_pct": 1.52, "upper_chars_ratio_pct": 5.94, "excl_density": 0.0, "quest_density": 0.0, "ellipsis_density": 0.0, "punct_intensity": 0.0, "numbers_density": 1.515, "percent_count": 0, "temporal_density": 0.758, "palabras_mayusculas_encontradas": ["DUBNÁ", "JINR"], "marcadores_temporales_encontrados": ["2022"]}}, "desglose_oraciones": [{"idx": 1, "texto": "Rusia quiere recrear el comienzo del Universo.", "num_palabras": 7, "sensacionalismo_prob": 0.9678, "sensacionalismo_pct": 96.8, "es_oracion_gatillo": true, "coherencia_consecutiva": null, "similitud_media_documento": 0.3087, "par_mas_redundante": {"idx_oracion_cercana": 2, "similitud": 0.4439, "texto_resumido": "Redacción DUBNÁ EFE En Dubná, a unos 100 kilómetros al norte de Moscú, se comien..."}, "mayusculas_ratio": 0.0, "palabras_mayusculas": [], "adverbios_densidad": 0.0, "verbos_dicendi": [], "boosters": [], "hedges": [], "tiene_citas": false, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": ["🔥 Pico Sensacionalista (96.8%)"]}, {"idx": 2, "texto": "Redacción DUBNÁ EFE En Dubná, a unos 100 kilómetros al norte de Moscú, se comienza a vislumbrar lo que será un enorme acelerador de partículas destinado a recrear los primeros instantes del Universo tras el Big Bang.", "num_palabras": 36, "sensacionalismo_prob": 0.591, "sensacionalismo_pct": 59.1, "es_oracion_gatillo": false, "coherencia_consecutiva": 0.4439, "similitud_media_documento": 0.5273, "par_mas_redundante": {"idx_oracion_cercana": 3, "similitud": 0.615, "texto_resumido": "La construcción del NICA (Nuclotron based Ion Collider Facility)en el Instituto ..."}, "mayusculas_ratio": 2.78, "palabras_mayusculas": ["DUBNÁ"], "adverbios_densidad": 0.0, "verbos_dicendi": [], "boosters": [], "hedges": [], "tiene_citas": false, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": ["🔁 Redundancia Estricta con Frase #3 (cos=0.61 >= 0.60)"]}, {"idx": 3, "texto": "La construcción del NICA (Nuclotron based Ion Collider Facility)en el Instituto Conjunto para la Investigación Nuclear (JINR, por sus siglas en inglés) de Dubná avanza a pasos agigantados.", "num_palabras": 29, "sensacionalismo_prob": 0.4303, "sensacionalismo_pct": 43.0, "es_oracion_gatillo": false, "coherencia_consecutiva": 0.615, "similitud_media_documento": 0.4451, "par_mas_redundante": {"idx_oracion_cercana": 2, "similitud": 0.615, "texto_resumido": "Redacción DUBNÁ EFE En Dubná, a unos 100 kilómetros al norte de Moscú, se comien..."}, "mayusculas_ratio": 3.45, "palabras_mayusculas": ["JINR"], "adverbios_densidad": 0.0, "verbos_dicendi": [], "boosters": [], "hedges": [], "tiene_citas": false, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": ["🔁 Redundancia Estricta con Frase #2 (cos=0.61 >= 0.60)"]}, {"idx": 4, "texto": "El deseo de los aproximadamente mil científicos e ingenieros que trabajan en el megaproyecto es poner en marcha el colisionador en 2022.", "num_palabras": 21, "sensacionalismo_prob": 0.197, "sensacionalismo_pct": 19.7, "es_oracion_gatillo": false, "coherencia_consecutiva": 0.4992, "similitud_media_documento": 0.4461, "par_mas_redundante": {"idx_oracion_cercana": 2, "similitud": 0.5597, "texto_resumido": "Redacción DUBNÁ EFE En Dubná, a unos 100 kilómetros al norte de Moscú, se comien..."}, "mayusculas_ratio": 0.0, "palabras_mayusculas": [], "adverbios_densidad": 4.76, "verbos_dicendi": [], "boosters": [], "hedges": [], "tiene_citas": false, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": ["🔄 Paráfrasis Moderada (PAWS-X) con Frase #2 (cos=0.56 >= 0.53)"]}, {"idx": 5, "texto": "El objetivo es estudiar la transición de la materia ordinaria al plasma quark-gluón que existía en los primeros microsegundos después de la gran explosión.", "num_palabras": 25, "sensacionalismo_prob": 0.1244, "sensacionalismo_pct": 12.4, "es_oracion_gatillo": false, "coherencia_consecutiva": 0.4328, "similitud_media_documento": 0.4364, "par_mas_redundante": {"idx_oracion_cercana": 2, "similitud": 0.5756, "texto_resumido": "Redacción DUBNÁ EFE En Dubná, a unos 100 kilómetros al norte de Moscú, se comien..."}, "mayusculas_ratio": 0.0, "palabras_mayusculas": [], "adverbios_densidad": 0.0, "verbos_dicendi": [], "boosters": [], "hedges": [], "tiene_citas": false, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": ["🔄 Paráfrasis Moderada (PAWS-X) con Frase #2 (cos=0.58 >= 0.53)"]}, {"idx": 6, "texto": "Para ello en Dubná se harán colisionar haces de iones de oro.", "num_palabras": 12, "sensacionalismo_prob": 0.7076, "sensacionalismo_pct": 70.8, "es_oracion_gatillo": true, "coherencia_consecutiva": 0.4206, "similitud_media_documento": 0.3833, "par_mas_redundante": {"idx_oracion_cercana": 2, "similitud": 0.442, "texto_resumido": "Redacción DUBNÁ EFE En Dubná, a unos 100 kilómetros al norte de Moscú, se comien..."}, "mayusculas_ratio": 0.0, "palabras_mayusculas": [], "adverbios_densidad": 0.0, "verbos_dicendi": [], "boosters": [], "hedges": [], "tiene_citas": false, "exclamaciones": 0, "interrogaciones": 0, "banderas_forenses": ["🔥 Pico Sensacionalista (70.8%)"]}]}];
 
 </script>
   <script>
@@ -1633,7 +2058,9 @@ let sampleRotationIdx = 0;
 
 let imlRadarChart = null;
 let sensTrajectoryChart = null;
+let modalSensChart = null;
 let forenseExamples = window.EMBEDDED_FORENSE_EXAMPLES || [];
+let currentDetectedArchetypeKey = 'ESTILO_V';
 
 const SAMPLE_TEXTS = [
   `Boooomm\nMUJERES VACUNADAS DE COVID ESTÁN MOSTRANDO EFECTOS SECUNDARIOS TÍPICOS DE CANCER DE MAMA\nLos médicos de Intermountain Healthcare’s Breast Care Centre de Utah, USA, anuncian nuevas pautas de mamografías para las mujeres vacunadas contra Covid-19 recientemente.\nLos médicos han observado inflamación de los ganglios linfáticos en las mamografías de detección de mujeres que se vacunaron recientemente contra COVID-19.\n"Siempre que los vemos en una mamografía de detección normal, llamamos a esas pacientes porque puede significar cáncer de mama metastásico que viaja a los ganglios linfáticos o linfoma o leucemia".\n“Con la vacuna Moderna están habiendo estos síntomas aproximadamente un 11% después de la primera dosis y un 16% después de la segunda dosis. Creemos que también es comparable para la vacuna Pfizer.`,
@@ -1642,12 +2069,57 @@ const SAMPLE_TEXTS = [
   `Rusia quiere recrear el comienzo del Universo. Redacción DUBNÁ EFE En Dubná, a unos 100 kilómetros al norte de Moscú, se comienza a vislumbrar lo que será un enorme acelerador de partículas destinado a recrear los primeros instantes del Universo tras el Big Bang. La construcción del NICA (Nuclotron based Ion Collider Facility)en el Instituto Conjunto para la Investigación Nuclear (JINR, por sus siglas en inglés) de Dubná avanza a pasos agigantados. El deseo de los aproximadamente mil científicos e ingenieros que trabajan en el megaproyecto es poner en marcha el colisionador en 2022. El objetivo es estudiar la transición de la materia ordinaria al plasma quark-gluón que existía en los primeros microsegundos después de la gran explosión. Para ello en Dubná se harán colisionar haces de iones de oro.`
 ];
 
-const ARCHETYPE_DEFINITIONS = {
-  ESTILO_I: "🔥 Estilo I (Desinformación Estridente): Se activa cuando D1 ≥ 65 y D4 ≥ 65. Combina alarma emocional extrema con repetición circular de consignas.",
-  ESTILO_II: "🎯 Estilo II (Cebo Comercial / Clickbait): Se activa cuando D2 ≥ 50 y D3 ≥ 50. El titular dispara un pico de alarma, pero el cuerpo técnico lo amortigua con datos.",
-  ESTILO_III: "🕵️ Estilo III (Propaganda Institucional / Astroturfing): Se activa cuando D1 < 45 y D4 ≥ 65. Tono formal y frío, pero repite una consigna en bucle para inducir verdad ilusoria.",
-  ESTILO_IV: "🧩 Estilo IV (Incoherencia Estructural): Se activa cuando D5 ≤ 55 y D4 < 40. Sintaxis fragmentada, saltos abruptos entre frases o recortes inconexos.",
-  ESTILO_V: "✅ Estilo V (Periodismo Profesional Balanceado): Progresión temática lineal en la Banda Óptima de Shannon sin bucles ni estridencia sostenida."
+const ARCHETYPE_CONFIG = {
+  ESTILO_I: {
+    id: "ESTILO_I",
+    nombre: "Estilo I: Desinformación Estridente",
+    tagline: "Alarma Emocional Sostenida + Nula Amortiguación + Repetición Circular",
+    regla: "Afinidad dominante: D1 alta + D3 baja + D4 bucle",
+    color: "#ef4444",
+    radarRef: [85.0, 80.0, 20.0, 85.0, 40.0],
+    tecnica: "Perfil flexible de afinidad: combina alta carga afectiva y dramatismo (D1 ≥ 40..75) con falta de amortiguación en el cuerpo (D3 ≤ 60..10) y reiteración circular (D4). Se activa por máxima afinidad morfoestilométrica, superando la rigidez de umbrales binarios fijos.",
+    ciudadano: "⚠️ ALERTA MÁXIMA (Muy baja confiabilidad): Esta noticia busca provocar alarma, indignación o pánico urgente repitiendo consignas en bucle y usando palabras de alto impacto emocional sin pruebas reales. Desconfía y no la compartas sin contrastarla en fuentes oficiales."
+  },
+  ESTILO_II: {
+    id: "ESTILO_II",
+    nombre: "Estilo II: Cebo Comercial (Clickbait)",
+    tagline: "Titular / Frase Inicial Alarmista con Cuerpo Amortiguado",
+    regla: "Afinidad dominante: D2 gatillo alto + D3 amortiguación alta",
+    color: "#f59e0b",
+    radarRef: [55.0, 75.0, 75.0, 30.0, 75.0],
+    tecnica: "Perfil flexible de afinidad: pico gatillo en cabecera (D2 ≥ 35..65) contrastado con alta amortiguación contextual del cuerpo (D3 ≥ 40..75). Captura titulares de impacto o cebos comerciales neutralizados por el cuerpo técnico.",
+    ciudadano: "🟡 CUIDADO (Confianza parcial / Lectura crítica): El titular o las primeras líneas exageran la noticia para atrapar tu clic y generar visitas, pero el cuerpo del texto explica los hechos con más calma y datos. Lee siempre el artículo completo antes de creer solo lo que dice el título."
+  },
+  ESTILO_III: {
+    id: "ESTILO_III",
+    nombre: "Estilo III: Propaganda Institucional (Astroturfing)",
+    tagline: "Tono Sobrio y Frío pero con Reiteración Temática en Bucle",
+    regla: "Afinidad dominante: D4 bucle alto + D1 sobria/baja + D2 sin gatillo",
+    color: "#8b5cf6",
+    radarRef: [25.0, 30.0, 60.0, 85.0, 80.0],
+    tecnica: "Perfil flexible de afinidad: alta reiteración semántica (D4 ≥ 45..80) enmascarada bajo un tono formal y frío (D1 ≤ 60..20) y sin gatillo clickbait (D2 ≤ 65..25) para inducir verdad ilusoria por repetición continua.",
+    ciudadano: "🟠 ATENCIÓN (Mensaje persuasivo / Propaganda): Está escrito con un tono serio, educado y formal, pero insiste una y otra vez en el mismo mensaje o consigna política/corporativa para convencerte por repetición. Comprueba quién financia o emite la información."
+  },
+  ESTILO_IV: {
+    id: "ESTILO_IV",
+    nombre: "Estilo IV: Incoherencia Estructural",
+    tagline: "Sintaxis Fragmentada, Saltos Abruptos o Recortes Inconexos",
+    regla: "Afinidad dominante: D5 cohesión rota + D4 baja/dispersa",
+    color: "#ec4899",
+    radarRef: [50.0, 50.0, 35.0, 25.0, 30.0],
+    tecnica: "Perfil flexible de afinidad: fractura en la conectividad discursiva (D5 ≤ 70..38) acompañada de baja continuidad proposicional (D4 ≤ 55..25) y baja amortiguación (D3). Refleja recortes desarticulados o generación automática defectuosa.",
+    ciudadano: "🔴 SOSPECHOSO (Baja confiabilidad): El texto parece un conjunto de frases pegadas sin orden lógico, rumores de redes sociales o una mala traducción. Carece de redacción periodística coherente y pierde el hilo argumental con facilidad."
+  },
+  ESTILO_V: {
+    id: "ESTILO_V",
+    nombre: "Estilo V: Periodismo Profesional Balanceado",
+    tagline: "Banda Óptima de Shannon, Coherencia Lineal y Atribución Factual",
+    regla: "Afinidad dominante: D5 óptima + D1 sobria + D4 progresión lineal + D2 equilibrada",
+    color: "#10b981",
+    radarRef: [15.0, 25.0, 88.0, 40.0, 92.0],
+    tecnica: "Perfil flexible de afinidad: redacción balanceada en la Banda Óptima de Shannon (D5 ≥ 45..75), baja alarma (D1 ≤ 55..20), progresión temática lineal sin bucles circulares (D4 en 25..65) y tono cabecera-cuerpo uniforme (D2 ≤ 55..25).",
+    ciudadano: "🟢 ALTA CONFIABILIDAD (Estilo periodístico riguroso): El texto informa con sobriedad, cita fuentes identificables ('declaró', 'indicó'), incluye datos verificables y no busca manipular tus emociones ni venderte una postura. Sigue el estándar de agencias profesionales."
+  }
 };
 
 // DOM Elements
@@ -1713,22 +2185,22 @@ document.addEventListener('DOMContentLoaded', () => {
     updateCharCounter();
   });
 
-  // Toggle Matrix Table button
-  document.getElementById('btn-toggle-matrix').addEventListener('click', () => {
-    const card = document.getElementById('matrix-audit-card');
-    card.style.display = card.style.display === 'none' ? 'block' : 'none';
-  });
-
-  // Interactive Archetype Pills
+  // Interactive Archetype Selection (Updates Radar Reference & Descriptions)
   document.querySelectorAll('#archetypes-5-strip .arch-pill').forEach(pill => {
     pill.addEventListener('click', () => {
       const key = pill.getAttribute('data-arch');
-      const infoEl = document.getElementById('arch-hover-info');
-      if (infoEl && ARCHETYPE_DEFINITIONS[key]) {
-        infoEl.textContent = ARCHETYPE_DEFINITIONS[key];
-      }
+      selectArchetype(key, true);
     });
   });
+
+  const btnResetArch = document.getElementById('btn-reset-arch-view');
+  if (btnResetArch) {
+    btnResetArch.addEventListener('click', () => {
+      if (currentDetectedArchetypeKey) {
+        selectArchetype(currentDetectedArchetypeKey, false);
+      }
+    });
+  }
 
   // Toggle SBERT Heatmap vs Top Pair
   const btnHeat = document.getElementById('btn-sbert-view-heat');
@@ -2013,6 +2485,9 @@ function renderCarouselAndSentencesTable(data) {
           ${mexgenBadge}
           ${scoreBadge}
         </div>
+        <div class="progress-track" style="height: 4px; margin-bottom: 0.45rem;">
+          <div class="progress-fill" style="width: ${Math.min(100, s.sensacionalismo_pct)}%; background: ${scoreColor};"></div>
+        </div>
         <div class="carousel-card-text">"${s.texto}"</div>
         <div class="carousel-flags-wrap">${flagsChips}</div>
       </div>
@@ -2050,30 +2525,52 @@ function renderCarouselAndSentencesTable(data) {
   });
 }
 
-// 3. Perfil IML (Gráfica de Araña) & 5 Arquetipos Discursivos
+// 3. Perfil IML (Gráfica de Araña Ampliada) & 5 Arquetipos Discursivos
 function renderIMLAndArchetypes(data) {
   const iml = data.las_5_dimensiones_iml;
   const arch = iml.arquetipo_discursivo;
 
-  document.getElementById('arch-assigned-name').textContent = arch.nombre;
-  document.getElementById('arch-assigned-desc').textContent = arch.descripcion;
-  document.getElementById('arch-assigned-rule').textContent = `Regla: ${arch.condicion_activada}`;
-
-  document.querySelectorAll('#archetypes-5-strip .arch-pill').forEach(pill => {
-    const key = pill.getAttribute('data-arch');
-    if (arch.id.startsWith(key)) {
-      pill.classList.add('active-arch');
-    } else {
-      pill.classList.remove('active-arch');
+  // Detectar arquetipo activo
+  let detectedKey = 'ESTILO_V';
+  for (const k of Object.keys(ARCHETYPE_CONFIG)) {
+    if (arch.id && arch.id.startsWith(k)) {
+      detectedKey = k;
+      break;
     }
-  });
+  }
+  currentDetectedArchetypeKey = detectedKey;
 
   const dimsOrder = [
-    { key: 'D1_Carga_Emocional', label: 'D1: Carga Emocional', color: '#ef4444' },
-    { key: 'D2_Volatilidad_Gatillo', label: 'D2: Volatilidad de Gatillo', color: '#f59e0b' },
-    { key: 'D3_Amortiguacion_Contextual', label: 'D3: Amortiguación Contextual', color: '#10b981' },
-    { key: 'D4_Reiteracion_Redundancia', label: 'D4: Reiteración / Redundancia', color: '#8b5cf6' },
-    { key: 'D5_Cohesion_Fluidez', label: 'D5: Cohesión y Fluidez', color: '#3b82f6' }
+    {
+      key: 'D1_Carga_Emocional',
+      label: 'D1: Carga Emocional',
+      color: '#ef4444',
+      tooltip: 'Mide si el texto busca alterarte, asustarte o causarte indignación con palabras provocadoras en vez de informar con serenidad.'
+    },
+    {
+      key: 'D2_Volatilidad_Gatillo',
+      label: 'D2: Volatilidad de Gatillo',
+      color: '#f59e0b',
+      tooltip: 'Detecta si hay frases bomba o explosivas diseñadas para atraparte de golpe, comparado con el cuerpo de la noticia que suele ser más calmado.'
+    },
+    {
+      key: 'D3_Amortiguacion_Contextual',
+      label: 'D3: Amortiguación Contextual',
+      color: '#10b981',
+      tooltip: 'Evalúa si la noticia aporta datos, citas de testigos o explicaciones que calman la duda y dan contexto real al lector.'
+    },
+    {
+      key: 'D4_Reiteracion_Redundancia',
+      label: 'D4: Reiteración / Redundancia',
+      color: '#8b5cf6',
+      tooltip: 'Mide si la noticia repite la misma idea una y otra vez con distintas palabras para grabarte un mensaje en la cabeza.'
+    },
+    {
+      key: 'D5_Cohesion_Fluidez',
+      label: 'D5: Cohesión y Fluidez',
+      color: '#3b82f6',
+      tooltip: 'Revisa si el texto está bien redactado y ordenado como prensa profesional, o si son frases cortadas y pegadas sin sentido lógico.'
+    }
   ];
 
   const container = document.getElementById('iml-dimensions-container');
@@ -2082,24 +2579,104 @@ function renderIMLAndArchetypes(data) {
   dimsOrder.forEach(d => {
     const dObj = iml[d.key];
     const val = dObj ? dObj.valor : 0;
-    const row = document.createElement('div');
-    row.className = 'iml-dim-compact-row';
-    row.innerHTML = `
-      <div class="iml-dim-top">
-        <span>${d.label} <small style="font-weight: 500; color: var(--text-muted);">(${dObj.nivel})</small></span>
-        <span style="color: ${d.color}; font-family: 'Outfit', sans-serif;">${val.toFixed(1)} / 100</span>
+    const card = document.createElement('div');
+    card.className = 'iml-dim-card-h';
+    card.innerHTML = `
+      <div>
+        <div class="dim-card-header">
+          <span class="dim-card-title" style="color: ${d.color};">
+            ${d.label}
+            <span class="help-tip" tabindex="0">?
+              <span class="help-content">${d.tooltip}</span>
+            </span>
+          </span>
+          <span class="dim-card-level">${dObj ? dObj.nivel : '--'}</span>
+        </div>
+        <div class="dim-card-score" style="color: var(--text-primary); margin: 0.25rem 0;">
+          ${val.toFixed(1)} <small style="font-size: 0.72rem; color: var(--text-muted); font-weight: 500;">/ 100</small>
+        </div>
       </div>
       <div class="progress-track" style="height: 6px;">
         <div class="progress-fill" style="width: ${Math.min(100, val)}%; background: ${d.color};"></div>
       </div>
     `;
-    container.appendChild(row);
+    container.appendChild(card);
   });
 
-  renderIMLRadarChart(iml);
+  renderIMLRadarChart(iml, detectedKey);
+  selectArchetype(detectedKey, false);
 }
 
-function renderIMLRadarChart(iml) {
+function selectArchetype(key, isExploration = true) {
+  const cfg = ARCHETYPE_CONFIG[key] || ARCHETYPE_CONFIG.ESTILO_V;
+
+  // Actualizar píldoras activas
+  document.querySelectorAll('#archetypes-5-strip .arch-pill').forEach(pill => {
+    if (pill.getAttribute('data-arch') === key) {
+      pill.classList.add('active-arch');
+    } else {
+      pill.classList.remove('active-arch');
+    }
+  });
+
+  // Título y regla
+  const nameEl = document.getElementById('arch-assigned-name');
+  if (nameEl) nameEl.textContent = cfg.nombre;
+
+  const descEl = document.getElementById('arch-assigned-desc');
+  if (descEl) descEl.textContent = cfg.tagline;
+
+  const ruleEl = document.getElementById('arch-assigned-rule');
+  if (ruleEl) ruleEl.textContent = `Regla: ${cfg.regla}`;
+
+  // Mini-descripción para técnico y para lector común
+  const techEl = document.getElementById('arch-tech-desc');
+  if (techEl) techEl.textContent = cfg.tecnica;
+
+  const comEl = document.getElementById('arch-common-desc');
+  if (comEl) comEl.textContent = cfg.ciudadano;
+
+  // Badge en cabecera de la telaraña
+  const badgeRef = document.getElementById('radar-reference-badge');
+  if (badgeRef) {
+    badgeRef.textContent = `🟢 Referencia: ${cfg.nombre}`;
+    badgeRef.style.color = cfg.color;
+  }
+
+  // Estado de exploración
+  const badgeView = document.getElementById('arch-view-badge');
+  const btnResetArch = document.getElementById('btn-reset-arch-view');
+
+  const isActuallyExploration = isExploration && (key !== currentDetectedArchetypeKey);
+
+  if (isActuallyExploration) {
+    if (badgeView) {
+      badgeView.textContent = `Explorando: ${cfg.nombre.split(':')[0]}`;
+      badgeView.style.background = 'rgba(245, 158, 11, 0.15)';
+      badgeView.style.color = '#b45309';
+    }
+    if (btnResetArch) btnResetArch.style.display = 'inline-flex';
+  } else {
+    if (badgeView) {
+      badgeView.textContent = 'Detectado en Noticia';
+      badgeView.style.background = 'rgba(99, 102, 241, 0.12)';
+      badgeView.style.color = 'var(--primary)';
+    }
+    if (btnResetArch) btnResetArch.style.display = 'none';
+  }
+
+  // Actualizar dinámicamente la serie de referencia verde en el Radar
+  if (imlRadarChart && imlRadarChart.data && imlRadarChart.data.datasets.length > 1) {
+    imlRadarChart.data.datasets[1].data = [...cfg.radarRef];
+    imlRadarChart.data.datasets[1].label = `Ref: ${cfg.nombre}`;
+    imlRadarChart.data.datasets[1].borderColor = cfg.color;
+    imlRadarChart.data.datasets[1].pointBackgroundColor = cfg.color;
+    imlRadarChart.data.datasets[1].backgroundColor = `${cfg.color}18`;
+    imlRadarChart.update();
+  }
+}
+
+function renderIMLRadarChart(iml, refArchKey = null) {
   const canvas = document.getElementById('iml-radar-chart');
   if (!canvas || typeof Chart === 'undefined') return;
 
@@ -2116,6 +2693,9 @@ function renderIMLRadarChart(iml) {
     iml.D4_Reiteracion_Redundancia.valor,
     iml.D5_Cohesion_Fluidez.valor
   ];
+
+  const targetKey = (refArchKey && ARCHETYPE_CONFIG[refArchKey]) ? refArchKey : (currentDetectedArchetypeKey || 'ESTILO_V');
+  const refConfig = ARCHETYPE_CONFIG[targetKey] || ARCHETYPE_CONFIG.ESTILO_V;
 
   imlRadarChart = new Chart(canvas, {
     type: 'radar',
@@ -2135,22 +2715,26 @@ function renderIMLRadarChart(iml) {
           borderColor: '#ec4899',
           pointBackgroundColor: '#ec4899',
           pointBorderColor: '#fff',
-          borderWidth: 2.4
+          pointHoverRadius: 6,
+          borderWidth: 2.5
         },
         {
-          label: 'Referencia Prensa Sobria',
-          data: [15.0, 35.0, 88.0, 45.0, 92.0],
-          backgroundColor: 'rgba(16, 185, 129, 0.08)',
-          borderColor: '#10b981',
-          borderDash: [4, 4],
-          pointBackgroundColor: '#10b981',
-          borderWidth: 1.6
+          label: `Ref: ${refConfig.nombre}`,
+          data: [...refConfig.radarRef],
+          backgroundColor: `${refConfig.color}18`,
+          borderColor: refConfig.color,
+          borderDash: [5, 4],
+          pointBackgroundColor: refConfig.color,
+          pointBorderColor: '#fff',
+          pointHoverRadius: 5,
+          borderWidth: 2.0
         }
       ]
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
+      animation: { duration: 400 },
       scales: {
         r: {
           min: 0,
@@ -2159,13 +2743,13 @@ function renderIMLRadarChart(iml) {
             stepSize: 25,
             color: isDark ? '#94a3b8' : '#64748b',
             backdropColor: 'transparent',
-            font: { size: 9 }
+            font: { size: 9.5 }
           },
           grid: { color: gridColor },
           angleLines: { color: gridColor },
           pointLabels: {
             color: textColor,
-            font: { size: 10.5, weight: '700' }
+            font: { size: 11, weight: '700' }
           }
         }
       },
@@ -2468,11 +3052,20 @@ window.openModal = function(sentenceIdx, initialTab = 'sens') {
 };
 
 function closeModal() {
+  if (modalSensChart) {
+    modalSensChart.destroy();
+    modalSensChart = null;
+  }
   modalOverlay.classList.remove('active');
 }
 
 function setModalTab(tab) {
   modalActiveTab = tab;
+
+  if (modalSensChart) {
+    modalSensChart.destroy();
+    modalSensChart = null;
+  }
 
   btnModalSens.className = `modal-act-btn ${tab === 'sens' ? 'active-sens' : ''}`;
   btnModalRedun.className = `modal-act-btn ${tab === 'redun' ? 'active-redun' : ''}`;
@@ -2485,81 +3078,351 @@ function setModalTab(tab) {
   let html = '';
 
   if (tab === 'sens') {
+    const isGat = s.es_oracion_gatillo;
+    const sensP = s.sensacionalismo_pct;
+    const pMean = sensDoc.P_mean * 100;
+    const pMax = sensDoc.P_max * 100;
+    const diffMean = sensP - pMean;
+
+    let sensBadgeText = "Sobria / Neutra";
+    let sensBadgeColor = "var(--true-color)";
+    let sensZone = "Zona Factual Neutra";
+    if (isGat) {
+      sensBadgeText = "🔥 ORACIÓN GATILLO PRINCIPAL";
+      sensBadgeColor = "var(--fake-color)";
+      sensZone = "Gatillo de Impacto Máximo";
+    } else if (sensP >= 60) {
+      sensBadgeText = "Alto Sensacionalismo";
+      sensBadgeColor = "var(--sens-color)";
+      sensZone = "Alerta Emocional Elevada";
+    } else if (sensP >= 40) {
+      sensBadgeText = "Moderadamente Sensacionalista";
+      sensBadgeColor = "var(--warning)";
+      sensZone = "Alarma Moderada";
+    }
+
     html = `
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.7rem;">
-        <strong style="color: var(--text-primary);">🔥 Modelo Sensacionalismo (BETO):</strong>
-        <span style="font-weight: 800; color: ${s.es_oracion_gatillo ? 'var(--fake-color)' : 'var(--sens-color)'};">
-          ${s.es_oracion_gatillo ? '🔥 ORACIÓN GATILLO DETECTADA' : (s.sensacionalismo_pct >= 50 ? 'Sensacionalista' : 'Sobria / Neutra')}
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.4rem;">
+        <div style="font-weight: 700; color: var(--text-primary); font-size: 0.9rem;">
+          🔥 Sensacionalismo Local (BETO): <span style="color: ${sensBadgeColor};">${sensBadgeText}</span>
+        </div>
+        <span class="section-badge" style="background: ${isGat ? 'var(--fake-light)' : 'var(--sens-light)'}; color: ${sensBadgeColor}; font-weight: 700;">
+          ${sensZone}
         </span>
       </div>
-      <div style="margin-bottom: 0.7rem;">
-        <div style="display: flex; justify-content: space-between; font-size: 0.83rem; color: var(--text-secondary); margin-bottom: 0.25rem;">
-          <span>Score Sensacionalismo Local P(s_${s.idx}):</span>
-          <strong>${s.sensacionalismo_pct.toFixed(1)}% (prob = ${s.sensacionalismo_prob.toFixed(4)})</strong>
+
+      <!-- GRÁFICA COMPARATIVA DENTRO DE CADA FRASE (CHART.JS CANVAS) -->
+      <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 0.65rem 0.85rem; margin-bottom: 0.75rem;">
+        <div style="font-size: 0.76rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.35rem; display: flex; justify-content: space-between; align-items: center;">
+          <span>📊 Comparativa Gráfica: Frase #${s.idx} vs. Noticia</span>
+          <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 500;">BETO (Escala 0–100%)</span>
         </div>
-        <div class="progress-track">
-          <div class="progress-fill" style="width: ${s.sensacionalismo_pct}%; background: ${s.es_oracion_gatillo ? 'var(--fake-color)' : 'var(--sens-color)'};"></div>
+        <div style="height: 115px; position: relative;">
+          <canvas id="modal-sentence-chart"></canvas>
         </div>
       </div>
-      <div style="font-size: 0.81rem; color: var(--text-secondary); line-height: 1.5; background: var(--bg-card); padding: 0.7rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
-        <div>• <strong>Respecto a la Media Documental (${(sensDoc.P_mean * 100).toFixed(1)}%):</strong> ${(s.sensacionalismo_pct - sensDoc.P_mean * 100 >= 0 ? '+' : '')}${(s.sensacionalismo_pct - sensDoc.P_mean * 100).toFixed(1)} pts.</div>
-        <div style="margin-top: 0.3rem;">• <strong>Impacto Contrafáctico (ΔP = ${sensDoc.delta_p_gatillo_causal.toFixed(4)}):</strong> ${s.es_oracion_gatillo ? 'Actúa como detonante emocional principal del artículo.' : 'Frase de soporte contextual sin pico alarmista.'}</div>
+
+      <!-- BARRAS COMPARATIVAS ESTILIZADAS -->
+      <div class="sens-bars-container">
+        <!-- BARRA 1: ESTA FRASE -->
+        <div class="sens-bar-item" style="border-left: 4px solid ${sensBadgeColor};">
+          <div class="sens-bar-header">
+            <span>Frase Actual (#${s.idx}):</span>
+            <strong style="color: ${sensBadgeColor};">${sensP.toFixed(1)}% (prob = ${s.sensacionalismo_prob.toFixed(4)})</strong>
+          </div>
+          <div class="progress-track" style="height: 7px;">
+            <div class="progress-fill" style="width: ${Math.min(100, sensP)}%; background: ${sensBadgeColor};"></div>
+          </div>
+        </div>
+
+        <!-- BARRA 2: PROMEDIO DOCUMENTAL -->
+        <div class="sens-bar-item">
+          <div class="sens-bar-header">
+            <span style="color: var(--text-secondary);">Promedio de la Noticia (P_mean):</span>
+            <strong style="color: var(--sens-color);">${pMean.toFixed(1)}%</strong>
+          </div>
+          <div class="progress-track" style="height: 6px;">
+            <div class="progress-fill" style="width: ${Math.min(100, pMean)}%; background: var(--sens-color);"></div>
+          </div>
+        </div>
+
+        <!-- BARRA 3: PICO MÁXIMO DE LA NOTICIA -->
+        <div class="sens-bar-item">
+          <div class="sens-bar-header">
+            <span style="color: var(--text-secondary);">Pico Máximo Documental (P_max):</span>
+            <strong style="color: var(--fake-color);">${pMax.toFixed(1)}%</strong>
+          </div>
+          <div class="progress-track" style="height: 6px;">
+            <div class="progress-fill" style="width: ${Math.min(100, pMax)}%; background: var(--fake-color);"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CAJA DE ANÁLISIS FORENSE Y CONTRAFÁCTICO -->
+      <div style="font-size: 0.81rem; color: var(--text-secondary); line-height: 1.5; background: var(--bg-card); padding: 0.75rem 0.9rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+        <div>• <strong>Desviación frente a la Media (${pMean.toFixed(1)}%):</strong> <span style="font-weight: 700; color: ${diffMean >= 0 ? 'var(--sens-color)' : 'var(--true-color)'};">${diffMean >= 0 ? '+' : ''}${diffMean.toFixed(1)} pts</span>.</div>
+        <div style="margin-top: 0.35rem;">• <strong>Impacto Causal Contrafáctico (ΔP = ${sensDoc.delta_p_gatillo_causal.toFixed(4)}):</strong> ${isGat ? 'Actúa como el principal detonante alarmista del artículo. Al silenciar esta frase la alarma cae drásticamente.' : 'Frase de desarrollo argumental o contextual sin pico detonante.'}</div>
       </div>
     `;
   } else if (tab === 'redun') {
     const pmr = s.par_mas_redundante;
-    const consecText = s.coherencia_consecutiva !== null ? `${s.coherencia_consecutiva.toFixed(4)} (${(s.coherencia_consecutiva * 100).toFixed(1)}%)` : 'Primera frase del texto (—)';
+    const matrix = (currentAnalysis.redundancia_sbert && currentAnalysis.redundancia_sbert.matriz_similitud) || [];
+    const simRow = matrix[selectedSentenceIndex] || [];
+    const consecText = s.coherencia_consecutiva !== null ? `${s.coherencia_consecutiva.toFixed(4)} (${(s.coherencia_consecutiva * 100).toFixed(1)}%)` : 'Primera frase (—)';
+
+    // Generar tabla mapa de calor idéntica a la sección de redundancia (1 fila x K columnas)
+    let theadCols = '';
+    let tbodyCols = '';
+    simRow.forEach((simVal, j) => {
+      const isSelf = (j === selectedSentenceIndex);
+      const isTopRedun = (pmr && pmr.idx_oracion_cercana === (j + 1) && !isSelf);
+      
+      theadCols += `<th>F${j + 1}</th>`;
+
+      let bg = 'transparent';
+      let col = 'var(--text-primary)';
+      if (isSelf) {
+        bg = 'var(--bg-card-subtle)';
+        col = 'var(--text-muted)';
+      } else if (simVal >= 0.59) {
+        bg = `rgba(139, 92, 246, ${Math.min(0.9, simVal * 0.9)})`;
+        col = '#ffffff';
+      } else if (simVal >= 0.34) {
+        bg = `rgba(59, 130, 246, ${Math.min(0.65, simVal * 0.75)})`;
+        col = '#ffffff';
+      } else {
+        bg = 'rgba(148, 163, 184, 0.12)';
+      }
+
+      const outlineStyle = isTopRedun ? 'outline: 2px solid var(--redun-color); z-index: 1; position: relative;' : '';
+
+      tbodyCols += `
+        <td onclick="inspectSentencePairInModal(${selectedSentenceIndex}, ${j})"
+            title="Comparar Frase #${s.idx} con Frase #${j + 1}: Similitud Coseno = ${simVal.toFixed(4)}"
+            style="background: ${bg}; color: ${col}; font-weight: ${simVal >= 0.34 && !isSelf ? '700' : '400'}; ${outlineStyle}">
+          ${isSelf ? '1.0' : simVal.toFixed(2)}
+        </td>
+      `;
+    });
+
     html = `
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.7rem;">
-        <strong style="color: var(--text-primary);">🔄 Geometría Semántica SBERT (τ = 0.34):</strong>
-        <span style="font-weight: 800; color: var(--redun-color);">
-          ${pmr && pmr.similitud >= 0.34 ? `Redundante con Frase #${pmr.idx_oracion_cercana}` : 'Sin Redundancia Cíclica'}
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.55rem; flex-wrap: wrap; gap: 0.4rem;">
+        <strong style="color: var(--text-primary);">🔄 Mapa de Calor Oracional: Frase #${s.idx} vs. Todas las Frases</strong>
+        <span style="font-size: 0.74rem; font-weight: 700; color: var(--redun-color);">
+          ${pmr && pmr.similitud >= 0.34 ? `🔁 Redundante con Frase #${pmr.idx_oracion_cercana}` : 'Sin bucle de redundancia'}
         </span>
       </div>
-      <div style="margin-bottom: 0.7rem;">
-        <div style="display: flex; justify-content: space-between; font-size: 0.83rem; color: var(--text-secondary); margin-bottom: 0.25rem;">
-          <span>Similitud Máxima con otra frase:</span>
-          <strong>${pmr ? (pmr.similitud * 100).toFixed(1) + '% (cos = ' + pmr.similitud.toFixed(4) + ')' : '0%'}</strong>
-        </div>
-        <div class="progress-track">
-          <div class="progress-fill" style="width: ${pmr ? Math.min(100, pmr.similitud * 100) : 0}%; background: var(--redun-color);"></div>
-        </div>
+
+      <!-- TABLA MAPA DE CALOR ESTILO SBERT (1 FILA X K COLUMNAS) -->
+      <div style="overflow-x: auto; margin-bottom: 0.55rem; border: 1px solid var(--border-color); border-radius: var(--radius-sm);">
+        <table class="sbert-heatmap-table" style="width: 100%; margin: 0;">
+          <thead>
+            <tr>
+              <th style="padding: 0.35rem 0.55rem; background: var(--bg-card-subtle);">Frase</th>
+              ${theadCols}
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th style="padding: 0.35rem 0.55rem; color: var(--primary); font-weight: 800; background: var(--bg-card-subtle);">F${s.idx}</th>
+              ${tbodyCols}
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <div style="font-size: 0.81rem; color: var(--text-secondary); line-height: 1.5; background: var(--bg-card); padding: 0.7rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+      <div style="font-size: 0.71rem; color: var(--text-muted); text-align: center; margin-bottom: 0.65rem;">
+        💡 Haz clic en cualquier celda <strong>F_j</strong> de la tabla para comparar el texto completo entre Frase #${s.idx} y esa frase.
+      </div>
+
+      <!-- CAJA COMPARATIVA DE PARES (DINÁMICA) -->
+      <div id="sentence-pair-detail-box" class="quote-callout-compact" style="border-left-color: var(--redun-color); margin-bottom: 0.65rem;">
+        ${pmr ? `
+          <div style="font-weight: 700; color: var(--redun-color); margin-bottom: 0.25rem;">
+            🔁 Par de Máxima Similitud: Frase #${s.idx} ↔ Frase #${pmr.idx_oracion_cercana} (cos = ${pmr.similitud.toFixed(4)})
+          </div>
+          <div><em>"${pmr.texto_resumido}"</em></div>
+        ` : `
+          <div>Documento de una sola frase o sin pares.</div>
+        `}
+      </div>
+
+      <!-- RESUMEN DE COHERENCIA -->
+      <div style="font-size: 0.81rem; color: var(--text-secondary); line-height: 1.5; background: var(--bg-card); padding: 0.65rem 0.85rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
         <div>• <strong>Coherencia Consecutiva Adyacente (D1):</strong> <code>${consecText}</code></div>
-        <div>• <strong>Similitud Media con el Documento:</strong> <code>${s.similitud_media_documento.toFixed(4)}</code></div>
-        ${pmr ? `<div style="margin-top: 0.35rem;">• <strong>Frase Más Similar (Frase #${pmr.idx_oracion_cercana}):</strong><br><em>"${pmr.texto_resumido}"</em></div>` : ''}
+        <div style="margin-top: 0.2rem;">• <strong>Similitud Media con el Documento:</strong> <code>${s.similitud_media_documento.toFixed(4)}</code></div>
       </div>
     `;
   } else if (tab === 'sabert') {
+    // 1. Mayúsculas
+    const capsWords = s.palabras_mayusculas || [];
+    const capsChips = capsWords.length > 0
+      ? capsWords.map(w => `<span class="ortho-chip" style="background: rgba(239, 68, 68, 0.15); color: var(--fake-color); border: 1px solid rgba(239, 68, 68, 0.3);">${w}</span>`).join('')
+      : '<span style="font-size: 0.75rem; color: var(--true-color); font-weight: 600;">✅ Sin palabras en MAYÚSCULAS</span>';
+
+    // 2. Puntuación no neutra (!, ?, ...)
+    const punctMatches = s.texto.match(/[!?¡¿…]/g) || [];
+    const punctChips = punctMatches.length > 0
+      ? punctMatches.map(p => `<span class="ortho-chip" style="background: rgba(245, 158, 11, 0.15); color: var(--warning); border: 1px solid rgba(245, 158, 11, 0.3);">${p}</span>`).join('')
+      : '<span style="font-size: 0.75rem; color: var(--text-muted);">Puntuación neutra (estándar)</span>';
+
+    // 3. Verbos dicendi (de atribución)
+    const dicendi = s.verbos_dicendi || [];
+    const dicendiChips = dicendi.length > 0
+      ? dicendi.map(v => `<span class="ortho-chip" style="background: rgba(16, 185, 129, 0.15); color: #059669; border: 1px solid rgba(16, 185, 129, 0.3);">🎙️ ${v}</span>`).join('')
+      : '<span style="font-size: 0.75rem; color: var(--text-muted);">⚠️ Sin verbos de atribución explícita</span>';
+
+    // 4. Boosters / Hedges
+    const boostersFound = [];
+    const lowerText = s.texto.toLowerCase();
+    ['sin duda', 'obvio', 'evidente', 'claramente', 'boooomm', 'seguro'].forEach(b => {
+      if (lowerText.includes(b)) boostersFound.push(`⚡ ${b}`);
+    });
+    ['podría', 'posiblemente', 'al parecer', 'presunto', 'según parece'].forEach(h => {
+      if (lowerText.includes(h)) boostersFound.push(`🛡️ ${h}`);
+    });
+    const epistemicChips = boostersFound.length > 0
+      ? boostersFound.map(e => `<span class="ortho-chip" style="background: rgba(99, 102, 241, 0.15); color: var(--primary); border: 1px solid rgba(99, 102, 241, 0.3);">${e}</span>`).join('')
+      : '<span style="font-size: 0.75rem; color: var(--text-muted);">Registro equilibrado (sin sesgo asertivo)</span>';
+
+    // Banderas forenses
     const flagsList = (s.banderas_forenses && s.banderas_forenses.length > 0)
-      ? s.banderas_forenses.map(f => `<div style="margin-bottom: 0.2rem;">• ${f}</div>`).join('')
-      : '<div>• ✅ Tono neutro / Sin anomalías morfosintácticas</div>';
+      ? s.banderas_forenses.map(f => `<div style="margin-bottom: 0.25rem;">• ${f}</div>`).join('')
+      : '<div>• ✅ Tono sobrio / Sin anomalías estilométricas</div>';
 
     html = `
-      <div class="kpi-mini-grid" style="margin-bottom: 0.7rem;">
-        <div class="kpi-mini-box" style="background: var(--bg-card);">
-          <div class="kpi-mini-label">Mayúsculas (D5)</div>
-          <div class="kpi-mini-val" style="color: ${s.mayusculas_ratio >= 12 ? 'var(--fake-color)' : 'var(--text-primary)'};">${s.mayusculas_ratio.toFixed(1)}%</div>
+      <!-- GRID DE 4 TARJETAS VISUALES DE MARCADORES -->
+      <div class="ortho-badges-grid">
+        <!-- 1. MAYÚSCULAS -->
+        <div class="ortho-card">
+          <div class="ortho-card-title">
+            <span>📢 Mayúsculas (D5)</span>
+            <span style="color: ${s.mayusculas_ratio > 10 ? 'var(--fake-color)' : 'var(--text-primary)'};">${s.mayusculas_ratio.toFixed(1)}%</span>
+          </div>
+          <div class="ortho-token-chips">${capsChips}</div>
         </div>
-        <div class="kpi-mini-box" style="background: var(--bg-card);">
-          <div class="kpi-mini-label">Adverbios (D4)</div>
-          <div class="kpi-mini-val" style="color: ${s.adverbios_densidad >= 6 ? 'var(--sens-color)' : 'var(--text-primary)'};">${s.adverbios_densidad.toFixed(1)}%</div>
+
+        <!-- 2. PUNTUACIÓN EXPRESIVA -->
+        <div class="ortho-card">
+          <div class="ortho-card-title">
+            <span>❗ Puntuación Expresiva (D5)</span>
+            <span style="color: ${punctMatches.length > 0 ? 'var(--warning)' : 'var(--text-primary)'};">${punctMatches.length} signos</span>
+          </div>
+          <div class="ortho-token-chips">${punctChips}</div>
         </div>
-        <div class="kpi-mini-box" style="background: var(--bg-card);">
-          <div class="kpi-mini-label">Verbos Dicendi (D2)</div>
-          <div class="kpi-mini-val" style="color: ${(s.verbos_dicendi && s.verbos_dicendi.length) ? 'var(--true-color)' : 'var(--text-muted)'};">${(s.verbos_dicendi || []).length}</div>
+
+        <!-- 3. VERBOS DE ATRIBUCIÓN (DICENDI) -->
+        <div class="ortho-card">
+          <div class="ortho-card-title">
+            <span>🎙️ Atribución Factual (D2)</span>
+            <span style="color: ${dicendi.length > 0 ? '#059669' : 'var(--text-muted)'};">${dicendi.length} verbos</span>
+          </div>
+          <div class="ortho-token-chips">${dicendiChips}</div>
+        </div>
+
+        <!-- 4. GATILLOS EPISTÉMICOS -->
+        <div class="ortho-card">
+          <div class="ortho-card-title">
+            <span>⚡ Certeza / Cautela (D2)</span>
+            <span style="color: var(--primary);">${boostersFound.length} marcas</span>
+          </div>
+          <div class="ortho-token-chips">${epistemicChips}</div>
         </div>
       </div>
-      <div style="font-size: 0.81rem; color: var(--text-secondary); background: var(--bg-card); padding: 0.7rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
-        <strong>Banderas y Advertencias Forenses Activas:</strong>
-        <div style="margin-top: 0.3rem;">${flagsList}</div>
+
+      <!-- BARRITA DE ADVERBIOS Y RESUMEN FORENSE -->
+      <div style="font-size: 0.81rem; color: var(--text-secondary); background: var(--bg-card); padding: 0.75rem 0.9rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 0.4rem;">
+          <span><strong>Densidad de Adverbios Modales (D4):</strong></span>
+          <strong style="color: ${s.adverbios_densidad >= 6 ? 'var(--sens-color)' : 'var(--text-primary)'};">${s.adverbios_densidad.toFixed(1)}%</strong>
+        </div>
+        <div style="margin-top: 0.35rem; font-weight: 700; color: var(--text-primary);">Banderas Forenses Detectadas en esta Oración:</div>
+        <div style="margin-top: 0.25rem;">${flagsList}</div>
       </div>
     `;
   }
 
   modalDetailPanel.innerHTML = html;
+
+  // Si estamos en la pestaña de sensacionalismo, instanciar la gráfica visual de Chart.js
+  if (tab === 'sens') {
+    const canvasModal = document.getElementById('modal-sentence-chart');
+    if (canvasModal && typeof Chart !== 'undefined') {
+      const isDark = currentTheme === 'dark';
+      const textColor = isDark ? '#e2e8f0' : '#1e293b';
+      const sensP = s.sensacionalismo_pct;
+      const pMean = sensDoc.P_mean * 100;
+      const pMax = sensDoc.P_max * 100;
+      const sensBarCol = s.es_oracion_gatillo ? '#ef4444' : (sensP >= 50 ? '#f59e0b' : '#10b981');
+
+      modalSensChart = new Chart(canvasModal, {
+        type: 'bar',
+        data: {
+          labels: [`Frase #${s.idx}`, 'Media Noticia', 'Pico Gatillo'],
+          datasets: [{
+            label: 'Sensacionalismo (%)',
+            data: [
+              parseFloat(sensP.toFixed(1)),
+              parseFloat(pMean.toFixed(1)),
+              parseFloat(pMax.toFixed(1))
+            ],
+            backgroundColor: [
+              sensBarCol,
+              'rgba(245, 158, 11, 0.75)',
+              'rgba(239, 68, 68, 0.8)'
+            ],
+            borderRadius: 4,
+            barThickness: 15
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: { duration: 350 },
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: ctx => ` ${ctx.parsed.x}% sensacionalismo`
+              }
+            }
+          },
+          scales: {
+            x: {
+              min: 0,
+              max: 100,
+              grid: { color: isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)' },
+              ticks: { font: { size: 9 }, color: isDark ? '#94a3b8' : '#64748b' }
+            },
+            y: {
+              grid: { display: false },
+              ticks: { font: { size: 9.5, weight: '700' }, color: textColor }
+            }
+          }
+        }
+      });
+    }
+  }
 }
+
+window.inspectSentencePairInModal = function(srcIdx, tgtIdx) {
+  if (!currentAnalysis || !currentAnalysis.desglose_oraciones) return;
+  const sents = currentAnalysis.desglose_oraciones;
+  const matrix = (currentAnalysis.redundancia_sbert && currentAnalysis.redundancia_sbert.matriz_similitud) || [];
+  const val = (matrix[srcIdx] && matrix[srcIdx][tgtIdx] !== undefined) ? matrix[srcIdx][tgtIdx] : 0;
+  
+  const box = document.getElementById('sentence-pair-detail-box');
+  if (!box) return;
+
+  const isSelf = srcIdx === tgtIdx;
+  box.innerHTML = `
+    <div style="font-weight: 700; color: ${val >= 0.34 && !isSelf ? 'var(--redun-color)' : 'var(--primary)'}; margin-bottom: 0.35rem;">
+      🔍 Comparación: Frase #${srcIdx + 1} ↔ Frase #${tgtIdx + 1} (Similitud Coseno = ${isSelf ? '1.0000 (Misma frase)' : val.toFixed(4)})
+    </div>
+    <div style="margin-bottom: 0.3rem;"><strong>Frase #${srcIdx + 1}:</strong> <em>"${sents[srcIdx].texto}"</em></div>
+    <div><strong>Frase #${tgtIdx + 1}:</strong> <em>"${sents[tgtIdx].texto}"</em></div>
+  `;
+};
 
 // 7. Simulaciones Contrafácticas Interactivas
 function simulateLiveAblation() {
@@ -2759,32 +3622,81 @@ function buildClientForensicAudit(text) {
 
   const imlScore = Math.min(100, Math.max(0, d1_iml * 0.35 + d2_iml * 0.20 + (100 - d3_iml) * 0.15 + d4_iml * 0.20 + (100 - d5_iml) * 0.10));
 
-  let archId = "ESTILO_V_PERIODISMO_EQUILIBRADO";
-  let archName = "Estilo V: Periodismo Profesional Balanceado";
-  let archDesc = "Redacción equilibrada con variedad léxica, desarrollo temático progresivo y ausencia de manipulaciones estilísticas.";
-  let archRule = "Comportamiento estilométrico equilibrado sin anomalías severas";
-
-  if (d1_iml >= 65 && d4_iml >= 65) {
-    archId = "ESTILO_I_DESINFO_ESTRIDENTE";
-    archName = "Estilo I: Desinformación Estridente / Cliché Hiperbólico";
-    archDesc = "Texto saturado homogéneamente de emociones extremas con reiteración circular de premisas.";
-    archRule = "D1 >= 65.0 y D4 >= 65.0";
-  } else if (d2_iml >= 50 && d3_iml >= 50) {
-    archId = "ESTILO_II_CLICKBAIT_CABECERA";
-    archName = "Estilo II: Cebo Comercial / Clickbait de Cabecera";
-    archDesc = "Titular o apertura alarmista diseñado para capturar clics, pero con cuerpo informativo formal que amortigua la alarma.";
-    archRule = "D2 >= 50.0 y D3 >= 50.0";
-  } else if (d1_iml < 45 && d4_iml >= 65) {
-    archId = "ESTILO_III_PROPAGANDA_SOBRIA";
-    archName = "Estilo III: Propaganda Institucional / Astroturfing Encubierto";
-    archDesc = "Tono aparentemente sobrio y académico, pero con bucles de repetición semántica calculados para inducir verdad ilusoria.";
-    archRule = "D1 < 45.0 y D4 >= 65.0";
-  } else if (d5_iml <= 55 && d4_iml < 40) {
-    archId = "ESTILO_IV_DESARTICULADO";
-    archName = "Estilo IV: Incoherencia Estructural / Generación Rota";
-    archDesc = "Texto con baja conectividad proposicional, fragmentación sintáctica o párrafos desvinculados.";
-    archRule = "D5 <= 55.0 y D4 < 40.0";
+  // Clasificación flexible por afinidad estilométrica continua (mismo cálculo que arquetipos_flexibles.py)
+  function rampUp(x, lo, hi) {
+    if (x <= lo) return 0.0;
+    if (x >= hi) return 1.0;
+    return (x - lo) / (hi - lo);
   }
+  function rampDown(x, hi, lo) {
+    return 1.0 - rampUp(x, lo, hi);
+  }
+  function bellBand(x, lo, midLo, midHi, hi) {
+    if (x <= lo || x >= hi) return 0.0;
+    if (x >= midLo && x <= midHi) return 1.0;
+    if (x < midLo) return (x - lo) / (midLo - lo);
+    return (hi - x) / (hi - midHi);
+  }
+
+  const arquetiposMeta = [
+    {
+      id: "ESTILO_I_DESINFO_ESTRIDENTE",
+      nombre: "Estilo I: Desinformación Estridente / Cliché Hiperbólico",
+      descripcion: "Alarma emocional sostenida en todo el texto, sin amortiguación del cuerpo; la repetición circular de premisas agrava la estridencia.",
+      regla: "Afinidad = 0.45·(D1 alta) + 0.30·(D3 baja/sin amortiguar) + 0.25·(D4 bucle circular)"
+    },
+    {
+      id: "ESTILO_II_CLICKBAIT_CABECERA",
+      nombre: "Estilo II: Cebo Comercial / Clickbait de Cabecera",
+      descripcion: "Titular o apertura alarmista diseñado para capturar clics, pero con cuerpo informativo formal que amortigua y diluye la alarma.",
+      regla: "Afinidad = 0.45·(D2 gatillo alto) + 0.40·(D3 amortiguación alta) + 0.15·(D1 moderada/baja)"
+    },
+    {
+      id: "ESTILO_III_PROPAGANDA_SOBRIA",
+      nombre: "Estilo III: Propaganda Institucional / Astroturfing Encubierto",
+      descripcion: "Tono formal, sobrio y frío, pero con bucles de repetición semántica calculados para inducir verdad ilusoria.",
+      regla: "Afinidad = 0.45·(D4 bucle alto) + 0.35·(D1 sobria/baja) + 0.20·(D2 gatillo bajo/homogéneo)"
+    },
+    {
+      id: "ESTILO_IV_DESARTICULADO",
+      nombre: "Estilo IV: Incoherencia Estructural / Generación Rota",
+      descripcion: "Texto con baja conectividad proposicional, fragmentación sintáctica o párrafos desvinculados sin hilo temático.",
+      regla: "Afinidad = 0.50·(D5 cohesión rota) + 0.35·(D4 redundancia dispersa) + 0.15·(D3 baja)"
+    },
+    {
+      id: "ESTILO_V_PERIODISMO_EQUILIBRADO",
+      nombre: "Estilo V: Periodismo Profesional Balanceado",
+      descripcion: "Redacción equilibrada con variedad léxica, desarrollo temático progresivo en Banda de Shannon y ausencia de estridencias.",
+      regla: "Afinidad = 0.35·(D5 cohesión óptima) + 0.30·(D1 sobria) + 0.20·(D4 progresión lineal) + 0.15·(D2 equilibrada)"
+    }
+  ];
+
+  const a1 = 0.45 * rampUp(d1_iml, 40.0, 75.0) + 0.30 * rampDown(d3_iml, 60.0, 10.0) + 0.25 * rampUp(d4_iml, 35.0, 75.0);
+  const a2 = 0.45 * rampUp(d2_iml, 35.0, 65.0) + 0.40 * rampUp(d3_iml, 40.0, 75.0) + 0.15 * rampDown(d1_iml, 70.0, 30.0);
+  const a3 = 0.45 * rampUp(d4_iml, 45.0, 80.0) + 0.35 * rampDown(d1_iml, 60.0, 20.0) + 0.20 * rampDown(d2_iml, 65.0, 25.0);
+  const a4 = 0.50 * rampDown(d5_iml, 70.0, 38.0) + 0.35 * rampDown(d4_iml, 55.0, 25.0) + 0.15 * rampDown(d3_iml, 60.0, 20.0);
+  const a5 = 0.35 * rampUp(d5_iml, 45.0, 75.0) + 0.30 * rampDown(d1_iml, 55.0, 20.0) + 0.20 * bellBand(d4_iml, 20.0, 30.0, 60.0, 75.0) + 0.15 * rampDown(d2_iml, 55.0, 25.0);
+
+  const afs = [a1, a2, a3, a4, a5];
+  const orden = [0, 1, 2, 3, 4].sort((i, j) => afs[j] - afs[i]);
+  const ganadorIdx = orden[0];
+  const segundoIdx = orden[1];
+
+  const archGanador = arquetiposMeta[ganadorIdx];
+  const archSegundo = arquetiposMeta[segundoIdx];
+
+  const afinidadGanadorPct = parseFloat((afs[ganadorIdx] * 100).toFixed(1));
+  const afinidadSegundoPct = parseFloat((afs[segundoIdx] * 100).toFixed(1));
+
+  const afinidadesDict = {};
+  arquetiposMeta.forEach((meta, idx) => {
+    afinidadesDict[meta.id] = parseFloat((afs[idx] * 100).toFixed(1));
+  });
+
+  const archId = archGanador.id;
+  const archName = archGanador.nombre;
+  const archDesc = archGanador.descripcion;
+  const archRule = `Afinidad dominante = ${afinidadGanadorPct}% (${archGanador.regla}); 2.º arquetipo afín: ${archSegundo.nombre.split(':')[0]} (${afinidadSegundoPct}%)`;
 
   const desglose = oraciones.map((sText, i) => {
     const ws = sText.match(/[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+/g) || [];
@@ -2892,7 +3804,16 @@ function buildClientForensicAudit(text) {
       D5_Cohesion_Fluidez: { valor: parseFloat(d5_iml.toFixed(1)), nivel: d5_iml >= 75 ? "Cohesión Óptima" : (d5_iml >= 50 ? "Regular" : "Roto"), interpretacion: "Conectividad proposicional en la Banda de Shannon." },
       score_global_iml: parseFloat(imlScore.toFixed(1)),
       nivel_riesgo_estilometrico: imlScore > 60 ? "Alto Riesgo Estilométrico" : (imlScore > 35 ? "Riesgo Moderado" : "Bajo Riesgo (Sobrio)"),
-      arquetipo_discursivo: { id: archId, nombre: archName, descripcion: archDesc, condicion_activada: archRule }
+      arquetipo_discursivo: {
+        id: archId,
+        nombre: archName,
+        descripcion: archDesc,
+        afinidad_pct: afinidadGanadorPct,
+        arquetipo_secundario: archSegundo.nombre,
+        afinidad_secundaria_pct: afinidadSegundoPct,
+        afinidades_pct: afinidadesDict,
+        condicion_activada: archRule
+      }
     },
     variables_ensamble_avanzado_5d: {
       D1_Dinamica_Discursiva: {

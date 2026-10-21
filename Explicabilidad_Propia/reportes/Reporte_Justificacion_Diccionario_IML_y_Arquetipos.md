@@ -318,7 +318,7 @@ else:
 
 > [!IMPORTANT]
 > **¿Por qué parece a primera vista que "un arquetipo tiene X score del IML" en las tablas del reporte?**  
-> En la Tabla de la Sección 4 de [`Reporte_Estilos_Manipulacion_Textual.md`](Reporte_Estilos_Manipulacion_Textual.md#L154-L167), aparece una columna llamada **`IML Promedio (/100)`** (ej. Estilo I = `74.2`, Estilo II = `32.6`, Estilo III = `25.1`, Estilo IV = `43.9`, Estilo V = `41.9`). **¡Ese número NO es un umbral inventado para definir el arquetipo!** Es el **promedio estadístico *a posteriori* (resultado experimental)** que dio al promediar el `iml_score` de las noticias reales del corpus ($N = 2.604$) que cayeron dentro de cada arquetipo tras ejecutar [`perfilador_estilo_manipulacion.py`](../codigos/perfilador_estilo_manipulacion.py#L137).
+> En la Tabla de la Sección 4 de [`Reporte_Estilos_Manipulacion_Textual.md`](Reporte_Estilos_Manipulacion_Textual.md#L154-L167), aparece una columna llamada **`IML Promedio (/100)`** (ej. Estilo I = `66.5`, Estilo II = `33.1`, Estilo III = `26.5`, Estilo IV = `43.8`, Estilo V = `20.9`). **¡Ese número NO es un umbral inventado para definir el arquetipo!** Es el **promedio estadístico *a posteriori* (resultado experimental)** que dio al promediar el `iml_score` de las noticias reales del corpus ($N = 2.604$) que cayeron dentro de cada arquetipo tras clasificar su afinidad morfoestilométrica continua mediante [`perfilador_estilo_manipulacion.py`](../codigos/perfilador_estilo_manipulacion.py#L137).
 
 ---
 
@@ -334,9 +334,9 @@ A continuación tienes la ficha teórica, matemática y bibliográfica completa 
   1. **Horne & Adali (2017) — *ICWSM*:** Demostraron empíricamente que la fabricación desinformativa viral combina alta carga emocional con un cuerpo altamente repetitivo y léxicamente simple, asemejándose más a la sátira hiperbólica que al periodismo informativo.
   2. **Hamby, Kim & Spezzano (2023) — *Journal of Business Research*:** Documentaron el rol de las narrativas sensacionalistas y la excitación emocional (*high-arousal negative emotions*) en la viralización de bulos.
   3. **Salaverría et al. (2020) — *El Profesional de la Información*:** Caracterizaron los bulos de pánico sanitario (alertas apocalípticas y falsos remedios) durante la pandemia en el ámbito hispanohablante.
-* **Construcción Matemática:** Se activa cuando $D_1 \ge 65.0 \land D_4 \ge 65.0$ (es decir, probabilidad documental BETO $P_{\text{full}} \ge 0.65$ y similitud intra-documental SBERT por encima del umbral de redundancia estricta $P_{95}$ / Shannon).
+* **Construcción Matemática:** Se activa mediante la función de afinidad continua $A_1 = 0.45 \cdot \text{RampUp}(D_1, 40, 75) + 0.30 \cdot \text{RampDown}(D_3, 60, 10) + 0.25 \cdot \text{RampUp}(D_4, 35, 75)$, asignando el estilo cuando $A_1$ es máxima en el espectro pentagonal.
 * **Evidencia Experimental en tu Corpus ($N = 2.604$ noticias):**
-  * Con `BETO-SBERT` ($d=768$): Agrupó **$275$ noticias**, alcanzando un **IML promedio de $74.2 / 100$** y la **mayor pureza de noticias falsas de todo el corpus: $69.82\%$ ($192$ falsas frente a $83$ reales)**.
+  * Con `BETO-SBERT` ($d=768$) y afinidad flexible: Agrupó **$829$ noticias**, alcanzando un **IML promedio de $66.5 / 100$** y la **mayor concentración de noticias falsas del corpus: $61.5\%$ ($510$ falsas frente a $319$ reales)**, con una afinidad media del $86.8\%$. Se corrige la anomalía de la versión rígida previa, donde noticias con alarma extrema ($D_1 \approx 99$) pero redundancia moderada eran descartadas al residual.
 
 ---
 
@@ -346,9 +346,9 @@ A continuación tienes la ficha teórica, matemática y bibliográfica completa 
   1. **Bazaco, Redondo & Sánchez-García (2019) — *Revista Latina de Comunicación Social*:** Caracterizaron el *clickbait* en la prensa digital en español como una estrategia de hiperbolización y cebado en el titular que distorsiona o exagera un cuerpo informativo convencional.
   2. **Blanco Alfonso (2020) — *Cuadernos de Periodismo*:** Analizó cómo el sensacionalismo comercial contemporáneo utiliza aperturas de choque en medios legítimos para competir por atención en redes sociales.
   3. **Wardle & Derakhshan (2017) — *Council of Europe*:** Definieron la categoría de **Conexión Falsa (*False Connection*)**, donde los titulares, imágenes o sumarios no reflejan el tono ni el contenido real del cuerpo del artículo.
-* **Construcción Matemática:** Se activa cuando $D_2 \ge 50.0 \land D_3 \ge 50.0$ (desbalance severo entre la oración gatillo $P_{\max}$ y la media $P_{\text{mean}}$, acompañado de una amortiguación contextual del cuerpo superior al $50\%$).
+* **Construcción Matemática:** Se activa mediante la función de afinidad continua $A_2 = 0.45 \cdot \text{RampUp}(D_2, 35, 65) + 0.40 \cdot \text{RampUp}(D_3, 40, 75) + 0.15 \cdot \text{RampDown}(D_1, 70, 30)$ (desbalance severo entre la oración gatillo y la media, neutralizado por la alta amortiguación contextual del cuerpo).
 * **Evidencia Experimental en tu Corpus ($N = 2.604$ noticias):**
-  * Agrupó **$712$ noticias ($27.3\%$ de todo el corpus)** con un **IML promedio de $32.6 / 100$**. Aquí conviven noticias reales comerciales y noticias falsas con titular anzuelo, demostrando empíricamente que si un modelo de IA clasificara solo por el titular, cometería cientos de falsos positivos contra la prensa legítima.
+  * Agrupó **$661$ noticias ($25.4\%$ del corpus)** con un **IML promedio de $33.1 / 100$** y una afinidad media del $95.3\%$. Aquí conviven noticias reales comerciales ($417$) y noticias falsas con titular anzuelo ($244$), demostrando empíricamente que si un modelo de IA clasificara solo por el titular, cometería cientos de falsos positivos contra la prensa legítima.
 
 ---
 
@@ -357,9 +357,9 @@ A continuación tienes la ficha teórica, matemática y bibliográfica completa 
 * **Autores y Respaldo en el Estado del Arte (Literatura):**
   1. **Hasher, Goldstein & Toppino (1977) — *Journal of Verbal Learning and Verbal Behavior* / Pennycook, Cannon & Rand (2018) — *Journal of Experimental Psychology*:** Descubrieron y demostraron en noticias falsas el **Efecto de Verdad Ilusoria (*Illusory Truth Effect*)**: la exposición repetida a una misma proposición semántica incrementa su fluidez de procesamiento cognitivo (*processing fluency*), haciendo que el cerebro humano la juzgue como verdadera aunque sea falsa.
   2. **Wardle & Derakhshan (2017) / Tandoc et al. (2018):** Caracterizaron la propaganda e impostura institucional que imita los códigos formales del periodismo de agencia para evadir el escepticismo del lector.
-* **Construcción Matemática:** Se activa cuando $D_1 < 45.0 \land D_4 \ge 65.0$ (tono afectivo frío/sobrio en BETO, pero redundancia semántica estricta o multi-bucle activa en SBERT).
+* **Construcción Matemática:** Se activa mediante la función de afinidad continua $A_3 = 0.45 \cdot \text{RampUp}(D_4, 45, 80) + 0.35 \cdot \text{RampDown}(D_1, 60, 20) + 0.20 \cdot \text{RampDown}(D_2, 65, 25)$ (tono afectivo formal en BETO, pero redundancia semántica en bucle activo en SBERT sin desbalance de titular).
 * **Evidencia Experimental en tu Corpus ($N = 2.604$ noticias):**
-  * Tiene el **Score Global IML promedio más bajo de los 5 estilos ($21.2 / 100$ en MiniLM y $25.1 / 100$ en BETO-SBERT)** porque no grita ni usa lenguaje visceral. Sin embargo, en el corte extremo de hiper-redundancia de MiniLM capturó un **$70.2\%$ de noticias falsas** ($47$ de $67$) y en BETO-SBERT identificó **$234$ documentos** ($90$ falsos encubiertos). Es la prueba empírica de que sin el sensor geométrico de SBERT ($D_4$), la desinformación sobria es invisible para los detectores de amarillismo.
+  * Presenta un **IML promedio bajo de $26.5 / 100$** porque no grita ni usa lenguaje visceral. En BETO-SBERT identificó **$210$ documentos** ($80$ falsos encubiertos, tasa del $38.1\%$), con una afinidad media del $93.2\%$. Es la prueba empírica de que sin el sensor geométrico de SBERT ($D_4$), la desinformación sobria es invisible para los detectores de amarillismo.
 
 ---
 
@@ -368,9 +368,9 @@ A continuación tienes la ficha teórica, matemática y bibliográfica completa 
 * **Autores y Respaldo en el Estado del Arte (Literatura):**
   1. **Graesser, McNamara, Louwerse & Cai (2004) — *Behavior Research Methods (Coh-Metrix)*:** Establecieron que la **cohesión referencial y semántica entre oraciones** es el requisito estructural básico para la construcción del modelo mental de un texto informativo.
   2. **Zhou & Zafarani (2020) — *ACM Computing Surveys*:** Documentaron cómo las granjas de desinformación de bajo costo ensamblan fragmentos inconexos o generan textos con discontinuidades discursivas medibles en el nivel de discurso.
-* **Construcción Matemática:** Se activa cuando $D_5 \le 55.0 \land D_4 < 45.0$ (el documento cae en el **Bin 1 de Entropía de Shannon**, $S_{(1)} \le 0.3740$ en BETO-SBERT o $\le 0.5924$ en MiniLM, indicando ausencia de cohesión temática y ausencia de bucles).
+* **Construcción Matemática:** Se activa mediante la función de afinidad continua $A_4 = 0.50 \cdot \text{RampDown}(D_5, 70, 38) + 0.35 \cdot \text{RampDown}(D_4, 55, 25) + 0.15 \cdot \text{RampDown}(D_3, 60, 20)$ (fractura de la cohesión proposicional fuera de Shannon y dispersión semántica).
 * **Evidencia Experimental en tu Corpus ($N = 2.604$ noticias):**
-  * Con `BETO-SBERT` ($d=768$) aisló **$277$ noticias** con un **IML promedio de $43.9 / 100$** ($45.1\%$ falsas y $54.9\%$ reales mal estructuradas o cables telegráficos breves).
+  * Aisló **$281$ noticias** con un **IML promedio de $43.8 / 100$** ($44.8\%$ falsas y $55.2\%$ reales mal estructuradas o cables telegráficos breves).
 
 ---
 
@@ -379,9 +379,9 @@ A continuación tienes la ficha teórica, matemática y bibliográfica completa 
 * **Autores y Respaldo en el Estado del Arte (Literatura):**
   1. **Biber (1988) — *Variation Across Speech and Writing (Cambridge University Press)*:** Caracterizó el registro del reportaje de prensa escrita (*press reportage*) por su alta densidad informativa nominal, variedad léxica, atribución en tercera persona y progresión proposicional no redundante.
   2. **Coulthard (2004) & McMenamin (2002):** Fundamentaron las marcas estilométricas de autoría institucional y prosa estándar frente a textos anómalos.
-* **Construcción Matemática:** Se activa por cumplimiento simultáneo de equilibrio en todas las dimensiones: no presenta bucle + grito ($\neg\text{Estilo I}$), no es un *clickbait* descompensado ($\neg\text{Estilo II}$), no tiene bucle encubierto ($\neg\text{Estilo III}$) y no está roto fuera de la banda de Shannon ($\neg\text{Estilo IV}$).
+* **Construcción Matemática:** Se activa mediante la función de afinidad continua $A_5 = 0.35 \cdot \text{RampUp}(D_5, 45, 75) + 0.30 \cdot \text{RampDown}(D_1, 55, 20) + 0.20 \cdot \text{BellBand}(D_4, 20, 30, 60, 75) + 0.15 \cdot \text{RampDown}(D_2, 55, 25)$ (cohesión alta en Shannon, baja carga emocional, progresión lineal no redundante y tono homogéneo).
 * **Evidencia Experimental en tu Corpus ($N = 2.604$ noticias):**
-  * Con un **IML promedio moderado-bajo ($41.9 / 100$ en BETO-SBERT y $48.0 / 100$ en MiniLM)**, es el grupo de referencia donde una noticia falsa solo puede infiltrarse si imita a la perfección tanto la sobriedad emocional como la progresión temática lineal (lo que justifica pasar en la Fase 2 al **Ensamble GBDT de 42/51 variables**, que añade `adv_density`, `dicendi_density`, `guiraud_ttr` y `numbers_density` para detectar falsedades que imitan el Estilo V).
+  * Agrupa **$623$ noticias** con el **IML promedio más bajo y limpio del corpus ($20.9 / 100$)**, corrigiendo el problema de la versión previa donde actuaba como residual con un IML de $41.9$. Aquí la prensa formal y balanceada queda rigurosamente aislada.
 
 ---
 
@@ -390,7 +390,7 @@ A continuación tienes la ficha teórica, matemática y bibliográfica completa 
 Si durante la sustentación un jurado te hace cualquiera de estas preguntas directas, aquí tienes la respuesta exacta y blindada:
 
 1. **«¿Usted se inventó que el Arquetipo X tenga tal puntaje de IML?»**
-   > *«No, jurado. Ningún arquetipo se define por tener un puntaje fijo del Score Global IML. Los puntajes promedio que aparecen en la tabla del reporte ($74.2$, $32.6$, $25.1$, $43.9$, $41.9$) son el **resultado empírico promedio** tras evaluar las 2.604 noticias del corpus. Los arquetipos no se asignan con el Score Global IML, sino mediante **reglas lógicas conjuntivas sobre las 5 dimensiones individuales ($D_1$ a $D_5$)**, cuyos umbrales salen del Modelo de Mezcla Gaussiana ($\tau=0.34$), del Percentil 95 de redundancia estricta ($\tau=0.60$) y de los estratos de Entropía de Shannon medidos en el corpus.»*
+   > *«No, jurado. Ningún arquetipo se define por tener un puntaje fijo del Score Global IML. Los puntajes promedio que aparecen en la tabla del reporte ($66.5$, $33.1$, $26.5$, $43.8$, $20.9$) son el **resultado empírico promedio** tras evaluar las 2.604 noticias del corpus. Los arquetipos se asignan mediante un **sistema de afinidad morfoestilométrica continua (lógica difusa calibrada)** sobre las 5 dimensiones individuales ($D_1$ a $D_5$), midiendo a qué arquetipo se parece más el perfil del texto y reportando tanto la afinidad dominante como el segundo arquetipo más afín.»*
 
 2. **«¿Por qué son 5 Arquetipos y no 3 o 7? ¿Salieron de un clustering?»**
    > *«No usamos clustering ciego como $k$-means porque en estilometría forense (Rudin, 2019) los clusters no supervisados agrupan por longitud o temática coyuntural y pierden interpretabilidad. Son exactamente 5 porque provienen de la **partición ortogonal exhaustiva (MECE)** al cruzar los dos ejes demostrados en el estado del arte (Horne & Adali, 2017; Hasher et al., 1977; Graesser et al., 2004): el **Eje Afectivo de BETO** (Alarma sostenida, Gatillo amortiguado o Tono sobrio) contra el **Eje Geométrico-Semántico de SBERT** (Bucle circular, Progresión lineal en Banda de Shannon o Cohesión rota). Ese cruce genera matemáticamente las 5 regiones discursivas.»*

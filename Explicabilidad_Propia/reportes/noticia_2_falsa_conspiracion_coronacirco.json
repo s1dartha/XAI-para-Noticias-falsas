@@ -3,7 +3,7 @@
     "titulo": "Desinformación Conspiracionista y Negacionista de Redes",
     "conteo_palabras": 106,
     "num_oraciones": 5,
-    "tiempo_analisis_segundos": 0.119,
+    "tiempo_analisis_segundos": 0.376,
     "dispositivo": "cuda",
     "modelo_redundancia": "hiiamsid/sentence_similarity_spanish_es",
     "metadata_adicional": {
@@ -140,10 +140,20 @@
     "score_global_iml": 70.4,
     "nivel_riesgo_estilometrico": "Alto Riesgo de Manipulación Estilométrica (Anomalía Forense Severa)",
     "arquetipo_discursivo": {
-      "id": "ESTILO_V_PERIODISMO_EQUILIBRADO",
-      "nombre": "Estilo V: Periodismo Profesional Balanceado",
-      "descripcion": "Redacción equilibrada con variedad léxica, desarrollo temático progresivo y ausencia de manipulaciones estilísticas.",
-      "condicion_activada": "Comportamiento estilométrico equilibrado sin anomalías severas"
+      "id": "ESTILO_I_DESINFO_ESTRIDENTE",
+      "nombre": "Estilo I: Desinformación Estridente / Cliché Hiperbólico",
+      "descripcion": "Alarma emocional sostenida en todo el texto, sin amortiguación del cuerpo; la repetición circular de premisas agrava la estridencia.",
+      "afinidad_pct": 85.6,
+      "arquetipo_secundario": "Estilo IV: Incoherencia Estructural / Generación Rota",
+      "afinidad_secundaria_pct": 52.9,
+      "afinidades_pct": {
+        "ESTILO_I_DESINFO_ESTRIDENTE": 85.6,
+        "ESTILO_II_CLICKBAIT_CABECERA": 0.0,
+        "ESTILO_III_PROPAGANDA_SOBRIA": 29.0,
+        "ESTILO_IV_DESARTICULADO": 52.9,
+        "ESTILO_V_PERIODISMO_EQUILIBRADO": 38.5
+      },
+      "condicion_activada": "Afinidad dominante = 85.6% (Afinidad = 0.45·(D1 alta) + 0.30·(D3 baja/sin amortiguar) + 0.25·(D4 bucle circular)); 2.º arquetipo afín: Estilo IV (52.9%)"
     }
   },
   "variables_ensamble_avanzado_5d": {

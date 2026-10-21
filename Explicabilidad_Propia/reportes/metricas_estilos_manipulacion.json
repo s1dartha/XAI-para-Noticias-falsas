@@ -1,42 +1,42 @@
 [
     {
         "estilo": "Estilo I: Desinformación Estridente / Cliché Hiperbólico",
-        "total_noticias": 275,
-        "noticias_falsas": 192,
-        "noticias_reales": 83,
-        "tasa_fakenews_pct": 69.82,
-        "iml_promedio": 74.16
+        "total_noticias": 829,
+        "noticias_falsas": 510,
+        "noticias_reales": 319,
+        "tasa_fakenews_pct": 61.52,
+        "iml_promedio": 66.55
     },
     {
         "estilo": "Estilo II: Cebo Comercial / Clickbait de Cabecera",
-        "total_noticias": 712,
-        "noticias_falsas": 267,
-        "noticias_reales": 445,
-        "tasa_fakenews_pct": 37.5,
-        "iml_promedio": 32.58
+        "total_noticias": 661,
+        "noticias_falsas": 244,
+        "noticias_reales": 417,
+        "tasa_fakenews_pct": 36.91,
+        "iml_promedio": 33.1
     },
     {
         "estilo": "Estilo III: Propaganda Institucional / Astroturfing Encubierto",
-        "total_noticias": 234,
-        "noticias_falsas": 90,
-        "noticias_reales": 144,
-        "tasa_fakenews_pct": 38.46,
-        "iml_promedio": 25.07
+        "total_noticias": 210,
+        "noticias_falsas": 80,
+        "noticias_reales": 130,
+        "tasa_fakenews_pct": 38.1,
+        "iml_promedio": 26.51
     },
     {
         "estilo": "Estilo IV: Incoherencia Estructural / Generación Rota",
-        "total_noticias": 277,
-        "noticias_falsas": 125,
-        "noticias_reales": 152,
-        "tasa_fakenews_pct": 45.13,
-        "iml_promedio": 43.91
+        "total_noticias": 281,
+        "noticias_falsas": 126,
+        "noticias_reales": 155,
+        "tasa_fakenews_pct": 44.84,
+        "iml_promedio": 43.81
     },
     {
         "estilo": "Estilo V: Periodismo Profesional Balanceado",
-        "total_noticias": 1106,
-        "noticias_falsas": 585,
-        "noticias_reales": 521,
-        "tasa_fakenews_pct": 52.89,
-        "iml_promedio": 41.87
+        "total_noticias": 623,
+        "noticias_falsas": 299,
+        "noticias_reales": 324,
+        "tasa_fakenews_pct": 47.99,
+        "iml_promedio": 20.86
     }
 ]

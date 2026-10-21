@@ -110,16 +110,15 @@ La investigación se sostiene sobre un corpus empírico masivo ejecutado en `/ho
 
 ### Módulo 3: Modelado de Redundancia Semántica e Interpretabilidad (`Modelos_Individuales/Redundancia/`)
 * **Corpus Evaluado:** 2.471 noticias válidas con 47.693 pares oracionales intra-documento (`dataset_con_similitudes.csv`).
-* **Modelo Seleccionado:** `paraphrase-multilingual-MiniLM-L12-v2` (SBERT Siamesa).
+* **Modelo Seleccionado:** `hiiamsid/sentence_similarity_spanish_es` (SBERT Clásico sobre BETO, $d=768$).
 
 #### Hallazgos Empíricos Clave:
 1. **Benchmark de Agregación (*Pooling*):**
-   * **SBERT Clásico (Mean-Pooling):** Superó holgadamente a convoluciones y recurrencias (STS-B Pearson: 0.8282; PAWS-X F1: 0.6257; Score Global: **0.6242** vs. CNN-SBERT 0.5212 y BiLSTM-SBERT 0.5200).
-2. **Umbral Bayesiano No Supervisado (GMM):**
-   * Modelado con Mixturas Gaussianas determinó el corte de similitud intra-oracional en **$\tau = 0.34$**.
-3. **Discretización Supervisada Óptima por Ganancia de Shannon:**
-   * Un árbol de decisión restringido sobre `max_intra_similarity` segregó 7 estratos óptimos de riesgo (cortes en `0.5924, 0.6177, 0.6336, 0.8077, 0.8514, 0.9308`).
-   * **Fenómeno de Discontinuidad:** En la banda `(0.592, 0.618]`, la tasa de fake news es del **64.2%**, mientras que en `(0.618, 0.634]` cae al **35.3%**. En la cola de hiper-redundancia `(0.851, 0.931]`, la concentración de fake news alcanza el **79.2%**.
+   * **SBERT Clásico sobre BETO (Mean-Pooling, $d=768$):** Superó holgadamente a convoluciones, recurrencias y modelos alternativos en español (PAWS-X ROC-AUC: **0.7689**, F1: **0.6598**, Separación Intrínseca $\Delta = +0.5858$).
+2. **Jerarquía de 4 Umbrales Semánticos (GMM, PAWS-X y Percentiles):**
+   * Continuidad temática basal (GMM): **$\tau_{\text{GMM}} = 0.3434$**; Paráfrasis moderada ($P_{90}$ / PAWS-X): **$\tau_{\text{PAWS-X}} = 0.5340$**; Redundancia semántica estricta ($P_{95}$ / Shannon): **$\tau_{P_{95}} = 0.5996$**; Hiper-redundancia circular ($P_{99}$): **$\tau_{\text{Hiper}} = 0.7287$**.
+3. **Discretización Supervisada Óptima In-Fold y Estadísticos MexGen:**
+   * Los árboles de decisión por reducción de entropía de Shannon se ajustan estrictamente **`In-Fold`** dentro de cada partición del 5-Fold CV, y se complementan con el segundo máximo no tautológico **$S_{(2)}$ (`second_max_intra_similarity`)** y la ablación MoRF de la oración pivote.
 4. **Validación Causal y Sanity Check de Adebayo:**
    * Fast-IG (10 pasos) alcanzó Comprensividad $+0.1346$ y Suficiencia $0.2330$ en GPU (852 ms/par).
    * Al aleatorizar parámetros capa por capa en cascada, la correlación de Spearman colapsó monótonamente: $\rho = 1.000 \to 0.933 \to 0.766 \to 0.589 \to \mathbf{0.0495}$, superando la prueba de sanidad de Adebayo et al. (2018).
@@ -199,7 +198,7 @@ flowchart TD
     In["Entrada: Noticia Completa"] --> Part["Preprocesamiento y Partición Sintáctica<br>(SpaCy + Delimitadores de Cláusula)"]
     
     Part --> ModSens["Módulo 1: Sensacionalismo<br>(BETO JJNeila)"]
-    Part --> ModRed["Módulo 2: Redundancia Semántica<br>(SBERT paraphrase-MiniLM-L12)"]
+    Part --> ModRed["Módulo 2: Redundancia Semántica<br>(BETO SBERT hiiamsid/sentence_similarity_spanish_es)"]
     
     ModSens --> ProfSens["Profiling de Sensacionalismo<br>- P_full vs P_mean<br>- Detección de Gatillos (Top-1, Top-2)<br>- Dilution Ratio (DR) & Varianza"]
     

@@ -191,6 +191,34 @@ Para fines de reproducibilidad y auditoría bibliográfica de la tesis, se desgl
 > [!IMPORTANT]
 > En la desinformación política de `Omdena LATAM` ($N = 1.250$), el Recall de SaBERT fue de apenas **$4,10\%$** (ROC-AUC de $0,5336$, indistinguible de una moneda al aire). En `FakeDeS 2021` ($N = 248$), la exactitud fue del **$48,39\%$**, inferior al azar. Esto ratifica que el colapso no ocurre en una sola muestra, sino en toda la variedad periodística de América Latina.
 
+### 5.1 Auditoría Contrafáctica: ¿La Caída en América Latina se debe a Datos Censurados (`*NUMBER*`, `*URL*`, `*PHONE*`) o a Entidades y Estilo Diferente (*Domain Shift*)?
+
+Dado que los corpus académicos mexicanos `MEX-A3T` ($N = 566$) y `FakeDeS 2021` ($N = 248$) contienen máscaras de anonimización de origen (`1.457` ocurrencias de `*NUMBER*`, `7` de `*URL*`, `1` de `*PHONE*` y `1` de `*2767*`, concentradas en $385$ documentos), mientras que `Omdena LATAM` ($N = 1.250$) y los corpus de España (`Freiren` y `Edds Fixed`, $N = 2.354$) conservan la totalidad de sus cifras y enlaces sin enmascarar ($0\%$ de máscaras), se ejecutó el protocolo experimental [`Codigos/auditoria_censura_vs_domain_shift.py`](../Codigos/auditoria_censura_vs_domain_shift.py) para aislar causalmente ambos efectos:
+
+```
++===================================================================================================================================================+
+|               TABLA 6: ABLACIÓN CONTRAFÁCTICA: IMPACTO DE DATOS CENSURADOS (*NUMBER*) VS. DOMAIN SHIFT EN SaBERT                                 |
++================================================+========+==========+==========+==========+==========+==========+==================================+
+| Escenario Experimental                         | N      | Accuracy | Rec-Fake | F1-Fake  | ROC-AUC  | AP       | Variación vs. España Original    |
++================================================+========+==========+==========+==========+==========+==========+==================================+
+| 1. España Original (Sin máscaras)              | 2.354  | 89,72 %  | 80,00 %  | 0,8781   | 0,9536   | 0,9577   | Línea Base (Referencia)          |
+| 2. España + Censura Sintética (*NUMBER*/*URL*) | 2.354  | 89,12 %  | 79,27 %  | 0,8710   | 0,9522   | 0,9563   | ΔAcc = -0,59 pp | ΔAUC = -0,0014 |
++------------------------------------------------+--------+----------+----------+----------+----------+----------+----------------------------------+
+| 3. LatAm SIN Censura (Omdena LATAM, 0% másc.)  | 1.250  | 64,72 %  |  4,10 %  | 0,0716   | 0,5336   | 0,3529   | ΔAcc = -25,00 pp| ΔAUC = -0,4200 |
+| 4. LatAm Corpus con Máscaras (MEX + FakeDeS)   | 814    | 67,69 %  | 53,78 %  | 0,6725   | 0,7817   | 0,8641   | ΔAcc = -22,03 pp| ΔAUC = -0,1719 |
+| 5. LatAm Restaurado (Imputación numérica)      | 814    | 67,81 %  | 53,19 %  | 0,6709   | 0,7898   | 0,8650   | ΔAcc vs (4) = +0,12 pp           |
++================================================+========+==========+==========+==========+==========+==========+==================================+
+```
+
+![Impacto de Censura vs Domain Shift](Imagenes/7_impacto_censura_vs_domain_shift.png)
+
+**Demostración Empírica en Tres Pruebas Independientes:**
+1. **Prueba Intra-Regional en América Latina (Con vs. Sin Censura):** Si la caída de SaBERT en América Latina estuviese provocada por los tokens `*NUMBER*`, el modelo debería rendir mejor en `Omdena LATAM` ($0\%$ de tokens censurados) que en `MEX-A3T` ($67,8\%$ de textos con `*NUMBER*`). Ocurre exactamente lo opuesto: el colapso más severo se registra en **`Omdena LATAM` sin datos censurados** ($\text{Accuracy} = 64,72\%$, $\text{Recall Fake} = 4,10\%$, $\text{ROC-AUC} = 0,5336$), mientras que en `MEX-A3T` alcanza $\text{Accuracy} = 76,15\%$ y $\text{ROC-AUC} = 0,8451$. Incluso dentro de `MEX-A3T + FakeDeS`, los $385$ textos con máscaras obtienen un ROC-AUC de $0,8236$ frente a $0,7536$ en los $429$ textos sin máscaras.
+2. **Experimento Contrafáctico A (Enmascaramiento Sintético sobre España, $N = 2.354$):** Al sustituir todas las cifras y enlaces del corpus español por `*NUMBER*` y `*URL*` ($1.926$ noticias modificadas y $11.503$ cifras enmascaradas), manteniendo constantes las entidades políticas y el estilo peninsular, la exactitud de SaBERT apenas varía de **$89,72\%$ a $89,12\%$ ($\Delta\text{Accuracy} = -0,59\text{ pp}$)** y el ROC-AUC pasa de **$0,9536$ a $0,9522$ ($\Delta\text{ROC-AUC} = -0,0014$)**.
+3. **Experimento Contrafáctico B (Restauración Numérica en `MEX-A3T + FakeDeS`, $N = 814$):** Al reemplazar los tokens `*NUMBER*`, `*URL*` y `*PHONE*` por cifras e hipervínculos explícitos, la exactitud en dichos sub-corpus pasa de **$67,69\%$ a $67,81\%$ ($+0,12\text{ pp}$)** y el ROC-AUC de **$0,7817$ a $0,7898$ ($+0,0081$)**.
+
+**Conclusión Causal:** Más del **$97\%$ de la degradación de SaBERT** al pasar al corpus latinoamericano ($\Delta\text{Accuracy} = -23,83\text{ pp}$ consolidado; $-25,00\text{ pp}$ en corpus sin máscaras) obedece al **desplazamiento de dominio geográfico, léxico de entidades y estilo periodístico**, mientras que la censura léxica (`*NUMBER*`) explica menos de **$0,6$ puntos porcentuales** de variación.
+
 ---
 
 ## 6. Justificación Teórica y Estratégica en la Defensa de la Tesis
@@ -215,7 +243,8 @@ SABERT_Evaluacion/
 ├── Noticias_entre_70_y_370_palabras_AMPLIADO_LATAM.csv   # Dataset formato CSV idéntico
 ├── Reporte_Evaluacion_SaBERT_Domain_Shift.md             # Este informe maestro
 ├── Reporte_Creacion_Dataset_Ampliado_LatAm.md            # Informe de procedencia, enlaces y fiabilidad
-├── actualizar_evaluacion_ampliada.py                     # Script de estandarización y evaluación
+├── Codigos/auditoria_censura_vs_domain_shift.py          # Script de ablación contrafáctica (*NUMBER* vs Domain Shift)
+├── Reportes/auditoria_censura_vs_domain_shift.json       # Resultados JSON de los experimentos contrafácticos
 ├── metricas_sabert_dataset_ampliado_4418.json            # JSON con métricas consolidadas
 ├── predicciones_sabert_ampliado_4418.csv                 # 4.418 noticias con predicciones y probabilidades
 └── Imagenes/                                             # Gráficos en alta resolución (300 DPI):
@@ -225,5 +254,6 @@ SABERT_Evaluacion/
     ├── 4_curvas_roc_espana_vs_latam.png                  # Curvas ROC comparativas
     ├── 5_curvas_pr_espana_vs_latam.png                   # Curvas Precision-Recall
     ├── 6_colapso_domain_shift_falsos_negativos_latam.png # Comparativa de tasas de falsos negativos
+    ├── 7_impacto_censura_vs_domain_shift.png             # Ablación contrafáctica: Censura vs Domain Shift
     └── 8_distribucion_probabilidades_espana_vs_latam.png # Distribución de densidades KDE
 ```

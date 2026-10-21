@@ -153,7 +153,7 @@ def main():
         f.write("---\n\n")
         f.write("**Fecha:** Octubre de 2026  \n")
         f.write("**Módulo Principal:** [`Tesis/Explicabilidad_Propia`](../)  \n")
-        f.write("**Modelos Base de Extracción:** BETO Sensacionalismo (`JJNeila/bert-spanish-sensationalism-oss`), SBERT Redundancia (`paraphrase-multilingual-MiniLM-L12-v2`) y spaCy NLP (`es_core_news_sm`)  \n")
+        f.write("**Modelos Base de Extracción:** BETO Sensacionalismo (`JJNeila/bert-spanish-sensationalism-oss`), SBERT Clásico sobre BETO Redundancia (`hiiamsid/sentence_similarity_spanish_es`, $d=768$) y spaCy NLP (`es_core_news_sm`)  \n")
         f.write("**Corpus de Validación Forense:** 4 Noticias Emblemáticas de Control (2 Falsas y 2 Verdaderas)  \n")
         f.write("**Corpus de Validación Experimental del Ensamble:** $N = 4.418$ Noticias en Español (España y América Latina)  \n\n")
 
@@ -170,11 +170,11 @@ def main():
         f.write("flowchart TD\n")
         f.write("    subgraph N1[\"NIVEL 1: Modelos Base de Procesamiento del Lenguaje Natural (PLN)\"]\n")
         f.write("        BETO[\"BETO Sensacionalismo Afectivo<br/>(JJNeila/bert-spanish-sensationalism-oss)\"]\n")
-        f.write("        SBERT[\"Sentence-BERT Semántica Vectorial<br/>(paraphrase-multilingual-MiniLM-L12-v2)\"]\n")
+        f.write("        SBERT[\"SBERT Clásico sobre BETO (d=768)<br/>(hiiamsid/sentence_similarity_spanish_es)\"]\n")
         f.write("        SPACY[\"spaCy POS Tagging + Regex Compilados<br/>(es_core_news_sm + Minería Léxica)\"]\n")
         f.write("    end\n\n")
-        f.write("    subgraph N2[\"NIVEL 2: Las 36 Variables Cuantitativas Base (Dimensiones D0 a D5)\"]\n")
-        f.write("        D0[\"D0: Sensacionalismo y Redundancia (10 vars)<br/>P_full, P_max, sigma_sens, dilution_ratio, delta_p, sim_cos\"]\n")
+        f.write("    subgraph N2[\"NIVEL 2: Las 45 Variables Cuantitativas Base (Dimensiones D0 a D5)\"]\n")
+        f.write("        D0[\"D0: Sensacionalismo y Redundancia BETO SBERT + MexGen (19 vars)<br/>P_full, P_max, S_max, S_(2) MexGen, top3_mean, p90, 4 densidades umbral\"]\n")
         f.write("        D1[\"D1: Dinámica Discursiva y Flujo Secuencial (3 vars)<br/>consec_sim_mean, consec_sim_min, consec_sim_std\"]\n")
         f.write("        D2[\"D2: Lingüística Forense y Epistémica (5 vars)<br/>dicendi_density, quotes_density, hedges, boosters, epistemic_ratio\"]\n")
         f.write("        D3[\"D3: Riqueza Léxica, Sintaxis y Legibilidad (6 vars)<br/>guiraud_ttr, hapax_ratio, flesch_szigriszt, gutierrez_polini\"]\n")
@@ -203,10 +203,10 @@ def main():
 
         f.write("```\n")
         f.write("RESUMEN TEXTUAL DEL MAPA JERÁRQUICO EN 4 NIVELES:\n")
-        f.write("├── NIVEL 1: Modelos de PLN Subyacentes (BETO, SBERT, spaCy, NLTK) ── [Sensores de Lenguaje]\n")
-        f.write("├── NIVEL 2: 36 Variables Cuantitativas Base (Dimensiones D0 a D5) ──── [Datos Matemáticos Crudos]\n")
-        f.write("├── NIVEL 3: Perfilador Estilométrico (5 Dimensiones IML: Escala 0-100) [Ficha Forense Humana]\n")
-        f.write("└── NIVEL 4: Los 5 Arquetipos Discursivos (Estilos I a V) ─────────────── [Diagnóstico Retórico]\n")
+        f.write("├── NIVEL 1: Modelos de PLN Subyacentes (BETO Sensacionalismo, BETO SBERT, spaCy) ── [Sensores de Lenguaje]\n")
+        f.write("├── NIVEL 2: 45 Variables Cuantitativas Base (Dimensiones D0 a D5 + MexGen) ───────── [Datos Matemáticos Crudos]\n")
+        f.write("├── NIVEL 3: Perfilador Estilométrico (5 Dimensiones IML: Escala 0-100) ───────────── [Ficha Forense Humana]\n")
+        f.write("└── NIVEL 4: Los 5 Arquetipos Discursivos (Estilos I a V) ──────────────────────────── [Diagnóstico Retórico]\n")
         f.write("```\n\n")
 
         # ---------------------------------------------------------------------
@@ -227,14 +227,14 @@ def main():
         )
 
         # ---------------------------------------------------------------------
-        # SECCIÓN 3: ARQUITECTURA DE LAS 36 VARIABLES Y PIPELINE DE EXTRACCIÓN
+        # SECCIÓN 3: ARQUITECTURA DE LAS 45 VARIABLES Y PIPELINE DE EXTRACCIÓN
         # ---------------------------------------------------------------------
-        f.write("## 3. Arquitectura Forense: Desglose de las 36 Variables y Pipeline de Extracción\n\n")
+        f.write("## 3. Arquitectura Forense: Desglose de las 45 Variables y Pipeline de Extracción\n\n")
         f.write(
-            "El sistema procesa y extrae un total de **36 variables cuantitativas base** distribuidas en 6 bloques temáticos (D0 a D5), "
+            "El sistema procesa y extrae un total de **45 variables cuantitativas continuas base** distribuidas en 6 bloques temáticos (D0 a D5), "
             "sintetiza **5 dimensiones de manipulación estilométrica (IML)** y calcula **14 banderas forenses locales por cada oración**:\n\n"
-            "### A. Desglose de las 36 Variables Cuantitativas Base (Dimensiones D0 a D5)\n"
-            "1. **D0: Sensacionalismo y Redundancia Base (10 variables):** `P_full`, `P_mean`, `P_max`, `P_top2`, `sigma_sens`, `dilution_ratio`, `delta_p_gatillo`, `max_intra_similarity_clean`, `mean_intra_similarity_clean`, `redundancy_density`.\n"
+            "### A. Desglose de las 45 Variables Cuantitativas Base (Dimensiones D0 a D5)\n"
+            "1. **D0: Sensacionalismo y Redundancia BETO SBERT + MexGen (19 variables):** `P_full`, `P_mean`, `P_max`, `P_top2`, `sigma_sens`, `dilution_ratio`, `delta_p_gatillo`, `max_intra_similarity_clean`, `second_max_intra_similarity_clean` ($S_{(2)}$ MexGen), `top3_mean_intra_similarity_clean`, `p90_intra_similarity_clean`, `var_intra_similarity_clean`, `mean_intra_similarity_clean`, `mexgen_persistence_gap`, `delta_mean_sim_morf`, `topic_continuity_density` ($\\ge 0.3434$), `paraphrase_density_p90` ($\\ge 0.5340$), `strict_redundancy_density_p95` ($\\ge 0.5996$), `hyper_redundancy_density` ($\\ge 0.7287$).\n"
             "2. **D1: Coherencia y Flujo Secuencial (3 variables):** `consec_sim_mean`, `consec_sim_min`, `consec_sim_std`.\n"
             "3. **D2: Lingüística Forense y Marcadores Epistémicos (5 variables):** `dicendi_density`, `quotes_density`, `hedges_density`, `boosters_density`, `epistemic_ratio`.\n"
             "4. **D3: Riqueza Léxica, Complejidad Sintáctica y Legibilidad (6 variables):** `hapax_ratio`, `guiraud_ttr`, `conteo_palabras_text`, `num_sentences`, `gutierrez_polini`, `flesch_szigriszt`.\n"
@@ -244,7 +244,7 @@ def main():
             "Cuando entra el texto en bruto de una noticia, el pipeline opera en 5 etapas secuenciales:\n"
             "1. **Segmentación y Normalización:** NLTK (`sent_tokenize` adaptado a español) divide el documento en oraciones $S = \\{s_1, \\dots, s_K\\}$. Expresiones regulares limpian los tokens, detectan mayúsculas y computan núcleos silábicos según diptongos del español.\n"
             "2. **Inferencia Afectiva con BETO (`JJNeila/bert-spanish-sensationalism-oss`):** Se evalúa la probabilidad de sensacionalismo del documento completo ($P_{full}$) y de cada oración ($P(s_i)$). Se identifica la oración gatillo ($P_{max}$), se calcula la dispersión emocional $\\sigma_{sens}$ y se ejecuta la ablación causal contrafáctica (silenciar las dos frases extremas) para obtener $\\Delta P_{gatillo}$.\n"
-            "3. **Inferencia Semántica con Sentence-BERT (`paraphrase-multilingual-MiniLM-L12-v2`):** Cada oración se proyecta en un vector denso de 384 dimensiones. Se calcula la coherencia consecutiva adyacente ($e_i \\cdot e_{i+1}$) y la matriz completa de similitud coseno $\\mathbf{S} \\in \\mathbb{R}^{K \\times K}$. Se aplica el umbral bayesiano calibrado con Modelos de Mezcla Gaussiana ($\\tau = 0.34$) para computar la densidad de redundancia y los bines de entropía de Shannon (7 y 4).\n"
+            "3. **Inferencia Semántica con SBERT Clásico sobre BETO (`hiiamsid/sentence_similarity_spanish_es`, $d=768$):** Cada oración se proyecta en un vector denso nativo del español de 768 dimensiones. Se calcula la coherencia consecutiva adyacente ($e_i \\cdot e_{i+1}$), la matriz completa de similitud coseno $\\mathbf{S} \\in \\mathbb{R}^{K \\times K}$, la jerarquía de 4 umbrales validados ($\\tau_{\\text{GMM}} = 0.3434$, $\\tau_{\\text{PAWS-X}} = 0.5340$, $\\tau_{P_{95}} = 0.5996$, $\\tau_{\\text{Hiper}} = 0.7287$) y la ablación contrafáctica no tautológica **MexGen** ($S_{(2)}$ post-ablación y curva MoRF).\n"
             "4. **Perfilado Morfosintáctico con spaCy (`es_core_news_sm`):** POS Tagging cataloga adjetivos (ADJ), sustantivos (NOUN), adverbios (ADV) y pronombres (1.ª y 3.ª persona), normalizando densidades por 100 palabras.\n"
             "5. **Minería de Marcadores Lingüísticos (Regex Compilados):** Escaneo de verbos de reporte (*dicendi*), intensificadores de certeza (*boosters*), atenuadores de cautela (*hedges*), comillas tipográficas, números, porcentajes y fechas verificables.\n"
             "6. **Síntesis en el Perfilador Estilométrico (IML):** Conversión a escala $[0, 100]$ para $D_1, D_2, D_3, D_4, D_5$, Score IML ponderado y diagnóstico en uno de los 5 Arquetipos Discursivos.\n\n"
@@ -253,18 +253,18 @@ def main():
         # ---------------------------------------------------------------------
         # SECCIÓN 4: INTERACCIÓN CRUZADA SENSACIONALISMO VS REDUNDANCIA
         # ---------------------------------------------------------------------
-        f.write("## 4. Interacción Cruzada: Sensacionalismo (BETO) frente a Redundancia Semántica (SBERT)\n\n")
+        f.write("## 4. Interacción Cruzada: Sensacionalismo (BETO) frente a Redundancia Semántica (BETO SBERT)\n\n")
         f.write(
             "Una de las fuentes habituales de confusión en el análisis de desinformación es mezclar dos fenómenos lingüísticos que operan en dimensiones ortogonales e independientes:\n\n"
             "| Eje de Análisis | Modelo de PLN | ¿Qué Mide en el Texto? | Casos Típicos Posibles |\n"
             "|---|---|---|---|\n"
             "| **Sensacionalismo** | **BETO** (`bert-spanish-sensationalism-oss`) | **La intensidad afectiva y visceral:** si el texto vocifera, alarma, manipula mediante superlativos o induce pánico. | • **Alarma Sostenida:** $P_{full} > 0.70$ y todas las frases son alarmistas.<br>• **Cebo Aislado / Gatillo:** Titular alarmista ($P_{max} > 0.80$) pero cuerpo sobrio.<br>• **Sobriedad Informativa:** Texto neutro ($P_{full} < 0.25$). |\n"
-            "| **Redundancia Semántica** | **Sentence-BERT** (`paraphrase-multilingual-MiniLM-L12-v2`) | **La topología y geometría de ideas:** si las oraciones aportan datos nuevos o si giran en círculos repitiendo lo mismo. | • **Redundancia Cíclica (Bucle):** $S_{max} \\ge 0.80$ (Shannon bins 5-7). Paráfrasis repetitiva.<br>• **Progresión Lineal Óptima:** $S_{max} \\in [0.59, 0.80]$ (Shannon bins 2-4). Cada frase aporta hechos nuevos.<br>• **Incoherencia / Dispersión:** $S_{max} < 0.50$ (Shannon bin 1). Párrafos desconectados. |\n\n"
+            "| **Redundancia Semántica** | **BETO SBERT** (`hiiamsid/sentence_similarity_spanish_es`) | **La topología y geometría de ideas:** si las oraciones aportan datos nuevos o si giran en círculos repitiendo lo mismo. | • **Hiper-Redundancia Cíclica ($P_{99}$):** $S_{max} \\ge 0.7287$ (Shannon bin 7). Paráfrasis repetitiva.<br>• **Redundancia Estricta / Paráfrasis ($P_{90}-P_{95}$):** $S_{max} \\in [0.5340, 0.7287)$.<br>• **Progresión Lineal Óptima (Banda de Shannon):** $S_{max} \\in [0.3740, 0.6079]$.<br>• **Incoherencia / Dispersión:** $S_{max} < 0.3434$ (Shannon bin 1). Párrafos desconectados. |\n\n"
             "### A. ¿Qué es la Redundancia Cíclica frente a la Redundancia No Cíclica (Progresión Lineal)?\n"
-            "- **Redundancia Cíclica (Bucle Argumental / Hiper-Redundancia):** Ocurre cuando un artículo reitera la misma premisa central a lo largo de varias oraciones, disfrazándola con sinónimos. "
+            "- **Redundancia Cíclica (Bucle Argumental / Hiper-Redundancia):** Ocurre cuando un artículo reitera la misma premisa central a lo largo de varias oraciones, disfrazándola con sinónimos ($S_{max} \\ge 0.5996$ y persistencia estructural $S_{(2)}$ MexGen). "
             "En la psicología cognitiva de la desinformación, este mecanismo se conoce como **Sesgo de Verdad Ilusoria** (*Illusory Truth Effect*): repetir una mentira múltiples veces hace que el cerebro humano la procese con mayor fluidez cognitiva y tienda a aceptarla como verdadera.\n"
             "- **Redundancia No Cíclica (Progresión Temática Lineal):** Es el estándar del periodismo profesional de calidad. Las oraciones mantienen un hilo conductor coherente "
-            "(se sitúan en la **Banda Óptima de Shannon**, $0.618 \\le S_{max} \\le 0.808$), pero **cada oración añade información nueva**: un dato cuantitativo, una cita de un testigo, un antecedente histórico o una declaración oficial.\n\n"
+            "(se sitúan en la **Banda Óptima de Shannon** sobre BETO SBERT, $0.3740 \\le S_{max} \\le 0.6079$), pero **cada oración añade información nueva**: un dato cuantitativo, una cita de un testigo, un antecedente histórico o una declaración oficial.\n\n"
             "### B. El Cruce de Sensacionalismo y Redundancia en los 5 Arquetipos Discursivos\n"
             "Al cruzar la carga de sensacionalismo con el tipo de redundancia, emergen con total claridad los **5 Arquetipos Discursivos** formalizados en la tesis:\n\n"
         )
@@ -272,12 +272,12 @@ def main():
         f.write("```mermaid\n")
         f.write("flowchart TD\n")
         f.write("    SENS[\"Sensacionalismo Afectivo (BETO)\"]\n")
-        f.write("    RED[\"Redundancia Semántica (SBERT)\"]\n\n")
+        f.write("    RED[\"Redundancia Semántica (BETO SBERT d=768)\"]\n\n")
         f.write("    SENS_ALTO[\"Alto Sensacionalismo (P_full > 0.70)\"]\n")
         f.write("    SENS_BAJO[\"Bajo Sensacionalismo (Sobrio P_full < 0.35)\"]\n\n")
-        f.write("    RED_CICLICA[\"Bucle Cíclico (cos >= 0.80)<br/>Sesgo de Verdad Ilusoria\"]\n")
-        f.write("    RED_LINEAL[\"Progresión Lineal Óptima (cos 0.60-0.80)<br/>Banda de Shannon\"]\n")
-        f.write("    RED_ROTA[\"Incoherencia Rota (cos < 0.50)<br/>Desconexión Proposicional\"]\n\n")
+        f.write("    RED_CICLICA[\"Bucle Cíclico (cos >= 0.5996 / 0.7287)<br/>Sesgo de Verdad Ilusoria\"]\n")
+        f.write("    RED_LINEAL[\"Progresión Lineal Óptima (cos 0.3740-0.6079)<br/>Banda de Shannon\"]\n")
+        f.write("    RED_ROTA[\"Incoherencia Rota (cos < 0.3434)<br/>Desconexión Proposicional\"]\n\n")
         f.write("    SENS --> SENS_ALTO\n")
         f.write("    SENS --> SENS_BAJO\n\n")
         f.write("    SENS_ALTO -->|Bucle Cíclico| ESTILO1[\"Estilo I: Desinformación Estridente<br/>(Grita + Repite Consigna)\"]\n")
@@ -381,15 +381,15 @@ def main():
             f"| **Arquetipo Asignado** | **{resultados_auditorias[0]['las_5_dimensiones_iml']['arquetipo_discursivo']['nombre'].split(':')[0]}** | **{resultados_auditorias[1]['las_5_dimensiones_iml']['arquetipo_discursivo']['nombre'].split(':')[0]}** | **{resultados_auditorias[2]['las_5_dimensiones_iml']['arquetipo_discursivo']['nombre'].split(':')[0]}** | **{resultados_auditorias[3]['las_5_dimensiones_iml']['arquetipo_discursivo']['nombre'].split(':')[0]}** | Clasificación cualitativa de estilo retórico |\n\n"
         )
 
-        f.write("### 6.2 Matriz Exhaustiva y Completa de las 36 Variables Cuantitativas Base (D0 a D5)\n\n")
+        f.write("### 6.2 Matriz Exhaustiva y Completa de las 45 Variables Cuantitativas Base (D0 a D5)\n\n")
         f.write(
-            "Esta tabla detalla las **36 variables cuantitativas base** extraídas directamente del texto de las 4 noticias de control, junto con su rango, su bloque temático y su interpretación periodística:\n\n"
+            "Esta tabla detalla las **45 variables cuantitativas continuas base** (incluyendo las métricas no tautológicas MexGen y los 4 umbrales semánticos de BETO SBERT) extraídas directamente del texto de las 4 noticias de control, junto con su rango, su bloque temático y su interpretación periodística:\n\n"
             "| # | Dimensión | Variable | Noticia 1 (Falsa Salud) | Noticia 2 (Falsa Conspir.) | Noticia 3 (Real Puebla) | Noticia 4 (Real Ciencia EFE) | Rango / Unidad | Interpretación Forense y Periodística |\n"
             "|---|---|---|:---:|:---:|:---:|:---:|:---:|---|\n"
         )
 
         vars_def = [
-            # D0: Sensacionalismo y Redundancia Base (10)
+            # D0: Sensacionalismo y Redundancia BETO SBERT + MexGen (19)
             ("D0", "P_full", lambda aud: f"{aud['sensacionalismo_beto']['P_full']:.4f}", "[0, 1]", "Sensacionalismo documental global asignado por BETO fine-tuned"),
             ("D0", "P_mean", lambda aud: f"{aud['sensacionalismo_beto']['P_mean']:.4f}", "[0, 1]", "Promedio del sensacionalismo en todas las oraciones del documento"),
             ("D0", "P_max", lambda aud: f"{aud['sensacionalismo_beto']['P_max']:.4f}", "[0, 1]", "Máximo sensacionalismo oracional (identifica la Oración Gatillo)"),
@@ -397,9 +397,18 @@ def main():
             ("D0", "sigma_sens", lambda aud: f"{aud['sensacionalismo_beto']['sigma_sens']:.4f}", "[0, 0.5]", "Desviación estándar oracional: dispersión afectiva interna"),
             ("D0", "dilution_ratio", lambda aud: f"{aud['sensacionalismo_beto']['dilution_ratio']:.4f}", "[0, 1+]", "Dilution Ratio: P_full / P_max (mide si el cuerpo diluye el titular)"),
             ("D0", "delta_p_gatillo", lambda aud: f"{aud['sensacionalismo_beto']['delta_p_gatillo_causal']:.4f}", "[-1, 1]", "Impacto causal contrafáctico: caída de alarma al silenciar 2 gatillos"),
-            ("D0", "max_intra_similarity", lambda aud: f"{aud['redundancia_sbert']['max_intra_similarity']:.4f}", "[0, 1]", "Máxima similitud coseno SBERT entre dos frases del documento"),
+            ("D0", "max_intra_similarity", lambda aud: f"{aud['redundancia_sbert']['max_intra_similarity']:.4f}", "[0, 1]", "Máxima similitud coseno BETO SBERT entre dos frases del documento"),
+            ("D0", "second_max_intra_similarity", lambda aud: f"{aud['redundancia_sbert']['second_max_intra_similarity']:.4f}", "[0, 1]", "Segundo máximo S_(2) MexGen (persistencia estructural tras ablación)"),
+            ("D0", "top3_mean_intra_similarity", lambda aud: f"{aud['redundancia_sbert']['top3_mean_intra_similarity']:.4f}", "[0, 1]", "Promedio de los 3 pares más similares BETO SBERT"),
+            ("D0", "p90_intra_similarity", lambda aud: f"{aud['redundancia_sbert']['p90_intra_similarity']:.4f}", "[0, 1]", "Percentil 90 de similitud intra-documental"),
+            ("D0", "var_intra_similarity", lambda aud: f"{aud['redundancia_sbert']['var_intra_similarity']:.4f}", "[0, 0.25]", "Varianza de las similitudes entre pares de oraciones"),
             ("D0", "mean_intra_similarity", lambda aud: f"{aud['redundancia_sbert']['mean_intra_similarity']:.4f}", "[0, 1]", "Media de similitudes coseno intra-documentales"),
-            ("D0", "redundancy_density", lambda aud: f"{aud['redundancia_sbert']['redundancy_density_pct']:.1f}%", "[0, 100%]", "Densidad de pares de oraciones con similitud cos >= 0.34 (GMM)"),
+            ("D0", "mexgen_persistence_gap", lambda aud: f"{aud['redundancia_sbert']['mexgen_persistence_gap']:.4f}", "[0, 1]", "Brecha de persistencia MexGen: S_(1) - S_(2)"),
+            ("D0", "delta_mean_sim_morf", lambda aud: f"{aud['redundancia_sbert']['delta_mean_sim_morf']:.4f}", "[-1, 1]", "Caída de similitud media en ablación MoRF (oración pivote)"),
+            ("D0", "topic_continuity_density", lambda aud: f"{aud['redundancia_sbert']['topic_continuity_density_pct']:.1f}%", "[0, 100%]", "Densidad de continuidad temática basal (cos >= 0.3434 GMM)"),
+            ("D0", "paraphrase_density_p90", lambda aud: f"{aud['redundancia_sbert']['paraphrase_density_p90_pct']:.1f}%", "[0, 100%]", "Densidad de paráfrasis moderada (cos >= 0.5340 PAWS-X / P90)"),
+            ("D0", "strict_redundancy_density_p95", lambda aud: f"{aud['redundancia_sbert']['strict_redundancy_density_p95_pct']:.1f}%", "[0, 100%]", "Densidad de redundancia semántica estricta (cos >= 0.5996 P95)"),
+            ("D0", "hyper_redundancy_density", lambda aud: f"{aud['redundancia_sbert']['hyper_redundancy_density_pct']:.1f}%", "[0, 100%]", "Densidad de hiper-redundancia circular (cos >= 0.7287 P99)"),
             # D1: Coherencia y Flujo Secuencial (3)
             ("D1", "consec_sim_mean", lambda aud: f"{aud['variables_ensamble_avanzado_5d']['D1_Dinamica_Discursiva']['consec_sim_mean']:.4f}", "[0, 1]", "Coherencia temática promedio entre oraciones adyacentes consecutivas"),
             ("D1", "consec_sim_min", lambda aud: f"{aud['variables_ensamble_avanzado_5d']['D1_Dinamica_Discursiva']['consec_sim_min']:.4f}", "[0, 1]", "Salto temático más abrupto o ruptura narrativa entre oraciones contiguas"),
@@ -465,26 +474,26 @@ def main():
         # ---------------------------------------------------------------------
         f.write("## 7. El Punto de Inflexión Científico: ¿Se Puede Clasificar la Desinformación a partir de esta Explicabilidad Forense?\n\n")
         f.write(
-            "Al culminar esta caracterización forense de 36 variables cuantitativas y 5 dimensiones estilométricas, la investigación "
+            "Al culminar esta caracterización forense de 45 variables cuantitativas continuas (y 51 variables en el ensamble con discretización `In-Fold`) y 5 dimensiones estilométricas, la investigación "
             "llega a un hallazgo de enorme trascendencia científica:\n\n"
             "> **Las diferencias entre desinformación y periodismo legítimo NO son arbitrarias ni dependen del vocabulario político coyuntural: "
             "quedan fielmente reflejadas en la morfología sintáctica, la saturación adverbial, el abuso de mayúsculas, la ausencia de verbos de reporte "
-            "y la presencia de bucles redundantes.**\n\n"
+            "y la persistencia de bucles redundantes ($S_{(2)}$ MexGen y umbrales BETO SBERT).**\n\n"
             "A partir de este resultado, surge la **pregunta de investigación central** que conecta la explicabilidad forense con la inteligencia artificial aplicada:\n\n"
         )
 
         f.write("```mermaid\n")
         f.write("flowchart LR\n")
         f.write("    subgraph EXP[\"Explicabilidad Forense Estilométrica (Fase 1)\"]\n")
-        f.write("        VARS[\"36 Variables Cuantitativas Base<br/>(D0 a D5: Morfosintaxis, Mayúsculas, Dicendi, etc.)\"]\n")
+        f.write("        VARS[\"45 Variables Cuantitativas Base<br/>(D0 a D5: BETO SBERT + MexGen, Morfosintaxis, Mayúsculas)\"]\n")
         f.write("        IML[\"Perfilador IML (5 Dimensiones 0-100)<br/>& Arquetipos Discursivos\"]\n")
         f.write("    end\n\n")
         f.write("    subgraph PREGUNTA[\"Punto de Inflexión Científico\"]\n")
-        f.write("        P[\"¿Es posible clasificar noticias<br/>con estas 36 variables forenses<br/>superando el Domain Shift?\"]\n")
+        f.write("        P[\"¿Es posible clasificar noticias<br/>con estas variables forenses In-Fold<br/>superando el Domain Shift?\"]\n")
         f.write("    end\n\n")
         f.write("    subgraph ENSAMBLE[\"Modelo Ensamble Adaptativo 5D (Fase 2)\"]\n")
-        f.write("        GBDT[\"GBDT (140 árboles, profundidad 3)<br/>Umbral Bayesiano θ* = 0.42\"]\n")
-        f.write("        LATAM[\"Supera a SaBERT en América Latina<br/>Exactitud: 68.36% vs 65.89%<br/>Recall: 62.16% vs 31.30%\"]\n")
+        f.write("        GBDT[\"GBDT (140 árboles, prof. 3, In-Fold CV)<br/>Umbral Bayesiano θ* = 0.42\"]\n")
+        f.write("        LATAM[\"Supera a SaBERT en América Latina<br/>ROC-AUC LatAm: 0.7239 vs 0.6800<br/>Exactitud: 67.59% / 67.20% vs 65.89%<br/>Recall: 62.70% vs 31.30%\"]\n")
         f.write("    end\n\n")
         f.write("    EXP --> PREGUNTA\n")
         f.write("    PREGUNTA --> ENSAMBLE\n")
@@ -494,7 +503,7 @@ def main():
         f.write("┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐\n")
         f.write("│                                           PREGUNTA CENTRAL DE INVESTIGACIÓN                                           │\n")
         f.write("├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤\n")
-        f.write("│ «¿Es posible aprovechar todo este espacio de 36 características forenses explicables (Dimensiones D0 a D5)            │\n")
+        f.write("│ «¿Es posible aprovechar todo este espacio de características forenses explicables (Dimensiones D0 a D5 con BETO SBERT)│\n")
         f.write("│  para entrenar un modelo alternativo y adaptativo capaz de clasificar noticias falsas vs. verdaderas, superando       │\n")
         f.write("│  la opacidad, la memorización espuria de nombres propios y el colapso por Domain Shift de los modelos tradicionales   │\n")
         f.write("│  de caja negra (como SaBERT o BERT plano)?»                                                                           │\n")
@@ -509,12 +518,12 @@ def main():
         f.write(
             "Para responder a la pregunta de investigación, se diseñó e implementó el **Modelo Ensamble Morfológico Avanzado 5D** "
             "([`Reporte_Ensamble_Adaptativo_FakeNews.md`](../../Clasificar_fake/Modelo_Ensamble/Reportes/Reporte_Ensamble_Adaptativo_FakeNews.md)).\n\n"
-            "### 8.1 Arquitectura del Ensamble: Superando las Cajas Negras mediante Características Estilométricas\n"
+            "### 8.1 Arquitectura del Ensamble: Superando las Cajas Negras mediante Características Estilométricas In-Fold\n"
             "En lugar de alimentar una red neuronal con texto en bruto para que memorice atajos dialectales (como nombres de ministros o leyes locales), "
             "el Ensamble opera **exclusivamente sobre el vector numérico de las variables forenses extraídas**:\n"
             "- **Algoritmo Base:** Gradient Boosting Decision Trees (GBDT / Scikit-Learn Ensemble) con 140 estimadores, profundidad máxima de árbol de 3 y submuestreo de características (0.85).\n"
-            "- **Espacio de Entrada:** 42 variables numéricas consolidadas (las 36 variables base más codificaciones OHE de bins de Shannon).\n"
-            "- **Validación Cruzada Estratificada:** 5-Fold Stratified Cross-Validation sobre el corpus completo garantizando independencia de particiones.\n"
+            "- **Espacio de Entrada:** 51 variables numéricas consolidadas (las 45 variables continuas base incluyendo BETO SBERT + MexGen $S_{(2)}$, más 6 codificaciones OHE de bines de entropía de Shannon calculadas estrictamente **`In-Fold`** sin fuga de datos).\n"
+            "- **Validación Cruzada Estratificada:** 5-Fold Stratified Cross-Validation sobre el corpus completo garantizando independencia total de particiones y discretización `In-Fold`.\n"
             "- **Calibración Adaptativa Bayesiana (Índice de Youden):** En lugar de usar el umbral ingenuo $\\theta = 0.50$, se calculó el umbral bayesiano óptimo $\\theta^* = 0.42$, "
             "diseñado específicamente para maximizar la sensibilidad (*recall*) ante el engaño sin degradar la precisión.\n\n"
             "### 8.2 Desempeño Experimental en el Corpus Ampliado ($N = 4.418$ Noticias)\n"
@@ -522,44 +531,46 @@ def main():
             "y **América Latina** ($N = 2.064$), confrontándolo contra el clasificador SaBERT oficial del estado del arte:\n\n"
             "```\n"
             "+===================================================================================================================================================+\n"
-            "|               TABLA 8.1: COMPARATIVA METROLÓGICA FORMAL: ENSAMBLE FORENSE 5D vs. SaBERT (N = 4.418 NOTICIAS)                                      |\n"
+            "|               TABLA 8.1: COMPARATIVA METROLÓGICA FORMAL: ENSAMBLE FORENSE 5D (BETO SBERT) vs. SaBERT (N = 4.418 NOTICIAS)                         |\n"
             "+=========================================+=====================================+=====================================+=============================+\n"
-            "| Métrica Evaluada                        | Ensamble Base (12 Vars)             | Ensamble Avanzado 5D (42 Vars)      | SaBERT Oficial              |\n"
+            "| Métrica Evaluada                        | Ensamble Base (18 Vars BETO SBERT)  | Ensamble Avanzado 5D (51 Vars)      | SaBERT Oficial              |\n"
             "|                                         | θ = 0,50        │ θ* = 0,42 (Calib.)│ θ = 0,50        │ θ* = 0,42 (Calib.)│ (Colapso en LatAm)          |\n"
             "+=========================================+=================+===================+=================+===================+=============================+\n"
-            "| **Capacidad de Separación (ROC-AUC)**   | 0,6568          | 0,6568            | **0,7178 (+6,10)**| **0,7178 (+6,10)**| 0,8519 (En España) / Colapso|\n"
-            "| **Área Precision-Recall (PR-AUC)**      | 0,6213          | 0,6213            | **0,7038 (+8,25)**| **0,7038 (+8,25)**| 0,7821                      |\n"
-            "| **Exactitud en América Latina**         | 63,52 %         | 61,87 %           | **68,36 %**     | **65,70 %**       | **65,89 % (Cae -23,8 pts)** |\n"
-            "| **ROC-AUC en América Latina**           | 0,6608          | 0,6608            | **0,7162**      | **0,7162**        | **0,6800 (Colapso severo)** |\n"
-            "| **Recall Fake News LatAm (Sensibilidad)**| 43,95 %        | 61,83 %           | 50,05 %         | **62,16 %**       | **31,30 % (Omite 68,7% bulos|\n"
-            "| **Bulos Omitidos en LatAm (FN)**        | 514             | 350               | 458             | **347 (Rescatados)**| **630 bulos omitidos**      |\n"
-            "| Recall Global Fake News (N=4.418)       | 43,10 %         | 72,60 %           | 50,62 %         | **70,05 %**       | 57,75 %                     |\n"
-            "| Bulos Capturados Globales (TP)          | 865 bulos       | 1.457 bulos       | 1.016 bulos     | **1.406 bulos**   | 1.159 bulos                 |\n"
-            "| Matriz de Confusión Global [TN, FP]     | TN=1836, FP=575 │ TN=1170, FP=1241  | TN=1886, FP=525 │ **TN=1414, FP=997** | TN=2313, FP=98              |\n"
-            "|                            [FN, TP]     | FN=1142, TP=865 │ FN=550,  TP=1457  | FN=991,  TP=1016│ **FN=601,  TP=1406**| FN=848,  TP=1159            |\n"
+            "| **Capacidad de Separación (ROC-AUC)**   | 0,6531          | 0,6531            | **0,7212 (+6,81)**| **0,7212 (+6,81)**| 0,8519 (En España) / Colapso|\n"
+            "| **Área Precision-Recall (PR-AUC)**      | 0,6159          | 0,6159            | **0,7027 (+8,68)**| **0,7027 (+8,68)**| 0,7821                      |\n"
+            "| **Exactitud Global (N=4.418)**          | 61,75 %         | 58,94 %           | **65,62 %**     | **64,31 %**       | 78,59 %                     |\n"
+            "| **Exactitud en América Latina**         | 63,57 %         | 61,58 %           | **67,59 %**     | **67,20 %**       | **65,89 % (Cae -23,8 pts)** |\n"
+            "| **ROC-AUC en América Latina**           | 0,6540          | 0,6540            | **0,7239**      | **0,7239**        | **0,6800 (Colapso severo)** |\n"
+            "| **Recall Fake News LatAm (Sensibilidad)**| 45,58 %        | 62,27 %           | 50,05 %         | **62,70 %**       | **31,30 % (Omite 68,7% bulos|\n"
+            "| **Bulos Omitidos en LatAm (FN)**        | 499             | 346               | 458             | **342 (Rescatados)**| **630 bulos omitidos**      |\n"
+            "| Recall Global Fake News (N=4.418)       | 45,74 %         | 72,70 %           | 50,12 %         | **69,11 %**       | 57,75 %                     |\n"
+            "| Bulos Capturados Globales (TP)          | 918 bulos       | 1.459 bulos       | 1.006 bulos     | **1.387 bulos**   | 1.159 bulos                 |\n"
+            "| Matriz de Confusión Global [TN, FP]     | TN=1810, FP=601 │ TN=1145, FP=1266  | TN=1893, FP=518 │ **TN=1454, FP=957** | TN=2313, FP=98              |\n"
+            "|                            [FN, TP]     | FN=1089, TP=918 │ FN=548,  TP=1459  | FN=1001, TP=1006│ **FN=620,  TP=1387**| FN=848,  TP=1159            |\n"
             "+=========================================+=================+===================+=================+===================+=============================+\n"
             "```\n\n"
             "### 8.3 El Fenómeno del Domain Shift: Por qué el Ensamble Forense Supera a SaBERT en América Latina\n"
             "1. **Superación Formal de SaBERT en América Latina:**\n"
-            "   - En exactitud pura, el Ensamble Avanzado 5D alcanza un **$68,36\\%$**, superando los $65,89\\%$ de SaBERT.\n"
-            "   - En ROC-AUC intrínseco, el Ensamble alcanza **$0,7162$**, superando con holgura el **$0,6800$** de SaBERT.\n"
+            "   - En exactitud pura, el Ensamble Avanzado 5D alcanza un **$67,59\\%$** (y **$67,20\\%$** en el punto calibrado $\\theta^* = 0,42$), superando en ambos escenarios los $65,89\\%$ de SaBERT.\n"
+            "   - En ROC-AUC intrínseco en América Latina, el Ensamble alcanza **$0,7239$**, superando por **$+4,39$ puntos** el **$0,6800$** de SaBERT.\n"
             "2. **Duplicación del Recall y Rescate de Bulos:**\n"
             "   - SaBERT sufrió un colapso dramático al cruzar a América Latina: su tasa de detección cayó al **$31,30\\%$**, dejando escapar **$630$ bulos** (un alarmante $68,7\\%$ de falsos negativos) debido a que sobreajustó con nombres políticos de España (Vox, Pedro Sánchez, leyes peninsulares).\n"
-            "   - El Ensamble Forense Calibrado ($\\theta^* = 0,42$) alcanza un **$Recall = 62,16\\%$** en América Latina, **duplicando la detección de SaBERT** y reduciendo los bulos omitidos a $347$.\n\n"
+            "   - El Ensamble Forense Calibrado ($\\theta^* = 0,42$) alcanza un **$Recall = 62,70\\%$** en América Latina ($575$ bulos detectados vs $287$ de SaBERT), **duplicando la sensibilidad de SaBERT** y reduciendo los bulos omitidos a $342$.\n\n"
             "### 8.4 Importancia de Características (SHAP / Gini): ¿Qué Variables Mandan en la Clasificación?\n"
             "El análisis de ganancia de información reveló qué variables extraídas por el método forense son las más decisivas para clasificar:\n\n"
             "```\n"
-            "DISTRIBUCIÓN DEL PESO PREDICTIVO POR DIMENSIÓN EN EL ENSAMBLE:\n"
-            "├── D0: Sensacionalismo y Redundancia Base (31,10%) ── [Pilar Semántico]\n"
-            "├── D5: Anclajes Factuales y Mayúsculas (24,11%) ──── [Pilar Enfático]\n"
-            "├── D3: Riqueza Léxica y Legibilidad (19,34%) ─────── [Pilar Estilístico]\n"
-            "├── D4: Morfosintaxis y Subjetividad POS (14,78%) ─── [Pilar Gramatical]\n"
-            "├── D2: Lingüística Forense y Citas (6,56%) ───────── [Pilar Epistémico]\n"
-            "└── D1: Coherencia y Flujo Secuencial (4,10%) ─────── [Pilar Discursivo]\n"
+            "DISTRIBUCIÓN DEL PESO PREDICTIVO POR DIMENSIÓN EN EL ENSAMBLE (BETO SBERT + MexGen):\n"
+            "├── D0: Sensacionalismo BETO (23,60%) + Redundancia BETO SBERT/MexGen (12,21%) = 35,81% ── [Pilar Semántico]\n"
+            "├── D5: Anclajes Factuales y Mayúsculas Sostenidas (22,95%) ────────────────────────────── [Pilar Enfático]\n"
+            "├── D3: Riqueza Léxica y Legibilidad (18,86%) ──────────────────────────────────────────── [Pilar Estilístico]\n"
+            "├── D4: Morfosintaxis y Subjetividad POS (14,22%) ──────────────────────────────────────── [Pilar Gramatical]\n"
+            "├── D2: Lingüística Forense y Citas (6,24%) ────────────────────────────────────────────── [Pilar Epistémico]\n"
+            "└── D1: Coherencia y Flujo Secuencial (1,92%) ──────────────────────────────────────────── [Pilar Discursivo]\n"
             "```\n\n"
-            "- **Top 1 Individual: Densidad de Adverbios (`adv_density` = $8,41\\%$):** Fue la característica individual con mayor ganancia de Gini de todo el modelo. Los generadores de bulos saturan el texto de adverbios valorativos (*«claramente», «obviamente», «jamás»*), traicionando la sobriedad informativa.\n"
-            "- **Top 2 y Top 3 Global: Mayúsculas Sostenidas (`upper_chars_ratio` = $7,49\\%$ y `all_caps_ratio` = $6,96\\%$):** Juntas representan casi un **$15\\%$ de todo el poder predictivo del clasificador**. La prensa seria prohíbe el uso de mayúsculas sostenidas, mientras que la desinformación viral recurre a ellas de forma sistemática para inducir urgencia visual.\n\n"
-            "> **Conclusión Epistemológica de la Tesis:** La clasificación binaria no precede a la explicabilidad. **La clasificación robusta, generalizable y resistente al Domain Shift es el fruto de haber construido primero una sólida explicabilidad estilométrica de 36 dimensiones.**\n\n"
+            "- **Top 1 Individual: Densidad de Adverbios (`adv_density` = $8,16\\%$):** Fue la característica individual con mayor ganancia de Gini de todo el modelo. Los generadores de bulos saturan el texto de adverbios valorativos (*«claramente», «obviamente», «jamás»*), traicionando la sobriedad informativa.\n"
+            "- **Top 2 y Top 3 Global: Mayúsculas Sostenidas (`upper_chars_ratio` = $7,16\\%$ y `all_caps_ratio` = $6,76\\%$):** Juntas representan casi un **$14\\%$ de todo el poder predictivo del clasificador**. La prensa seria prohíbe el uso de mayúsculas sostenidas, mientras que la desinformación viral recurre a ellas de forma sistemática para inducir urgencia visual.\n"
+            "- **Salto de Importancia de la Redundancia con BETO SBERT y MexGen ($14,13\\%$ combinado D0_Red + D1):** Al sustituir el modelo multilingüe por el encoder nativo del español `hiiamsid/sentence_similarity_spanish_es` ($d=768$) e incorporar los estadísticos de orden no tautológicos de **MexGen**, la variable **`second_max_intra_similarity_clean` ($S_{(2)}$)** ingresó directamente al Top 14 global con un **$3,39\\%$ de importancia**, duplicando el aporte predictivo de `max_intra_similarity_clean` ($1,71\\%$) y confirmando que la persistencia estructural tras ablación separa los bucles de desinformación de las citas periodísticas puntuales.\n\n"
+            "> **Conclusión Epistemológica de la Tesis:** La clasificación binaria no precede a la explicabilidad. **La clasificación robusta, generalizable y resistente al Domain Shift es el fruto de haber construido primero una sólida explicabilidad estilométrica y semántica nativa en español.**\n\n"
         )
 
         # ---------------------------------------------------------------------
@@ -577,23 +588,23 @@ def main():
 
         f.write("### 2. Formulación Matemática del IML y los 5 Arquetipos Discursivos (Fase 1 Forense)\n")
         f.write("- **Archivo:** [`Reporte_Estilos_Manipulacion_Textual.md`](Reporte_Estilos_Manipulacion_Textual.md)\n")
-        f.write("- **¿Por qué se necesita?** Contiene la deducción teórica de las **5 Dimensiones del IML** ($D_1$ a $D_5$), sus rangos de calibración y los umbrales de activación de los **5 Arquetipos Discursivos**. Además, incluye el estudio empírico masivo sobre 2.604 noticias donde se demostró la Paradoja 1 (el Estilo III tiene IML de 21.2 pero 70.2% de fake news) y las Figuras 4 (radar) y 5 (tasas empíricas).\n\n")
+        f.write("- **¿Por qué se necesita?** Contiene la deducción teórica de las **5 Dimensiones del IML** ($D_1$ a $D_5$), sus rangos de calibración sobre BETO SBERT y los umbrales de activación de los **5 Arquetipos Discursivos**, junto con el estudio empírico masivo sobre 2.604 noticias y las Figuras 4 (radar) y 5 (tasas empíricas).\n\n")
 
         f.write("### 3. Modelo de Ensamble Adaptativo e Importancia Global de Variables (Fase 2 de Clasificación)\n")
         f.write("- **Archivo:** [`Modelos_Individuales/Clasificar_fake/Modelo_Ensamble/Reportes/Reporte_Ensamble_Adaptativo_FakeNews.md`](../../Clasificar_fake/Modelo_Ensamble/Reportes/Reporte_Ensamble_Adaptativo_FakeNews.md)\n")
-        f.write("- **¿Por qué se necesita?** Expone el rendimiento predictivo del ensamble GBDT, la calibración bayesiana del umbral adaptativo ($\\theta = 0.42$) y el ranking de importancia de características mediante valores SHAP. Este reporte demostró que las variables morfosintácticas (`adv_density`, `all_caps_ratio`, `upper_chars_ratio`) superan en poder discriminativo a la semántica pura.\n\n")
+        f.write("- **¿Por qué se necesita?** Expone el rendimiento predictivo del ensamble GBDT `In-Fold`, la calibración bayesiana del umbral adaptativo ($\\theta^* = 0.42$) y el ranking de importancia de características donde se demuestra el aporte conjunto de la morfosintaxis (`adv_density`, `upper_chars_ratio`) y la persistencia semántica (`second_max_intra_similarity_clean`).\n\n")
 
-        f.write("### 4. Diccionario Ontológico y Matemático de las 36 Variables\n")
+        f.write("### 4. Diccionario Ontológico y Matemático de las Variables\n")
         f.write("- **Archivo:** [`dashboard/diccionario_variables_5d.json`](../../../dashboard/diccionario_variables_5d.json)\n")
-        f.write("- **¿Por qué se necesita?** Es el catálogo exhaustivo de las 36 variables cuantitativas del Ensamble Avanzado. Para cada variable define su fórmula matemática, su hipótesis periodística, su rango de valores, su ranking de importancia y el impacto explicativo que genera en el texto.\n\n")
+        f.write("- **¿Por qué se necesita?** Es el catálogo exhaustivo de las variables cuantitativas del Ensamble Avanzado. Para cada variable define su fórmula matemática, su hipótesis periodística, su rango de valores, su ranking de importancia y el impacto explicativo que genera en el texto.\n\n")
 
         f.write("### 5. Códigos del Perfilador Forense y Extracción Masiva\n")
-        f.write("- **Archivos:** [`codigos/perfilador_estilo_manipulacion.py`](../codigos/perfilador_estilo_manipulacion.py), [`metodo_explicabilidad.py`](../metodo_explicabilidad.py) y [`extraer_features_avanzadas_5d.py`](../../Clasificar_fake/Modelo_Ensamble/Codigos/extraer_features_avanzadas_5d.py)\n")
-        f.write("- **¿Por qué se necesitan?** Contienen la implementación computacional donde se realiza el perfilado estilométrico de 5 dimensiones y la extracción masiva en GPU para el corpus completo de noticias.\n\n")
+        f.write("- **Archivos:** [`codigos/perfilador_estilo_manipulacion.py`](../codigos/perfilador_estilo_manipulacion.py), [`metodo_explicabilidad.py`](../metodo_explicabilidad.py) y [`extraer_features_ensamble_ampliado.py`](../../Clasificar_fake/Modelo_Ensamble/Codigos/extraer_features_ensamble_ampliado.py)\n")
+        f.write("- **¿Por qué se necesitan?** Contienen la implementación computacional donde se realiza el perfilado estilométrico de 5 dimensiones y la extracción masiva en GPU con `hiiamsid/sentence_similarity_spanish_es` para el corpus completo de noticias.\n\n")
 
-        f.write("### 6. Calibración del Umbral de Redundancia y Bins de Shannon\n")
+        f.write("### 6. Calibración del Umbral de Redundancia, MexGen y Bins de Shannon\n")
         f.write("- **Carpeta:** [`Modelos_Individuales/Redundancia/Reportes/`](../../Redundancia/Reportes)\n")
-        f.write("- **¿Por qué se necesita?** Detalla los experimentos con Sentence-BERT y la justificación probabilística del umbral $\\tau = 0.34$, obtenido mediante Modelos de Mezcla Gaussiana (GMM) para separar la similitud temática natural de la paráfrasis redundante, así como los cortes de los árboles de decisión de entropía (bins 7 y 4 de Shannon).\n\n")
+        f.write("- **¿Por qué se necesita?** Documenta la selección empírica de **SBERT Clásico sobre BETO** (`hiiamsid/sentence_similarity_spanish_es`, $d=768$) frente a 4 arquitecturas en español (PAWS-X AUC = $0.7689$, separación intrínseca $\\Delta = +0.5858$), la jerarquía de 4 umbrales ($\\tau_{\\text{GMM}} = 0.3434$, $\\tau_{\\text{PAWS-X}} = 0.5340$, $\\tau_{P_{95}} = 0.5996$, $\\tau_{\\text{Hiper}} = 0.7287$), la validación de explicabilidad no tautológica **MexGen** ($S_{(2)}$ y curvas MoRF) y los cortes de entropía de Shannon.\n\n")
 
         f.write("### 7. Validación de Estabilidad y Sensibilidad de BETO\n")
         f.write("- **Carpeta:** [`Modelos_Individuales/Sensacionalismo/Pruebas_Frases/`](../../Sensacionalismo/Pruebas_Frases)\n")

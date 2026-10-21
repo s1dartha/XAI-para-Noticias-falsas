@@ -3,8 +3,9 @@
     "titulo": "Noticia Oficial de Salud Pública y Medidas Epidemiológicas",
     "conteo_palabras": 216,
     "num_oraciones": 9,
-    "tiempo_analisis_segundos": 0.226,
+    "tiempo_analisis_segundos": 0.194,
     "dispositivo": "cuda",
+    "modelo_redundancia": "hiiamsid/sentence_similarity_spanish_es",
     "metadata_adicional": {
       "id": "noticia_3_verdadera_puebla_salud",
       "tipo_referencia": "Verdadera (Ground Truth = 0)",
@@ -28,124 +29,146 @@
     "diagnostico": "Tono Informativo Sobrio / Desprovisto de Amarillismo"
   },
   "redundancia_sbert": {
-    "mean_intra_similarity": 0.2287,
-    "max_intra_similarity": 0.5647,
-    "redundant_pairs_count": 7,
+    "mean_intra_similarity": 0.3039,
+    "max_intra_similarity": 0.7644,
+    "second_max_intra_similarity": 0.5337,
+    "top3_mean_intra_similarity": 0.608,
+    "p90_intra_similarity": 0.4942,
+    "var_intra_similarity": 0.0199,
+    "max_post_ablation_mexgen": 0.5258,
+    "mexgen_persistence_gap": 0.2386,
+    "delta_mean_sim_morf": 0.0311,
+    "topologia_mexgen": "Bucle Único Focalizado (S_post < 0.60: se desactiva al retirar 1 oración)",
+    "topic_continuity_pairs_count": 13,
+    "topic_continuity_density_pct": 36.11,
+    "paraphrase_pairs_count_p90": 1,
+    "paraphrase_density_p90_pct": 2.78,
+    "strict_redundant_pairs_count_p95": 1,
+    "strict_redundancy_density_p95_pct": 2.78,
+    "hyper_redundant_pairs_count": 1,
+    "hyper_redundancy_density_pct": 2.78,
+    "redundant_pairs_count": 1,
     "num_pairs_total": 36,
-    "redundancy_density_pct": 19.44,
-    "umbral_gmm_tau": 0.34,
-    "shannon_bin_7": 1,
-    "shannon_bin_4": 1,
+    "redundancy_density_pct": 2.78,
+    "umbral_gmm_tau": 0.3434,
+    "umbral_pawsx_tau": 0.534,
+    "umbral_estricto_tau": 0.5996,
+    "umbral_hiper_tau": 0.7287,
+    "shannon_bin_7": 7,
+    "shannon_bin_4": 4,
     "par_maxima_redundancia": {
       "oracion_a_idx": 1,
       "oracion_a_texto": "El Gobierno de Puebla anunció que el confinamiento para evitar que colapse el sistema de salud por la pandemia de coronavirus, se extiende hasta el día 25 de enero.",
       "oracion_b_idx": 3,
       "oracion_b_texto": "Indicó que de esta forma se ratifica el llamado de alerta máxima en Puebla hasta el 25 de enero, fecha en que se determinará el comportamiento de la pandemia.",
-      "similitud_coseno": 0.5647,
-      "supera_umbral_gmm": true
+      "similitud_coseno": 0.7644,
+      "supera_continuidad_gmm_034": true,
+      "supera_parafrasis_pawsx_053": true,
+      "supera_redundancia_estricta_060": true,
+      "supera_hiper_redundancia_073": true
     },
     "matriz_similitud": [
       [
         1.0,
-        0.342,
-        0.5647,
-        0.1741,
-        0.2263,
-        0.084,
-        0.1019,
-        0.4193,
-        0.4188
+        0.3478,
+        0.7644,
+        0.171,
+        0.3125,
+        0.2561,
+        0.1952,
+        0.3872,
+        0.2801
       ],
       [
-        0.342,
+        0.3478,
         1.0,
-        0.3338,
-        0.1723,
-        0.3423,
-        0.4387,
-        0.1833,
-        0.2799,
-        0.274
+        0.5337,
+        0.1461,
+        0.4844,
+        0.5258,
+        0.2627,
+        0.3021,
+        0.4026
       ],
       [
-        0.5647,
-        0.3338,
+        0.7644,
+        0.5337,
         1.0,
-        0.1979,
-        0.2656,
-        0.1393,
-        0.0839,
-        0.234,
-        0.4465
+        0.1672,
+        0.4076,
+        0.3651,
+        0.2337,
+        0.4257,
+        0.4056
       ],
       [
-        0.1741,
-        0.1723,
-        0.1979,
+        0.171,
+        0.1461,
+        0.1672,
         1.0,
-        0.2368,
-        0.0773,
-        0.0908,
-        0.1314,
-        0.2056
+        0.2282,
+        0.1339,
+        0.2009,
+        0.0892,
+        0.2365
       ],
       [
-        0.2263,
-        0.3423,
-        0.2656,
-        0.2368,
+        0.3125,
+        0.4844,
+        0.4076,
+        0.2282,
         1.0,
-        0.27,
-        0.2687,
-        0.0338,
-        0.2859
+        0.3001,
+        0.3129,
+        0.2236,
+        0.3654
       ],
       [
-        0.084,
-        0.4387,
-        0.1393,
-        0.0773,
-        0.27,
+        0.2561,
+        0.5258,
+        0.3651,
+        0.1339,
+        0.3001,
         1.0,
-        0.2912,
-        0.104,
-        0.1395
+        0.5041,
+        0.2794,
+        0.102
       ],
       [
-        0.1019,
-        0.1833,
-        0.0839,
-        0.0908,
-        0.2687,
-        0.2912,
+        0.1952,
+        0.2627,
+        0.2337,
+        0.2009,
+        0.3129,
+        0.5041,
         1.0,
-        0.0222,
-        0.1323
+        0.1566,
+        0.1674
       ],
       [
-        0.4193,
-        0.2799,
-        0.234,
-        0.1314,
-        0.0338,
-        0.104,
-        0.0222,
+        0.3872,
+        0.3021,
+        0.4257,
+        0.0892,
+        0.2236,
+        0.2794,
+        0.1566,
         1.0,
-        0.2224
+        0.2643
       ],
       [
-        0.4188,
-        0.274,
-        0.4465,
-        0.2056,
-        0.2859,
-        0.1395,
-        0.1323,
-        0.2224,
+        0.2801,
+        0.4026,
+        0.4056,
+        0.2365,
+        0.3654,
+        0.102,
+        0.1674,
+        0.2643,
         1.0
       ]
     ],
-    "diagnostico": "Discurso Desarticulado / Párrafos Fragmentados"
+    "diagnostico": "Hiper-Redundancia Circular (Bucle de Verdad Ilusoria, >= 0.73)"
   },
   "las_5_dimensiones_iml": {
     "D1_Carga_Emocional": {
@@ -167,19 +190,19 @@
       "nivel": "Amortiguación Alta (Cuerpo Sobrio Neutraliza Titular)"
     },
     "D4_Reiteracion_Redundancia": {
-      "valor": 40.1,
+      "valor": 100.0,
       "escala": "[0 - 100]",
-      "interpretacion": "Circularidad semántica intra-documental mediante paráfrasis y reiteración.",
-      "nivel": "Progresión Normal Temática"
+      "interpretacion": "Circularidad semántica intra-documental (S_(1), S_(2) y paráfrasis BETO SBERT).",
+      "nivel": "Bucle Argumental / Redundancia Estricta"
     },
     "D5_Cohesion_Fluidez": {
-      "valor": 57.2,
+      "valor": 67.5,
       "escala": "[0 - 100]",
-      "interpretacion": "Conectividad proposicional y solidez sintáctica en la banda de Shannon.",
+      "interpretacion": "Conectividad proposicional y solidez sintáctica en la banda In-Fold de Shannon.",
       "nivel": "Cohesión Regular"
     },
-    "score_global_iml": 25.6,
-    "nivel_riesgo_estilometrico": "Bajo Riesgo de Manipulación Estilométrica (Texto Neutro/Sobrio)",
+    "score_global_iml": 36.6,
+    "nivel_riesgo_estilometrico": "Riesgo Moderado de Manipulación (Retórica Comercial o Polarizada)",
     "arquetipo_discursivo": {
       "id": "ESTILO_II_CLICKBAIT_CABECERA",
       "nombre": "Estilo II: Cebo Comercial / Clickbait de Cabecera",
@@ -189,9 +212,9 @@
   },
   "variables_ensamble_avanzado_5d": {
     "D1_Dinamica_Discursiva": {
-      "consec_sim_mean": 0.2395,
-      "consec_sim_min": 0.0222,
-      "consec_sim_std": 0.095
+      "consec_sim_mean": 0.3127,
+      "consec_sim_min": 0.1566,
+      "consec_sim_std": 0.1332
     },
     "D2_Linguistica_Forense_Epistemica": {
       "hedges_density": 0.0,
@@ -205,8 +228,8 @@
       ],
       "tokens_dicendi": [
         "anunció",
-        "Indicó",
-        "indicó"
+        "indicó",
+        "Indicó"
       ]
     },
     "D3_Riqueza_Lexica_Legibilidad": {
@@ -255,10 +278,10 @@
       "sensacionalismo_pct": 13.7,
       "es_oracion_gatillo": false,
       "coherencia_consecutiva": null,
-      "similitud_media_documento": 0.2914,
+      "similitud_media_documento": 0.3393,
       "par_mas_redundante": {
         "idx_oracion_cercana": 3,
-        "similitud": 0.5647,
+        "similitud": 0.7644,
         "texto_resumido": "Indicó que de esta forma se ratifica el llamado de alerta máxima en Puebla hasta..."
       },
       "mayusculas_ratio": 0.0,
@@ -274,7 +297,7 @@
       "interrogaciones": 0,
       "banderas_forenses": [
         "🎙️ Atribución Fuente (anunció)",
-        "🔁 Redundante con Frase #3 (cos=0.56)"
+        "🔁 Redundancia Estricta con Frase #3 (cos=0.76 >= 0.60)"
       ]
     },
     {
@@ -284,12 +307,12 @@
       "sensacionalismo_prob": 0.0117,
       "sensacionalismo_pct": 1.2,
       "es_oracion_gatillo": false,
-      "coherencia_consecutiva": 0.342,
-      "similitud_media_documento": 0.2958,
+      "coherencia_consecutiva": 0.3478,
+      "similitud_media_documento": 0.3756,
       "par_mas_redundante": {
-        "idx_oracion_cercana": 6,
-        "similitud": 0.4387,
-        "texto_resumido": "Jesús Ramírez, subsecretario de transparencia, indicó que todo el estado se encu..."
+        "idx_oracion_cercana": 3,
+        "similitud": 0.5337,
+        "texto_resumido": "Indicó que de esta forma se ratifica el llamado de alerta máxima en Puebla hasta..."
       },
       "mayusculas_ratio": 0.0,
       "palabras_mayusculas": [],
@@ -303,8 +326,7 @@
       "exclamaciones": 0,
       "interrogaciones": 0,
       "banderas_forenses": [
-        "🎙️ Atribución Fuente (indicó)",
-        "🔁 Redundante con Frase #6 (cos=0.44)"
+        "🎙️ Atribución Fuente (indicó)"
       ]
     },
     {
@@ -314,11 +336,11 @@
       "sensacionalismo_prob": 0.0525,
       "sensacionalismo_pct": 5.2,
       "es_oracion_gatillo": false,
-      "coherencia_consecutiva": 0.3338,
-      "similitud_media_documento": 0.2832,
+      "coherencia_consecutiva": 0.5337,
+      "similitud_media_documento": 0.4129,
       "par_mas_redundante": {
         "idx_oracion_cercana": 1,
-        "similitud": 0.5647,
+        "similitud": 0.7644,
         "texto_resumido": "El Gobierno de Puebla anunció que el confinamiento para evitar que colapse el si..."
       },
       "mayusculas_ratio": 0.0,
@@ -337,7 +359,7 @@
       "banderas_forenses": [
         "⚡ Intensificador/Booster (alerta)",
         "🎙️ Atribución Fuente (Indicó)",
-        "🔁 Redundante con Frase #1 (cos=0.56)"
+        "🔁 Redundancia Estricta con Frase #1 (cos=0.76 >= 0.60)"
       ]
     },
     {
@@ -347,12 +369,12 @@
       "sensacionalismo_prob": 0.032,
       "sensacionalismo_pct": 3.2,
       "es_oracion_gatillo": false,
-      "coherencia_consecutiva": 0.1979,
-      "similitud_media_documento": 0.1608,
+      "coherencia_consecutiva": 0.1672,
+      "similitud_media_documento": 0.1716,
       "par_mas_redundante": {
-        "idx_oracion_cercana": 5,
-        "similitud": 0.2368,
-        "texto_resumido": "Asimismo se advirtió mayor presencia policíaca en las calles para el cumplimient..."
+        "idx_oracion_cercana": 9,
+        "similitud": 0.2365,
+        "texto_resumido": "De mantenerse la tendencia, al día 14 de enero estaríamos \"a tope\" y el día 18 l..."
       },
       "mayusculas_ratio": 0.0,
       "palabras_mayusculas": [],
@@ -372,11 +394,11 @@
       "sensacionalismo_prob": 0.0636,
       "sensacionalismo_pct": 6.4,
       "es_oracion_gatillo": false,
-      "coherencia_consecutiva": 0.2368,
-      "similitud_media_documento": 0.2412,
+      "coherencia_consecutiva": 0.2282,
+      "similitud_media_documento": 0.3293,
       "par_mas_redundante": {
         "idx_oracion_cercana": 2,
-        "similitud": 0.3423,
+        "similitud": 0.4844,
         "texto_resumido": "En rueda de prensa, el gobernador Luis Miguel Barbosa indicó que se busca reduci..."
       },
       "mayusculas_ratio": 0.0,
@@ -388,9 +410,7 @@
       "tiene_citas": false,
       "exclamaciones": 0,
       "interrogaciones": 0,
-      "banderas_forenses": [
-        "🔁 Redundante con Frase #2 (cos=0.34)"
-      ]
+      "banderas_forenses": []
     },
     {
       "idx": 6,
@@ -399,11 +419,11 @@
       "sensacionalismo_prob": 0.0291,
       "sensacionalismo_pct": 2.9,
       "es_oracion_gatillo": false,
-      "coherencia_consecutiva": 0.27,
-      "similitud_media_documento": 0.193,
+      "coherencia_consecutiva": 0.3001,
+      "similitud_media_documento": 0.3083,
       "par_mas_redundante": {
         "idx_oracion_cercana": 2,
-        "similitud": 0.4387,
+        "similitud": 0.5258,
         "texto_resumido": "En rueda de prensa, el gobernador Luis Miguel Barbosa indicó que se busca reduci..."
       },
       "mayusculas_ratio": 0.0,
@@ -418,8 +438,7 @@
       "exclamaciones": 0,
       "interrogaciones": 0,
       "banderas_forenses": [
-        "🎙️ Atribución Fuente (indicó)",
-        "🔁 Redundante con Frase #2 (cos=0.44)"
+        "🎙️ Atribución Fuente (indicó)"
       ]
     },
     {
@@ -429,11 +448,11 @@
       "sensacionalismo_prob": 0.5372,
       "sensacionalismo_pct": 53.7,
       "es_oracion_gatillo": false,
-      "coherencia_consecutiva": 0.2912,
-      "similitud_media_documento": 0.1468,
+      "coherencia_consecutiva": 0.5041,
+      "similitud_media_documento": 0.2542,
       "par_mas_redundante": {
         "idx_oracion_cercana": 6,
-        "similitud": 0.2912,
+        "similitud": 0.5041,
         "texto_resumido": "Jesús Ramírez, subsecretario de transparencia, indicó que todo el estado se encu..."
       },
       "mayusculas_ratio": 0.0,
@@ -454,12 +473,12 @@
       "sensacionalismo_prob": 0.0099,
       "sensacionalismo_pct": 1.0,
       "es_oracion_gatillo": false,
-      "coherencia_consecutiva": 0.0222,
-      "similitud_media_documento": 0.1809,
+      "coherencia_consecutiva": 0.1566,
+      "similitud_media_documento": 0.266,
       "par_mas_redundante": {
-        "idx_oracion_cercana": 1,
-        "similitud": 0.4193,
-        "texto_resumido": "El Gobierno de Puebla anunció que el confinamiento para evitar que colapse el si..."
+        "idx_oracion_cercana": 3,
+        "similitud": 0.4257,
+        "texto_resumido": "Indicó que de esta forma se ratifica el llamado de alerta máxima en Puebla hasta..."
       },
       "mayusculas_ratio": 0.0,
       "palabras_mayusculas": [],
@@ -473,9 +492,7 @@
       "exclamaciones": 0,
       "interrogaciones": 0,
       "banderas_forenses": [
-        "🎙️ Atribución Fuente (indicó)",
-        "⚠️ Salto Temático Abrupto (Baja Coherencia)",
-        "🔁 Redundante con Frase #1 (cos=0.42)"
+        "🎙️ Atribución Fuente (indicó)"
       ]
     },
     {
@@ -485,11 +502,11 @@
       "sensacionalismo_prob": 0.0239,
       "sensacionalismo_pct": 2.4,
       "es_oracion_gatillo": false,
-      "coherencia_consecutiva": 0.2224,
-      "similitud_media_documento": 0.2656,
+      "coherencia_consecutiva": 0.2643,
+      "similitud_media_documento": 0.278,
       "par_mas_redundante": {
         "idx_oracion_cercana": 3,
-        "similitud": 0.4465,
+        "similitud": 0.4056,
         "texto_resumido": "Indicó que de esta forma se ratifica el llamado de alerta máxima en Puebla hasta..."
       },
       "mayusculas_ratio": 0.0,
@@ -502,8 +519,7 @@
       "exclamaciones": 0,
       "interrogaciones": 0,
       "banderas_forenses": [
-        "📜 Cita Textual Entrecomillada",
-        "🔁 Redundante con Frase #3 (cos=0.45)"
+        "📜 Cita Textual Entrecomillada"
       ]
     }
   ]

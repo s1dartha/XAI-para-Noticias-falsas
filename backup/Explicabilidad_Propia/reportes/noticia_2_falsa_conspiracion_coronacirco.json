@@ -1,0 +1,320 @@
+{
+  "metadatos": {
+    "titulo": "Desinformación Conspiracionista y Negacionista de Redes",
+    "conteo_palabras": 106,
+    "num_oraciones": 5,
+    "tiempo_analisis_segundos": 0.135,
+    "dispositivo": "cuda",
+    "metadata_adicional": {
+      "id": "noticia_2_falsa_conspiracion_coronacirco",
+      "tipo_referencia": "Falsa (Ground Truth = 1)",
+      "origen": "Corpus Fact-Checking Hispanoamérica (Redes / Mensajería)"
+    }
+  },
+  "sensacionalismo_beto": {
+    "P_full": 0.9941,
+    "P_full_pct": 99.4,
+    "P_mean": 0.8282,
+    "P_max": 0.9955,
+    "P_top2": 0.9903,
+    "sigma_sens": 0.2154,
+    "dilution_ratio": 0.9985,
+    "delta_p_gatillo_causal": 0.0251,
+    "oracion_gatillo_principal": {
+      "idx": 1,
+      "texto": "Victoria Abril ha dejado a todo el mundo con la boca abierta con su discurso anti-plandemia a la que ha llegado a denominar coronacirco.",
+      "sens_prob": 0.9955
+    },
+    "diagnostico": "Alarma Sensacionalista Sostenida"
+  },
+  "redundancia_sbert": {
+    "mean_intra_similarity": 0.1942,
+    "max_intra_similarity": 0.4051,
+    "redundant_pairs_count": 1,
+    "num_pairs_total": 10,
+    "redundancy_density_pct": 10.0,
+    "umbral_gmm_tau": 0.34,
+    "shannon_bin_7": 1,
+    "shannon_bin_4": 1,
+    "par_maxima_redundancia": {
+      "oracion_a_idx": 3,
+      "oracion_a_texto": "Entre otras cosas ha dicho: «Ya no son tesis conspiracionistas, llevamos un año de coronacirco y epidemia de miedo y la tele nos bombardea con muertos y enfermos».",
+      "oracion_b_idx": 4,
+      "oracion_b_texto": "Antes iban metiendo miedo para decir que la única solución es la vacuna, pero la vacuna no es la solución, nos están usando como conejillos de indias.",
+      "similitud_coseno": 0.4051,
+      "supera_umbral_gmm": true
+    },
+    "matriz_similitud": [
+      [
+        1.0,
+        0.1993,
+        0.2712,
+        0.2313,
+        0.0729
+      ],
+      [
+        0.1993,
+        1.0,
+        0.1593,
+        0.1379,
+        0.2291
+      ],
+      [
+        0.2712,
+        0.1593,
+        1.0,
+        0.4051,
+        0.1977
+      ],
+      [
+        0.2313,
+        0.1379,
+        0.4051,
+        1.0,
+        0.0381
+      ],
+      [
+        0.0729,
+        0.2291,
+        0.1977,
+        0.0381,
+        1.0
+      ]
+    ],
+    "diagnostico": "Discurso Desarticulado / Párrafos Fragmentados"
+  },
+  "las_5_dimensiones_iml": {
+    "D1_Carga_Emocional": {
+      "valor": 99.4,
+      "escala": "[0 - 100]",
+      "interpretacion": "Densidad de superlativos y dramatismo léxico asignado por BETO.",
+      "nivel": "Crítico / Alarmismo Extremo"
+    },
+    "D2_Volatilidad_Gatillo": {
+      "valor": 25.1,
+      "escala": "[0 - 100]",
+      "interpretacion": "Desbalance entre la frase gatillo y la sobriedad media del artículo.",
+      "nivel": "Desbalance Leve"
+    },
+    "D3_Amortiguacion_Contextual": {
+      "valor": 0.1,
+      "escala": "[0 - 100]",
+      "interpretacion": "Capacidad del cuerpo del texto para diluir o mitigar la alarma del titular.",
+      "nivel": "Sin Amortiguación (Pánico Sostenido en Todo el Texto)"
+    },
+    "D4_Reiteracion_Redundancia": {
+      "valor": 11.6,
+      "escala": "[0 - 100]",
+      "interpretacion": "Circularidad semántica intra-documental mediante paráfrasis y reiteración.",
+      "nivel": "Diversidad Temática / Sin Repeticiones"
+    },
+    "D5_Cohesion_Fluidez": {
+      "valor": 41.0,
+      "escala": "[0 - 100]",
+      "interpretacion": "Conectividad proposicional y solidez sintáctica en la banda de Shannon.",
+      "nivel": "Texto Desarticulado / Roto"
+    },
+    "score_global_iml": 63.0,
+    "nivel_riesgo_estilometrico": "Alto Riesgo de Manipulación Estilométrica (Anomalía Forense Severa)",
+    "arquetipo_discursivo": {
+      "id": "ESTILO_IV_DESARTICULADO",
+      "nombre": "Estilo IV: Incoherencia Estructural / Generación Rota",
+      "descripcion": "Texto con baja conectividad proposicional, fragmentación sintáctica o párrafos desvinculados.",
+      "condicion_activada": "D5 <= 55.0 y D4 < 40.0"
+    }
+  },
+  "variables_ensamble_avanzado_5d": {
+    "D1_Dinamica_Discursiva": {
+      "consec_sim_mean": 0.2005,
+      "consec_sim_min": 0.0381,
+      "consec_sim_std": 0.1322
+    },
+    "D2_Linguistica_Forense_Epistemica": {
+      "hedges_density": 0.0,
+      "boosters_density": 0.0,
+      "epistemic_ratio": 0.1,
+      "quotes_density": 0.4,
+      "dicendi_density": 0.0,
+      "tokens_hedges": [],
+      "tokens_boosters": [],
+      "tokens_dicendi": []
+    },
+    "D3_Riqueza_Lexica_Legibilidad": {
+      "flesch_szigriszt": 63.97,
+      "gutierrez_polini": 29.71,
+      "guiraud_ttr": 6.702,
+      "hapax_ratio_pct": 46.23,
+      "vocabulario_unico": 69,
+      "promedio_silabas_palabra": 1.95,
+      "promedio_palabras_oracion": 21.2
+    },
+    "D4_Perfilado_Morfosintactico_POS": {
+      "adv_density": 8.491,
+      "pron_1p_density": 1.887,
+      "pron_3p_density": 11.321,
+      "adj_noun_ratio": 0.2,
+      "conteo_adjetivos": 5,
+      "conteo_sustantivos": 24,
+      "conteo_adverbios": 9,
+      "conteo_pronombres_1p": 2,
+      "conteo_pronombres_3p": 12
+    },
+    "D5_Anclajes_Factuales_Puntuacion": {
+      "all_caps_count": 0,
+      "all_caps_ratio_pct": 0.0,
+      "upper_chars_ratio_pct": 1.45,
+      "excl_density": 0.0,
+      "quest_density": 0.0,
+      "ellipsis_density": 0.0,
+      "punct_intensity": 0.0,
+      "numbers_density": 0.0,
+      "percent_count": 0,
+      "temporal_density": 0.943,
+      "palabras_mayusculas_encontradas": [],
+      "marcadores_temporales_encontrados": [
+        "Abril"
+      ]
+    }
+  },
+  "desglose_oraciones": [
+    {
+      "idx": 1,
+      "texto": "Victoria Abril ha dejado a todo el mundo con la boca abierta con su discurso anti-plandemia a la que ha llegado a denominar coronacirco.",
+      "num_palabras": 25,
+      "sensacionalismo_prob": 0.9955,
+      "sensacionalismo_pct": 99.6,
+      "es_oracion_gatillo": true,
+      "coherencia_consecutiva": null,
+      "similitud_media_documento": 0.1937,
+      "par_mas_redundante": {
+        "idx_oracion_cercana": 3,
+        "similitud": 0.2712,
+        "texto_resumido": "Entre otras cosas ha dicho: «Ya no son tesis conspiracionistas, llevamos un año ..."
+      },
+      "mayusculas_ratio": 0.0,
+      "palabras_mayusculas": [],
+      "adverbios_densidad": 0.0,
+      "verbos_dicendi": [],
+      "boosters": [],
+      "hedges": [],
+      "tiene_citas": false,
+      "exclamaciones": 0,
+      "interrogaciones": 0,
+      "banderas_forenses": [
+        "🔥 Pico Sensacionalista (99.6%)"
+      ]
+    },
+    {
+      "idx": 2,
+      "texto": "Más claro y con más lógica no se pueden decir las cosas, se la ha entendido todo perfectamente.",
+      "num_palabras": 18,
+      "sensacionalismo_prob": 0.7413,
+      "sensacionalismo_pct": 74.1,
+      "es_oracion_gatillo": true,
+      "coherencia_consecutiva": 0.1993,
+      "similitud_media_documento": 0.1814,
+      "par_mas_redundante": {
+        "idx_oracion_cercana": 5,
+        "similitud": 0.2291,
+        "texto_resumido": "Ponemos el vídeo a continuación, no tiene desperdicio."
+      },
+      "mayusculas_ratio": 0.0,
+      "palabras_mayusculas": [],
+      "adverbios_densidad": 16.67,
+      "verbos_dicendi": [],
+      "boosters": [],
+      "hedges": [],
+      "tiene_citas": false,
+      "exclamaciones": 0,
+      "interrogaciones": 0,
+      "banderas_forenses": [
+        "🔥 Pico Sensacionalista (74.1%)",
+        "💬 Densidad Adverbial Alta (16.7%)"
+      ]
+    },
+    {
+      "idx": 3,
+      "texto": "Entre otras cosas ha dicho: «Ya no son tesis conspiracionistas, llevamos un año de coronacirco y epidemia de miedo y la tele nos bombardea con muertos y enfermos».",
+      "num_palabras": 28,
+      "sensacionalismo_prob": 0.985,
+      "sensacionalismo_pct": 98.5,
+      "es_oracion_gatillo": true,
+      "coherencia_consecutiva": 0.1593,
+      "similitud_media_documento": 0.2583,
+      "par_mas_redundante": {
+        "idx_oracion_cercana": 4,
+        "similitud": 0.4051,
+        "texto_resumido": "Antes iban metiendo miedo para decir que la única solución es la vacuna, pero la..."
+      },
+      "mayusculas_ratio": 0.0,
+      "palabras_mayusculas": [],
+      "adverbios_densidad": 3.57,
+      "verbos_dicendi": [],
+      "boosters": [],
+      "hedges": [],
+      "tiene_citas": true,
+      "exclamaciones": 0,
+      "interrogaciones": 0,
+      "banderas_forenses": [
+        "🔥 Pico Sensacionalista (98.5%)",
+        "📜 Cita Textual Entrecomillada",
+        "🔁 Redundante con Frase #4 (cos=0.41)"
+      ]
+    },
+    {
+      "idx": 4,
+      "texto": "Antes iban metiendo miedo para decir que la única solución es la vacuna, pero la vacuna no es la solución, nos están usando como conejillos de indias.",
+      "num_palabras": 27,
+      "sensacionalismo_prob": 0.9778,
+      "sensacionalismo_pct": 97.8,
+      "es_oracion_gatillo": true,
+      "coherencia_consecutiva": 0.4051,
+      "similitud_media_documento": 0.2031,
+      "par_mas_redundante": {
+        "idx_oracion_cercana": 3,
+        "similitud": 0.4051,
+        "texto_resumido": "Entre otras cosas ha dicho: «Ya no son tesis conspiracionistas, llevamos un año ..."
+      },
+      "mayusculas_ratio": 0.0,
+      "palabras_mayusculas": [],
+      "adverbios_densidad": 0.0,
+      "verbos_dicendi": [],
+      "boosters": [],
+      "hedges": [],
+      "tiene_citas": false,
+      "exclamaciones": 0,
+      "interrogaciones": 0,
+      "banderas_forenses": [
+        "🔥 Pico Sensacionalista (97.8%)",
+        "🔁 Redundante con Frase #3 (cos=0.41)"
+      ]
+    },
+    {
+      "idx": 5,
+      "texto": "Ponemos el vídeo a continuación, no tiene desperdicio.",
+      "num_palabras": 8,
+      "sensacionalismo_prob": 0.4416,
+      "sensacionalismo_pct": 44.2,
+      "es_oracion_gatillo": false,
+      "coherencia_consecutiva": 0.0381,
+      "similitud_media_documento": 0.1345,
+      "par_mas_redundante": {
+        "idx_oracion_cercana": 2,
+        "similitud": 0.2291,
+        "texto_resumido": "Más claro y con más lógica no se pueden decir las cosas, se la ha entendido todo..."
+      },
+      "mayusculas_ratio": 0.0,
+      "palabras_mayusculas": [],
+      "adverbios_densidad": 0.0,
+      "verbos_dicendi": [],
+      "boosters": [],
+      "hedges": [],
+      "tiene_citas": false,
+      "exclamaciones": 0,
+      "interrogaciones": 0,
+      "banderas_forenses": [
+        "⚠️ Salto Temático Abrupto (Baja Coherencia)"
+      ]
+    }
+  ]
+}

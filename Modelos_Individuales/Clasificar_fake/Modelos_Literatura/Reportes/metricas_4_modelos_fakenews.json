@@ -1,12 +1,10 @@
 {
     "metadata": {
-        "dataset_path": "C:\\Users\\natali.albatem\\Documents\\Tesis\\Datasets\\casificar fake\\Noticias_entre_70_y_370_palabras (1).xlsx",
+        "dataset": "Noticias_entre_70_y_370_palabras (1).xlsx",
         "total_registros": 2604,
         "clase_verdadera_0": 1345,
         "clase_falsa_1": 1259,
-        "dispositivo": "cpu (8 threads)",
-        "timestamp": "2026-08-31 15:15:00",
-        "nota_correccion": "Etiquetas corregidas oficialmente: True=Verdadera (0), False=Falsa (1)"
+        "nota": "Metricas canonicas auditadas: 0=Real, 1=Fake"
     },
     "modelos": {
         "BETO_Narrativaai": {
@@ -17,9 +15,9 @@
             "Recall": 0.7609,
             "F1-Score": 0.6616,
             "AUC": 0.6926,
-            "AP": 0.3812,
-            "Tiempo Total (s)": 2083.26,
-            "Latencia (ms)": 800.02,
+            "AP": 0.6902,
+            "Tiempo Total (s)": 462.13,
+            "Latencia (ms)": 177.47,
             "CM": [
                 [
                     666,
@@ -39,7 +37,7 @@
             "Recall": 0.726,
             "F1-Score": 0.8309,
             "AUC": 0.9362,
-            "AP": 0.1245,
+            "AP": 0.9444,
             "Tiempo Total (s)": 620.63,
             "Latencia (ms)": 238.34,
             "CM": [
@@ -59,11 +57,11 @@
             "Accuracy": 0.6947,
             "Precision": 0.6224,
             "Recall": 0.9373,
-            "F1-Score": 0.7481,
+            "F1-Score": 0.748,
             "AUC": 0.8635,
-            "AP": 0.3521,
-            "Tiempo Total (s)": 627.01,
-            "Latencia (ms)": 240.79,
+            "AP": 0.868,
+            "Tiempo Total (s)": 236.28,
+            "Latencia (ms)": 90.74,
             "CM": [
                 [
                     629,
@@ -81,9 +79,9 @@
             "Accuracy": 0.4574,
             "Precision": 0.4411,
             "Recall": 0.4583,
-            "F1-Score": 0.4495,
-            "AUC": 0.4382,
-            "AP": 0.548,
+            "F1-Score": 0.4496,
+            "AUC": 0.4381,
+            "AP": 0.5481,
             "Tiempo Total (s)": 780.4,
             "Latencia (ms)": 299.69,
             "CM": [

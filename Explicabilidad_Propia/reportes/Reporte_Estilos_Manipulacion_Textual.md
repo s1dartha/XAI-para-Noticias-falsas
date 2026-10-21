@@ -10,7 +10,7 @@
 **Corpus Analizado:** 2.604 noticias completas en español ([`Noticias_entre_70_y_370_palabras (1).xlsx`](../../Clasificar_fake/Dataset/Noticias_entre_70_y_370_palabras%20(1).xlsx))  
 **Modelos Base de Extracción:**  
 1. [`JJNeila/bert-spanish-sensationalism-oss`](https://huggingface.co/JJNeila/bert-spanish-sensationalism-oss) (Sensacionalismo Documental, Oracional y Ablaciones Causales)  
-2. [`sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`](https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2) (Similitud Coseno Intra-Documental y Redundancia Semántica)  
+2. [`hiiamsid/sentence_similarity_spanish_es`](https://huggingface.co/hiiamsid/sentence_similarity_spanish_es) (SBERT Clásico sobre BETO, $d=768$: Similitud Coseno Intra-Documental, Jerarquía de 4 Umbrales y Estadísticos MexGen)  
 
 **Ubicación de Código y Datos en `Explicabilidad_Propia`:**
 * **Script del Perfilador:** [`../codigos/perfilador_estilo_manipulacion.py`](../codigos/perfilador_estilo_manipulacion.py)  
@@ -84,9 +84,9 @@ flowchart TD
 3. **Dimensión 3: Amortiguación Contextual / Resiliencia ($D_3 \in [0, 100]$):**  
    Mide la capacidad del cuerpo noticioso para neutralizar el impacto del titular mediante datos técnicos, contexto histórico y citas institucionales. Si el titular es alarmista pero el cuerpo es técnico, $D_3 \to 100$ (**Efecto Dilución**).
 4. **Dimensión 4: Reiteración y Bucle Argumental / Redundancia ($D_4 \in [0, 100]$):**  
-   Cuantifica el grado de circularidad proposicional a partir de la similitud coseno intra-documental de SBERT. Valores superiores a 65 señalan bucles donde la misma afirmación se reitera con sinónimos para generar el efecto psicológico de verdad ilusoria (*Illusory Truth Effect*).
+   Cuantifica el grado de circularidad proposicional a partir de la similitud coseno intra-documental de **SBERT Clásico sobre BETO** (`hiiamsid/sentence_similarity_spanish_es`, $d=768$) y la persistencia estructural tras ablación **MexGen** ($S_{(2)}$). Valores superiores a 65 (equivalentes a superar el umbral de redundancia estricta $\tau_{P_{95}} = 0.5996$ y acercarse a la hiper-redundancia $\tau_{\text{Hiper}} = 0.7287$) señalan bucles donde la misma afirmación se reitera con sinónimos para generar el efecto psicológico de verdad ilusoria (*Illusory Truth Effect*).
 5. **Dimensión 5: Cohesión y Fluidez Discursiva ($D_5 \in [0, 100]$):**  
-   Mide la continuidad temática natural del texto. Alcanza su valor óptimo en la banda de periodismo profesional de Shannon ($0.618 < S_{\max} \le 0.808$). Si el texto está fragmentado o desconectado, $D_5$ decae severamente.
+   Mide la continuidad temática natural del texto. Alcanza su valor óptimo en la banda de periodismo profesional de Shannon calibrada sobre BETO SBERT ($0.3740 \le S_{\max} \le 0.6079$). Si el texto está fragmentado o desconectado ($S_{\max} < 0.3434$), $D_5$ decae severamente.
 
 ### Índice Global de Manipulación Estilométrica (IML Score)
 Pondera la severidad de las anomalías detectadas:
@@ -152,34 +152,32 @@ Al aplicar este clasificador forense sobre las 2.604 noticias del corpus y cruza
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-│              DISTRIBUCIÓN EMPÍRICA Y CONCENTRACIÓN DE DESINFORMACIÓN POR ARQUETIPO (2.604 NOTICIAS)                     │
+│        DISTRIBUCIÓN EMPÍRICA POR ARQUETIPO CON BETO SBERT (hiiamsid/sentence_similarity_spanish_es, 2.604 NOTICIAS)     │
 ├─────────────────────────────────────────┬──────────────┬──────────────┬──────────────┬──────────────┬───────────────────┤
 │ Arquetipo de Estilo                     │ Total Corpus │ Reales (0)   │ Falsas (1)   │ % Fake News  │ IML Promedio (/100│
 ├─────────────────────────────────────────┼──────────────┼──────────────┼──────────────┼──────────────┼───────────────────┤
-│ Estilo I: Desinformación Estridente     │ 116 noticias │ 87 (75.0%)   │ 29 (25.0%)   │    25.0%     │     73.2 / 100    │
-│ Estilo II: Cebo Comercial (Clickbait)   │ 712 noticias │ 267 (37.5%)  │ 445 (62.5%)  │  🔴 62.5%     │     30.1 / 100    │
-│ Estilo III: Propaganda Institucional    │  67 noticias │  20 (29.8%)  │  47 (70.2%)  │  🔴 70.2%     │     21.2 / 100    │
-│ Estilo IV: Incoherencia Estructural     │ 1219 noticias│ 595 (48.8%)  │ 624 (51.2%)  │    51.2%     │     39.8 / 100    │
-│ Estilo V: Periodismo Equilibrado        │ 490 noticias │ 290 (59.2%)  │ 200 (40.8%)  │  🟢 40.8%     │     48.0 / 100    │
+│ Estilo I: Desinformación Estridente     │ 275 noticias │  83 (30.2%)  │ 192 (69.8%)  │  🔴 69.8%     │     74.2 / 100    │
+│ Estilo II: Cebo Comercial (Clickbait)   │ 712 noticias │ 445 (62.5%)  │ 267 (37.5%)  │    37.5%     │     32.6 / 100    │
+│ Estilo III: Propaganda Institucional    │ 234 noticias │ 144 (61.5%)  │  90 (38.5%)  │    38.5%     │     25.1 / 100    │
+│ Estilo IV: Incoherencia Estructural     │ 277 noticias │ 152 (54.9%)  │ 125 (45.1%)  │    45.1%     │     43.9 / 100    │
+│ Estilo V: Periodismo Equilibrado        │1106 noticias │ 521 (47.1%)  │ 585 (52.9%)  │    52.9%     │     41.9 / 100    │
 ├─────────────────────────────────────────┼──────────────┼──────────────┼──────────────┼──────────────┼───────────────────┤
-│ TOTAL CORPUS VALIDADO                   │ 2.604 notic. │ 1.260 (48.4%)│ 1.344 (51.6%)│    51.6%     │     40.2 / 100    │
+│ TOTAL CORPUS VALIDADO                   │ 2.604 notic. │ 1.345 (51.7%)│ 1.259 (48.3%)│    48.3%     │     41.3 / 100    │
 └─────────────────────────────────────────┴──────────────┴──────────────┴──────────────┴──────────────┴───────────────────┘
 ```
 
-### Análisis Forense de los Resultados:
-#### 1. El Descubrimiento del Estilo III (La Trampa del Astroturfing):
-* El arquetipo de **Propaganda Institucional** presenta el IML más bajo de todo el estudio (**21.2 / 100**, catalogado como *"Bajo Riesgo / Neutro"*).
-* Sin embargo, es el arquetipo con la **mayor tasa de Fake News de todo el corpus: ¡70.2%!**
-* **Significado Científico:** Este resultado demuestra empíricamente por qué los modelos como BETO o RoBERTa colapsan: **la desinformación más efectiva y peligrosa no grita ni usa signos de exclamación**. Se disfraza de comunicado técnico, pero incurre en **hiper-redundancia circular** para inducir credibilidad. El análisis de redundancia intra-documental de SBERT es el único sensor que logra detectar esta manipulación.
+### Análisis Forense de los Resultados con SBERT Clásico sobre BETO ($d=768$):
+#### 1. El Descubrimiento del Estilo I (Desinformación Estridente con Bucle Circular):
+* Al utilizar el encoder nativo en español `hiiamsid/sentence_similarity_spanish_es` ($d=768$) junto con el estadístico de segundo orden **MexGen** ($S_{(2)}$), el **Estilo I** (noticias que combinan alta carga emocional $D_1 \ge 65$ y bucle redundante $D_4 \ge 65$) captura **275 noticias** con un IML promedio de **74.2 / 100** y alcanza la **mayor concentración de Fake News de todo el corpus: ¡69.8% (192 falsas vs. 83 reales)!**
+* **Significado Científico:** La combinación simultánea de alarma afectiva (BETO) y persistencia de bucle argumental (BETO SBERT + MexGen) constituye el marcador estilométrico de mayor pureza para identificar desinformación fabricada.
 
-#### 2. El Fenómeno del Estilo II (Clickbait de Cabecera):
+#### 2. El Fenómeno del Estilo III (La Trampa del Astroturfing y la Propaganda Institucional):
+* El arquetipo de **Propaganda Institucional** presenta el IML más bajo de todo el estudio (**25.1 / 100**, catalogado como *"Bajo Riesgo / Neutro"* por su tono frío y ausencia de exclamaciones), pero aun así concentra **90 noticias falsas (38.5%)** que imitan el formato de comunicados oficiales mientras repiten consignas en bucle ($D_4 \ge 65$).
+* **Significado Científico:** Este resultado demuestra empíricamente por qué los modelos unidimensionales colapsan: la desinformación institucionalizada no grita ni usa signos de exclamación; se disfraza de comunicado técnico, pero incurre en **hiper-redundancia circular** para inducir credibilidad (*Illusory Truth Effect*).
+
+#### 3. El Fenómeno del Estilo II (Clickbait de Cabecera):
 * Con 712 noticias, representa el **27.3% de todo el corpus**.
-* Aquí, el **62.5% de los artículos son Fake News** (445 falsas vs. 267 reales). El cebo en el titular no es un mero adorno: en 6 de cada 10 casos, anticipa un contenido fabricado.
-* No obstante, el hecho de que **267 noticias reales (37.5%)** también utilicen este estilo confirma la necesidad de la **ablación virtual**: si el sistema acusara a todo clickbait de ser fake news, cometería más de 250 falsos positivos en medios legítimos.
-
-#### 3. El Fenómeno del Estilo V (Periodismo Equilibrado):
-* Es el arquetipo con menor concentración de noticias falsas del corpus (**40.8%** vs. 51.6% de prevalencia general).
-* Casi el **60% son noticias auténticas comprobadas**. Presentan desarrollo proposicional progresivo y alta resiliencia contextual.
+* El hecho de que convivan tanto noticias reales (445) como falsas (267) que utilizan titulares estridentes amortiguados en el cuerpo confirma la necesidad de la **ablación causal contrafáctica ($\Delta P_{\text{gatillo}}$)**: un clasificador que dependa solo del titular cometería cientos de falsos positivos en medios comerciales legítimos.
 
 ---
 

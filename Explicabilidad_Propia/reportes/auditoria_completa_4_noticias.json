@@ -4,8 +4,9 @@
       "titulo": "Bulo de Salud con Mayúsculas Sostenidas y Alarma Oncológica",
       "conteo_palabras": 126,
       "num_oraciones": 5,
-      "tiempo_analisis_segundos": 0.393,
+      "tiempo_analisis_segundos": 0.351,
       "dispositivo": "cuda",
+      "modelo_redundancia": "hiiamsid/sentence_similarity_spanish_es",
       "metadata_adicional": {
         "id": "noticia_1_falsa_salud_mayusculas",
         "tipo_referencia": "Falsa (Ground Truth = 1)",
@@ -29,60 +30,82 @@
       "diagnostico": "Alarma Sensacionalista Sostenida"
     },
     "redundancia_sbert": {
-      "mean_intra_similarity": 0.4553,
-      "max_intra_similarity": 0.6436,
-      "redundant_pairs_count": 8,
+      "mean_intra_similarity": 0.3904,
+      "max_intra_similarity": 0.6454,
+      "second_max_intra_similarity": 0.6374,
+      "top3_mean_intra_similarity": 0.5947,
+      "p90_intra_similarity": 0.6382,
+      "var_intra_similarity": 0.0235,
+      "max_post_ablation_mexgen": 0.5012,
+      "mexgen_persistence_gap": 0.1442,
+      "delta_mean_sim_morf": 0.0656,
+      "topologia_mexgen": "Bucle Único Focalizado (S_post < 0.60: se desactiva al retirar 1 oración)",
+      "topic_continuity_pairs_count": 5,
+      "topic_continuity_density_pct": 50.0,
+      "paraphrase_pairs_count_p90": 2,
+      "paraphrase_density_p90_pct": 20.0,
+      "strict_redundant_pairs_count_p95": 2,
+      "strict_redundancy_density_p95_pct": 20.0,
+      "hyper_redundant_pairs_count": 0,
+      "hyper_redundancy_density_pct": 0.0,
+      "redundant_pairs_count": 2,
       "num_pairs_total": 10,
-      "redundancy_density_pct": 80.0,
-      "umbral_gmm_tau": 0.34,
-      "shannon_bin_7": 4,
-      "shannon_bin_4": 2,
+      "redundancy_density_pct": 20.0,
+      "umbral_gmm_tau": 0.3434,
+      "umbral_pawsx_tau": 0.534,
+      "umbral_estricto_tau": 0.5996,
+      "umbral_hiper_tau": 0.7287,
+      "shannon_bin_7": 5,
+      "shannon_bin_4": 3,
       "par_maxima_redundancia": {
         "oracion_a_idx": 1,
         "oracion_a_texto": "Boooomm\nMUJERES VACUNADAS DE COVID ESTÁN MOSTRANDO EFECTOS SECUNDARIOS TÍPICOS DE CANCER DE MAMA\nLos médicos de Intermountain Healthcare’s Breast Care Centre de Utah, USA, anuncian nuevas pautas de mamografías para las mujeres vacunadas contra Covid-19 recientemente.",
         "oracion_b_idx": 2,
         "oracion_b_texto": "Los médicos han observado inflamación de los ganglios linfáticos en las mamografías de detección de mujeres que se vacunaron recientemente contra COVID-19.",
-        "similitud_coseno": 0.6436,
-        "supera_umbral_gmm": true
+        "similitud_coseno": 0.6454,
+        "supera_continuidad_gmm_034": true,
+        "supera_parafrasis_pawsx_053": true,
+        "supera_redundancia_estricta_060": true,
+        "supera_hiper_redundancia_073": false
       },
       "matriz_similitud": [
         [
           1.0,
-          0.6436,
-          0.4778,
-          0.3813,
-          0.4016
+          0.6454,
+          0.5012,
+          0.4242,
+          0.3282
         ],
         [
-          0.6436,
+          0.6454,
           1.0,
-          0.5028,
-          0.5277,
-          0.4864
+          0.6374,
+          0.3593,
+          0.3132
         ],
         [
-          0.4778,
-          0.5028,
+          0.5012,
+          0.6374,
           1.0,
-          0.2999,
-          0.3291
+          0.1533,
+          0.2606
         ],
         [
-          0.3813,
-          0.5277,
-          0.2999,
+          0.4242,
+          0.3593,
+          0.1533,
           1.0,
-          0.5023
+          0.281
         ],
         [
-          0.4016,
-          0.4864,
-          0.3291,
-          0.5023,
+          0.3282,
+          0.3132,
+          0.2606,
+          0.281,
           1.0
         ]
       ],
-      "diagnostico": "Redundancia Balanceada de Prensa Profesional (Banda Óptima Shannon)"
+      "diagnostico": "Redundancia Semántica Estricta (Reiteración Proposicional, >= 0.60)"
     },
     "las_5_dimensiones_iml": {
       "D1_Carga_Emocional": {
@@ -104,31 +127,31 @@
         "nivel": "Sin Amortiguación (Pánico Sostenido en Todo el Texto)"
       },
       "D4_Reiteracion_Redundancia": {
-        "valor": 54.2,
+        "valor": 81.2,
         "escala": "[0 - 100]",
-        "interpretacion": "Circularidad semántica intra-documental mediante paráfrasis y reiteración.",
-        "nivel": "Progresión Normal Temática"
+        "interpretacion": "Circularidad semántica intra-documental (S_(1), S_(2) y paráfrasis BETO SBERT).",
+        "nivel": "Bucle Argumental / Redundancia Estricta"
       },
       "D5_Cohesion_Fluidez": {
-        "valor": 99.0,
+        "valor": 87.5,
         "escala": "[0 - 100]",
-        "interpretacion": "Conectividad proposicional y solidez sintáctica en la banda de Shannon.",
+        "interpretacion": "Conectividad proposicional y solidez sintáctica en la banda In-Fold de Shannon.",
         "nivel": "Cohesión Profesional Óptima"
       },
-      "score_global_iml": 75.7,
+      "score_global_iml": 82.2,
       "nivel_riesgo_estilometrico": "Alto Riesgo de Manipulación Estilométrica (Anomalía Forense Severa)",
       "arquetipo_discursivo": {
-        "id": "ESTILO_V_PERIODISMO_EQUILIBRADO",
-        "nombre": "Estilo V: Periodismo Profesional Balanceado",
-        "descripcion": "Redacción equilibrada con variedad léxica, desarrollo temático progresivo y ausencia de manipulaciones estilísticas.",
-        "condicion_activada": "Comportamiento estilométrico equilibrado sin anomalías severas"
+        "id": "ESTILO_I_DESINFO_ESTRIDENTE",
+        "nombre": "Estilo I: Desinformación Estridente / Cliché Hiperbólico",
+        "descripcion": "Texto saturado homogéneamente de emociones extremas con reiteración circular de premisas.",
+        "condicion_activada": "D1 >= 65.0 y D4 >= 65.0"
       }
     },
     "variables_ensamble_avanzado_5d": {
       "D1_Dinamica_Discursiva": {
-        "consec_sim_mean": 0.4871,
-        "consec_sim_min": 0.2999,
-        "consec_sim_std": 0.1225
+        "consec_sim_mean": 0.4293,
+        "consec_sim_min": 0.1533,
+        "consec_sim_std": 0.2169
       },
       "D2_Linguistica_Forense_Epistemica": {
         "hedges_density": 0.0,
@@ -197,10 +220,10 @@
         "sensacionalismo_pct": 99.1,
         "es_oracion_gatillo": true,
         "coherencia_consecutiva": null,
-        "similitud_media_documento": 0.4761,
+        "similitud_media_documento": 0.4748,
         "par_mas_redundante": {
           "idx_oracion_cercana": 2,
-          "similitud": 0.6436,
+          "similitud": 0.6454,
           "texto_resumido": "Los médicos han observado inflamación de los ganglios linfáticos en las mamograf..."
         },
         "mayusculas_ratio": 26.32,
@@ -229,7 +252,7 @@
           "🔥 Pico Sensacionalista (99.1%)",
           "📢 MAYÚSCULAS Sostenidas (26.3%)",
           "⚡ Intensificador/Booster (Boooomm)",
-          "🔁 Redundante con Frase #2 (cos=0.64)"
+          "🔁 Redundancia Estricta con Frase #2 (cos=0.65 >= 0.60)"
         ]
       },
       {
@@ -239,11 +262,11 @@
         "sensacionalismo_prob": 0.2768,
         "sensacionalismo_pct": 27.7,
         "es_oracion_gatillo": false,
-        "coherencia_consecutiva": 0.6436,
-        "similitud_media_documento": 0.5401,
+        "coherencia_consecutiva": 0.6454,
+        "similitud_media_documento": 0.4888,
         "par_mas_redundante": {
           "idx_oracion_cercana": 1,
-          "similitud": 0.6436,
+          "similitud": 0.6454,
           "texto_resumido": "Boooomm\nMUJERES VACUNADAS DE COVID ESTÁN MOSTRANDO EFECTOS SECUNDARIOS TÍPICOS D..."
         },
         "mayusculas_ratio": 4.55,
@@ -258,7 +281,7 @@
         "exclamaciones": 0,
         "interrogaciones": 0,
         "banderas_forenses": [
-          "🔁 Redundante con Frase #1 (cos=0.64)"
+          "🔁 Redundancia Estricta con Frase #1 (cos=0.65 >= 0.60)"
         ]
       },
       {
@@ -268,11 +291,11 @@
         "sensacionalismo_prob": 0.6292,
         "sensacionalismo_pct": 62.9,
         "es_oracion_gatillo": false,
-        "coherencia_consecutiva": 0.5028,
-        "similitud_media_documento": 0.4024,
+        "coherencia_consecutiva": 0.6374,
+        "similitud_media_documento": 0.3881,
         "par_mas_redundante": {
           "idx_oracion_cercana": 2,
-          "similitud": 0.5028,
+          "similitud": 0.6374,
           "texto_resumido": "Los médicos han observado inflamación de los ganglios linfáticos en las mamograf..."
         },
         "mayusculas_ratio": 0.0,
@@ -286,7 +309,7 @@
         "interrogaciones": 0,
         "banderas_forenses": [
           "📜 Cita Textual Entrecomillada",
-          "🔁 Redundante con Frase #2 (cos=0.50)"
+          "🔁 Redundancia Estricta con Frase #2 (cos=0.64 >= 0.60)"
         ]
       },
       {
@@ -296,12 +319,12 @@
         "sensacionalismo_prob": 0.0585,
         "sensacionalismo_pct": 5.8,
         "es_oracion_gatillo": false,
-        "coherencia_consecutiva": 0.2999,
-        "similitud_media_documento": 0.4278,
+        "coherencia_consecutiva": 0.1533,
+        "similitud_media_documento": 0.3045,
         "par_mas_redundante": {
-          "idx_oracion_cercana": 2,
-          "similitud": 0.5277,
-          "texto_resumido": "Los médicos han observado inflamación de los ganglios linfáticos en las mamograf..."
+          "idx_oracion_cercana": 1,
+          "similitud": 0.4242,
+          "texto_resumido": "Boooomm\nMUJERES VACUNADAS DE COVID ESTÁN MOSTRANDO EFECTOS SECUNDARIOS TÍPICOS D..."
         },
         "mayusculas_ratio": 0.0,
         "palabras_mayusculas": [],
@@ -313,8 +336,7 @@
         "exclamaciones": 0,
         "interrogaciones": 0,
         "banderas_forenses": [
-          "📜 Cita Textual Entrecomillada",
-          "🔁 Redundante con Frase #2 (cos=0.53)"
+          "📜 Cita Textual Entrecomillada"
         ]
       },
       {
@@ -324,12 +346,12 @@
         "sensacionalismo_prob": 0.3264,
         "sensacionalismo_pct": 32.6,
         "es_oracion_gatillo": false,
-        "coherencia_consecutiva": 0.5023,
-        "similitud_media_documento": 0.4299,
+        "coherencia_consecutiva": 0.281,
+        "similitud_media_documento": 0.2958,
         "par_mas_redundante": {
-          "idx_oracion_cercana": 4,
-          "similitud": 0.5023,
-          "texto_resumido": "“Con la vacuna Moderna están habiendo estos síntomas aproximadamente un 11% desp..."
+          "idx_oracion_cercana": 1,
+          "similitud": 0.3282,
+          "texto_resumido": "Boooomm\nMUJERES VACUNADAS DE COVID ESTÁN MOSTRANDO EFECTOS SECUNDARIOS TÍPICOS D..."
         },
         "mayusculas_ratio": 0.0,
         "palabras_mayusculas": [],
@@ -340,9 +362,7 @@
         "tiene_citas": false,
         "exclamaciones": 0,
         "interrogaciones": 0,
-        "banderas_forenses": [
-          "🔁 Redundante con Frase #4 (cos=0.50)"
-        ]
+        "banderas_forenses": []
       }
     ]
   },
@@ -351,8 +371,9 @@
       "titulo": "Desinformación Conspiracionista y Negacionista de Redes",
       "conteo_palabras": 106,
       "num_oraciones": 5,
-      "tiempo_analisis_segundos": 0.135,
+      "tiempo_analisis_segundos": 0.119,
       "dispositivo": "cuda",
+      "modelo_redundancia": "hiiamsid/sentence_similarity_spanish_es",
       "metadata_adicional": {
         "id": "noticia_2_falsa_conspiracion_coronacirco",
         "tipo_referencia": "Falsa (Ground Truth = 1)",
@@ -376,60 +397,82 @@
       "diagnostico": "Alarma Sensacionalista Sostenida"
     },
     "redundancia_sbert": {
-      "mean_intra_similarity": 0.1942,
-      "max_intra_similarity": 0.4051,
-      "redundant_pairs_count": 1,
+      "mean_intra_similarity": 0.2656,
+      "max_intra_similarity": 0.5257,
+      "second_max_intra_similarity": 0.3864,
+      "top3_mean_intra_similarity": 0.4105,
+      "p90_intra_similarity": 0.4003,
+      "var_intra_similarity": 0.0193,
+      "max_post_ablation_mexgen": 0.3,
+      "mexgen_persistence_gap": 0.2257,
+      "delta_mean_sim_morf": 0.0812,
+      "topologia_mexgen": "Progresión Lineal sin Bucles Redundantes (< 0.534)",
+      "topic_continuity_pairs_count": 2,
+      "topic_continuity_density_pct": 20.0,
+      "paraphrase_pairs_count_p90": 0,
+      "paraphrase_density_p90_pct": 0.0,
+      "strict_redundant_pairs_count_p95": 0,
+      "strict_redundancy_density_p95_pct": 0.0,
+      "hyper_redundant_pairs_count": 0,
+      "hyper_redundancy_density_pct": 0.0,
+      "redundant_pairs_count": 0,
       "num_pairs_total": 10,
-      "redundancy_density_pct": 10.0,
-      "umbral_gmm_tau": 0.34,
-      "shannon_bin_7": 1,
-      "shannon_bin_4": 1,
+      "redundancy_density_pct": 0.0,
+      "umbral_gmm_tau": 0.3434,
+      "umbral_pawsx_tau": 0.534,
+      "umbral_estricto_tau": 0.5996,
+      "umbral_hiper_tau": 0.7287,
+      "shannon_bin_7": 3,
+      "shannon_bin_4": 2,
       "par_maxima_redundancia": {
-        "oracion_a_idx": 3,
-        "oracion_a_texto": "Entre otras cosas ha dicho: «Ya no son tesis conspiracionistas, llevamos un año de coronacirco y epidemia de miedo y la tele nos bombardea con muertos y enfermos».",
-        "oracion_b_idx": 4,
-        "oracion_b_texto": "Antes iban metiendo miedo para decir que la única solución es la vacuna, pero la vacuna no es la solución, nos están usando como conejillos de indias.",
-        "similitud_coseno": 0.4051,
-        "supera_umbral_gmm": true
+        "oracion_a_idx": 1,
+        "oracion_a_texto": "Victoria Abril ha dejado a todo el mundo con la boca abierta con su discurso anti-plandemia a la que ha llegado a denominar coronacirco.",
+        "oracion_b_idx": 3,
+        "oracion_b_texto": "Entre otras cosas ha dicho: «Ya no son tesis conspiracionistas, llevamos un año de coronacirco y epidemia de miedo y la tele nos bombardea con muertos y enfermos».",
+        "similitud_coseno": 0.5257,
+        "supera_continuidad_gmm_034": true,
+        "supera_parafrasis_pawsx_053": false,
+        "supera_redundancia_estricta_060": false,
+        "supera_hiper_redundancia_073": false
       },
       "matriz_similitud": [
         [
           1.0,
-          0.1993,
-          0.2712,
-          0.2313,
-          0.0729
+          0.2043,
+          0.5257,
+          0.3,
+          0.1133
         ],
         [
-          0.1993,
+          0.2043,
           1.0,
-          0.1593,
-          0.1379,
-          0.2291
+          0.3179,
+          0.2955,
+          0.1948
         ],
         [
-          0.2712,
-          0.1593,
+          0.5257,
+          0.3179,
           1.0,
-          0.4051,
-          0.1977
+          0.3864,
+          0.3196
         ],
         [
-          0.2313,
-          0.1379,
-          0.4051,
+          0.3,
+          0.2955,
+          0.3864,
           1.0,
-          0.0381
+          -0.0017
         ],
         [
-          0.0729,
-          0.2291,
-          0.1977,
-          0.0381,
+          0.1133,
+          0.1948,
+          0.3196,
+          -0.0017,
           1.0
         ]
       ],
-      "diagnostico": "Discurso Desarticulado / Párrafos Fragmentados"
+      "diagnostico": "Cohesión Periodística Estándar en Banda de Shannon (0.37 - 0.60)"
     },
     "las_5_dimensiones_iml": {
       "D1_Carga_Emocional": {
@@ -451,31 +494,31 @@
         "nivel": "Sin Amortiguación (Pánico Sostenido en Todo el Texto)"
       },
       "D4_Reiteracion_Redundancia": {
-        "valor": 11.6,
+        "valor": 52.0,
         "escala": "[0 - 100]",
-        "interpretacion": "Circularidad semántica intra-documental mediante paráfrasis y reiteración.",
-        "nivel": "Diversidad Temática / Sin Repeticiones"
+        "interpretacion": "Circularidad semántica intra-documental (S_(1), S_(2) y paráfrasis BETO SBERT).",
+        "nivel": "Progresión Normal Temática"
       },
       "D5_Cohesion_Fluidez": {
-        "valor": 41.0,
+        "valor": 48.0,
         "escala": "[0 - 100]",
-        "interpretacion": "Conectividad proposicional y solidez sintáctica en la banda de Shannon.",
+        "interpretacion": "Conectividad proposicional y solidez sintáctica en la banda In-Fold de Shannon.",
         "nivel": "Texto Desarticulado / Roto"
       },
-      "score_global_iml": 63.0,
+      "score_global_iml": 70.4,
       "nivel_riesgo_estilometrico": "Alto Riesgo de Manipulación Estilométrica (Anomalía Forense Severa)",
       "arquetipo_discursivo": {
-        "id": "ESTILO_IV_DESARTICULADO",
-        "nombre": "Estilo IV: Incoherencia Estructural / Generación Rota",
-        "descripcion": "Texto con baja conectividad proposicional, fragmentación sintáctica o párrafos desvinculados.",
-        "condicion_activada": "D5 <= 55.0 y D4 < 40.0"
+        "id": "ESTILO_V_PERIODISMO_EQUILIBRADO",
+        "nombre": "Estilo V: Periodismo Profesional Balanceado",
+        "descripcion": "Redacción equilibrada con variedad léxica, desarrollo temático progresivo y ausencia de manipulaciones estilísticas.",
+        "condicion_activada": "Comportamiento estilométrico equilibrado sin anomalías severas"
       }
     },
     "variables_ensamble_avanzado_5d": {
       "D1_Dinamica_Discursiva": {
-        "consec_sim_mean": 0.2005,
-        "consec_sim_min": 0.0381,
-        "consec_sim_std": 0.1322
+        "consec_sim_mean": 0.2267,
+        "consec_sim_min": -0.0017,
+        "consec_sim_std": 0.147
       },
       "D2_Linguistica_Forense_Epistemica": {
         "hedges_density": 0.0,
@@ -533,10 +576,10 @@
         "sensacionalismo_pct": 99.6,
         "es_oracion_gatillo": true,
         "coherencia_consecutiva": null,
-        "similitud_media_documento": 0.1937,
+        "similitud_media_documento": 0.2858,
         "par_mas_redundante": {
           "idx_oracion_cercana": 3,
-          "similitud": 0.2712,
+          "similitud": 0.5257,
           "texto_resumido": "Entre otras cosas ha dicho: «Ya no son tesis conspiracionistas, llevamos un año ..."
         },
         "mayusculas_ratio": 0.0,
@@ -559,12 +602,12 @@
         "sensacionalismo_prob": 0.7413,
         "sensacionalismo_pct": 74.1,
         "es_oracion_gatillo": true,
-        "coherencia_consecutiva": 0.1993,
-        "similitud_media_documento": 0.1814,
+        "coherencia_consecutiva": 0.2043,
+        "similitud_media_documento": 0.2531,
         "par_mas_redundante": {
-          "idx_oracion_cercana": 5,
-          "similitud": 0.2291,
-          "texto_resumido": "Ponemos el vídeo a continuación, no tiene desperdicio."
+          "idx_oracion_cercana": 3,
+          "similitud": 0.3179,
+          "texto_resumido": "Entre otras cosas ha dicho: «Ya no son tesis conspiracionistas, llevamos un año ..."
         },
         "mayusculas_ratio": 0.0,
         "palabras_mayusculas": [],
@@ -587,12 +630,12 @@
         "sensacionalismo_prob": 0.985,
         "sensacionalismo_pct": 98.5,
         "es_oracion_gatillo": true,
-        "coherencia_consecutiva": 0.1593,
-        "similitud_media_documento": 0.2583,
+        "coherencia_consecutiva": 0.3179,
+        "similitud_media_documento": 0.3874,
         "par_mas_redundante": {
-          "idx_oracion_cercana": 4,
-          "similitud": 0.4051,
-          "texto_resumido": "Antes iban metiendo miedo para decir que la única solución es la vacuna, pero la..."
+          "idx_oracion_cercana": 1,
+          "similitud": 0.5257,
+          "texto_resumido": "Victoria Abril ha dejado a todo el mundo con la boca abierta con su discurso ant..."
         },
         "mayusculas_ratio": 0.0,
         "palabras_mayusculas": [],
@@ -605,8 +648,7 @@
         "interrogaciones": 0,
         "banderas_forenses": [
           "🔥 Pico Sensacionalista (98.5%)",
-          "📜 Cita Textual Entrecomillada",
-          "🔁 Redundante con Frase #4 (cos=0.41)"
+          "📜 Cita Textual Entrecomillada"
         ]
       },
       {
@@ -616,11 +658,11 @@
         "sensacionalismo_prob": 0.9778,
         "sensacionalismo_pct": 97.8,
         "es_oracion_gatillo": true,
-        "coherencia_consecutiva": 0.4051,
-        "similitud_media_documento": 0.2031,
+        "coherencia_consecutiva": 0.3864,
+        "similitud_media_documento": 0.245,
         "par_mas_redundante": {
           "idx_oracion_cercana": 3,
-          "similitud": 0.4051,
+          "similitud": 0.3864,
           "texto_resumido": "Entre otras cosas ha dicho: «Ya no son tesis conspiracionistas, llevamos un año ..."
         },
         "mayusculas_ratio": 0.0,
@@ -633,8 +675,7 @@
         "exclamaciones": 0,
         "interrogaciones": 0,
         "banderas_forenses": [
-          "🔥 Pico Sensacionalista (97.8%)",
-          "🔁 Redundante con Frase #3 (cos=0.41)"
+          "🔥 Pico Sensacionalista (97.8%)"
         ]
       },
       {
@@ -644,12 +685,12 @@
         "sensacionalismo_prob": 0.4416,
         "sensacionalismo_pct": 44.2,
         "es_oracion_gatillo": false,
-        "coherencia_consecutiva": 0.0381,
-        "similitud_media_documento": 0.1345,
+        "coherencia_consecutiva": -0.0017,
+        "similitud_media_documento": 0.1565,
         "par_mas_redundante": {
-          "idx_oracion_cercana": 2,
-          "similitud": 0.2291,
-          "texto_resumido": "Más claro y con más lógica no se pueden decir las cosas, se la ha entendido todo..."
+          "idx_oracion_cercana": 3,
+          "similitud": 0.3196,
+          "texto_resumido": "Entre otras cosas ha dicho: «Ya no son tesis conspiracionistas, llevamos un año ..."
         },
         "mayusculas_ratio": 0.0,
         "palabras_mayusculas": [],
@@ -671,8 +712,9 @@
       "titulo": "Noticia Oficial de Salud Pública y Medidas Epidemiológicas",
       "conteo_palabras": 216,
       "num_oraciones": 9,
-      "tiempo_analisis_segundos": 0.226,
+      "tiempo_analisis_segundos": 0.194,
       "dispositivo": "cuda",
+      "modelo_redundancia": "hiiamsid/sentence_similarity_spanish_es",
       "metadata_adicional": {
         "id": "noticia_3_verdadera_puebla_salud",
         "tipo_referencia": "Verdadera (Ground Truth = 0)",
@@ -696,124 +738,146 @@
       "diagnostico": "Tono Informativo Sobrio / Desprovisto de Amarillismo"
     },
     "redundancia_sbert": {
-      "mean_intra_similarity": 0.2287,
-      "max_intra_similarity": 0.5647,
-      "redundant_pairs_count": 7,
+      "mean_intra_similarity": 0.3039,
+      "max_intra_similarity": 0.7644,
+      "second_max_intra_similarity": 0.5337,
+      "top3_mean_intra_similarity": 0.608,
+      "p90_intra_similarity": 0.4942,
+      "var_intra_similarity": 0.0199,
+      "max_post_ablation_mexgen": 0.5258,
+      "mexgen_persistence_gap": 0.2386,
+      "delta_mean_sim_morf": 0.0311,
+      "topologia_mexgen": "Bucle Único Focalizado (S_post < 0.60: se desactiva al retirar 1 oración)",
+      "topic_continuity_pairs_count": 13,
+      "topic_continuity_density_pct": 36.11,
+      "paraphrase_pairs_count_p90": 1,
+      "paraphrase_density_p90_pct": 2.78,
+      "strict_redundant_pairs_count_p95": 1,
+      "strict_redundancy_density_p95_pct": 2.78,
+      "hyper_redundant_pairs_count": 1,
+      "hyper_redundancy_density_pct": 2.78,
+      "redundant_pairs_count": 1,
       "num_pairs_total": 36,
-      "redundancy_density_pct": 19.44,
-      "umbral_gmm_tau": 0.34,
-      "shannon_bin_7": 1,
-      "shannon_bin_4": 1,
+      "redundancy_density_pct": 2.78,
+      "umbral_gmm_tau": 0.3434,
+      "umbral_pawsx_tau": 0.534,
+      "umbral_estricto_tau": 0.5996,
+      "umbral_hiper_tau": 0.7287,
+      "shannon_bin_7": 7,
+      "shannon_bin_4": 4,
       "par_maxima_redundancia": {
         "oracion_a_idx": 1,
         "oracion_a_texto": "El Gobierno de Puebla anunció que el confinamiento para evitar que colapse el sistema de salud por la pandemia de coronavirus, se extiende hasta el día 25 de enero.",
         "oracion_b_idx": 3,
         "oracion_b_texto": "Indicó que de esta forma se ratifica el llamado de alerta máxima en Puebla hasta el 25 de enero, fecha en que se determinará el comportamiento de la pandemia.",
-        "similitud_coseno": 0.5647,
-        "supera_umbral_gmm": true
+        "similitud_coseno": 0.7644,
+        "supera_continuidad_gmm_034": true,
+        "supera_parafrasis_pawsx_053": true,
+        "supera_redundancia_estricta_060": true,
+        "supera_hiper_redundancia_073": true
       },
       "matriz_similitud": [
         [
           1.0,
-          0.342,
-          0.5647,
-          0.1741,
-          0.2263,
-          0.084,
-          0.1019,
-          0.4193,
-          0.4188
+          0.3478,
+          0.7644,
+          0.171,
+          0.3125,
+          0.2561,
+          0.1952,
+          0.3872,
+          0.2801
         ],
         [
-          0.342,
+          0.3478,
           1.0,
-          0.3338,
-          0.1723,
-          0.3423,
-          0.4387,
-          0.1833,
-          0.2799,
-          0.274
+          0.5337,
+          0.1461,
+          0.4844,
+          0.5258,
+          0.2627,
+          0.3021,
+          0.4026
         ],
         [
-          0.5647,
-          0.3338,
+          0.7644,
+          0.5337,
           1.0,
-          0.1979,
-          0.2656,
-          0.1393,
-          0.0839,
-          0.234,
-          0.4465
+          0.1672,
+          0.4076,
+          0.3651,
+          0.2337,
+          0.4257,
+          0.4056
         ],
         [
-          0.1741,
-          0.1723,
-          0.1979,
+          0.171,
+          0.1461,
+          0.1672,
           1.0,
-          0.2368,
-          0.0773,
-          0.0908,
-          0.1314,
-          0.2056
+          0.2282,
+          0.1339,
+          0.2009,
+          0.0892,
+          0.2365
         ],
         [
-          0.2263,
-          0.3423,
-          0.2656,
-          0.2368,
+          0.3125,
+          0.4844,
+          0.4076,
+          0.2282,
           1.0,
-          0.27,
-          0.2687,
-          0.0338,
-          0.2859
+          0.3001,
+          0.3129,
+          0.2236,
+          0.3654
         ],
         [
-          0.084,
-          0.4387,
-          0.1393,
-          0.0773,
-          0.27,
+          0.2561,
+          0.5258,
+          0.3651,
+          0.1339,
+          0.3001,
           1.0,
-          0.2912,
-          0.104,
-          0.1395
+          0.5041,
+          0.2794,
+          0.102
         ],
         [
-          0.1019,
-          0.1833,
-          0.0839,
-          0.0908,
-          0.2687,
-          0.2912,
+          0.1952,
+          0.2627,
+          0.2337,
+          0.2009,
+          0.3129,
+          0.5041,
           1.0,
-          0.0222,
-          0.1323
+          0.1566,
+          0.1674
         ],
         [
-          0.4193,
-          0.2799,
-          0.234,
-          0.1314,
-          0.0338,
-          0.104,
-          0.0222,
+          0.3872,
+          0.3021,
+          0.4257,
+          0.0892,
+          0.2236,
+          0.2794,
+          0.1566,
           1.0,
-          0.2224
+          0.2643
         ],
         [
-          0.4188,
-          0.274,
-          0.4465,
-          0.2056,
-          0.2859,
-          0.1395,
-          0.1323,
-          0.2224,
+          0.2801,
+          0.4026,
+          0.4056,
+          0.2365,
+          0.3654,
+          0.102,
+          0.1674,
+          0.2643,
           1.0
         ]
       ],
-      "diagnostico": "Discurso Desarticulado / Párrafos Fragmentados"
+      "diagnostico": "Hiper-Redundancia Circular (Bucle de Verdad Ilusoria, >= 0.73)"
     },
     "las_5_dimensiones_iml": {
       "D1_Carga_Emocional": {
@@ -835,19 +899,19 @@
         "nivel": "Amortiguación Alta (Cuerpo Sobrio Neutraliza Titular)"
       },
       "D4_Reiteracion_Redundancia": {
-        "valor": 40.1,
+        "valor": 100.0,
         "escala": "[0 - 100]",
-        "interpretacion": "Circularidad semántica intra-documental mediante paráfrasis y reiteración.",
-        "nivel": "Progresión Normal Temática"
+        "interpretacion": "Circularidad semántica intra-documental (S_(1), S_(2) y paráfrasis BETO SBERT).",
+        "nivel": "Bucle Argumental / Redundancia Estricta"
       },
       "D5_Cohesion_Fluidez": {
-        "valor": 57.2,
+        "valor": 67.5,
         "escala": "[0 - 100]",
-        "interpretacion": "Conectividad proposicional y solidez sintáctica en la banda de Shannon.",
+        "interpretacion": "Conectividad proposicional y solidez sintáctica en la banda In-Fold de Shannon.",
         "nivel": "Cohesión Regular"
       },
-      "score_global_iml": 25.6,
-      "nivel_riesgo_estilometrico": "Bajo Riesgo de Manipulación Estilométrica (Texto Neutro/Sobrio)",
+      "score_global_iml": 36.6,
+      "nivel_riesgo_estilometrico": "Riesgo Moderado de Manipulación (Retórica Comercial o Polarizada)",
       "arquetipo_discursivo": {
         "id": "ESTILO_II_CLICKBAIT_CABECERA",
         "nombre": "Estilo II: Cebo Comercial / Clickbait de Cabecera",
@@ -857,9 +921,9 @@
     },
     "variables_ensamble_avanzado_5d": {
       "D1_Dinamica_Discursiva": {
-        "consec_sim_mean": 0.2395,
-        "consec_sim_min": 0.0222,
-        "consec_sim_std": 0.095
+        "consec_sim_mean": 0.3127,
+        "consec_sim_min": 0.1566,
+        "consec_sim_std": 0.1332
       },
       "D2_Linguistica_Forense_Epistemica": {
         "hedges_density": 0.0,
@@ -873,8 +937,8 @@
         ],
         "tokens_dicendi": [
           "anunció",
-          "Indicó",
-          "indicó"
+          "indicó",
+          "Indicó"
         ]
       },
       "D3_Riqueza_Lexica_Legibilidad": {
@@ -923,10 +987,10 @@
         "sensacionalismo_pct": 13.7,
         "es_oracion_gatillo": false,
         "coherencia_consecutiva": null,
-        "similitud_media_documento": 0.2914,
+        "similitud_media_documento": 0.3393,
         "par_mas_redundante": {
           "idx_oracion_cercana": 3,
-          "similitud": 0.5647,
+          "similitud": 0.7644,
           "texto_resumido": "Indicó que de esta forma se ratifica el llamado de alerta máxima en Puebla hasta..."
         },
         "mayusculas_ratio": 0.0,
@@ -942,7 +1006,7 @@
         "interrogaciones": 0,
         "banderas_forenses": [
           "🎙️ Atribución Fuente (anunció)",
-          "🔁 Redundante con Frase #3 (cos=0.56)"
+          "🔁 Redundancia Estricta con Frase #3 (cos=0.76 >= 0.60)"
         ]
       },
       {
@@ -952,12 +1016,12 @@
         "sensacionalismo_prob": 0.0117,
         "sensacionalismo_pct": 1.2,
         "es_oracion_gatillo": false,
-        "coherencia_consecutiva": 0.342,
-        "similitud_media_documento": 0.2958,
+        "coherencia_consecutiva": 0.3478,
+        "similitud_media_documento": 0.3756,
         "par_mas_redundante": {
-          "idx_oracion_cercana": 6,
-          "similitud": 0.4387,
-          "texto_resumido": "Jesús Ramírez, subsecretario de transparencia, indicó que todo el estado se encu..."
+          "idx_oracion_cercana": 3,
+          "similitud": 0.5337,
+          "texto_resumido": "Indicó que de esta forma se ratifica el llamado de alerta máxima en Puebla hasta..."
         },
         "mayusculas_ratio": 0.0,
         "palabras_mayusculas": [],
@@ -971,8 +1035,7 @@
         "exclamaciones": 0,
         "interrogaciones": 0,
         "banderas_forenses": [
-          "🎙️ Atribución Fuente (indicó)",
-          "🔁 Redundante con Frase #6 (cos=0.44)"
+          "🎙️ Atribución Fuente (indicó)"
         ]
       },
       {
@@ -982,11 +1045,11 @@
         "sensacionalismo_prob": 0.0525,
         "sensacionalismo_pct": 5.2,
         "es_oracion_gatillo": false,
-        "coherencia_consecutiva": 0.3338,
-        "similitud_media_documento": 0.2832,
+        "coherencia_consecutiva": 0.5337,
+        "similitud_media_documento": 0.4129,
         "par_mas_redundante": {
           "idx_oracion_cercana": 1,
-          "similitud": 0.5647,
+          "similitud": 0.7644,
           "texto_resumido": "El Gobierno de Puebla anunció que el confinamiento para evitar que colapse el si..."
         },
         "mayusculas_ratio": 0.0,
@@ -1005,7 +1068,7 @@
         "banderas_forenses": [
           "⚡ Intensificador/Booster (alerta)",
           "🎙️ Atribución Fuente (Indicó)",
-          "🔁 Redundante con Frase #1 (cos=0.56)"
+          "🔁 Redundancia Estricta con Frase #1 (cos=0.76 >= 0.60)"
         ]
       },
       {
@@ -1015,12 +1078,12 @@
         "sensacionalismo_prob": 0.032,
         "sensacionalismo_pct": 3.2,
         "es_oracion_gatillo": false,
-        "coherencia_consecutiva": 0.1979,
-        "similitud_media_documento": 0.1608,
+        "coherencia_consecutiva": 0.1672,
+        "similitud_media_documento": 0.1716,
         "par_mas_redundante": {
-          "idx_oracion_cercana": 5,
-          "similitud": 0.2368,
-          "texto_resumido": "Asimismo se advirtió mayor presencia policíaca en las calles para el cumplimient..."
+          "idx_oracion_cercana": 9,
+          "similitud": 0.2365,
+          "texto_resumido": "De mantenerse la tendencia, al día 14 de enero estaríamos \"a tope\" y el día 18 l..."
         },
         "mayusculas_ratio": 0.0,
         "palabras_mayusculas": [],
@@ -1040,11 +1103,11 @@
         "sensacionalismo_prob": 0.0636,
         "sensacionalismo_pct": 6.4,
         "es_oracion_gatillo": false,
-        "coherencia_consecutiva": 0.2368,
-        "similitud_media_documento": 0.2412,
+        "coherencia_consecutiva": 0.2282,
+        "similitud_media_documento": 0.3293,
         "par_mas_redundante": {
           "idx_oracion_cercana": 2,
-          "similitud": 0.3423,
+          "similitud": 0.4844,
           "texto_resumido": "En rueda de prensa, el gobernador Luis Miguel Barbosa indicó que se busca reduci..."
         },
         "mayusculas_ratio": 0.0,
@@ -1056,9 +1119,7 @@
         "tiene_citas": false,
         "exclamaciones": 0,
         "interrogaciones": 0,
-        "banderas_forenses": [
-          "🔁 Redundante con Frase #2 (cos=0.34)"
-        ]
+        "banderas_forenses": []
       },
       {
         "idx": 6,
@@ -1067,11 +1128,11 @@
         "sensacionalismo_prob": 0.0291,
         "sensacionalismo_pct": 2.9,
         "es_oracion_gatillo": false,
-        "coherencia_consecutiva": 0.27,
-        "similitud_media_documento": 0.193,
+        "coherencia_consecutiva": 0.3001,
+        "similitud_media_documento": 0.3083,
         "par_mas_redundante": {
           "idx_oracion_cercana": 2,
-          "similitud": 0.4387,
+          "similitud": 0.5258,
           "texto_resumido": "En rueda de prensa, el gobernador Luis Miguel Barbosa indicó que se busca reduci..."
         },
         "mayusculas_ratio": 0.0,
@@ -1086,8 +1147,7 @@
         "exclamaciones": 0,
         "interrogaciones": 0,
         "banderas_forenses": [
-          "🎙️ Atribución Fuente (indicó)",
-          "🔁 Redundante con Frase #2 (cos=0.44)"
+          "🎙️ Atribución Fuente (indicó)"
         ]
       },
       {
@@ -1097,11 +1157,11 @@
         "sensacionalismo_prob": 0.5372,
         "sensacionalismo_pct": 53.7,
         "es_oracion_gatillo": false,
-        "coherencia_consecutiva": 0.2912,
-        "similitud_media_documento": 0.1468,
+        "coherencia_consecutiva": 0.5041,
+        "similitud_media_documento": 0.2542,
         "par_mas_redundante": {
           "idx_oracion_cercana": 6,
-          "similitud": 0.2912,
+          "similitud": 0.5041,
           "texto_resumido": "Jesús Ramírez, subsecretario de transparencia, indicó que todo el estado se encu..."
         },
         "mayusculas_ratio": 0.0,
@@ -1122,12 +1182,12 @@
         "sensacionalismo_prob": 0.0099,
         "sensacionalismo_pct": 1.0,
         "es_oracion_gatillo": false,
-        "coherencia_consecutiva": 0.0222,
-        "similitud_media_documento": 0.1809,
+        "coherencia_consecutiva": 0.1566,
+        "similitud_media_documento": 0.266,
         "par_mas_redundante": {
-          "idx_oracion_cercana": 1,
-          "similitud": 0.4193,
-          "texto_resumido": "El Gobierno de Puebla anunció que el confinamiento para evitar que colapse el si..."
+          "idx_oracion_cercana": 3,
+          "similitud": 0.4257,
+          "texto_resumido": "Indicó que de esta forma se ratifica el llamado de alerta máxima en Puebla hasta..."
         },
         "mayusculas_ratio": 0.0,
         "palabras_mayusculas": [],
@@ -1141,9 +1201,7 @@
         "exclamaciones": 0,
         "interrogaciones": 0,
         "banderas_forenses": [
-          "🎙️ Atribución Fuente (indicó)",
-          "⚠️ Salto Temático Abrupto (Baja Coherencia)",
-          "🔁 Redundante con Frase #1 (cos=0.42)"
+          "🎙️ Atribución Fuente (indicó)"
         ]
       },
       {
@@ -1153,11 +1211,11 @@
         "sensacionalismo_prob": 0.0239,
         "sensacionalismo_pct": 2.4,
         "es_oracion_gatillo": false,
-        "coherencia_consecutiva": 0.2224,
-        "similitud_media_documento": 0.2656,
+        "coherencia_consecutiva": 0.2643,
+        "similitud_media_documento": 0.278,
         "par_mas_redundante": {
           "idx_oracion_cercana": 3,
-          "similitud": 0.4465,
+          "similitud": 0.4056,
           "texto_resumido": "Indicó que de esta forma se ratifica el llamado de alerta máxima en Puebla hasta..."
         },
         "mayusculas_ratio": 0.0,
@@ -1170,8 +1228,7 @@
         "exclamaciones": 0,
         "interrogaciones": 0,
         "banderas_forenses": [
-          "📜 Cita Textual Entrecomillada",
-          "🔁 Redundante con Frase #3 (cos=0.45)"
+          "📜 Cita Textual Entrecomillada"
         ]
       }
     ]
@@ -1181,8 +1238,9 @@
       "titulo": "Crónica Científica sobre el Megaproyecto NICA de Dubná",
       "conteo_palabras": 132,
       "num_oraciones": 6,
-      "tiempo_analisis_segundos": 0.2,
+      "tiempo_analisis_segundos": 0.17,
       "dispositivo": "cuda",
+      "modelo_redundancia": "hiiamsid/sentence_similarity_spanish_es",
       "metadata_adicional": {
         "id": "noticia_4_verdadera_ciencia_efe",
         "tipo_referencia": "Verdadera (Ground Truth = 0)",
@@ -1206,73 +1264,95 @@
       "diagnostico": "Cebo Sensacionalista Aislado (Gatillo Cabecera)"
     },
     "redundancia_sbert": {
-      "mean_intra_similarity": 0.3454,
-      "max_intra_similarity": 0.6279,
-      "redundant_pairs_count": 8,
+      "mean_intra_similarity": 0.4245,
+      "max_intra_similarity": 0.615,
+      "second_max_intra_similarity": 0.5756,
+      "top3_mean_intra_similarity": 0.5835,
+      "p90_intra_similarity": 0.5693,
+      "var_intra_similarity": 0.012,
+      "max_post_ablation_mexgen": 0.4992,
+      "mexgen_persistence_gap": 0.1159,
+      "delta_mean_sim_morf": 0.0514,
+      "topologia_mexgen": "Bucle Único Focalizado (S_post < 0.60: se desactiva al retirar 1 oración)",
+      "topic_continuity_pairs_count": 11,
+      "topic_continuity_density_pct": 73.33,
+      "paraphrase_pairs_count_p90": 3,
+      "paraphrase_density_p90_pct": 20.0,
+      "strict_redundant_pairs_count_p95": 1,
+      "strict_redundancy_density_p95_pct": 6.67,
+      "hyper_redundant_pairs_count": 0,
+      "hyper_redundancy_density_pct": 0.0,
+      "redundant_pairs_count": 1,
       "num_pairs_total": 15,
-      "redundancy_density_pct": 53.33,
-      "umbral_gmm_tau": 0.34,
-      "shannon_bin_7": 3,
-      "shannon_bin_4": 2,
+      "redundancy_density_pct": 6.67,
+      "umbral_gmm_tau": 0.3434,
+      "umbral_pawsx_tau": 0.534,
+      "umbral_estricto_tau": 0.5996,
+      "umbral_hiper_tau": 0.7287,
+      "shannon_bin_7": 5,
+      "shannon_bin_4": 3,
       "par_maxima_redundancia": {
-        "oracion_a_idx": 1,
-        "oracion_a_texto": "Rusia quiere recrear el comienzo del Universo.",
-        "oracion_b_idx": 2,
-        "oracion_b_texto": "Redacción DUBNÁ EFE En Dubná, a unos 100 kilómetros al norte de Moscú, se comienza a vislumbrar lo que será un enorme acelerador de partículas destinado a recrear los primeros instantes del Universo tras el Big Bang.",
-        "similitud_coseno": 0.6279,
-        "supera_umbral_gmm": true
+        "oracion_a_idx": 2,
+        "oracion_a_texto": "Redacción DUBNÁ EFE En Dubná, a unos 100 kilómetros al norte de Moscú, se comienza a vislumbrar lo que será un enorme acelerador de partículas destinado a recrear los primeros instantes del Universo tras el Big Bang.",
+        "oracion_b_idx": 3,
+        "oracion_b_texto": "La construcción del NICA (Nuclotron based Ion Collider Facility)en el Instituto Conjunto para la Investigación Nuclear (JINR, por sus siglas en inglés) de Dubná avanza a pasos agigantados.",
+        "similitud_coseno": 0.615,
+        "supera_continuidad_gmm_034": true,
+        "supera_parafrasis_pawsx_053": true,
+        "supera_redundancia_estricta_060": true,
+        "supera_hiper_redundancia_073": false
       },
       "matriz_similitud": [
         [
           1.0,
-          0.6279,
-          0.1463,
-          0.3103,
-          0.2599,
-          0.0347
+          0.4439,
+          0.2536,
+          0.3176,
+          0.3064,
+          0.2219
         ],
         [
-          0.6279,
+          0.4439,
           1.0,
-          0.5032,
-          0.4594,
-          0.4698,
-          0.3477
+          0.615,
+          0.5597,
+          0.5756,
+          0.442
         ],
         [
-          0.1463,
-          0.5032,
+          0.2536,
+          0.615,
           1.0,
-          0.4959,
-          0.3859,
-          0.4533
+          0.4992,
+          0.4467,
+          0.411
         ],
         [
-          0.3103,
-          0.4594,
-          0.4959,
+          0.3176,
+          0.5597,
+          0.4992,
           1.0,
-          0.2948,
-          0.178
+          0.4328,
+          0.4212
         ],
         [
-          0.2599,
-          0.4698,
-          0.3859,
-          0.2948,
+          0.3064,
+          0.5756,
+          0.4467,
+          0.4328,
           1.0,
-          0.2144
+          0.4206
         ],
         [
-          0.0347,
-          0.3477,
-          0.4533,
-          0.178,
-          0.2144,
+          0.2219,
+          0.442,
+          0.411,
+          0.4212,
+          0.4206,
           1.0
         ]
       ],
-      "diagnostico": "Redundancia Balanceada de Prensa Profesional (Banda Óptima Shannon)"
+      "diagnostico": "Redundancia Semántica Estricta (Reiteración Proposicional, >= 0.60)"
     },
     "las_5_dimensiones_iml": {
       "D1_Carga_Emocional": {
@@ -1294,19 +1374,19 @@
         "nivel": "Amortiguación Alta (Cuerpo Sobrio Neutraliza Titular)"
       },
       "D4_Reiteracion_Redundancia": {
-        "valor": 51.4,
+        "valor": 73.3,
         "escala": "[0 - 100]",
-        "interpretacion": "Circularidad semántica intra-documental mediante paráfrasis y reiteración.",
-        "nivel": "Progresión Normal Temática"
+        "interpretacion": "Circularidad semántica intra-documental (S_(1), S_(2) y paráfrasis BETO SBERT).",
+        "nivel": "Bucle Argumental / Redundancia Estricta"
       },
       "D5_Cohesion_Fluidez": {
-        "valor": 99.8,
+        "valor": 90.5,
         "escala": "[0 - 100]",
-        "interpretacion": "Conectividad proposicional y solidez sintáctica en la banda de Shannon.",
+        "interpretacion": "Conectividad proposicional y solidez sintáctica en la banda In-Fold de Shannon.",
         "nivel": "Cohesión Profesional Óptima"
       },
-      "score_global_iml": 34.6,
-      "nivel_riesgo_estilometrico": "Bajo Riesgo de Manipulación Estilométrica (Texto Neutro/Sobrio)",
+      "score_global_iml": 39.9,
+      "nivel_riesgo_estilometrico": "Riesgo Moderado de Manipulación (Retórica Comercial o Polarizada)",
       "arquetipo_discursivo": {
         "id": "ESTILO_II_CLICKBAIT_CABECERA",
         "nombre": "Estilo II: Cebo Comercial / Clickbait de Cabecera",
@@ -1316,9 +1396,9 @@
     },
     "variables_ensamble_avanzado_5d": {
       "D1_Dinamica_Discursiva": {
-        "consec_sim_mean": 0.4272,
-        "consec_sim_min": 0.2144,
-        "consec_sim_std": 0.1507
+        "consec_sim_mean": 0.4823,
+        "consec_sim_min": 0.4206,
+        "consec_sim_std": 0.0716
       },
       "D2_Linguistica_Forense_Epistemica": {
         "hedges_density": 0.0,
@@ -1379,10 +1459,10 @@
         "sensacionalismo_pct": 96.8,
         "es_oracion_gatillo": true,
         "coherencia_consecutiva": null,
-        "similitud_media_documento": 0.2758,
+        "similitud_media_documento": 0.3087,
         "par_mas_redundante": {
           "idx_oracion_cercana": 2,
-          "similitud": 0.6279,
+          "similitud": 0.4439,
           "texto_resumido": "Redacción DUBNÁ EFE En Dubná, a unos 100 kilómetros al norte de Moscú, se comien..."
         },
         "mayusculas_ratio": 0.0,
@@ -1395,8 +1475,7 @@
         "exclamaciones": 0,
         "interrogaciones": 0,
         "banderas_forenses": [
-          "🔥 Pico Sensacionalista (96.8%)",
-          "🔁 Redundante con Frase #2 (cos=0.63)"
+          "🔥 Pico Sensacionalista (96.8%)"
         ]
       },
       {
@@ -1406,12 +1485,12 @@
         "sensacionalismo_prob": 0.591,
         "sensacionalismo_pct": 59.1,
         "es_oracion_gatillo": false,
-        "coherencia_consecutiva": 0.6279,
-        "similitud_media_documento": 0.4816,
+        "coherencia_consecutiva": 0.4439,
+        "similitud_media_documento": 0.5273,
         "par_mas_redundante": {
-          "idx_oracion_cercana": 1,
-          "similitud": 0.6279,
-          "texto_resumido": "Rusia quiere recrear el comienzo del Universo."
+          "idx_oracion_cercana": 3,
+          "similitud": 0.615,
+          "texto_resumido": "La construcción del NICA (Nuclotron based Ion Collider Facility)en el Instituto ..."
         },
         "mayusculas_ratio": 2.78,
         "palabras_mayusculas": [
@@ -1425,7 +1504,7 @@
         "exclamaciones": 0,
         "interrogaciones": 0,
         "banderas_forenses": [
-          "🔁 Redundante con Frase #1 (cos=0.63)"
+          "🔁 Redundancia Estricta con Frase #3 (cos=0.61 >= 0.60)"
         ]
       },
       {
@@ -1435,11 +1514,11 @@
         "sensacionalismo_prob": 0.4303,
         "sensacionalismo_pct": 43.0,
         "es_oracion_gatillo": false,
-        "coherencia_consecutiva": 0.5032,
-        "similitud_media_documento": 0.3969,
+        "coherencia_consecutiva": 0.615,
+        "similitud_media_documento": 0.4451,
         "par_mas_redundante": {
           "idx_oracion_cercana": 2,
-          "similitud": 0.5032,
+          "similitud": 0.615,
           "texto_resumido": "Redacción DUBNÁ EFE En Dubná, a unos 100 kilómetros al norte de Moscú, se comien..."
         },
         "mayusculas_ratio": 3.45,
@@ -1454,7 +1533,7 @@
         "exclamaciones": 0,
         "interrogaciones": 0,
         "banderas_forenses": [
-          "🔁 Redundante con Frase #2 (cos=0.50)"
+          "🔁 Redundancia Estricta con Frase #2 (cos=0.61 >= 0.60)"
         ]
       },
       {
@@ -1464,12 +1543,12 @@
         "sensacionalismo_prob": 0.197,
         "sensacionalismo_pct": 19.7,
         "es_oracion_gatillo": false,
-        "coherencia_consecutiva": 0.4959,
-        "similitud_media_documento": 0.3477,
+        "coherencia_consecutiva": 0.4992,
+        "similitud_media_documento": 0.4461,
         "par_mas_redundante": {
-          "idx_oracion_cercana": 3,
-          "similitud": 0.4959,
-          "texto_resumido": "La construcción del NICA (Nuclotron based Ion Collider Facility)en el Instituto ..."
+          "idx_oracion_cercana": 2,
+          "similitud": 0.5597,
+          "texto_resumido": "Redacción DUBNÁ EFE En Dubná, a unos 100 kilómetros al norte de Moscú, se comien..."
         },
         "mayusculas_ratio": 0.0,
         "palabras_mayusculas": [],
@@ -1481,7 +1560,7 @@
         "exclamaciones": 0,
         "interrogaciones": 0,
         "banderas_forenses": [
-          "🔁 Redundante con Frase #3 (cos=0.50)"
+          "🔄 Paráfrasis Moderada (PAWS-X) con Frase #2 (cos=0.56 >= 0.53)"
         ]
       },
       {
@@ -1491,11 +1570,11 @@
         "sensacionalismo_prob": 0.1244,
         "sensacionalismo_pct": 12.4,
         "es_oracion_gatillo": false,
-        "coherencia_consecutiva": 0.2948,
-        "similitud_media_documento": 0.325,
+        "coherencia_consecutiva": 0.4328,
+        "similitud_media_documento": 0.4364,
         "par_mas_redundante": {
           "idx_oracion_cercana": 2,
-          "similitud": 0.4698,
+          "similitud": 0.5756,
           "texto_resumido": "Redacción DUBNÁ EFE En Dubná, a unos 100 kilómetros al norte de Moscú, se comien..."
         },
         "mayusculas_ratio": 0.0,
@@ -1508,7 +1587,7 @@
         "exclamaciones": 0,
         "interrogaciones": 0,
         "banderas_forenses": [
-          "🔁 Redundante con Frase #2 (cos=0.47)"
+          "🔄 Paráfrasis Moderada (PAWS-X) con Frase #2 (cos=0.58 >= 0.53)"
         ]
       },
       {
@@ -1518,12 +1597,12 @@
         "sensacionalismo_prob": 0.7076,
         "sensacionalismo_pct": 70.8,
         "es_oracion_gatillo": true,
-        "coherencia_consecutiva": 0.2144,
-        "similitud_media_documento": 0.2456,
+        "coherencia_consecutiva": 0.4206,
+        "similitud_media_documento": 0.3833,
         "par_mas_redundante": {
-          "idx_oracion_cercana": 3,
-          "similitud": 0.4533,
-          "texto_resumido": "La construcción del NICA (Nuclotron based Ion Collider Facility)en el Instituto ..."
+          "idx_oracion_cercana": 2,
+          "similitud": 0.442,
+          "texto_resumido": "Redacción DUBNÁ EFE En Dubná, a unos 100 kilómetros al norte de Moscú, se comien..."
         },
         "mayusculas_ratio": 0.0,
         "palabras_mayusculas": [],
@@ -1535,8 +1614,7 @@
         "exclamaciones": 0,
         "interrogaciones": 0,
         "banderas_forenses": [
-          "🔥 Pico Sensacionalista (70.8%)",
-          "🔁 Redundante con Frase #3 (cos=0.45)"
+          "🔥 Pico Sensacionalista (70.8%)"
         ]
       }
     ]

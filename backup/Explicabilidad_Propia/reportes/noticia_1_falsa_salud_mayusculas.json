@@ -1,0 +1,347 @@
+{
+  "metadatos": {
+    "titulo": "Bulo de Salud con Mayúsculas Sostenidas y Alarma Oncológica",
+    "conteo_palabras": 126,
+    "num_oraciones": 5,
+    "tiempo_analisis_segundos": 0.393,
+    "dispositivo": "cuda",
+    "metadata_adicional": {
+      "id": "noticia_1_falsa_salud_mayusculas",
+      "tipo_referencia": "Falsa (Ground Truth = 1)",
+      "origen": "FakeDeS 2021 (Hispanoamérica / Redes Sociales)"
+    }
+  },
+  "sensacionalismo_beto": {
+    "P_full": 0.9717,
+    "P_full_pct": 97.2,
+    "P_mean": 0.4564,
+    "P_max": 0.9912,
+    "P_top2": 0.8102,
+    "sigma_sens": 0.3235,
+    "dilution_ratio": 0.9803,
+    "delta_p_gatillo_causal": 0.9332,
+    "oracion_gatillo_principal": {
+      "idx": 1,
+      "texto": "Boooomm\nMUJERES VACUNADAS DE COVID ESTÁN MOSTRANDO EFECTOS SECUNDARIOS TÍPICOS DE CANCER DE MAMA\nLos médicos de Intermountain Healthcare’s Breast Care Centre de Utah, USA, anuncian nuevas pautas de mamografías para las mujeres vacunadas contra Covid-19 recientemente.",
+      "sens_prob": 0.9912
+    },
+    "diagnostico": "Alarma Sensacionalista Sostenida"
+  },
+  "redundancia_sbert": {
+    "mean_intra_similarity": 0.4553,
+    "max_intra_similarity": 0.6436,
+    "redundant_pairs_count": 8,
+    "num_pairs_total": 10,
+    "redundancy_density_pct": 80.0,
+    "umbral_gmm_tau": 0.34,
+    "shannon_bin_7": 4,
+    "shannon_bin_4": 2,
+    "par_maxima_redundancia": {
+      "oracion_a_idx": 1,
+      "oracion_a_texto": "Boooomm\nMUJERES VACUNADAS DE COVID ESTÁN MOSTRANDO EFECTOS SECUNDARIOS TÍPICOS DE CANCER DE MAMA\nLos médicos de Intermountain Healthcare’s Breast Care Centre de Utah, USA, anuncian nuevas pautas de mamografías para las mujeres vacunadas contra Covid-19 recientemente.",
+      "oracion_b_idx": 2,
+      "oracion_b_texto": "Los médicos han observado inflamación de los ganglios linfáticos en las mamografías de detección de mujeres que se vacunaron recientemente contra COVID-19.",
+      "similitud_coseno": 0.6436,
+      "supera_umbral_gmm": true
+    },
+    "matriz_similitud": [
+      [
+        1.0,
+        0.6436,
+        0.4778,
+        0.3813,
+        0.4016
+      ],
+      [
+        0.6436,
+        1.0,
+        0.5028,
+        0.5277,
+        0.4864
+      ],
+      [
+        0.4778,
+        0.5028,
+        1.0,
+        0.2999,
+        0.3291
+      ],
+      [
+        0.3813,
+        0.5277,
+        0.2999,
+        1.0,
+        0.5023
+      ],
+      [
+        0.4016,
+        0.4864,
+        0.3291,
+        0.5023,
+        1.0
+      ]
+    ],
+    "diagnostico": "Redundancia Balanceada de Prensa Profesional (Banda Óptima Shannon)"
+  },
+  "las_5_dimensiones_iml": {
+    "D1_Carga_Emocional": {
+      "valor": 97.2,
+      "escala": "[0 - 100]",
+      "interpretacion": "Densidad de superlativos y dramatismo léxico asignado por BETO.",
+      "nivel": "Crítico / Alarmismo Extremo"
+    },
+    "D2_Volatilidad_Gatillo": {
+      "valor": 80.2,
+      "escala": "[0 - 100]",
+      "interpretacion": "Desbalance entre la frase gatillo y la sobriedad media del artículo.",
+      "nivel": "Clickbait Severo / Gatillo Aislado"
+    },
+    "D3_Amortiguacion_Contextual": {
+      "valor": 2.0,
+      "escala": "[0 - 100]",
+      "interpretacion": "Capacidad del cuerpo del texto para diluir o mitigar la alarma del titular.",
+      "nivel": "Sin Amortiguación (Pánico Sostenido en Todo el Texto)"
+    },
+    "D4_Reiteracion_Redundancia": {
+      "valor": 54.2,
+      "escala": "[0 - 100]",
+      "interpretacion": "Circularidad semántica intra-documental mediante paráfrasis y reiteración.",
+      "nivel": "Progresión Normal Temática"
+    },
+    "D5_Cohesion_Fluidez": {
+      "valor": 99.0,
+      "escala": "[0 - 100]",
+      "interpretacion": "Conectividad proposicional y solidez sintáctica en la banda de Shannon.",
+      "nivel": "Cohesión Profesional Óptima"
+    },
+    "score_global_iml": 75.7,
+    "nivel_riesgo_estilometrico": "Alto Riesgo de Manipulación Estilométrica (Anomalía Forense Severa)",
+    "arquetipo_discursivo": {
+      "id": "ESTILO_V_PERIODISMO_EQUILIBRADO",
+      "nombre": "Estilo V: Periodismo Profesional Balanceado",
+      "descripcion": "Redacción equilibrada con variedad léxica, desarrollo temático progresivo y ausencia de manipulaciones estilísticas.",
+      "condicion_activada": "Comportamiento estilométrico equilibrado sin anomalías severas"
+    }
+  },
+  "variables_ensamble_avanzado_5d": {
+    "D1_Dinamica_Discursiva": {
+      "consec_sim_mean": 0.4871,
+      "consec_sim_min": 0.2999,
+      "consec_sim_std": 0.1225
+    },
+    "D2_Linguistica_Forense_Epistemica": {
+      "hedges_density": 0.0,
+      "boosters_density": 0.794,
+      "epistemic_ratio": 10.1,
+      "quotes_density": 0.6,
+      "dicendi_density": 0.0,
+      "tokens_hedges": [],
+      "tokens_boosters": [
+        "Boooomm"
+      ],
+      "tokens_dicendi": []
+    },
+    "D3_Riqueza_Lexica_Legibilidad": {
+      "flesch_szigriszt": 47.11,
+      "gutierrez_polini": 17.21,
+      "guiraud_ttr": 6.971,
+      "hapax_ratio_pct": 42.62,
+      "vocabulario_unico": 77,
+      "promedio_silabas_palabra": 2.17,
+      "promedio_palabras_oracion": 24.4
+    },
+    "D4_Perfilado_Morfosintactico_POS": {
+      "adv_density": 5.556,
+      "pron_1p_density": 0.0,
+      "pron_3p_density": 9.524,
+      "adj_noun_ratio": 0.478,
+      "conteo_adjetivos": 11,
+      "conteo_sustantivos": 22,
+      "conteo_adverbios": 7,
+      "conteo_pronombres_1p": 0,
+      "conteo_pronombres_3p": 12
+    },
+    "D5_Anclajes_Factuales_Puntuacion": {
+      "all_caps_count": 11,
+      "all_caps_ratio_pct": 8.73,
+      "upper_chars_ratio_pct": 14.69,
+      "excl_density": 0.0,
+      "quest_density": 0.0,
+      "ellipsis_density": 0.0,
+      "punct_intensity": 0.0,
+      "numbers_density": 3.175,
+      "percent_count": 2,
+      "temporal_density": 0.0,
+      "palabras_mayusculas_encontradas": [
+        "MUJERES",
+        "VACUNADAS",
+        "COVID",
+        "ESTÁN",
+        "MOSTRANDO",
+        "EFECTOS",
+        "SECUNDARIOS",
+        "TÍPICOS",
+        "CANCER",
+        "MAMA"
+      ],
+      "marcadores_temporales_encontrados": []
+    }
+  },
+  "desglose_oraciones": [
+    {
+      "idx": 1,
+      "texto": "Boooomm\nMUJERES VACUNADAS DE COVID ESTÁN MOSTRANDO EFECTOS SECUNDARIOS TÍPICOS DE CANCER DE MAMA\nLos médicos de Intermountain Healthcare’s Breast Care Centre de Utah, USA, anuncian nuevas pautas de mamografías para las mujeres vacunadas contra Covid-19 recientemente.",
+      "num_palabras": 38,
+      "sensacionalismo_prob": 0.9912,
+      "sensacionalismo_pct": 99.1,
+      "es_oracion_gatillo": true,
+      "coherencia_consecutiva": null,
+      "similitud_media_documento": 0.4761,
+      "par_mas_redundante": {
+        "idx_oracion_cercana": 2,
+        "similitud": 0.6436,
+        "texto_resumido": "Los médicos han observado inflamación de los ganglios linfáticos en las mamograf..."
+      },
+      "mayusculas_ratio": 26.32,
+      "palabras_mayusculas": [
+        "MUJERES",
+        "VACUNADAS",
+        "COVID",
+        "ESTÁN",
+        "MOSTRANDO",
+        "EFECTOS",
+        "SECUNDARIOS",
+        "TÍPICOS",
+        "CANCER",
+        "MAMA"
+      ],
+      "adverbios_densidad": 2.63,
+      "verbos_dicendi": [],
+      "boosters": [
+        "Boooomm"
+      ],
+      "hedges": [],
+      "tiene_citas": false,
+      "exclamaciones": 0,
+      "interrogaciones": 0,
+      "banderas_forenses": [
+        "🔥 Pico Sensacionalista (99.1%)",
+        "📢 MAYÚSCULAS Sostenidas (26.3%)",
+        "⚡ Intensificador/Booster (Boooomm)",
+        "🔁 Redundante con Frase #2 (cos=0.64)"
+      ]
+    },
+    {
+      "idx": 2,
+      "texto": "Los médicos han observado inflamación de los ganglios linfáticos en las mamografías de detección de mujeres que se vacunaron recientemente contra COVID-19.",
+      "num_palabras": 22,
+      "sensacionalismo_prob": 0.2768,
+      "sensacionalismo_pct": 27.7,
+      "es_oracion_gatillo": false,
+      "coherencia_consecutiva": 0.6436,
+      "similitud_media_documento": 0.5401,
+      "par_mas_redundante": {
+        "idx_oracion_cercana": 1,
+        "similitud": 0.6436,
+        "texto_resumido": "Boooomm\nMUJERES VACUNADAS DE COVID ESTÁN MOSTRANDO EFECTOS SECUNDARIOS TÍPICOS D..."
+      },
+      "mayusculas_ratio": 4.55,
+      "palabras_mayusculas": [
+        "COVID"
+      ],
+      "adverbios_densidad": 4.55,
+      "verbos_dicendi": [],
+      "boosters": [],
+      "hedges": [],
+      "tiene_citas": false,
+      "exclamaciones": 0,
+      "interrogaciones": 0,
+      "banderas_forenses": [
+        "🔁 Redundante con Frase #1 (cos=0.64)"
+      ]
+    },
+    {
+      "idx": 3,
+      "texto": "\"Siempre que los vemos en una mamografía de detección normal, llamamos a esas pacientes porque puede significar cáncer de mama metastásico que viaja a los ganglios linfáticos o linfoma o leucemia\".",
+      "num_palabras": 31,
+      "sensacionalismo_prob": 0.6292,
+      "sensacionalismo_pct": 62.9,
+      "es_oracion_gatillo": false,
+      "coherencia_consecutiva": 0.5028,
+      "similitud_media_documento": 0.4024,
+      "par_mas_redundante": {
+        "idx_oracion_cercana": 2,
+        "similitud": 0.5028,
+        "texto_resumido": "Los médicos han observado inflamación de los ganglios linfáticos en las mamograf..."
+      },
+      "mayusculas_ratio": 0.0,
+      "palabras_mayusculas": [],
+      "adverbios_densidad": 3.23,
+      "verbos_dicendi": [],
+      "boosters": [],
+      "hedges": [],
+      "tiene_citas": true,
+      "exclamaciones": 0,
+      "interrogaciones": 0,
+      "banderas_forenses": [
+        "📜 Cita Textual Entrecomillada",
+        "🔁 Redundante con Frase #2 (cos=0.50)"
+      ]
+    },
+    {
+      "idx": 4,
+      "texto": "“Con la vacuna Moderna están habiendo estos síntomas aproximadamente un 11% después de la primera dosis y un 16% después de la segunda dosis.",
+      "num_palabras": 22,
+      "sensacionalismo_prob": 0.0585,
+      "sensacionalismo_pct": 5.8,
+      "es_oracion_gatillo": false,
+      "coherencia_consecutiva": 0.2999,
+      "similitud_media_documento": 0.4278,
+      "par_mas_redundante": {
+        "idx_oracion_cercana": 2,
+        "similitud": 0.5277,
+        "texto_resumido": "Los médicos han observado inflamación de los ganglios linfáticos en las mamograf..."
+      },
+      "mayusculas_ratio": 0.0,
+      "palabras_mayusculas": [],
+      "adverbios_densidad": 4.55,
+      "verbos_dicendi": [],
+      "boosters": [],
+      "hedges": [],
+      "tiene_citas": true,
+      "exclamaciones": 0,
+      "interrogaciones": 0,
+      "banderas_forenses": [
+        "📜 Cita Textual Entrecomillada",
+        "🔁 Redundante con Frase #2 (cos=0.53)"
+      ]
+    },
+    {
+      "idx": 5,
+      "texto": "Creemos que también es comparable para la vacuna Pfizer.",
+      "num_palabras": 9,
+      "sensacionalismo_prob": 0.3264,
+      "sensacionalismo_pct": 32.6,
+      "es_oracion_gatillo": false,
+      "coherencia_consecutiva": 0.5023,
+      "similitud_media_documento": 0.4299,
+      "par_mas_redundante": {
+        "idx_oracion_cercana": 4,
+        "similitud": 0.5023,
+        "texto_resumido": "“Con la vacuna Moderna están habiendo estos síntomas aproximadamente un 11% desp..."
+      },
+      "mayusculas_ratio": 0.0,
+      "palabras_mayusculas": [],
+      "adverbios_densidad": 0.0,
+      "verbos_dicendi": [],
+      "boosters": [],
+      "hedges": [],
+      "tiene_citas": false,
+      "exclamaciones": 0,
+      "interrogaciones": 0,
+      "banderas_forenses": [
+        "🔁 Redundante con Frase #4 (cos=0.50)"
+      ]
+    }
+  ]
+}

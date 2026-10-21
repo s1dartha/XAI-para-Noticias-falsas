@@ -1,0 +1,43 @@
+podrias revisar en el git hub el repositorio xai para noticias falsas los diferentes umbrales de redundancia y como se usaron en el ensamble , ademas quiero saber si el uso de paws-x es metodologicamente correcto, en el modelo ensamble y en /home/ubuntu/Documentos/Tesis/Explicabilidad_Propia/reportes/Reporte_Explicabilidad_Forense_4_Noticias.md y todo lo del iml  usa variables del modelos de redundacincia, cuales variables usan que tanto sirven o aportan, ademas veras que la estructura cambia un poco debido a que el modelo ganador del de redundancia no es el mimso que luego se usa en la explicabilidad propia o modelo ensamble, qtoca reahecr esas dos? las metricas pueden aumentar?, puedes revisar lo siguiente Módulo de Redundancia Semántica (Actualizado con BETO SBERT y sin fugas de información):
+https://github.com/s1dartha/XAI-para-Noticias-falsas/tree/main/Modelos_Individuales/Redundancia
+
+📄 1. Reportes de Umbral, Sensibilidad Multi-Umbral y Ablación Oracional (MexGen):
+- Reporte de Umbral y Sensibilidad Multi-Umbral:
+  https://github.com/s1dartha/XAI-para-Noticias-falsas/blob/main/Modelos_Individuales/Redundancia/Reportes/Umbral_Redundancia/Reporte_Umbral_Redundancia.md
+- Reporte de Ablación Oracional No Tautológica (MexGen):
+  https://github.com/s1dartha/XAI-para-Noticias-falsas/blob/main/Modelos_Individuales/Redundancia/Reportes/Umbral_Redundancia/reporte_explicabilidad_mexgen_redundancia.md
+- Figura Distribución y Sensibilidad del Umbral:
+  https://github.com/s1dartha/XAI-para-Noticias-falsas/blob/main/Modelos_Individuales/Redundancia/Reportes/Umbral_Redundancia/imagenes/distribucion_similitud_corpus.png
+- Figura Validación de Ablación Oracional MexGen:
+  https://github.com/s1dartha/XAI-para-Noticias-falsas/blob/main/Modelos_Individuales/Redundancia/Reportes/Umbral_Redundancia/imagenes/validacion_explicabilidad_mexgen.png
+- Dataset de Validación MexGen (CSV):
+  https://github.com/s1dartha/XAI-para-Noticias-falsas/blob/main/Modelos_Individuales/Redundancia/Reportes/Umbral_Redundancia/validacion_explicabilidad_mexgen.csv
+
+📄 2. Reportes de Discretización de Shannon Sin Fuga (In-Fold) y Control de Duplicados:
+- Reporte de Clases de Redundancia (Cortes In-Fold e IC 95%):
+  https://github.com/s1dartha/XAI-para-Noticias-falsas/blob/main/Modelos_Individuales/Redundancia/Reportes/Discretizacion_Redundancia/reporte_clases_redundancia.md
+- Reporte Comparativo de Estrategias (In-Fold CV y StratifiedGroupKFold):
+  https://github.com/s1dartha/XAI-para-Noticias-falsas/blob/main/Modelos_Individuales/Redundancia/Reportes/Discretizacion_Redundancia/reporte_comparativo_estrategias.md
+- Figura Particiones de Redundancia e IC 95%:
+  https://github.com/s1dartha/XAI-para-Noticias-falsas/blob/main/Modelos_Individuales/Redundancia/Reportes/Discretizacion_Redundancia/imagenes/redundancy_splits_visualization.png
+- Figura Comparación de Estrategias (Sin Fuga vs. Con Fuga):
+  https://github.com/s1dartha/XAI-para-Noticias-falsas/blob/main/Modelos_Individuales/Redundancia/Reportes/Discretizacion_Redundancia/imagenes/metricas_estrategias_comparacion.png
+
+📄 3. Explicabilidad (XAI) Unificada con BETO:
+- Reporte XAI en Muestras Aleatorias (BETO):
+  https://github.com/s1dartha/XAI-para-Noticias-falsas/blob/main/Modelos_Individuales/Redundancia/Reportes/XAI/Reporte_XAI_Aleatorio.md
+- Reporte XAI en Muestras Curadas (BETO):
+  https://github.com/s1dartha/XAI-para-Noticias-falsas/blob/main/Modelos_Individuales/Redundancia/Reportes/XAI/Reporte_XAI_Redundancia.md
+- Notebook XAI Experimentos Aleatorios (BETO):
+  https://github.com/s1dartha/XAI-para-Noticias-falsas/blob/main/Modelos_Individuales/Redundancia/XAI_Experimentos_Aleatorios.ipynb
+- Script XAI Aleatorio (BETO):
+  https://github.com/s1dartha/XAI-para-Noticias-falsas/blob/main/Modelos_Individuales/Redundancia/run_xai_aleatorio.py
+
+🗂️ 4. Dataset Principal e Índices de Trazabilidad:
+- Dataset de Similitudes Intra-Documento con BETO (CSV):
+  https://github.com/s1dartha/XAI-para-Noticias-falsas/blob/main/Modelos_Individuales/Redundancia/Dataset/dataset_con_similitudes.csv
+- Documentación del Dataset:
+  https://github.com/s1dartha/XAI-para-Noticias-falsas/blob/main/Modelos_Individuales/Redundancia/Dataset/README.md
+- Mapa General de Reportes:
+  https://github.com/s1dartha/XAI-para-Noticias-falsas/blob/main/Modelos_Individuales/Redundancia/Reportes/README.md 
+

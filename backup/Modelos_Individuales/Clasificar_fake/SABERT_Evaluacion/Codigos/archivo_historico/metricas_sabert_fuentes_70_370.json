@@ -1,0 +1,150 @@
+{
+  "GLOBAL": {
+    "fuente": "GLOBAL (Dataset Completo 70-370)",
+    "n_total": 2604,
+    "n_real": 1345,
+    "n_fake": 1259,
+    "accuracy": 0.8571428571428571,
+    "f1_macro": 0.8536194390715668,
+    "f1_fake": 0.8309090909090909,
+    "precision_fake": 0.971307120085016,
+    "recall_fake": 0.7259729944400317,
+    "roc_auc": 0.936214792527261,
+    "tn": 1318,
+    "fp": 27,
+    "fn": 345,
+    "tp": 914,
+    "cm": [
+      [
+        1318,
+        27
+      ],
+      [
+        345,
+        914
+      ]
+    ],
+    "false_negative_rate": 0.27402700555996823,
+    "false_positive_rate": 0.020074349442379184
+  },
+  "https://huggingface.co/datasets/Edds/spanish-fake-news-fixed": {
+    "nombre_corto": "Edds (Fact-checking España)",
+    "fuente": "https://huggingface.co/datasets/Edds/spanish-fake-news-fixed",
+    "n_total": 294,
+    "n_real": 183,
+    "n_fake": 111,
+    "proporcion_del_dataset": 0.11290322580645161,
+    "accuracy": 0.8571428571428571,
+    "f1_macro": 0.8357978723404256,
+    "f1_fake": 0.776595744680851,
+    "precision_fake": 0.948051948051948,
+    "recall_fake": 0.6576576576576577,
+    "roc_auc": 0.9132082902574705,
+    "tn": 179,
+    "fp": 4,
+    "fn": 38,
+    "tp": 73,
+    "cm": [
+      [
+        179,
+        4
+      ],
+      [
+        38,
+        73
+      ]
+    ],
+    "false_negative_rate": 0.34234234234234234,
+    "false_positive_rate": 0.02185792349726776
+  },
+  "https://huggingface.co/datasets/Freiren/Unified-and-Balanced-Spanish-Fake-News-Corpus": {
+    "nombre_corto": "Freiren (Gabriel Hurtado)",
+    "fuente": "https://huggingface.co/datasets/Freiren/Unified-and-Balanced-Spanish-Fake-News-Corpus",
+    "n_total": 2060,
+    "n_real": 1081,
+    "n_fake": 979,
+    "proporcion_del_dataset": 0.7910906298003072,
+    "accuracy": 0.9029126213592233,
+    "f1_macro": 0.9013163252498948,
+    "f1_fake": 0.8887652947719689,
+    "precision_fake": 0.9755799755799756,
+    "recall_fake": 0.8161389172625128,
+    "roc_auc": 0.9604667490000464,
+    "tn": 1061,
+    "fp": 20,
+    "fn": 180,
+    "tp": 799,
+    "cm": [
+      [
+        1061,
+        20
+      ],
+      [
+        180,
+        799
+      ]
+    ],
+    "false_negative_rate": 0.18386108273748722,
+    "false_positive_rate": 0.018501387604070305
+  },
+  "https://huggingface.co/datasets/mariagrandury/fake_news_corpus_spanish": {
+    "nombre_corto": "mariagrandury (FakeDeS - LatAm)",
+    "fuente": "https://huggingface.co/datasets/mariagrandury/fake_news_corpus_spanish",
+    "n_total": 248,
+    "n_real": 81,
+    "n_fake": 167,
+    "proporcion_del_dataset": 0.09523809523809523,
+    "accuracy": 0.4838709677419355,
+    "f1_macro": 0.4727610948711135,
+    "f1_fake": 0.39622641509433965,
+    "precision_fake": 0.9333333333333333,
+    "recall_fake": 0.25149700598802394,
+    "roc_auc": 0.7029644414873957,
+    "tn": 78,
+    "fp": 3,
+    "fn": 125,
+    "tp": 42,
+    "cm": [
+      [
+        78,
+        3
+      ],
+      [
+        125,
+        42
+      ]
+    ],
+    "false_negative_rate": 0.7485029940119761,
+    "false_positive_rate": 0.037037037037037035
+  },
+  "https://www.kaggle.com/datasets/arseniitretiakov/noticias-falsas-en-espaol?select=fakes1000.csv": {
+    "nombre_corto": "arseniitretiakov (Kaggle Spanish Fakes)",
+    "fuente": "https://www.kaggle.com/datasets/arseniitretiakov/noticias-falsas-en-espaol?select=fakes1000.csv",
+    "n_total": 2,
+    "n_real": 0,
+    "n_fake": 2,
+    "proporcion_del_dataset": 0.0007680491551459293,
+    "accuracy": 0.0,
+    "f1_macro": 0.0,
+    "f1_fake": 0.0,
+    "precision_fake": 0.0,
+    "recall_fake": 0.0,
+    "roc_auc": null,
+    "tn": 0,
+    "fp": 0,
+    "fn": 2,
+    "tp": 0,
+    "cm": [
+      [
+        0,
+        0
+      ],
+      [
+        2,
+        0
+      ]
+    ],
+    "false_negative_rate": 1.0,
+    "false_positive_rate": 0.0
+  }
+}

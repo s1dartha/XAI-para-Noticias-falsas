@@ -1,0 +1,98 @@
+{
+  "https://huggingface.co/datasets/Edds/spanish-fake-news-fixed": {
+    "nombre_corto": "Edds (Fact-checking España)",
+    "n_total": 538,
+    "n_real": 305,
+    "n_fake": 233,
+    "accuracy": 0.8550185873605948,
+    "roc_auc": 0.9259128966439176,
+    "tn": 298,
+    "fp": 7,
+    "fn": 71,
+    "tp": 162,
+    "fn_fallos_fake": "71 de 233",
+    "tasa_fallo_fake_pct": 30.472103004291846,
+    "cm": [
+      [
+        298,
+        7
+      ],
+      [
+        71,
+        162
+      ]
+    ]
+  },
+  "https://huggingface.co/datasets/Freiren/Unified-and-Balanced-Spanish-Fake-News-Corpus": {
+    "nombre_corto": "Freiren (Gabriel Hurtado)",
+    "n_total": 600,
+    "n_real": 300,
+    "n_fake": 300,
+    "accuracy": 0.8316666666666667,
+    "roc_auc": 0.9368,
+    "tn": 291,
+    "fp": 9,
+    "fn": 92,
+    "tp": 208,
+    "fn_fallos_fake": "92 de 300",
+    "tasa_fallo_fake_pct": 30.666666666666664,
+    "cm": [
+      [
+        291,
+        9
+      ],
+      [
+        92,
+        208
+      ]
+    ]
+  },
+  "https://huggingface.co/datasets/mariagrandury/fake_news_corpus_spanish": {
+    "nombre_corto": "mariagrandury (FakeDeS - LatAm)",
+    "n_total": 572,
+    "n_real": 286,
+    "n_fake": 286,
+    "accuracy": 0.5996503496503497,
+    "roc_auc": 0.6937258545650155,
+    "tn": 277,
+    "fp": 9,
+    "fn": 220,
+    "tp": 66,
+    "fn_fallos_fake": "220 de 286",
+    "tasa_fallo_fake_pct": 76.92307692307693,
+    "cm": [
+      [
+        277,
+        9
+      ],
+      [
+        220,
+        66
+      ]
+    ]
+  },
+  "https://www.kaggle.com/datasets/arseniitretiakov/noticias-falsas-en-espaol?select=fakes1000.csv": {
+    "nombre_corto": "arseniitretiakov (Kaggle Spanish Fakes)",
+    "n_total": 600,
+    "n_real": 300,
+    "n_fake": 300,
+    "accuracy": 0.545,
+    "roc_auc": 0.6853666666666667,
+    "tn": 293,
+    "fp": 7,
+    "fn": 266,
+    "tp": 34,
+    "fn_fallos_fake": "266 de 300",
+    "tasa_fallo_fake_pct": 88.66666666666667,
+    "cm": [
+      [
+        293,
+        7
+      ],
+      [
+        266,
+        34
+      ]
+    ]
+  }
+}

@@ -1,0 +1,37 @@
+🔴 CRITICAL SYSTEM CONSTRAINTS:
+Execute processes strictly sequentially. The provided Python script is already optimized for CPU and memory management; do NOT modify its dataset loading logic. Just execute it.
+
+📂 FILE PATHS:
+
+    Python Script: /home/ubuntu/Documentos/Tesis/Modelos_Individuales/Clasificar_fake/run_comparativo_fakenews.py
+
+    Reports Destination: /home/ubuntu/Documentos/Tesis/reportes
+
+🛠️ WORKFLOW:
+
+STEP 1: Execution
+
+    Run the script run_comparativo_fakenews.py using the terminal. Wait for it to finish generating the metrics JSON and the .png plots in the reports folder.
+
+STEP 2: Technical Web Research (Browser Tool)
+
+    The script evaluates 3 models: SaBERT (JJNeila), BETO Fake News (Narrativaai), and LLM Zero-Shot Fact-Checker (Qwen 1.5B).
+
+    Research their technical specifications online: architecture, number of parameters, common hyperparameters, original purpose, and pre-training data.
+
+STEP 3: Report Writing (Markdown .md format)
+Create a meticulous and academically rigorous report named Reporte_FakeNews.md inside the reportes folder, including:
+
+    Introduction and Methodology: Explanation of how categories were created and what the script evaluated.
+
+    Models' Technical Specs: Detailed theoretical research for each model.
+
+    Results and Times: Comparative table of metrics and execution times extracted from the script's output. Embed the generated .png images from the imagenes folder.
+
+    Discussion: Deep analysis comparing the theory of why they were created vs. the actual results obtained. Justify the metrics based on their architecture.
+
+🛡️ ERROR HANDLING:
+
+    Execution Errors: If the script throws a fatal error, try to fix the code a maximum of TWO times. If it still fails, document the error trace in the .md report.
+
+    Web Search Fallback: If you cannot find specific technical details online after 2 attempts, write "Technical information not available online" and move on.

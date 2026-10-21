@@ -1,0 +1,434 @@
+{
+  "modelo": "hiiamsid/sentence_similarity_spanish_es",
+  "umbral_redundancia_estricta": 0.5996,
+  "cohorte_a_20_pares": {
+    "1. Fast-IG (10 pasos)": {
+      "comp_del_mean": 0.19942555809393525,
+      "comp_del_std": 0.18413903207731636,
+      "comp_mask_mean": 0.06516617089509964,
+      "comp_noise_mean": 0.16760626416653396,
+      "sufficiency_mean": 0.1627546425908804,
+      "sufficiency_std": 0.12765054087185995,
+      "auc_morf_mean": 0.22266145740635696,
+      "auc_lorf_mean": 0.37361632946878676,
+      "delta_auc_mean": 0.15095487206242977,
+      "latencia_ms_mean": 848.704418248235,
+      "red_10_comp_del_mean": 0.33552922010421754,
+      "red_10_flips_del": 8,
+      "red_10_flips_mask": 6,
+      "red_10_flips_noise": 9,
+      "avg_morf_curve": [
+        0.4710709903389215,
+        0.2716454322449863,
+        0.20231765611097216,
+        0.24527528160251677,
+        0.3170668438076973
+      ],
+      "avg_lorf_curve": [
+        0.4710709903389215,
+        0.5091727502644062,
+        0.5050338208675385,
+        0.42542480789124965,
+        0.385829546302557
+      ]
+    },
+    "2. Input × Gradient": {
+      "comp_del_mean": 0.09112421125173568,
+      "comp_del_std": 0.14269400757915618,
+      "comp_mask_mean": -0.027730064839124678,
+      "comp_noise_mean": 0.041511835530400276,
+      "sufficiency_mean": 0.31420960240066054,
+      "sufficiency_std": 0.2332486884581989,
+      "auc_morf_mean": 0.2720655677095055,
+      "auc_lorf_mean": 0.252999748326838,
+      "delta_auc_mean": -0.01906581938266754,
+      "latencia_ms_mean": 77.88892109820154,
+      "red_10_comp_del_mean": 0.21221298575401307,
+      "red_10_flips_del": 5,
+      "red_10_flips_mask": 2,
+      "red_10_flips_noise": 5,
+      "avg_morf_curve": [
+        0.4710709903389215,
+        0.3799467790871859,
+        0.3233133636415005,
+        0.28972628712654114,
+        0.2636118270456791
+      ],
+      "avg_lorf_curve": [
+        0.4710709903389215,
+        0.36656172573566437,
+        0.31214579232037065,
+        0.21320214867591858,
+        0.27510715946555137
+      ]
+    },
+    "3. Saliency Vanilla": {
+      "comp_del_mean": 0.07401450388133526,
+      "comp_del_std": 0.19638109438322515,
+      "comp_mask_mean": -0.061119091138243674,
+      "comp_noise_mean": 0.046814173087477685,
+      "sufficiency_mean": 0.12864740500226618,
+      "sufficiency_std": 0.14535095934783507,
+      "auc_morf_mean": 0.3574409662559629,
+      "auc_lorf_mean": 0.3384936109371483,
+      "delta_auc_mean": -0.018947355318814512,
+      "latencia_ms_mean": 38.94446054910077,
+      "red_10_comp_del_mean": 0.22687579691410065,
+      "red_10_flips_del": 7,
+      "red_10_flips_mask": 2,
+      "red_10_flips_noise": 4,
+      "avg_morf_curve": [
+        0.4710709903389215,
+        0.3970564864575863,
+        0.40652890875935555,
+        0.4779829651117325,
+        0.5402019515633583
+      ],
+      "avg_lorf_curve": [
+        0.4710709903389215,
+        0.4712746497243643,
+        0.43115868074819447,
+        0.37325060963630674,
+        0.36249723881483076
+      ]
+    },
+    "4. Attention (Capa 12)": {
+      "comp_del_mean": 0.09984423071146012,
+      "comp_del_std": 0.2061428755150786,
+      "comp_mask_mean": -0.0058061439543962475,
+      "comp_noise_mean": 0.08104886822402477,
+      "sufficiency_mean": 0.18358601070940495,
+      "sufficiency_std": 0.15488293489913685,
+      "auc_morf_mean": 0.32569829475134615,
+      "auc_lorf_mean": 0.33856494283303623,
+      "delta_auc_mean": 0.012866648081690097,
+      "latencia_ms_mean": 27.245692850556225,
+      "red_10_comp_del_mean": 0.2527328938245773,
+      "red_10_flips_del": 6,
+      "red_10_flips_mask": 4,
+      "red_10_flips_noise": 8,
+      "avg_morf_curve": [
+        0.4710709903389215,
+        0.37122675962746143,
+        0.3590262267738581,
+        0.38261487483978274,
+        0.5601762346923351
+      ],
+      "avg_lorf_curve": [
+        0.4710709903389215,
+        0.45992316529154775,
+        0.45506732277572154,
+        0.38476235019043087,
+        0.3150727614760399
+      ]
+    },
+    "5. LIME-Light": {
+      "comp_del_mean": 0.17745205080136656,
+      "comp_del_std": 0.16075024404411603,
+      "comp_mask_mean": 0.04704844132065773,
+      "comp_noise_mean": 0.12335566934198142,
+      "sufficiency_mean": 0.1657178398221731,
+      "sufficiency_std": 0.1362705294796297,
+      "auc_morf_mean": 0.2113204127550125,
+      "auc_lorf_mean": 0.39109174622222787,
+      "delta_auc_mean": 0.17977133346721533,
+      "latencia_ms_mean": 246.92663160094526,
+      "red_10_comp_del_mean": 0.3142914518713951,
+      "red_10_flips_del": 8,
+      "red_10_flips_mask": 6,
+      "red_10_flips_noise": 7,
+      "avg_morf_curve": [
+        0.4710709903389215,
+        0.29361893953755497,
+        0.20790486643090844,
+        0.19310016557574272,
+        0.2528851941227913
+      ],
+      "avg_lorf_curve": [
+        0.4710709903389215,
+        0.5271523874253035,
+        0.5108755142427981,
+        0.485533956438303,
+        0.3927227556705475
+      ]
+    },
+    "6. KernelSHAP-Light": {
+      "comp_del_mean": 0.1560036852955818,
+      "comp_del_std": 0.15559220704630194,
+      "comp_mask_mean": 0.01453566700220108,
+      "comp_noise_mean": 0.09298918638378381,
+      "sufficiency_mean": 0.2117392759770155,
+      "sufficiency_std": 0.18080913269593835,
+      "auc_morf_mean": 0.2176257671415806,
+      "auc_lorf_mean": 0.37740506175905464,
+      "delta_auc_mean": 0.1597792946174741,
+      "latencia_ms_mean": 247.02585079867276,
+      "red_10_comp_del_mean": 0.24290767908096314,
+      "red_10_flips_del": 6,
+      "red_10_flips_mask": 5,
+      "red_10_flips_noise": 6,
+      "avg_morf_curve": [
+        0.4710709903389215,
+        0.31506730504333974,
+        0.24232997857034205,
+        0.1885829396545887,
+        0.21322623454034328
+      ],
+      "avg_lorf_curve": [
+        0.4710709903389215,
+        0.4979384109377861,
+        0.5069406971335411,
+        0.4545208975672722,
+        0.3841796159744263
+      ]
+    },
+    "7. Propio (MexGen)": {
+      "comp_del_mean": 0.15127347856760026,
+      "comp_del_std": 0.1619146547260551,
+      "comp_mask_mean": 0.040550220385193826,
+      "comp_noise_mean": 0.134495956543833,
+      "sufficiency_mean": 0.15495052859187125,
+      "sufficiency_std": 0.14987344452646215,
+      "auc_morf_mean": 0.2438955355249345,
+      "auc_lorf_mean": 0.35766599679365757,
+      "delta_auc_mean": 0.113770461268723,
+      "latencia_ms_mean": 37.86108385029365,
+      "red_10_comp_del_mean": 0.2649170607328415,
+      "red_10_flips_del": 6,
+      "red_10_flips_mask": 2,
+      "red_10_flips_noise": 5,
+      "avg_morf_curve": [
+        0.4710709903389215,
+        0.3197975117713213,
+        0.2430063381791115,
+        0.24531469633802772,
+        0.3516472723335028
+      ],
+      "avg_lorf_curve": [
+        0.4710709903389215,
+        0.4695074865594506,
+        0.46015816628932954,
+        0.437792195379734,
+        0.3706732811406255
+      ]
+    }
+  },
+  "cohorte_b_40_documentos_xai": {
+    "1. Fast-IG (10 pasos)": {
+      "pair_comp_del_mean": 0.21357185244560242,
+      "pair_comp_del_std": 0.12229357441259338,
+      "pair_comp_mask_mean": 0.051693564653396605,
+      "pair_suff_mean": 0.13784710895270108,
+      "pair_delta_auc_mean": 0.18047301603015514,
+      "red20_pair_comp_del_mean": 0.2488180086016655,
+      "red20_pair_flips_del": 19,
+      "red20_pair_flips_mask": 8,
+      "red20_pair_flips_noise": 14,
+      "red20_doc_drop_smax_mean": 0.0788667768239975,
+      "red20_doc_flips_del": 7,
+      " red20_doc_flips_del_pct": 35.0,
+      "doc_delta_mean_tok_del": 0.03983502611517906,
+      "latencia_ms_mean": 3101.4837191742117
+    },
+    "2. Input × Gradient": {
+      "pair_comp_del_mean": 0.08172359727323056,
+      "pair_comp_del_std": 0.08680828562236824,
+      "pair_comp_mask_mean": -0.019952021539211273,
+      "pair_suff_mean": 0.27073164414614437,
+      "pair_delta_auc_mean": 0.0032074307277798774,
+      "red20_pair_comp_del_mean": 0.10454913675785064,
+      "red20_pair_flips_del": 10,
+      "red20_pair_flips_mask": 3,
+      "red20_pair_flips_noise": 8,
+      "red20_doc_drop_smax_mean": 0.04714619219303131,
+      "red20_doc_flips_del": 4,
+      " red20_doc_flips_del_pct": 20.0,
+      "doc_delta_mean_tok_del": 0.01706700921058655,
+      "latencia_ms_mean": 257.2260851993633
+    },
+    "3. Saliency Vanilla": {
+      "pair_comp_del_mean": 0.1312991563230753,
+      "pair_comp_del_std": 0.10894582620993068,
+      "pair_comp_mask_mean": -0.037800874561071396,
+      "pair_suff_mean": 0.11929940916597843,
+      "pair_delta_auc_mean": 0.06271132901310922,
+      "red20_pair_comp_del_mean": 0.1845007598400116,
+      "red20_pair_flips_del": 16,
+      "red20_pair_flips_mask": 4,
+      "red20_pair_flips_noise": 13,
+      "red20_doc_drop_smax_mean": 0.07376262843608856,
+      "red20_doc_flips_del": 8,
+      " red20_doc_flips_del_pct": 40.0,
+      "doc_delta_mean_tok_del": 0.03902123495936394,
+      "latencia_ms_mean": 128.61304259968165
+    },
+    "4. Attention (Capa 12)": {
+      "pair_comp_del_mean": 0.08775403127074241,
+      "pair_comp_del_std": 0.12769074940416084,
+      "pair_comp_mask_mean": -0.045326610654592515,
+      "pair_suff_mean": 0.2184114633128047,
+      "pair_delta_auc_mean": 0.05803862481378021,
+      "red20_pair_comp_del_mean": 0.1188766174018383,
+      "red20_pair_flips_del": 11,
+      "red20_pair_flips_mask": 5,
+      "red20_pair_flips_noise": 11,
+      "red20_doc_drop_smax_mean": 0.042577752470970155,
+      "red20_doc_flips_del": 3,
+      " red20_doc_flips_del_pct": 15.0,
+      "doc_delta_mean_tok_del": 0.028498944640159608,
+      "latencia_ms_mean": 91.41462834995764
+    },
+    "5. LIME-Light": {
+      "pair_comp_del_mean": 0.17053623944520951,
+      "pair_comp_del_std": 0.09404412918275777,
+      "pair_comp_mask_mean": 0.023199974745512008,
+      "pair_suff_mean": 0.19868407920002937,
+      "pair_delta_auc_mean": 0.14260263331234455,
+      "red20_pair_comp_del_mean": 0.1896063506603241,
+      "red20_pair_flips_del": 17,
+      "red20_pair_flips_mask": 4,
+      "red20_pair_flips_noise": 16,
+      "red20_doc_drop_smax_mean": 0.07506064474582672,
+      "red20_doc_flips_del": 8,
+      " red20_doc_flips_del_pct": 40.0,
+      "doc_delta_mean_tok_del": 0.03580259829759598,
+      "latencia_ms_mean": 1113.674750573773
+    },
+    "6. KernelSHAP-Light": {
+      "pair_comp_del_mean": 0.13055488057434558,
+      "pair_comp_del_std": 0.08724072735611489,
+      "pair_comp_mask_mean": 0.003550570458173752,
+      "pair_suff_mean": 0.28612433848902585,
+      "pair_delta_auc_mean": 0.06939071804285049,
+      "red20_pair_comp_del_mean": 0.1355926737189293,
+      "red20_pair_flips_del": 14,
+      "red20_pair_flips_mask": 5,
+      "red20_pair_flips_noise": 11,
+      "red20_doc_drop_smax_mean": 0.05460168719291687,
+      "red20_doc_flips_del": 5,
+      " red20_doc_flips_del_pct": 25.0,
+      "doc_delta_mean_tok_del": 0.020370513945817948,
+      "latencia_ms_mean": 1112.9781793017173
+    },
+    "7. Propio (MexGen)": {
+      "pair_comp_del_mean": 0.13606483414769172,
+      "pair_comp_del_std": 0.10380638733292456,
+      "pair_comp_mask_mean": 0.005063597857952118,
+      "pair_suff_mean": 0.1835587579756975,
+      "pair_delta_auc_mean": 0.1097449560649693,
+      "red20_pair_comp_del_mean": 0.1649083636701107,
+      "red20_pair_flips_del": 14,
+      "red20_pair_flips_mask": 6,
+      "red20_pair_flips_noise": 13,
+      "red20_doc_drop_smax_mean": 0.05850200355052948,
+      "red20_doc_flips_del": 6,
+      " red20_doc_flips_del_pct": 30.0,
+      "doc_delta_mean_tok_del": 0.021541336178779603,
+      "latencia_ms_mean": 116.60761242601438
+    }
+  },
+  "explicabilidad_propia_mexgen": {
+    "muestra_40_docs_redundantes_20": {
+      "s_max1_mean": 0.7142882376909256,
+      "s_max_after_1_sent_mean": 0.6287012591958046,
+      "drop_max_1_sent_mean": 0.08558697849512101,
+      "drop_max_2_sents_mean": 0.15410454161465167,
+      "drop_max_rand_unres_mean": 0.0261056554638008,
+      "flips_1_sent_count": 8,
+      "flips_1_sent_pct": 40.0,
+      "flips_2_sents_count": 11,
+      "flips_2_sents_pct": 55.00000000000001,
+      "delta_mean_morf_hub": 0.034840642288327214,
+      "delta_mean_lorf_min": -0.04667147845029831,
+      "p_val_morf_vs_lorf_40": 2.3293022037535573e-06,
+      "latencia_ms_mean": 0.6450543754908722
+    },
+    "corpus_completo_712_redundantes": {
+      "n_total_elegibles": 1820,
+      "n_redundancia_estricta": 712,
+      "s_max1_mean": 0.6935151825842697,
+      "s_max_after_star_mean": 0.5743032162921349,
+      "drop_max_star_mean": 0.11921196629213478,
+      "drop_max_rand_unres_mean": 0.03989755177162013,
+      "delta_mean_hub_morf": 0.03979268942143058,
+      "delta_mean_min_lorf": -0.055828822239713326,
+      "p_val_morf_vs_lorf_712": 3.5975212120510357e-150,
+      "bucle_unico_flips_total_count": 379,
+      "bucle_unico_flips_total_pct": 53.230337078651694,
+      "real_310_bucle_unico_flips_pct": 62.61980830670927,
+      "real_310_multibucle_persist_pct": 37.38019169329074,
+      "fake_402_bucle_unico_flips_pct": 45.86466165413533,
+      "fake_402_multibucle_persist_pct": 54.13533834586466,
+      "fisher_odds_ratio_fake_multibucle": 1.9773013871374527,
+      "fisher_p_value": 1.0909557080092275e-05
+    }
+  },
+  "sanity_check_adebayo": {
+    "stages": [
+      "0_Orig (0 Capas)",
+      "1_Top1 (Capa 11)",
+      "2_Top2 (Capas 11-10)",
+      "3_Top4 (Capas 11-8)",
+      "4_Top6 (Capas 11-6)",
+      "5_All (Capas 11-0)"
+    ],
+    "spearman": {
+      "1. Fast-IG (10 pasos)": [
+        1.0,
+        0.6584415584415585,
+        0.4909090909090909,
+        0.2909090909090909,
+        0.2922077922077922,
+        -0.49870129870129876
+      ],
+      "2. Input × Gradient": [
+        1.0,
+        0.9324675324675323,
+        0.7701298701298702,
+        0.2792207792207792,
+        0.12077922077922078,
+        -0.1935064935064935
+      ],
+      "3. Saliency Vanilla": [
+        1.0,
+        0.9909090909090909,
+        0.9688311688311689,
+        0.8987012987012987,
+        0.7896103896103897,
+        -0.6753246753246753
+      ],
+      "4. Attention (Capa 12)": [
+        1.0,
+        0.43376623376623374,
+        0.2662337662337662,
+        0.02857142857142857,
+        0.13506493506493505,
+        0.21168831168831168
+      ],
+      "5. LIME-Light": [
+        1.0,
+        0.9255874673629242,
+        0.758485639686684,
+        0.671018276762402,
+        0.7532637075718015,
+        0.4203655352480417
+      ],
+      "6. KernelSHAP-Light": [
+        1.0,
+        0.9869451697127937,
+        0.9556135770234987,
+        0.9595300261096604,
+        0.9151436031331592,
+        0.7297650130548303
+      ],
+      "7. Propio (MexGen)": [
+        1.0,
+        0.8720626631853785,
+        0.8825065274151436,
+        0.7049608355091382,
+        0.6540469973890339,
+        -0.25065274151436034
+      ]
+    }
+  }
+}

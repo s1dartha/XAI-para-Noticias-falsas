@@ -143,14 +143,15 @@ def generar_graficos_auditoria(auditorias: list, out_dir: str):
             mat_sim = np.eye(k)
 
         sns.heatmap(mat_sim, ax=ax, cmap="YlOrRd", vmin=0.0, vmax=1.0, annot=k<=9, fmt=".2f",
-                    cbar_kws={'label': 'Similitud Coseno SBERT'}, annot_kws={"size": 8.5})
-        ax.set_title(f"N{idx+1}: Redundancia Intra-Doc ($S_{{max}}={aud['redundancia_sbert']['max_intra_similarity']}$)\n{aud['redundancia_sbert']['diagnostico']}",
-                     fontsize=10.5, weight='bold', color='#2c3e50')
+                    cbar_kws={'label': 'Similitud Coseno BETO SBERT'}, annot_kws={"size": 8.5})
+        s2_val = aud['redundancia_sbert'].get('second_max_intra_similarity', aud['redundancia_sbert']['max_intra_similarity'])
+        ax.set_title(f"N{idx+1}: Redundancia ($S_{{(1)}}={aud['redundancia_sbert']['max_intra_similarity']}$ | $S_{{(2)}}={s2_val}$)\n{aud['redundancia_sbert']['diagnostico']}",
+                     fontsize=10.0, weight='bold', color='#2c3e50')
         ax.set_xlabel("Índice de Oración", fontsize=9.5)
         ax.set_ylabel("Índice de Oración", fontsize=9.5)
 
-    plt.suptitle("Matrices de Similitud Coseno Intra-Documental (Sentence-BERT)\nIdentificación de Bucles y Pares Redundantes ($\\tau \\geq 0.34$)",
-                 fontsize=14, weight='bold', y=0.99, color='#2c3e50')
+    plt.suptitle("Matrices de Similitud Coseno Intra-Documental (BETO SBERT: hiiamsid/sentence_similarity_spanish_es)\nJerarquía Multi-Umbral: Paráfrasis PAWS-X ($\\tau \\geq 0.534$) y Redundancia Estricta ($\\tau \\geq 0.600$)",
+                 fontsize=13.5, weight='bold', y=0.99, color='#2c3e50')
     plt.tight_layout()
     red_path = os.path.join(out_dir, "fig_mapas_calor_redundancia.png")
     plt.savefig(red_path, dpi=300, bbox_inches='tight')

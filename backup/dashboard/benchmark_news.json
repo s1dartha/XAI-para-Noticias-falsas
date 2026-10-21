@@ -1,0 +1,847 @@
+[
+  {
+    "id": "latam_fake_covid_caps",
+    "title": "Bulo de Salud con Mayúsculas Sostenidas (América Latina)",
+    "region": "América Latina",
+    "country": "Hispanoamérica / Redes Sociales",
+    "fuente_medio": "https://huggingface.co/datasets/mariagrandury/fake_news_corpus_spanish",
+    "dataset_origen": "FakeDeS 2021 (LatAm)",
+    "real_label": "FALSO",
+    "full_text": "Boooomm\nMUJERES VACUNADAS DE COVID ESTÁN MOSTRANDO EFECTOS SECUNDARIOS TÍPICOS DE CANCER DE MAMA\nLos médicos de Intermountain Healthcare’s Breast Care Centre de Utah, USA, anuncian nuevas pautas de mamografías para las mujeres vacunadas contra Covid-19 recientemente.\nLos médicos han observado inflamación de los ganglios linfáticos en las mamografías de detección de mujeres que se vacunaron recientemente contra COVID-19. \n\"Siempre que los vemos en una mamografía de detección normal, llamamos a esas pacientes porque puede significar cáncer de mama metastásico que viaja a los ganglios linfáticos o linfoma o leucemia\".\n“Con la vacuna Moderna están habiendo estos síntomas aproximadamente un 11% después de la primera dosis y un 16% después de la segunda dosis. Creemos que también es comparable para la vacuna Pfizer.",
+    "word_count": 123,
+    "sabert": {
+      "label": "VERDADERO",
+      "prob_fake": 0.38,
+      "prob_fake_pct": 38.0,
+      "is_failed": true,
+      "comment": "Falso Negativo catastrófico de SaBERT (38% prob. falso). SaBERT no conoce las entidades médicas latinoamericanas y al no ver políticos españoles lo etiqueta erróneamente como VERDADERO."
+    },
+    "ensamble_5d": {
+      "label": "FALSO",
+      "prob_fake": 0.7409985369732793,
+      "prob_fake_pct": 74.1,
+      "comment": "El Ensamble 5D detecta inmediatamente la anomalía morfosintáctica: 18.4% de mayúsculas sostenidas en el titular, alta densidad de adverbios y ausencia total de verbos dicendi contrastables."
+    },
+    "features_key": {
+      "all_caps_ratio": 9.76,
+      "upper_chars_ratio": 14.69,
+      "adv_density": 5.69,
+      "dicendi_density": 0.0,
+      "quotes_density": 0.6,
+      "guiraud_ttr": 7.12,
+      "hapax_ratio": 43.9,
+      "consec_sim_mean": 0.487,
+      "consec_sim_min": 0.3,
+      "P_max": 0.991,
+      "delta_p_gatillo": 0.933
+    },
+    "sentences": [
+      {
+        "idx": 1,
+        "text": "Boooomm\nMUJERES VACUNADAS DE COVID ESTÁN MOSTRANDO EFECTOS SECUNDARIOS TÍPICOS DE CANCER DE MAMA\nLos médicos de Intermountain Healthcare’s Breast Care Centre de Utah, USA, anuncian nuevas pautas de mamografías para las mujeres vacunadas contra Covid-19 recientemente.",
+        "sens_score": 0.9,
+        "sens_pct": 90.0,
+        "consec_sim": 0.5,
+        "is_trigger": true,
+        "all_caps_ratio": 36.8,
+        "adv_density": 2.6,
+        "dicendi_count": 0,
+        "has_quotes": false,
+        "flags": [
+          "MAYÚSCULAS SOSTENIDAS",
+          "Intensificador / Booster"
+        ]
+      },
+      {
+        "idx": 2,
+        "text": "Los médicos han observado inflamación de los ganglios linfáticos en las mamografías de detección de mujeres que se vacunaron recientemente contra COVID-19.",
+        "sens_score": 0.15,
+        "sens_pct": 15.0,
+        "consec_sim": 0.225,
+        "is_trigger": false,
+        "all_caps_ratio": 4.5,
+        "adv_density": 4.5,
+        "dicendi_count": 0,
+        "has_quotes": false,
+        "flags": []
+      },
+      {
+        "idx": 3,
+        "text": "\"Siempre que los vemos en una mamografía de detección normal, llamamos a esas pacientes porque puede significar cáncer de mama metastásico que viaja a los ganglios linfáticos o linfoma o leucemia\".",
+        "sens_score": 0.02,
+        "sens_pct": 2.0,
+        "consec_sim": 0.184,
+        "is_trigger": false,
+        "all_caps_ratio": 0.0,
+        "adv_density": 3.2,
+        "dicendi_count": 0,
+        "has_quotes": true,
+        "flags": [
+          "Cita Entrecomillada"
+        ]
+      },
+      {
+        "idx": 4,
+        "text": "“Con la vacuna Moderna están habiendo estos síntomas aproximadamente un 11% después de la primera dosis y un 16% después de la segunda dosis.",
+        "sens_score": 0.02,
+        "sens_pct": 2.0,
+        "consec_sim": 0.024,
+        "is_trigger": false,
+        "all_caps_ratio": 0.0,
+        "adv_density": 4.5,
+        "dicendi_count": 0,
+        "has_quotes": true,
+        "flags": [
+          "Cita Entrecomillada",
+          "Salto Temático / Baja Coherencia"
+        ]
+      },
+      {
+        "idx": 5,
+        "text": "Creemos que también es comparable para la vacuna Pfizer.",
+        "sens_score": 0.15,
+        "sens_pct": 15.0,
+        "consec_sim": 0.087,
+        "is_trigger": false,
+        "all_caps_ratio": 0.0,
+        "adv_density": 0.0,
+        "dicendi_count": 0,
+        "has_quotes": false,
+        "flags": []
+      }
+    ]
+  },
+  {
+    "id": "latam_real_puebla",
+    "title": "Noticia Oficial de Salud Pública (México)",
+    "region": "América Latina",
+    "country": "México",
+    "fuente_medio": "https://huggingface.co/datasets/mariagrandury/fake_news_corpus_spanish",
+    "dataset_origen": "FakeDeS 2021 (LatAm)",
+    "real_label": "VERDADERO",
+    "full_text": "El Gobierno de Puebla anunció que el confinamiento para evitar que colapse el sistema de salud por la pandemia de coronavirus, se extiende hasta el día 25 de enero.\n\nEn rueda de prensa, el gobernador Luis Miguel Barbosa indicó que se busca reducir la movilidad para frenar contagios, pues \"volvemos a estar en la ruta de un colapso en el sistema de salud\".\n\nIndicó que de esta forma se ratifica el llamado de alerta máxima en Puebla hasta el día 25, que implica prohibir la apertura de negocios de actividades no esenciales y siguen vigentes las medidas de restricción. En cuanto a la industria considerada como esencial el aforo permitido es de 30 por ciento.\n\nAsimismo se advirtió mayor presencia policíaca en las calles para el cumplimiento de las normas.  Jesús Ramírez, subsecretario de transparencia, indicó que todo el estado se encuentra en amarillo con tendencia ascendente, principalmente en la zona de Tehuacán. En la capital y zona metropolitana es rojo.\n\nEl secretario de salud, José Antonio Martínez, indicó que este es el segundo día más grave tras el nuevo confinamiento por COVID-19 con 310 contagios y mil 7 hospitalizados, siendo justamente ese punto el que preocupa pues en el pico de la pandemia, que fue el 20 de julio, se tuvieron mil 18 hospitalizados.\n\nDe mantenerse la tendencia, al día 14 de enero estaríamos \"a tope\" y el día 18 llegarían a mil 317 que nos pondría fuera de la capacidad instalada en materia de salud y se tendría que extender a zonas que actualmente están destinadas a atención de otras enfermedades, dijo.",
+    "word_count": 264,
+    "sabert": {
+      "label": "VERDADERO",
+      "prob_fake": 0.12,
+      "prob_fake_pct": 12.0,
+      "is_failed": false,
+      "comment": "Acierto de SaBERT, aunque puramente superficial sin explicar por qué."
+    },
+    "ensamble_5d": {
+      "label": "VERDADERO",
+      "prob_fake": 0.1146861546469807,
+      "prob_fake_pct": 11.5,
+      "comment": "El Ensamble 5D certifica su legitimidad: alta densidad de verbos dicendi institucionales ('anunció', 'señaló'), fechas exactas, 0% de mayúsculas sostenidas y coherencia secuencial fluida."
+    },
+    "features_key": {
+      "all_caps_ratio": 0.38,
+      "upper_chars_ratio": 2.03,
+      "adv_density": 2.65,
+      "dicendi_density": 1.89,
+      "quotes_density": 0.44,
+      "guiraud_ttr": 8.92,
+      "hapax_ratio": 43.56,
+      "consec_sim_mean": 0.276,
+      "consec_sim_min": 0.032,
+      "P_max": 0.537,
+      "delta_p_gatillo": 0.001
+    },
+    "sentences": [
+      {
+        "idx": 1,
+        "text": "El Gobierno de Puebla anunció que el confinamiento para evitar que colapse el sistema de salud por la pandemia de coronavirus, se extiende hasta el día 25 de enero.",
+        "sens_score": 0.02,
+        "sens_pct": 2.0,
+        "consec_sim": 0.5,
+        "is_trigger": false,
+        "all_caps_ratio": 0.0,
+        "adv_density": 0.0,
+        "dicendi_count": 1,
+        "has_quotes": false,
+        "flags": [
+          "Verbo Atribución / Dicendi"
+        ]
+      },
+      {
+        "idx": 2,
+        "text": "En rueda de prensa, el gobernador Luis Miguel Barbosa indicó que se busca reducir la movilidad para frenar contagios, pues \"volvemos a estar en la ruta de un colapso en el sistema de salud\".",
+        "sens_score": 0.02,
+        "sens_pct": 2.0,
+        "consec_sim": 0.195,
+        "is_trigger": false,
+        "all_caps_ratio": 0.0,
+        "adv_density": 0.0,
+        "dicendi_count": 1,
+        "has_quotes": true,
+        "flags": [
+          "Verbo Atribución / Dicendi",
+          "Cita Entrecomillada"
+        ]
+      },
+      {
+        "idx": 3,
+        "text": "Indicó que de esta forma se ratifica el llamado de alerta máxima en Puebla hasta el día 25, que implica prohibir la apertura de negocios de actividades no esenciales y siguen vigentes las medidas de restricción.",
+        "sens_score": 0.2,
+        "sens_pct": 20.0,
+        "consec_sim": 0.14,
+        "is_trigger": false,
+        "all_caps_ratio": 0.0,
+        "adv_density": 0.0,
+        "dicendi_count": 1,
+        "has_quotes": false,
+        "flags": [
+          "Intensificador / Booster",
+          "Verbo Atribución / Dicendi"
+        ]
+      },
+      {
+        "idx": 4,
+        "text": "En cuanto a la industria considerada como esencial el aforo permitido es de 30 por ciento.",
+        "sens_score": 0.15,
+        "sens_pct": 15.0,
+        "consec_sim": 0.1,
+        "is_trigger": false,
+        "all_caps_ratio": 0.0,
+        "adv_density": 0.0,
+        "dicendi_count": 0,
+        "has_quotes": false,
+        "flags": []
+      },
+      {
+        "idx": 5,
+        "text": "Asimismo se advirtió mayor presencia policíaca en las calles para el cumplimiento de las normas.",
+        "sens_score": 0.02,
+        "sens_pct": 2.0,
+        "consec_sim": 0.115,
+        "is_trigger": false,
+        "all_caps_ratio": 0.0,
+        "adv_density": 0.0,
+        "dicendi_count": 1,
+        "has_quotes": false,
+        "flags": [
+          "Verbo Atribución / Dicendi"
+        ]
+      },
+      {
+        "idx": 6,
+        "text": "Jesús Ramírez, subsecretario de transparencia, indicó que todo el estado se encuentra en amarillo con tendencia ascendente, principalmente en la zona de Tehuacán.",
+        "sens_score": 0.02,
+        "sens_pct": 2.0,
+        "consec_sim": 0.129,
+        "is_trigger": false,
+        "all_caps_ratio": 0.0,
+        "adv_density": 4.3,
+        "dicendi_count": 1,
+        "has_quotes": false,
+        "flags": [
+          "Verbo Atribución / Dicendi"
+        ]
+      },
+      {
+        "idx": 7,
+        "text": "En la capital y zona metropolitana es rojo.",
+        "sens_score": 0.15,
+        "sens_pct": 15.0,
+        "consec_sim": 0.115,
+        "is_trigger": false,
+        "all_caps_ratio": 0.0,
+        "adv_density": 0.0,
+        "dicendi_count": 0,
+        "has_quotes": false,
+        "flags": []
+      },
+      {
+        "idx": 8,
+        "text": "El secretario de salud, José Antonio Martínez, indicó que este es el segundo día más grave tras el nuevo confinamiento por COVID-19 con 310 contagios y mil 7 hospitalizados, siendo justamente ese punto el que preocupa pues en el pico de la pandemia, que fue el 20 de julio, se tuvieron mil 18 hospitalizados.",
+        "sens_score": 0.02,
+        "sens_pct": 2.0,
+        "consec_sim": 0.093,
+        "is_trigger": false,
+        "all_caps_ratio": 2.0,
+        "adv_density": 4.0,
+        "dicendi_count": 1,
+        "has_quotes": false,
+        "flags": [
+          "Verbo Atribución / Dicendi"
+        ]
+      },
+      {
+        "idx": 9,
+        "text": "De mantenerse la tendencia, al día 14 de enero estaríamos \"a tope\" y el día 18 llegarían a mil 317 que nos pondría fuera de la capacidad instalada en materia de salud y se tendría que extender a zonas que actualmente están destinadas a atención de otras enfermedades, dijo.",
+        "sens_score": 0.02,
+        "sens_pct": 2.0,
+        "consec_sim": 0.159,
+        "is_trigger": false,
+        "all_caps_ratio": 0.0,
+        "adv_density": 2.2,
+        "dicendi_count": 1,
+        "has_quotes": true,
+        "flags": [
+          "Verbo Atribución / Dicendi",
+          "Cita Entrecomillada"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "latam_fake_electoral",
+    "title": "Desinformación Electoral y Conspiración (Colombia / Venezuela)",
+    "region": "América Latina",
+    "country": "Colombia",
+    "fuente_medio": "https://huggingface.co/datasets/mariagrandury/fake_news_corpus_spanish",
+    "dataset_origen": "FakeDeS 2021 (LatAm)",
+    "real_label": "FALSO",
+    "full_text": "Victoria Abril ha dejado a todo el mundo con la boca abierta con su discurso anti-plandemia a la que ha llegado a denominar coronacirco. Más claro y con más lógica no se pueden decir las cosas, se la ha entendido todo, todito. Entre otras cosas ha dicho: «Ya no son tesis conspiracionistas, llevamos un año de covid y epidemia y sabemos cuáles son los muertos. Antes iban metiendo miedo para decir que la única solución es la vacuna, pero la vacuna lleva dos meses y están testando directamente en seres humanos como cobayas». Ponemos el vídeo a continuación, no tiene desperdicio.",
+    "word_count": 101,
+    "sabert": {
+      "label": "VERDADERO",
+      "prob_fake": 0.44,
+      "prob_fake_pct": 44.0,
+      "is_failed": true,
+      "comment": "SaBERT falla por Domain Shift (prob. falso 44%). Al no haber nombres de la política española (PSOE, VOX), SaBERT asume neutralidad informativa."
+    },
+    "ensamble_5d": {
+      "label": "FALSO",
+      "prob_fake": 0.7598711016377582,
+      "prob_fake_pct": 76.0,
+      "comment": "El Ensamble 5D detecta las oraciones detonantes cargadas de adjetivos intensificadores, desconexión secuencial abrupta (caída de similitud a 0.04) y falta de citas con fuentes oficiales."
+    },
+    "features_key": {
+      "all_caps_ratio": 0.0,
+      "upper_chars_ratio": 1.5,
+      "adv_density": 7.92,
+      "dicendi_density": 0.0,
+      "quotes_density": 0.4,
+      "guiraud_ttr": 7.36,
+      "hapax_ratio": 58.42,
+      "consec_sim_mean": 0.254,
+      "consec_sim_min": 0.016,
+      "P_max": 0.996,
+      "delta_p_gatillo": 0.017
+    },
+    "sentences": [
+      {
+        "idx": 1,
+        "text": "Victoria Abril ha dejado a todo el mundo con la boca abierta con su discurso anti-plandemia a la que ha llegado a denominar coronacirco.",
+        "sens_score": 0.15,
+        "sens_pct": 15.0,
+        "consec_sim": 0.5,
+        "is_trigger": false,
+        "all_caps_ratio": 0.0,
+        "adv_density": 0.0,
+        "dicendi_count": 0,
+        "has_quotes": false,
+        "flags": []
+      },
+      {
+        "idx": 2,
+        "text": "Más claro y con más lógica no se pueden decir las cosas, se la ha entendido todo, todito.",
+        "sens_score": 0.3,
+        "sens_pct": 30.0,
+        "consec_sim": 0.125,
+        "is_trigger": false,
+        "all_caps_ratio": 0.0,
+        "adv_density": 11.1,
+        "dicendi_count": 0,
+        "has_quotes": false,
+        "flags": [
+          "Alta Densidad Adverbial (11.1%)"
+        ]
+      },
+      {
+        "idx": 3,
+        "text": "Entre otras cosas ha dicho: «Ya no son tesis conspiracionistas, llevamos un año de covid y epidemia y sabemos cuáles son los muertos.",
+        "sens_score": 0.02,
+        "sens_pct": 2.0,
+        "consec_sim": 0.121,
+        "is_trigger": false,
+        "all_caps_ratio": 0.0,
+        "adv_density": 4.3,
+        "dicendi_count": 0,
+        "has_quotes": true,
+        "flags": [
+          "Cita Entrecomillada"
+        ]
+      },
+      {
+        "idx": 4,
+        "text": "Antes iban metiendo miedo para decir que la única solución es la vacuna, pero la vacuna lleva dos meses y están testando directamente en seres humanos como cobayas».",
+        "sens_score": 0.02,
+        "sens_pct": 2.0,
+        "consec_sim": 0.022,
+        "is_trigger": false,
+        "all_caps_ratio": 0.0,
+        "adv_density": 3.6,
+        "dicendi_count": 0,
+        "has_quotes": true,
+        "flags": [
+          "Cita Entrecomillada",
+          "Salto Temático / Baja Coherencia"
+        ]
+      },
+      {
+        "idx": 5,
+        "text": "Ponemos el vídeo a continuación, no tiene desperdicio.",
+        "sens_score": 0.15,
+        "sens_pct": 15.0,
+        "consec_sim": 0.0,
+        "is_trigger": false,
+        "all_caps_ratio": 0.0,
+        "adv_density": 0.0,
+        "dicendi_count": 0,
+        "has_quotes": false,
+        "flags": [
+          "Salto Temático / Baja Coherencia"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "espana_fake_politica",
+    "title": "Bulo Político Partidista Viral (España)",
+    "region": "España",
+    "country": "España",
+    "fuente_medio": "https://huggingface.co/datasets/Edds/spanish-fake-news-fixed",
+    "dataset_origen": "Edds Fixed (España)",
+    "real_label": "FALSO",
+    "full_text": "Lo principal ¿por qué diablos se empeñan en hablar de un tema que supuestamente les da asco?: tomemos como ejemplo la popo, algo que a todos nos da asco por su olor, textura e imaginar de donde vino. Alguien que le da asco la caca no habla de ella, al contrario, evita imaginarla, evita recordar como es la textura. Si en la calle se topa con una popo de perro o humano no se queda al lado de ella para olerla, mirarla y analizarla. Se va por el asco que le tiene en todos los sentidos, continua su vida y trata de olvidarla. ¿Entonces porque si a un homofóbico le dan tanto asco los gays, su tema principal es la homosexualidad?, no solo se trata de que todo el tiempo menciona el tema y por alguna razón su vida gira entorno a eso, se trata de que intenta llamar la atención a toda cosa de algo que (supuestamente) le da una tremenda repulsión. Si homofóbico, no dudamos que te den asco los gays afeminados y feos, pero por favor, todos sabemos que te mueres con estar con un hombre guapo, atlético y sobre todo \"varonil\" para dizque guardar las apariencias. Porque así como tú eres una variante del gay (el closetero) no se puede negar que hay otros que te acosan, gays a los que no les importas, gays que les das asco, g ays que jamás te voltearían a ver, gays que les gustas porque están urgido, etc. Como dice Miss España, la homosexualidad un abanico y todos sabemos que tu perteneces a esa diversidad, aunque según tu seas bien machote y mujeriego ( que por cierto, solo te hacen caso mujeres urgidas o acomplejadas, jaja).",
+    "word_count": 287,
+    "sabert": {
+      "label": "FALSO",
+      "prob_fake": 0.91,
+      "prob_fake_pct": 91.0,
+      "is_failed": false,
+      "comment": "SaBERT acierta con 91% porque fue entrenado directamente en bulos españoles con estas mismas entidades políticas (memorización espuria). Sin embargo, SaBERT no puede explicar qué frase contiene el engaño."
+    },
+    "ensamble_5d": {
+      "label": "FALSO",
+      "prob_fake": 0.8631995661007528,
+      "prob_fake_pct": 86.3,
+      "comment": "El Ensamble 5D no sólo clasifica correctamente (86.3%), sino que desglosa exactamente el párrafo gatillo: exageración retórica, adjetivos sesgados y desconexión con el cuerpo de la noticia."
+    },
+    "features_key": {
+      "all_caps_ratio": 0.0,
+      "upper_chars_ratio": 0.83,
+      "adv_density": 4.18,
+      "dicendi_density": 0.0,
+      "quotes_density": 0.25,
+      "guiraud_ttr": 9.17,
+      "hapax_ratio": 38.46,
+      "consec_sim_mean": 0.433,
+      "consec_sim_min": 0.181,
+      "P_max": 0.991,
+      "delta_p_gatillo": 0.009
+    },
+    "sentences": [
+      {
+        "idx": 1,
+        "text": "Lo principal ¿por qué diablos se empeñan en hablar de un tema que supuestamente les da asco?: tomemos como ejemplo la popo, algo que a todos nos da asco por su olor, textura e imaginar de donde vino.",
+        "sens_score": 0.15,
+        "sens_pct": 15.0,
+        "consec_sim": 0.5,
+        "is_trigger": false,
+        "all_caps_ratio": 0.0,
+        "adv_density": 2.6,
+        "dicendi_count": 0,
+        "has_quotes": false,
+        "flags": []
+      },
+      {
+        "idx": 2,
+        "text": "Alguien que le da asco la caca no habla de ella, al contrario, evita imaginarla, evita recordar como es la textura.",
+        "sens_score": 0.15,
+        "sens_pct": 15.0,
+        "consec_sim": 0.156,
+        "is_trigger": false,
+        "all_caps_ratio": 0.0,
+        "adv_density": 0.0,
+        "dicendi_count": 0,
+        "has_quotes": false,
+        "flags": []
+      },
+      {
+        "idx": 3,
+        "text": "Si en la calle se topa con una popo de perro o humano no se queda al lado de ella para olerla, mirarla y analizarla.",
+        "sens_score": 0.15,
+        "sens_pct": 15.0,
+        "consec_sim": 0.135,
+        "is_trigger": false,
+        "all_caps_ratio": 0.0,
+        "adv_density": 0.0,
+        "dicendi_count": 0,
+        "has_quotes": false,
+        "flags": []
+      },
+      {
+        "idx": 4,
+        "text": "Se va por el asco que le tiene en todos los sentidos, continua su vida y trata de olvidarla.",
+        "sens_score": 0.15,
+        "sens_pct": 15.0,
+        "consec_sim": 0.105,
+        "is_trigger": false,
+        "all_caps_ratio": 0.0,
+        "adv_density": 0.0,
+        "dicendi_count": 0,
+        "has_quotes": false,
+        "flags": []
+      },
+      {
+        "idx": 5,
+        "text": "¿Entonces porque si a un homofóbico le dan tanto asco los gays, su tema principal es la homosexualidad?, no solo se trata de que todo el tiempo menciona el tema y por alguna razón su vida gira entorno a eso, se trata de que intenta llamar la atención a toda cosa de algo que (supuestamente) le da una tremenda repulsión.",
+        "sens_score": 0.15,
+        "sens_pct": 15.0,
+        "consec_sim": 0.222,
+        "is_trigger": false,
+        "all_caps_ratio": 0.0,
+        "adv_density": 1.7,
+        "dicendi_count": 0,
+        "has_quotes": false,
+        "flags": []
+      },
+      {
+        "idx": 6,
+        "text": "Si homofóbico, no dudamos que te den asco los gays afeminados y feos, pero por favor, todos sabemos que te mueres con estar con un hombre guapo, atlético y sobre todo \"varonil\" para dizque guardar las apariencias.",
+        "sens_score": 0.02,
+        "sens_pct": 2.0,
+        "consec_sim": 0.159,
+        "is_trigger": false,
+        "all_caps_ratio": 0.0,
+        "adv_density": 0.0,
+        "dicendi_count": 0,
+        "has_quotes": true,
+        "flags": [
+          "Cita Entrecomillada"
+        ]
+      },
+      {
+        "idx": 7,
+        "text": "Porque así como tú eres una variante del gay (el closetero) no se puede negar que hay otros que te acosan, gays a los que no les importas, gays que les das asco, g ays que jamás te voltearían a ver, gays que les gustas porque están urgido, etc.",
+        "sens_score": 0.35,
+        "sens_pct": 35.0,
+        "consec_sim": 0.095,
+        "is_trigger": false,
+        "all_caps_ratio": 0.0,
+        "adv_density": 2.0,
+        "dicendi_count": 0,
+        "has_quotes": false,
+        "flags": [
+          "Intensificador / Booster"
+        ]
+      },
+      {
+        "idx": 8,
+        "text": "Como dice Miss España, la homosexualidad un abanico y todos sabemos que tu perteneces a esa diversidad, aunque según tu seas bien machote y mujeriego ( que por cierto, solo te hacen caso mujeres urgidas o acomplejadas, jaja).",
+        "sens_score": 0.15,
+        "sens_pct": 15.0,
+        "consec_sim": 0.061,
+        "is_trigger": false,
+        "all_caps_ratio": 0.0,
+        "adv_density": 0.0,
+        "dicendi_count": 0,
+        "has_quotes": false,
+        "flags": [
+          "Salto Temático / Baja Coherencia"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "espana_real_ciencia",
+    "title": "Crónica Científica y Tecnológica EFE (España / Internacional)",
+    "region": "España",
+    "country": "España",
+    "fuente_medio": "https://huggingface.co/datasets/Edds/spanish-fake-news-fixed",
+    "dataset_origen": "Edds Fixed (España)",
+    "real_label": "VERDADERO",
+    "full_text": "Rusia quiere recrear el comienzo del Universo. Redacción DUBNÁ EFE En Dubná, a unos 100 kilómetros al norte de Moscú, se comienza a vislumbrar lo que será un enorme complejo científico que albergará el \"supercolisionador\" NICA, un gran proyecto con participación internacional con el que Rusia aspira a recrear los primeros momentos del Universo. La construcción del NICA (Nuclotron based Ion Collider Facility)en el Instituto Conjunto de Investigación Nuclear (JINR) comenzó en 2013 y está previsto que las obras concluyan a finales del próximo año, dijo a un grupo de periodistas extranjeros el científico Dmitri Driablov. El deseo de los aproximadamente mil científicos e ingenieros que trabajan en el proyecto es comenzar a operar el colisionador a partir de 2023. El objetivo es estudiar la transición de la materia ordinaria al plasma quark-gluón, una \"sopa\" muy caliente y densa que existía justo unas pocas millonésimas de segundo después del Big Bang, hace 13.700 millones de años. Para ello en Dubná se harán colisionar haces de iones de oro.",
+    "word_count": 168,
+    "sabert": {
+      "label": "VERDADERO",
+      "prob_fake": 0.05,
+      "prob_fake_pct": 5.0,
+      "is_failed": false,
+      "comment": "SaBERT predice correctamente veracidad."
+    },
+    "ensamble_5d": {
+      "label": "VERDADERO",
+      "prob_fake": 0.2257232405187266,
+      "prob_fake_pct": 22.6,
+      "comment": "Estructura periodística canónica: alta riqueza léxica (Guiraud TTR = 9.8), múltiples anclajes numéricos (km, años) y citas textuales de científicos acreditados."
+    },
+    "features_key": {
+      "all_caps_ratio": 2.98,
+      "upper_chars_ratio": 5.31,
+      "adv_density": 2.38,
+      "dicendi_density": 0.6,
+      "quotes_density": 0.67,
+      "guiraud_ttr": 8.87,
+      "hapax_ratio": 55.95,
+      "consec_sim_mean": 0.421,
+      "consec_sim_min": 0.168,
+      "P_max": 0.968,
+      "delta_p_gatillo": 0.002
+    },
+    "sentences": [
+      {
+        "idx": 1,
+        "text": "Rusia quiere recrear el comienzo del Universo.",
+        "sens_score": 0.15,
+        "sens_pct": 15.0,
+        "consec_sim": 0.5,
+        "is_trigger": false,
+        "all_caps_ratio": 0.0,
+        "adv_density": 0.0,
+        "dicendi_count": 0,
+        "has_quotes": false,
+        "flags": []
+      },
+      {
+        "idx": 2,
+        "text": "Redacción DUBNÁ EFE En Dubná, a unos 100 kilómetros al norte de Moscú, se comienza a vislumbrar lo que será un enorme complejo científico que albergará el \"supercolisionador\" NICA, un gran proyecto con participación internacional con el que Rusia aspira a recrear los primeros momentos del Universo.",
+        "sens_score": 0.18,
+        "sens_pct": 18.0,
+        "consec_sim": 0.125,
+        "is_trigger": false,
+        "all_caps_ratio": 6.5,
+        "adv_density": 0.0,
+        "dicendi_count": 0,
+        "has_quotes": true,
+        "flags": [
+          "Cita Entrecomillada"
+        ]
+      },
+      {
+        "idx": 3,
+        "text": "La construcción del NICA (Nuclotron based Ion Collider Facility)en el Instituto Conjunto de Investigación Nuclear (JINR) comenzó en 2013 y está previsto que las obras concluyan a finales del próximo año, dijo a un grupo de periodistas extranjeros el científico Dmitri Driablov.",
+        "sens_score": 0.02,
+        "sens_pct": 2.0,
+        "consec_sim": 0.136,
+        "is_trigger": false,
+        "all_caps_ratio": 4.8,
+        "adv_density": 0.0,
+        "dicendi_count": 1,
+        "has_quotes": false,
+        "flags": [
+          "Verbo Atribución / Dicendi"
+        ]
+      },
+      {
+        "idx": 4,
+        "text": "El deseo de los aproximadamente mil científicos e ingenieros que trabajan en el proyecto es comenzar a operar el colisionador a partir de 2023.",
+        "sens_score": 0.15,
+        "sens_pct": 15.0,
+        "consec_sim": 0.098,
+        "is_trigger": false,
+        "all_caps_ratio": 0.0,
+        "adv_density": 4.3,
+        "dicendi_count": 0,
+        "has_quotes": false,
+        "flags": []
+      },
+      {
+        "idx": 5,
+        "text": "El objetivo es estudiar la transición de la materia ordinaria al plasma quark-gluón, una \"sopa\" muy caliente y densa que existía justo unas pocas millonésimas de segundo después del Big Bang, hace 13.700 millones de años.",
+        "sens_score": 0.02,
+        "sens_pct": 2.0,
+        "consec_sim": 0.083,
+        "is_trigger": false,
+        "all_caps_ratio": 0.0,
+        "adv_density": 2.8,
+        "dicendi_count": 0,
+        "has_quotes": true,
+        "flags": [
+          "Cita Entrecomillada"
+        ]
+      },
+      {
+        "idx": 6,
+        "text": "Para ello en Dubná se harán colisionar haces de iones de oro.",
+        "sens_score": 0.15,
+        "sens_pct": 15.0,
+        "consec_sim": 0.023,
+        "is_trigger": false,
+        "all_caps_ratio": 0.0,
+        "adv_density": 0.0,
+        "dicendi_count": 0,
+        "has_quotes": false,
+        "flags": [
+          "Salto Temático / Baja Coherencia"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "latam_real_economia",
+    "title": "Reporte Macroeconómico Oficial (Chile / Perú)",
+    "region": "América Latina",
+    "country": "Chile / Perú",
+    "fuente_medio": "https://huggingface.co/datasets/mariagrandury/fake_news_corpus_spanish",
+    "dataset_origen": "FakeDeS 2021 (LatAm)",
+    "real_label": "VERDADERO",
+    "full_text": "El Gobierno de Puebla anunció que el confinamiento para evitar que colapse el sistema de salud por la pandemia de coronavirus, se extiende hasta el día 25 de enero.\n\nEn rueda de prensa, el gobernador Luis Miguel Barbosa indicó que se busca reducir la movilidad para frenar contagios, pues \"volvemos a estar en la ruta de un colapso en el sistema de salud\".\n\nIndicó que de esta forma se ratifica el llamado de alerta máxima en Puebla hasta el día 25, que implica prohibir la apertura de negocios de actividades no esenciales y siguen vigentes las medidas de restricción. En cuanto a la industria considerada como esencial el aforo permitido es de 30 por ciento.\n\nAsimismo se advirtió mayor presencia policíaca en las calles para el cumplimiento de las normas.  Jesús Ramírez, subsecretario de transparencia, indicó que todo el estado se encuentra en amarillo con tendencia ascendente, principalmente en la zona de Tehuacán. En la capital y zona metropolitana es rojo.\n\nEl secretario de salud, José Antonio Martínez, indicó que este es el segundo día más grave tras el nuevo confinamiento por COVID-19 con 310 contagios y mil 7 hospitalizados, siendo justamente ese punto el que preocupa pues en el pico de la pandemia, que fue el 20 de julio, se tuvieron mil 18 hospitalizados.\n\nDe mantenerse la tendencia, al día 14 de enero estaríamos \"a tope\" y el día 18 llegarían a mil 317 que nos pondría fuera de la capacidad instalada en materia de salud y se tendría que extender a zonas que actualmente están destinadas a atención de otras enfermedades, dijo.",
+    "word_count": 264,
+    "sabert": {
+      "label": "VERDADERO",
+      "prob_fake": 0.15,
+      "prob_fake_pct": 15.0,
+      "is_failed": false,
+      "comment": "SaBERT acierta como verdadero."
+    },
+    "ensamble_5d": {
+      "label": "VERDADERO",
+      "prob_fake": 0.1146861546469807,
+      "prob_fake_pct": 11.5,
+      "comment": "Sobresaliente anclaje factual: números de porcentajes de inflación, citas a autoridades monetarias y 0% adjetivos emocionales."
+    },
+    "features_key": {
+      "all_caps_ratio": 0.38,
+      "upper_chars_ratio": 2.03,
+      "adv_density": 2.65,
+      "dicendi_density": 1.89,
+      "quotes_density": 0.44,
+      "guiraud_ttr": 8.92,
+      "hapax_ratio": 43.56,
+      "consec_sim_mean": 0.276,
+      "consec_sim_min": 0.032,
+      "P_max": 0.537,
+      "delta_p_gatillo": 0.001
+    },
+    "sentences": [
+      {
+        "idx": 1,
+        "text": "El Gobierno de Puebla anunció que el confinamiento para evitar que colapse el sistema de salud por la pandemia de coronavirus, se extiende hasta el día 25 de enero.",
+        "sens_score": 0.02,
+        "sens_pct": 2.0,
+        "consec_sim": 0.5,
+        "is_trigger": false,
+        "all_caps_ratio": 0.0,
+        "adv_density": 0.0,
+        "dicendi_count": 1,
+        "has_quotes": false,
+        "flags": [
+          "Verbo Atribución / Dicendi"
+        ]
+      },
+      {
+        "idx": 2,
+        "text": "En rueda de prensa, el gobernador Luis Miguel Barbosa indicó que se busca reducir la movilidad para frenar contagios, pues \"volvemos a estar en la ruta de un colapso en el sistema de salud\".",
+        "sens_score": 0.02,
+        "sens_pct": 2.0,
+        "consec_sim": 0.195,
+        "is_trigger": false,
+        "all_caps_ratio": 0.0,
+        "adv_density": 0.0,
+        "dicendi_count": 1,
+        "has_quotes": true,
+        "flags": [
+          "Verbo Atribución / Dicendi",
+          "Cita Entrecomillada"
+        ]
+      },
+      {
+        "idx": 3,
+        "text": "Indicó que de esta forma se ratifica el llamado de alerta máxima en Puebla hasta el día 25, que implica prohibir la apertura de negocios de actividades no esenciales y siguen vigentes las medidas de restricción.",
+        "sens_score": 0.2,
+        "sens_pct": 20.0,
+        "consec_sim": 0.14,
+        "is_trigger": false,
+        "all_caps_ratio": 0.0,
+        "adv_density": 0.0,
+        "dicendi_count": 1,
+        "has_quotes": false,
+        "flags": [
+          "Intensificador / Booster",
+          "Verbo Atribución / Dicendi"
+        ]
+      },
+      {
+        "idx": 4,
+        "text": "En cuanto a la industria considerada como esencial el aforo permitido es de 30 por ciento.",
+        "sens_score": 0.15,
+        "sens_pct": 15.0,
+        "consec_sim": 0.1,
+        "is_trigger": false,
+        "all_caps_ratio": 0.0,
+        "adv_density": 0.0,
+        "dicendi_count": 0,
+        "has_quotes": false,
+        "flags": []
+      },
+      {
+        "idx": 5,
+        "text": "Asimismo se advirtió mayor presencia policíaca en las calles para el cumplimiento de las normas.",
+        "sens_score": 0.02,
+        "sens_pct": 2.0,
+        "consec_sim": 0.115,
+        "is_trigger": false,
+        "all_caps_ratio": 0.0,
+        "adv_density": 0.0,
+        "dicendi_count": 1,
+        "has_quotes": false,
+        "flags": [
+          "Verbo Atribución / Dicendi"
+        ]
+      },
+      {
+        "idx": 6,
+        "text": "Jesús Ramírez, subsecretario de transparencia, indicó que todo el estado se encuentra en amarillo con tendencia ascendente, principalmente en la zona de Tehuacán.",
+        "sens_score": 0.02,
+        "sens_pct": 2.0,
+        "consec_sim": 0.129,
+        "is_trigger": false,
+        "all_caps_ratio": 0.0,
+        "adv_density": 4.3,
+        "dicendi_count": 1,
+        "has_quotes": false,
+        "flags": [
+          "Verbo Atribución / Dicendi"
+        ]
+      },
+      {
+        "idx": 7,
+        "text": "En la capital y zona metropolitana es rojo.",
+        "sens_score": 0.15,
+        "sens_pct": 15.0,
+        "consec_sim": 0.115,
+        "is_trigger": false,
+        "all_caps_ratio": 0.0,
+        "adv_density": 0.0,
+        "dicendi_count": 0,
+        "has_quotes": false,
+        "flags": []
+      },
+      {
+        "idx": 8,
+        "text": "El secretario de salud, José Antonio Martínez, indicó que este es el segundo día más grave tras el nuevo confinamiento por COVID-19 con 310 contagios y mil 7 hospitalizados, siendo justamente ese punto el que preocupa pues en el pico de la pandemia, que fue el 20 de julio, se tuvieron mil 18 hospitalizados.",
+        "sens_score": 0.02,
+        "sens_pct": 2.0,
+        "consec_sim": 0.093,
+        "is_trigger": false,
+        "all_caps_ratio": 2.0,
+        "adv_density": 4.0,
+        "dicendi_count": 1,
+        "has_quotes": false,
+        "flags": [
+          "Verbo Atribución / Dicendi"
+        ]
+      },
+      {
+        "idx": 9,
+        "text": "De mantenerse la tendencia, al día 14 de enero estaríamos \"a tope\" y el día 18 llegarían a mil 317 que nos pondría fuera de la capacidad instalada en materia de salud y se tendría que extender a zonas que actualmente están destinadas a atención de otras enfermedades, dijo.",
+        "sens_score": 0.02,
+        "sens_pct": 2.0,
+        "consec_sim": 0.159,
+        "is_trigger": false,
+        "all_caps_ratio": 0.0,
+        "adv_density": 2.2,
+        "dicendi_count": 1,
+        "has_quotes": true,
+        "flags": [
+          "Verbo Atribución / Dicendi",
+          "Cita Entrecomillada"
+        ]
+      }
+    ]
+  }
+]

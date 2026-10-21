@@ -171,16 +171,16 @@ Uno de los aspectos metodológicos más críticos en la evaluación comparativa 
 A continuación se presenta la tabla integral de desempeño computada sobre las **2.604 noticias** del dataset:
 
 ```
-+===================================================================================================================================================+
-|                                    TABLA 3: MÉTRICAS GLOBALES DE RENDIMIENTO Y LATENCIA (N = 2.604 REGISTROS)                                     |
-+================================+==========+==========+==========+==========+==========+==========+==================+=========================+
-| Modelo                         | N° Muestras | Accuracy | Precision| Recall   | F1-Score | ROC-AUC  | Tiempo Total (s) | Latencia (ms / muestra) |
-+================================+==========+==========+==========+==========+==========+==========+==================+=========================+
-| 1. SaBERT (VerificadoProf)     | 2.604    | 0.8571   | 0.9713   | 0.7260   | 0.8309   | 0.9362   | 620,63 s         | 238,34 ms               |
-| 2. BERT Seq (Juanillaberia)    | 2.604    | 0.6947   | 0.6224   | 0.9373   | 0.7481   | 0.8635   | 627,01 s         | 240,79 ms               |
-| 3. BETO Fake News (Narrativaai)| 2.604    | 0.6237   | 0.5852   | 0.7609   | 0.6616   | 0.6926   | 2.083,26 s       | 800,02 ms               |
-| 4. LLM Zero-Shot (Qwen 1.5B)   | 2.604    | 0.4574   | 0.4411   | 0.4583   | 0.4495   | 0.4382   | 780,40 s         | 299,69 ms               |
-+================================+==========+==========+==========+==========+==========+==========+==================+=========================+
++==================================================================================================================================================================+
+|                                              TABLA 3: MÉTRICAS GLOBALES DE RENDIMIENTO Y LATENCIA (N = 2.604 REGISTROS)                                          |
++================================+==========+==========+==========+==========+==========+==========+=============+==================+=========================+
+| Modelo                         | N° Muestras | Accuracy | Precision| Recall   | F1-Score | ROC-AUC  | AP (PR-AUC) | Tiempo Total (s) | Latencia (ms / muestra) |
++================================+==========+==========+==========+==========+==========+==========+=============+==================+=========================+
+| 1. SaBERT (VerificadoProf)     | 2.604    | 0.8571   | 0.9713   | 0.7260   | 0.8309   | 0.9362   | 0.9444      | 620,63 s         | 238,34 ms               |
+| 2. BERT Seq (Juanillaberia)    | 2.604    | 0.6947   | 0.6224   | 0.9373   | 0.7481   | 0.8635   | 0.8680      | 627,01 s         | 240,79 ms               |
+| 3. BETO Fake News (Narrativaai)| 2.604    | 0.6237   | 0.5852   | 0.7609   | 0.6616   | 0.6926   | 0.6902      | 2.083,26 s       | 800,02 ms               |
+| 4. LLM Zero-Shot (Qwen 1.5B)   | 2.604    | 0.4574   | 0.4411   | 0.4583   | 0.4495   | 0.4382   | 0.5480      | 780,40 s         | 299,69 ms               |
++================================+==========+==========+==========+==========+==========+==========+=============+==================+=========================+
 ```
 
 ### 4.2 Desglose por Clase (Precision, Recall y F1-Score)
@@ -247,7 +247,7 @@ La curva Precision-Recall evalúa la capacidad de discriminación en la clase po
    A diferencia de los modelos discriminativos supervisados, **`Qwen2.5-1.5B-Instruct`** en régimen Zero-Shot queda por debajo de la diagonal aleatoria con un **$\text{AUC-ROC} = 0.4382$** y un Accuracy de **45.74%**. Esto demuestra de forma concluyente que, sin mecanismos de recuperación de evidencia documental en tiempo real (*Retrieval-Augmented Generation*, RAG) ni ajuste supervisado de dominio, los modelos de lenguaje autorregresivos generales carecen de la capacidad intrínseca para discernir la falsedad factual de una noticia basándose únicamente en los logits de salida.
 
 3. **Análisis de las Curvas Precision-Recall:**
-   Frente a la prevalencia base del $48.35\%$ ($1.259 / 2.604$, línea horizontal discontinua), SaBERT mantiene una precisión superior al $95\%$ a lo largo de más del $70\%$ del espectro de exhaustividad (*Recall*), logrando un **Average Precision (AP) de 0.8755**. Por su parte, Juanillaberia mantiene una curva PR robusta (AP = 0.6479) y BETO alcanza un AP = 0.6188, mientras que Qwen decae por debajo de la línea base.
+   Frente a la prevalencia base del $48.35\%$ ($1.259 / 2.604$, línea horizontal discontinua), SaBERT mantiene una precisión superior al $95\%$ a lo largo de más del $70\%$ del espectro de exhaustividad (*Recall*), logrando un **Average Precision (AP) de 0.9444**. Por su parte, Juanillaberia mantiene una curva PR robusta (**AP = 0.8680**) y BETO alcanza un **AP = 0.6902**, mientras que Qwen alcanza un **AP = 0.5480**.
 
 ---
 

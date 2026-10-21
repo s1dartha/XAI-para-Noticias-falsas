@@ -1,0 +1,300 @@
+{
+    "distribucion_mascaras_por_corpus": {
+        "Edds Fixed (España)": {
+            "n_noticias": 294,
+            "n_con_mascara": 0,
+            "pct_con_mascara": 0.0,
+            "ocurrencias_number": 0,
+            "ocurrencias_url": 0,
+            "ocurrencias_phone": 0,
+            "pct_real_con_mascara": 0.0,
+            "pct_fake_con_mascara": 0.0
+        },
+        "FakeDeS 2021 (LatAm)": {
+            "n_noticias": 248,
+            "n_con_mascara": 1,
+            "pct_con_mascara": 0.4032258064516129,
+            "ocurrencias_number": 1,
+            "ocurrencias_url": 0,
+            "ocurrencias_phone": 0,
+            "pct_real_con_mascara": 0.0,
+            "pct_fake_con_mascara": 0.5988023952095809
+        },
+        "Freiren Unified Corpus (España)": {
+            "n_noticias": 2060,
+            "n_con_mascara": 0,
+            "pct_con_mascara": 0.0,
+            "ocurrencias_number": 0,
+            "ocurrencias_url": 0,
+            "ocurrencias_phone": 0,
+            "pct_real_con_mascara": 0.0,
+            "pct_fake_con_mascara": 0.0
+        },
+        "MEX-A3T (UNAM / IPN)": {
+            "n_noticias": 566,
+            "n_con_mascara": 384,
+            "pct_con_mascara": 67.84452296819788,
+            "ocurrencias_number": 1457,
+            "ocurrencias_url": 7,
+            "ocurrencias_phone": 1,
+            "pct_real_con_mascara": 77.92207792207793,
+            "pct_fake_con_mascara": 60.895522388059696
+        },
+        "Omdena LATAM (Politics Fake News Detector)": {
+            "n_noticias": 1250,
+            "n_con_mascara": 0,
+            "pct_con_mascara": 0.0,
+            "ocurrencias_number": 0,
+            "ocurrencias_url": 0,
+            "ocurrencias_phone": 0,
+            "pct_real_con_mascara": 0.0,
+            "pct_fake_con_mascara": 0.0
+        }
+    },
+    "metricas_estratificadas_originales": {
+        "Global_4418": {
+            "n": 4418,
+            "n_real_0": 2411,
+            "n_fake_1": 2007,
+            "accuracy": 0.7858759619737438,
+            "precision_fake": 0.9220365950676214,
+            "recall_fake": 0.5774788241155954,
+            "f1_fake": 0.710171568627451,
+            "f1_macro": 0.7701970549526344,
+            "roc_auc": 0.8519315535402119,
+            "ap": 0.8635613477308873,
+            "mean_prob_fake": 0.40692179763911823,
+            "cm": [
+                [
+                    2313,
+                    98
+                ],
+                [
+                    848,
+                    1159
+                ]
+            ]
+        },
+        "Espana_Original_2354": {
+            "n": 2354,
+            "n_real_0": 1264,
+            "n_fake_1": 1090,
+            "accuracy": 0.897196261682243,
+            "precision_fake": 0.9732142857142857,
+            "recall_fake": 0.8,
+            "f1_fake": 0.878147029204431,
+            "f1_macro": 0.8946209062260215,
+            "roc_auc": 0.9535673847404483,
+            "ap": 0.9577407672408346,
+            "mean_prob_fake": 0.46190889944081465,
+            "cm": [
+                [
+                    1240,
+                    24
+                ],
+                [
+                    218,
+                    872
+                ]
+            ]
+        },
+        "LatAm_Total_2064": {
+            "n": 2064,
+            "n_real_0": 1147,
+            "n_fake_1": 917,
+            "accuracy": 0.6589147286821705,
+            "precision_fake": 0.7950138504155124,
+            "recall_fake": 0.31297709923664124,
+            "f1_fake": 0.4491392801251956,
+            "f1_macro": 0.6010608681327733,
+            "roc_auc": 0.6799692716954475,
+            "ap": 0.6750420501344522,
+            "mean_prob_fake": 0.3442087949059819,
+            "cm": [
+                [
+                    1073,
+                    74
+                ],
+                [
+                    630,
+                    287
+                ]
+            ]
+        },
+        "LatAm_Sin_Censura_Omdena_1250": {
+            "n": 1250,
+            "n_real_0": 835,
+            "n_fake_1": 415,
+            "accuracy": 0.6472,
+            "precision_fake": 0.2833333333333333,
+            "recall_fake": 0.04096385542168675,
+            "f1_fake": 0.07157894736842105,
+            "f1_macro": 0.42690058479532167,
+            "roc_auc": 0.5335574633864801,
+            "ap": 0.3529273805577944,
+            "mean_prob_fake": 0.26142463908102365,
+            "cm": [
+                [
+                    792,
+                    43
+                ],
+                [
+                    398,
+                    17
+                ]
+            ]
+        },
+        "LatAm_Corpus_Censurados_MEX_FakeDeS_814": {
+            "n": 814,
+            "n_real_0": 312,
+            "n_fake_1": 502,
+            "accuracy": 0.6769041769041769,
+            "precision_fake": 0.8970099667774086,
+            "recall_fake": 0.5378486055776892,
+            "f1_fake": 0.6724782067247821,
+            "f1_macro": 0.6768451639684516,
+            "roc_auc": 0.7817320461742773,
+            "ap": 0.8641332831672378,
+            "mean_prob_fake": 0.4713343413202298,
+            "cm": [
+                [
+                    281,
+                    31
+                ],
+                [
+                    232,
+                    270
+                ]
+            ]
+        },
+        "MEX_FakeDeS_Textos_CON_Mascara_472": {
+            "n": 385,
+            "n_real_0": 180,
+            "n_fake_1": 205,
+            "accuracy": 0.7558441558441559,
+            "precision_fake": 0.8827586206896552,
+            "recall_fake": 0.624390243902439,
+            "f1_fake": 0.7314285714285714,
+            "f1_macro": 0.7538095238095238,
+            "roc_auc": 0.8236314363143631,
+            "ap": 0.8553096340655083,
+            "mean_prob_fake": 0.4663982704922847,
+            "cm": [
+                [
+                    163,
+                    17
+                ],
+                [
+                    77,
+                    128
+                ]
+            ]
+        },
+        "MEX_FakeDeS_Textos_SIN_Mascara_342": {
+            "n": 429,
+            "n_real_0": 132,
+            "n_fake_1": 297,
+            "accuracy": 0.6060606060606061,
+            "precision_fake": 0.9102564102564102,
+            "recall_fake": 0.4781144781144781,
+            "f1_fake": 0.6269315673289183,
+            "f1_macro": 0.6048238083558172,
+            "roc_auc": 0.7536220793796551,
+            "ap": 0.8802446617240627,
+            "mean_prob_fake": 0.47576414847351384,
+            "cm": [
+                [
+                    118,
+                    14
+                ],
+                [
+                    155,
+                    142
+                ]
+            ]
+        }
+    },
+    "contrafactico_espana_censurada_2354": {
+        "n": 2354,
+        "n_real_0": 1264,
+        "n_fake_1": 1090,
+        "accuracy": 0.8912489379779099,
+        "precision_fake": 0.9664429530201343,
+        "recall_fake": 0.7926605504587156,
+        "f1_fake": 0.8709677419354839,
+        "f1_macro": 0.8884941499692104,
+        "roc_auc": 0.9521636569504122,
+        "ap": 0.9563300579830797,
+        "mean_prob_fake": 0.4667230999614915,
+        "cm": [
+            [
+                1234,
+                30
+            ],
+            [
+                226,
+                864
+            ]
+        ],
+        "n_textos_modificados": 1384,
+        "pct_textos_modificados": 58.79354290569244,
+        "total_cifras_enmascaradas": 4282
+    },
+    "contrafactico_mex_fakedes_restaurado_814": {
+        "n": 814,
+        "n_real_0": 312,
+        "n_fake_1": 502,
+        "accuracy": 0.6781326781326781,
+        "precision_fake": 0.9081632653061225,
+        "recall_fake": 0.5318725099601593,
+        "f1_fake": 0.6708542713567839,
+        "f1_macro": 0.6779752126014689,
+        "roc_auc": 0.789821483297579,
+        "ap": 0.8650411615530569,
+        "mean_prob_fake": 0.4713796643032269,
+        "cm": [
+            [
+                285,
+                27
+            ],
+            [
+                235,
+                267
+            ]
+        ]
+    },
+    "atribucion_deltas": {
+        "delta_censura_en_espana": {
+            "descripcion": "Efecto puro de reemplazar cifras y URLs por *NUMBER* y *URL* en Espana (N=2354)",
+            "delta_accuracy_pp": -0.5947323704333041,
+            "delta_recall_fake_pp": -0.7339449541284404,
+            "delta_f1_fake": -0.007179287268947121,
+            "delta_roc_auc": -0.0014037277900361689,
+            "delta_ap": -0.001410709257754883
+        },
+        "delta_restauracion_en_mex_fakedes": {
+            "descripcion": "Efecto de sustituir *NUMBER* por cifras numericas en MEX-A3T + FakeDeS (N=814)",
+            "delta_accuracy_pp": 0.12285012285011554,
+            "delta_recall_fake_pp": -0.5976095617529875,
+            "delta_f1_fake": -0.0016239353679982083,
+            "delta_roc_auc": 0.00808943712330168,
+            "delta_ap": 0.000907878385819072
+        },
+        "delta_domain_shift_puro_sin_censura": {
+            "descripcion": "Caida de Espana (sin censura, N=2354) a Omdena LATAM (sin censura, N=1250)",
+            "delta_accuracy_pp": -24.9996261682243,
+            "delta_recall_fake_pp": -75.90361445783132,
+            "delta_f1_fake": -0.8065680818360099,
+            "delta_roc_auc": -0.4200099213539682,
+            "delta_ap": -0.6048133866830402
+        },
+        "delta_domain_shift_global_latam": {
+            "descripcion": "Caida total de Espana (N=2354) a America Latina consolidada (N=2064)",
+            "delta_accuracy_pp": -23.828153300007248,
+            "delta_recall_fake_pp": -48.70229007633588,
+            "delta_f1_fake": -0.4290077490792354,
+            "delta_roc_auc": -0.2735981130450008,
+            "delta_ap": -0.2826987171063824
+        }
+    }
+}

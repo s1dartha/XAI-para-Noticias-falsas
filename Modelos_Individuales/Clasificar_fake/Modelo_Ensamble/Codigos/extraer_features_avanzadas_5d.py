@@ -41,9 +41,9 @@ print(f"✅ Cargadas {len(df)} noticias. Columnas actuales: {len(df.columns)}")
 # -----------------------------------------------------------------------------
 # 1. DIMENSIÓN 1: Dinámica Discursiva y Flujo de Coherencia Secuencial
 # -----------------------------------------------------------------------------
-print("⏳ [Dimensión 1/5] Computando Flujo de Coherencia Consecutiva con SBERT...")
-sbert_name = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
-sbert_model = SentenceTransformer(sbert_name, device=device)
+print("⏳ [Dimensión 1/5] Computando Flujo de Coherencia Consecutiva con BETO SBERT...")
+sbert_name = "hiiamsid/sentence_similarity_spanish_es"
+sbert_model = SentenceTransformer(sbert_name, device=str(device))
 
 # Segmentar oraciones por documento
 all_sentences_flat = []
@@ -290,12 +290,19 @@ df['adv_density'] = adv_dens_list
 print("⏳ [Dimensión 5/5] Extrayendo Mayúsculas Sostenidas, Puntuación Enfática y Anclajes Numéricos...")
 
 PAT_ALL_CAPS = re.compile(r'\b[A-ZÁÉÍÓÚÑ]{3,}\b')
+PAT_CENSORED_MASKS = re.compile(r'\*(?:NUMBER|URL|PHONE|\d+)\*', re.IGNORECASE)
+PAT_CENSORED_NUMBER = re.compile(r'\*(?:NUMBER|\d+)\*', re.IGNORECASE)
 PAT_EXCLAMATION = re.compile(r'[!¡]')
 PAT_QUESTION = re.compile(r'[?¿]')
 PAT_ELLIPSIS = re.compile(r'(\.\.\.|…)')
 PAT_DIGITS = re.compile(r'\b\d+(?:[\.,]\d+)?\b')
 PAT_PERCENT = re.compile(r'(?:\d+\s*%|\bpor\s+ciento\b)', re.IGNORECASE)
 PAT_TEMPORAL = re.compile(r'\b(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre|2019|2020|2021|2022|2023|2024|2025|2026)\b', re.IGNORECASE)
+
+SIGLAS_EXCLUIDAS = {
+    'ONU', 'UE', 'EEUU', 'OMS', 'PIB', 'FMI', 'OTAN', 'VOX', 'PSOE', 'PP', 'INE',
+    'USA', 'EFE', 'IAC', 'NICA', 'NUMBER', 'URL', 'PHONE'
+}
 
 all_caps_count_list = []
 all_caps_ratio_list = []
@@ -310,34 +317,34 @@ temporal_dens_list = []
 
 for text, n_words in zip(df['Text'], df['conteo_palabras_text']):
     t_str = str(text)
+    t_str_no_masks = PAT_CENSORED_MASKS.sub(' ', t_str)
     w_count = max(n_words, 1)
     
-    # Mayúsculas sostenidas
-    caps_words = PAT_ALL_CAPS.findall(t_str)
-    # Filtrar palabras comunes que son acrónimos conocidos (ONU, UE, EEUU, OMS, PIB)
-    caps_filt = [w for w in caps_words if w not in {'ONU', 'UE', 'EEUU', 'OMS', 'PIB', 'FMI', 'OTAN', 'VOX', 'PSOE', 'PP', 'INE'}]
+    # Mayúsculas sostenidas (excluyendo máscaras de anonimización *NUMBER*, *URL*, *PHONE* y siglas)
+    caps_words = PAT_ALL_CAPS.findall(t_str_no_masks)
+    caps_filt = [w for w in caps_words if w not in SIGLAS_EXCLUIDAS]
     n_caps = len(caps_filt)
     caps_ratio = float(n_caps / w_count) * 100.0
     
-    # Ratio de caracteres en mayúsculas sobre letras
-    alpha_chars = [c for c in t_str if c.isalpha()]
+    # Ratio de caracteres en mayúsculas sobre letras (sin contar máscaras de anonimización)
+    alpha_chars = [c for c in t_str_no_masks if c.isalpha()]
     n_upper = sum(1 for c in alpha_chars if c.isupper())
     upper_chars_ratio = float(n_upper / max(len(alpha_chars), 1))
     
     # Puntuación
-    n_excl = len(PAT_EXCLAMATION.findall(t_str))
-    n_quest = len(PAT_QUESTION.findall(t_str))
-    n_ellip = len(PAT_ELLIPSIS.findall(t_str))
+    n_excl = len(PAT_EXCLAMATION.findall(t_str_no_masks))
+    n_quest = len(PAT_QUESTION.findall(t_str_no_masks))
+    n_ellip = len(PAT_ELLIPSIS.findall(t_str_no_masks))
     
     excl_dens = (n_excl / w_count) * 100.0
     quest_dens = (n_quest / w_count) * 100.0
     ellip_dens = (n_ellip / w_count) * 100.0
     punct_intens = ((n_excl + n_quest + n_ellip) / w_count) * 100.0
     
-    # Anclajes factuales
-    n_digits = len(PAT_DIGITS.findall(t_str))
+    # Anclajes factuales (contabilizando tanto cifras explícitas como máscaras numéricas *NUMBER*)
+    n_digits = len(PAT_DIGITS.findall(t_str_no_masks)) + len(PAT_CENSORED_NUMBER.findall(t_str))
     n_percent = len(PAT_PERCENT.findall(t_str))
-    n_temp = len(PAT_TEMPORAL.findall(t_str))
+    n_temp = len(PAT_TEMPORAL.findall(t_str_no_masks))
     
     num_dens = (n_digits / w_count) * 100.0
     temp_dens = (n_temp / w_count) * 100.0

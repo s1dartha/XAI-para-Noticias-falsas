@@ -3,8 +3,9 @@
     "titulo": "Bulo de Salud con Mayúsculas Sostenidas y Alarma Oncológica",
     "conteo_palabras": 126,
     "num_oraciones": 5,
-    "tiempo_analisis_segundos": 0.393,
+    "tiempo_analisis_segundos": 0.351,
     "dispositivo": "cuda",
+    "modelo_redundancia": "hiiamsid/sentence_similarity_spanish_es",
     "metadata_adicional": {
       "id": "noticia_1_falsa_salud_mayusculas",
       "tipo_referencia": "Falsa (Ground Truth = 1)",
@@ -28,60 +29,82 @@
     "diagnostico": "Alarma Sensacionalista Sostenida"
   },
   "redundancia_sbert": {
-    "mean_intra_similarity": 0.4553,
-    "max_intra_similarity": 0.6436,
-    "redundant_pairs_count": 8,
+    "mean_intra_similarity": 0.3904,
+    "max_intra_similarity": 0.6454,
+    "second_max_intra_similarity": 0.6374,
+    "top3_mean_intra_similarity": 0.5947,
+    "p90_intra_similarity": 0.6382,
+    "var_intra_similarity": 0.0235,
+    "max_post_ablation_mexgen": 0.5012,
+    "mexgen_persistence_gap": 0.1442,
+    "delta_mean_sim_morf": 0.0656,
+    "topologia_mexgen": "Bucle Único Focalizado (S_post < 0.60: se desactiva al retirar 1 oración)",
+    "topic_continuity_pairs_count": 5,
+    "topic_continuity_density_pct": 50.0,
+    "paraphrase_pairs_count_p90": 2,
+    "paraphrase_density_p90_pct": 20.0,
+    "strict_redundant_pairs_count_p95": 2,
+    "strict_redundancy_density_p95_pct": 20.0,
+    "hyper_redundant_pairs_count": 0,
+    "hyper_redundancy_density_pct": 0.0,
+    "redundant_pairs_count": 2,
     "num_pairs_total": 10,
-    "redundancy_density_pct": 80.0,
-    "umbral_gmm_tau": 0.34,
-    "shannon_bin_7": 4,
-    "shannon_bin_4": 2,
+    "redundancy_density_pct": 20.0,
+    "umbral_gmm_tau": 0.3434,
+    "umbral_pawsx_tau": 0.534,
+    "umbral_estricto_tau": 0.5996,
+    "umbral_hiper_tau": 0.7287,
+    "shannon_bin_7": 5,
+    "shannon_bin_4": 3,
     "par_maxima_redundancia": {
       "oracion_a_idx": 1,
       "oracion_a_texto": "Boooomm\nMUJERES VACUNADAS DE COVID ESTÁN MOSTRANDO EFECTOS SECUNDARIOS TÍPICOS DE CANCER DE MAMA\nLos médicos de Intermountain Healthcare’s Breast Care Centre de Utah, USA, anuncian nuevas pautas de mamografías para las mujeres vacunadas contra Covid-19 recientemente.",
       "oracion_b_idx": 2,
       "oracion_b_texto": "Los médicos han observado inflamación de los ganglios linfáticos en las mamografías de detección de mujeres que se vacunaron recientemente contra COVID-19.",
-      "similitud_coseno": 0.6436,
-      "supera_umbral_gmm": true
+      "similitud_coseno": 0.6454,
+      "supera_continuidad_gmm_034": true,
+      "supera_parafrasis_pawsx_053": true,
+      "supera_redundancia_estricta_060": true,
+      "supera_hiper_redundancia_073": false
     },
     "matriz_similitud": [
       [
         1.0,
-        0.6436,
-        0.4778,
-        0.3813,
-        0.4016
+        0.6454,
+        0.5012,
+        0.4242,
+        0.3282
       ],
       [
-        0.6436,
+        0.6454,
         1.0,
-        0.5028,
-        0.5277,
-        0.4864
+        0.6374,
+        0.3593,
+        0.3132
       ],
       [
-        0.4778,
-        0.5028,
+        0.5012,
+        0.6374,
         1.0,
-        0.2999,
-        0.3291
+        0.1533,
+        0.2606
       ],
       [
-        0.3813,
-        0.5277,
-        0.2999,
+        0.4242,
+        0.3593,
+        0.1533,
         1.0,
-        0.5023
+        0.281
       ],
       [
-        0.4016,
-        0.4864,
-        0.3291,
-        0.5023,
+        0.3282,
+        0.3132,
+        0.2606,
+        0.281,
         1.0
       ]
     ],
-    "diagnostico": "Redundancia Balanceada de Prensa Profesional (Banda Óptima Shannon)"
+    "diagnostico": "Redundancia Semántica Estricta (Reiteración Proposicional, >= 0.60)"
   },
   "las_5_dimensiones_iml": {
     "D1_Carga_Emocional": {
@@ -103,31 +126,31 @@
       "nivel": "Sin Amortiguación (Pánico Sostenido en Todo el Texto)"
     },
     "D4_Reiteracion_Redundancia": {
-      "valor": 54.2,
+      "valor": 81.2,
       "escala": "[0 - 100]",
-      "interpretacion": "Circularidad semántica intra-documental mediante paráfrasis y reiteración.",
-      "nivel": "Progresión Normal Temática"
+      "interpretacion": "Circularidad semántica intra-documental (S_(1), S_(2) y paráfrasis BETO SBERT).",
+      "nivel": "Bucle Argumental / Redundancia Estricta"
     },
     "D5_Cohesion_Fluidez": {
-      "valor": 99.0,
+      "valor": 87.5,
       "escala": "[0 - 100]",
-      "interpretacion": "Conectividad proposicional y solidez sintáctica en la banda de Shannon.",
+      "interpretacion": "Conectividad proposicional y solidez sintáctica en la banda In-Fold de Shannon.",
       "nivel": "Cohesión Profesional Óptima"
     },
-    "score_global_iml": 75.7,
+    "score_global_iml": 82.2,
     "nivel_riesgo_estilometrico": "Alto Riesgo de Manipulación Estilométrica (Anomalía Forense Severa)",
     "arquetipo_discursivo": {
-      "id": "ESTILO_V_PERIODISMO_EQUILIBRADO",
-      "nombre": "Estilo V: Periodismo Profesional Balanceado",
-      "descripcion": "Redacción equilibrada con variedad léxica, desarrollo temático progresivo y ausencia de manipulaciones estilísticas.",
-      "condicion_activada": "Comportamiento estilométrico equilibrado sin anomalías severas"
+      "id": "ESTILO_I_DESINFO_ESTRIDENTE",
+      "nombre": "Estilo I: Desinformación Estridente / Cliché Hiperbólico",
+      "descripcion": "Texto saturado homogéneamente de emociones extremas con reiteración circular de premisas.",
+      "condicion_activada": "D1 >= 65.0 y D4 >= 65.0"
     }
   },
   "variables_ensamble_avanzado_5d": {
     "D1_Dinamica_Discursiva": {
-      "consec_sim_mean": 0.4871,
-      "consec_sim_min": 0.2999,
-      "consec_sim_std": 0.1225
+      "consec_sim_mean": 0.4293,
+      "consec_sim_min": 0.1533,
+      "consec_sim_std": 0.2169
     },
     "D2_Linguistica_Forense_Epistemica": {
       "hedges_density": 0.0,
@@ -196,10 +219,10 @@
       "sensacionalismo_pct": 99.1,
       "es_oracion_gatillo": true,
       "coherencia_consecutiva": null,
-      "similitud_media_documento": 0.4761,
+      "similitud_media_documento": 0.4748,
       "par_mas_redundante": {
         "idx_oracion_cercana": 2,
-        "similitud": 0.6436,
+        "similitud": 0.6454,
         "texto_resumido": "Los médicos han observado inflamación de los ganglios linfáticos en las mamograf..."
       },
       "mayusculas_ratio": 26.32,
@@ -228,7 +251,7 @@
         "🔥 Pico Sensacionalista (99.1%)",
         "📢 MAYÚSCULAS Sostenidas (26.3%)",
         "⚡ Intensificador/Booster (Boooomm)",
-        "🔁 Redundante con Frase #2 (cos=0.64)"
+        "🔁 Redundancia Estricta con Frase #2 (cos=0.65 >= 0.60)"
       ]
     },
     {
@@ -238,11 +261,11 @@
       "sensacionalismo_prob": 0.2768,
       "sensacionalismo_pct": 27.7,
       "es_oracion_gatillo": false,
-      "coherencia_consecutiva": 0.6436,
-      "similitud_media_documento": 0.5401,
+      "coherencia_consecutiva": 0.6454,
+      "similitud_media_documento": 0.4888,
       "par_mas_redundante": {
         "idx_oracion_cercana": 1,
-        "similitud": 0.6436,
+        "similitud": 0.6454,
         "texto_resumido": "Boooomm\nMUJERES VACUNADAS DE COVID ESTÁN MOSTRANDO EFECTOS SECUNDARIOS TÍPICOS D..."
       },
       "mayusculas_ratio": 4.55,
@@ -257,7 +280,7 @@
       "exclamaciones": 0,
       "interrogaciones": 0,
       "banderas_forenses": [
-        "🔁 Redundante con Frase #1 (cos=0.64)"
+        "🔁 Redundancia Estricta con Frase #1 (cos=0.65 >= 0.60)"
       ]
     },
     {
@@ -267,11 +290,11 @@
       "sensacionalismo_prob": 0.6292,
       "sensacionalismo_pct": 62.9,
       "es_oracion_gatillo": false,
-      "coherencia_consecutiva": 0.5028,
-      "similitud_media_documento": 0.4024,
+      "coherencia_consecutiva": 0.6374,
+      "similitud_media_documento": 0.3881,
       "par_mas_redundante": {
         "idx_oracion_cercana": 2,
-        "similitud": 0.5028,
+        "similitud": 0.6374,
         "texto_resumido": "Los médicos han observado inflamación de los ganglios linfáticos en las mamograf..."
       },
       "mayusculas_ratio": 0.0,
@@ -285,7 +308,7 @@
       "interrogaciones": 0,
       "banderas_forenses": [
         "📜 Cita Textual Entrecomillada",
-        "🔁 Redundante con Frase #2 (cos=0.50)"
+        "🔁 Redundancia Estricta con Frase #2 (cos=0.64 >= 0.60)"
       ]
     },
     {
@@ -295,12 +318,12 @@
       "sensacionalismo_prob": 0.0585,
       "sensacionalismo_pct": 5.8,
       "es_oracion_gatillo": false,
-      "coherencia_consecutiva": 0.2999,
-      "similitud_media_documento": 0.4278,
+      "coherencia_consecutiva": 0.1533,
+      "similitud_media_documento": 0.3045,
       "par_mas_redundante": {
-        "idx_oracion_cercana": 2,
-        "similitud": 0.5277,
-        "texto_resumido": "Los médicos han observado inflamación de los ganglios linfáticos en las mamograf..."
+        "idx_oracion_cercana": 1,
+        "similitud": 0.4242,
+        "texto_resumido": "Boooomm\nMUJERES VACUNADAS DE COVID ESTÁN MOSTRANDO EFECTOS SECUNDARIOS TÍPICOS D..."
       },
       "mayusculas_ratio": 0.0,
       "palabras_mayusculas": [],
@@ -312,8 +335,7 @@
       "exclamaciones": 0,
       "interrogaciones": 0,
       "banderas_forenses": [
-        "📜 Cita Textual Entrecomillada",
-        "🔁 Redundante con Frase #2 (cos=0.53)"
+        "📜 Cita Textual Entrecomillada"
       ]
     },
     {
@@ -323,12 +345,12 @@
       "sensacionalismo_prob": 0.3264,
       "sensacionalismo_pct": 32.6,
       "es_oracion_gatillo": false,
-      "coherencia_consecutiva": 0.5023,
-      "similitud_media_documento": 0.4299,
+      "coherencia_consecutiva": 0.281,
+      "similitud_media_documento": 0.2958,
       "par_mas_redundante": {
-        "idx_oracion_cercana": 4,
-        "similitud": 0.5023,
-        "texto_resumido": "“Con la vacuna Moderna están habiendo estos síntomas aproximadamente un 11% desp..."
+        "idx_oracion_cercana": 1,
+        "similitud": 0.3282,
+        "texto_resumido": "Boooomm\nMUJERES VACUNADAS DE COVID ESTÁN MOSTRANDO EFECTOS SECUNDARIOS TÍPICOS D..."
       },
       "mayusculas_ratio": 0.0,
       "palabras_mayusculas": [],
@@ -339,9 +361,7 @@
       "tiene_citas": false,
       "exclamaciones": 0,
       "interrogaciones": 0,
-      "banderas_forenses": [
-        "🔁 Redundante con Frase #4 (cos=0.50)"
-      ]
+      "banderas_forenses": []
     }
   ]
 }

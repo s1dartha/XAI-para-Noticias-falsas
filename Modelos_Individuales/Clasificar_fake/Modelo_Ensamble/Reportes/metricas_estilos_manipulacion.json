@@ -1,11 +1,11 @@
 [
     {
         "estilo": "Estilo I: Desinformación Estridente / Cliché Hiperbólico",
-        "total_noticias": 116,
-        "noticias_falsas": 87,
-        "noticias_reales": 29,
-        "tasa_fakenews_pct": 75.0,
-        "iml_promedio": 73.17
+        "total_noticias": 275,
+        "noticias_falsas": 192,
+        "noticias_reales": 83,
+        "tasa_fakenews_pct": 69.82,
+        "iml_promedio": 74.16
     },
     {
         "estilo": "Estilo II: Cebo Comercial / Clickbait de Cabecera",
@@ -13,30 +13,30 @@
         "noticias_falsas": 267,
         "noticias_reales": 445,
         "tasa_fakenews_pct": 37.5,
-        "iml_promedio": 30.11
+        "iml_promedio": 32.58
     },
     {
         "estilo": "Estilo III: Propaganda Institucional / Astroturfing Encubierto",
-        "total_noticias": 67,
-        "noticias_falsas": 20,
-        "noticias_reales": 47,
-        "tasa_fakenews_pct": 29.85,
-        "iml_promedio": 21.23
+        "total_noticias": 234,
+        "noticias_falsas": 90,
+        "noticias_reales": 144,
+        "tasa_fakenews_pct": 38.46,
+        "iml_promedio": 25.07
     },
     {
         "estilo": "Estilo IV: Incoherencia Estructural / Generación Rota",
-        "total_noticias": 1219,
-        "noticias_falsas": 595,
-        "noticias_reales": 624,
-        "tasa_fakenews_pct": 48.81,
-        "iml_promedio": 39.8
+        "total_noticias": 277,
+        "noticias_falsas": 125,
+        "noticias_reales": 152,
+        "tasa_fakenews_pct": 45.13,
+        "iml_promedio": 43.91
     },
     {
         "estilo": "Estilo V: Periodismo Profesional Balanceado",
-        "total_noticias": 490,
-        "noticias_falsas": 290,
-        "noticias_reales": 200,
-        "tasa_fakenews_pct": 59.18,
-        "iml_promedio": 47.96
+        "total_noticias": 1106,
+        "noticias_falsas": 585,
+        "noticias_reales": 521,
+        "tasa_fakenews_pct": 52.89,
+        "iml_promedio": 41.87
     }
 ]

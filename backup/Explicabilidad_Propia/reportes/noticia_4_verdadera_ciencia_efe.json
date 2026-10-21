@@ -1,0 +1,365 @@
+{
+  "metadatos": {
+    "titulo": "Crónica Científica sobre el Megaproyecto NICA de Dubná",
+    "conteo_palabras": 132,
+    "num_oraciones": 6,
+    "tiempo_analisis_segundos": 0.2,
+    "dispositivo": "cuda",
+    "metadata_adicional": {
+      "id": "noticia_4_verdadera_ciencia_efe",
+      "tipo_referencia": "Verdadera (Ground Truth = 0)",
+      "origen": "Agencia EFE (Sección Ciencia y Tecnología / Rusia)"
+    }
+  },
+  "sensacionalismo_beto": {
+    "P_full": 0.2054,
+    "P_full_pct": 20.5,
+    "P_mean": 0.503,
+    "P_max": 0.9678,
+    "P_top2": 0.8377,
+    "sigma_sens": 0.291,
+    "dilution_ratio": 0.2122,
+    "delta_p_gatillo_causal": 0.1888,
+    "oracion_gatillo_principal": {
+      "idx": 1,
+      "texto": "Rusia quiere recrear el comienzo del Universo.",
+      "sens_prob": 0.9678
+    },
+    "diagnostico": "Cebo Sensacionalista Aislado (Gatillo Cabecera)"
+  },
+  "redundancia_sbert": {
+    "mean_intra_similarity": 0.3454,
+    "max_intra_similarity": 0.6279,
+    "redundant_pairs_count": 8,
+    "num_pairs_total": 15,
+    "redundancy_density_pct": 53.33,
+    "umbral_gmm_tau": 0.34,
+    "shannon_bin_7": 3,
+    "shannon_bin_4": 2,
+    "par_maxima_redundancia": {
+      "oracion_a_idx": 1,
+      "oracion_a_texto": "Rusia quiere recrear el comienzo del Universo.",
+      "oracion_b_idx": 2,
+      "oracion_b_texto": "Redacción DUBNÁ EFE En Dubná, a unos 100 kilómetros al norte de Moscú, se comienza a vislumbrar lo que será un enorme acelerador de partículas destinado a recrear los primeros instantes del Universo tras el Big Bang.",
+      "similitud_coseno": 0.6279,
+      "supera_umbral_gmm": true
+    },
+    "matriz_similitud": [
+      [
+        1.0,
+        0.6279,
+        0.1463,
+        0.3103,
+        0.2599,
+        0.0347
+      ],
+      [
+        0.6279,
+        1.0,
+        0.5032,
+        0.4594,
+        0.4698,
+        0.3477
+      ],
+      [
+        0.1463,
+        0.5032,
+        1.0,
+        0.4959,
+        0.3859,
+        0.4533
+      ],
+      [
+        0.3103,
+        0.4594,
+        0.4959,
+        1.0,
+        0.2948,
+        0.178
+      ],
+      [
+        0.2599,
+        0.4698,
+        0.3859,
+        0.2948,
+        1.0,
+        0.2144
+      ],
+      [
+        0.0347,
+        0.3477,
+        0.4533,
+        0.178,
+        0.2144,
+        1.0
+      ]
+    ],
+    "diagnostico": "Redundancia Balanceada de Prensa Profesional (Banda Óptima Shannon)"
+  },
+  "las_5_dimensiones_iml": {
+    "D1_Carga_Emocional": {
+      "valor": 20.5,
+      "escala": "[0 - 100]",
+      "interpretacion": "Densidad de superlativos y dramatismo léxico asignado por BETO.",
+      "nivel": "Sobrio / Formal"
+    },
+    "D2_Volatilidad_Gatillo": {
+      "valor": 69.7,
+      "escala": "[0 - 100]",
+      "interpretacion": "Desbalance entre la frase gatillo y la sobriedad media del artículo.",
+      "nivel": "Clickbait Severo / Gatillo Aislado"
+    },
+    "D3_Amortiguacion_Contextual": {
+      "valor": 78.8,
+      "escala": "[0 - 100]",
+      "interpretacion": "Capacidad del cuerpo del texto para diluir o mitigar la alarma del titular.",
+      "nivel": "Amortiguación Alta (Cuerpo Sobrio Neutraliza Titular)"
+    },
+    "D4_Reiteracion_Redundancia": {
+      "valor": 51.4,
+      "escala": "[0 - 100]",
+      "interpretacion": "Circularidad semántica intra-documental mediante paráfrasis y reiteración.",
+      "nivel": "Progresión Normal Temática"
+    },
+    "D5_Cohesion_Fluidez": {
+      "valor": 99.8,
+      "escala": "[0 - 100]",
+      "interpretacion": "Conectividad proposicional y solidez sintáctica en la banda de Shannon.",
+      "nivel": "Cohesión Profesional Óptima"
+    },
+    "score_global_iml": 34.6,
+    "nivel_riesgo_estilometrico": "Bajo Riesgo de Manipulación Estilométrica (Texto Neutro/Sobrio)",
+    "arquetipo_discursivo": {
+      "id": "ESTILO_II_CLICKBAIT_CABECERA",
+      "nombre": "Estilo II: Cebo Comercial / Clickbait de Cabecera",
+      "descripcion": "Titular o apertura alarmista diseñado para capturar clics, pero con cuerpo informativo formal que amortigua la alarma.",
+      "condicion_activada": "D2 >= 50.0 y D3 >= 50.0"
+    }
+  },
+  "variables_ensamble_avanzado_5d": {
+    "D1_Dinamica_Discursiva": {
+      "consec_sim_mean": 0.4272,
+      "consec_sim_min": 0.2144,
+      "consec_sim_std": 0.1507
+    },
+    "D2_Linguistica_Forense_Epistemica": {
+      "hedges_density": 0.0,
+      "boosters_density": 0.0,
+      "epistemic_ratio": 0.1,
+      "quotes_density": 0.0,
+      "dicendi_density": 0.0,
+      "tokens_hedges": [],
+      "tokens_boosters": [],
+      "tokens_dicendi": []
+    },
+    "D3_Riqueza_Lexica_Legibilidad": {
+      "flesch_szigriszt": 58.65,
+      "gutierrez_polini": 24.51,
+      "guiraud_ttr": 7.63,
+      "hapax_ratio_pct": 54.62,
+      "vocabulario_unico": 87,
+      "promedio_silabas_palabra": 2.03,
+      "promedio_palabras_oracion": 21.67
+    },
+    "D4_Perfilado_Morfosintactico_POS": {
+      "adv_density": 1.515,
+      "pron_1p_density": 0.0,
+      "pron_3p_density": 9.848,
+      "adj_noun_ratio": 0.37,
+      "conteo_adjetivos": 10,
+      "conteo_sustantivos": 26,
+      "conteo_adverbios": 2,
+      "conteo_pronombres_1p": 0,
+      "conteo_pronombres_3p": 13
+    },
+    "D5_Anclajes_Factuales_Puntuacion": {
+      "all_caps_count": 2,
+      "all_caps_ratio_pct": 1.52,
+      "upper_chars_ratio_pct": 5.94,
+      "excl_density": 0.0,
+      "quest_density": 0.0,
+      "ellipsis_density": 0.0,
+      "punct_intensity": 0.0,
+      "numbers_density": 1.515,
+      "percent_count": 0,
+      "temporal_density": 0.758,
+      "palabras_mayusculas_encontradas": [
+        "DUBNÁ",
+        "JINR"
+      ],
+      "marcadores_temporales_encontrados": [
+        "2022"
+      ]
+    }
+  },
+  "desglose_oraciones": [
+    {
+      "idx": 1,
+      "texto": "Rusia quiere recrear el comienzo del Universo.",
+      "num_palabras": 7,
+      "sensacionalismo_prob": 0.9678,
+      "sensacionalismo_pct": 96.8,
+      "es_oracion_gatillo": true,
+      "coherencia_consecutiva": null,
+      "similitud_media_documento": 0.2758,
+      "par_mas_redundante": {
+        "idx_oracion_cercana": 2,
+        "similitud": 0.6279,
+        "texto_resumido": "Redacción DUBNÁ EFE En Dubná, a unos 100 kilómetros al norte de Moscú, se comien..."
+      },
+      "mayusculas_ratio": 0.0,
+      "palabras_mayusculas": [],
+      "adverbios_densidad": 0.0,
+      "verbos_dicendi": [],
+      "boosters": [],
+      "hedges": [],
+      "tiene_citas": false,
+      "exclamaciones": 0,
+      "interrogaciones": 0,
+      "banderas_forenses": [
+        "🔥 Pico Sensacionalista (96.8%)",
+        "🔁 Redundante con Frase #2 (cos=0.63)"
+      ]
+    },
+    {
+      "idx": 2,
+      "texto": "Redacción DUBNÁ EFE En Dubná, a unos 100 kilómetros al norte de Moscú, se comienza a vislumbrar lo que será un enorme acelerador de partículas destinado a recrear los primeros instantes del Universo tras el Big Bang.",
+      "num_palabras": 36,
+      "sensacionalismo_prob": 0.591,
+      "sensacionalismo_pct": 59.1,
+      "es_oracion_gatillo": false,
+      "coherencia_consecutiva": 0.6279,
+      "similitud_media_documento": 0.4816,
+      "par_mas_redundante": {
+        "idx_oracion_cercana": 1,
+        "similitud": 0.6279,
+        "texto_resumido": "Rusia quiere recrear el comienzo del Universo."
+      },
+      "mayusculas_ratio": 2.78,
+      "palabras_mayusculas": [
+        "DUBNÁ"
+      ],
+      "adverbios_densidad": 0.0,
+      "verbos_dicendi": [],
+      "boosters": [],
+      "hedges": [],
+      "tiene_citas": false,
+      "exclamaciones": 0,
+      "interrogaciones": 0,
+      "banderas_forenses": [
+        "🔁 Redundante con Frase #1 (cos=0.63)"
+      ]
+    },
+    {
+      "idx": 3,
+      "texto": "La construcción del NICA (Nuclotron based Ion Collider Facility)en el Instituto Conjunto para la Investigación Nuclear (JINR, por sus siglas en inglés) de Dubná avanza a pasos agigantados.",
+      "num_palabras": 29,
+      "sensacionalismo_prob": 0.4303,
+      "sensacionalismo_pct": 43.0,
+      "es_oracion_gatillo": false,
+      "coherencia_consecutiva": 0.5032,
+      "similitud_media_documento": 0.3969,
+      "par_mas_redundante": {
+        "idx_oracion_cercana": 2,
+        "similitud": 0.5032,
+        "texto_resumido": "Redacción DUBNÁ EFE En Dubná, a unos 100 kilómetros al norte de Moscú, se comien..."
+      },
+      "mayusculas_ratio": 3.45,
+      "palabras_mayusculas": [
+        "JINR"
+      ],
+      "adverbios_densidad": 0.0,
+      "verbos_dicendi": [],
+      "boosters": [],
+      "hedges": [],
+      "tiene_citas": false,
+      "exclamaciones": 0,
+      "interrogaciones": 0,
+      "banderas_forenses": [
+        "🔁 Redundante con Frase #2 (cos=0.50)"
+      ]
+    },
+    {
+      "idx": 4,
+      "texto": "El deseo de los aproximadamente mil científicos e ingenieros que trabajan en el megaproyecto es poner en marcha el colisionador en 2022.",
+      "num_palabras": 21,
+      "sensacionalismo_prob": 0.197,
+      "sensacionalismo_pct": 19.7,
+      "es_oracion_gatillo": false,
+      "coherencia_consecutiva": 0.4959,
+      "similitud_media_documento": 0.3477,
+      "par_mas_redundante": {
+        "idx_oracion_cercana": 3,
+        "similitud": 0.4959,
+        "texto_resumido": "La construcción del NICA (Nuclotron based Ion Collider Facility)en el Instituto ..."
+      },
+      "mayusculas_ratio": 0.0,
+      "palabras_mayusculas": [],
+      "adverbios_densidad": 4.76,
+      "verbos_dicendi": [],
+      "boosters": [],
+      "hedges": [],
+      "tiene_citas": false,
+      "exclamaciones": 0,
+      "interrogaciones": 0,
+      "banderas_forenses": [
+        "🔁 Redundante con Frase #3 (cos=0.50)"
+      ]
+    },
+    {
+      "idx": 5,
+      "texto": "El objetivo es estudiar la transición de la materia ordinaria al plasma quark-gluón que existía en los primeros microsegundos después de la gran explosión.",
+      "num_palabras": 25,
+      "sensacionalismo_prob": 0.1244,
+      "sensacionalismo_pct": 12.4,
+      "es_oracion_gatillo": false,
+      "coherencia_consecutiva": 0.2948,
+      "similitud_media_documento": 0.325,
+      "par_mas_redundante": {
+        "idx_oracion_cercana": 2,
+        "similitud": 0.4698,
+        "texto_resumido": "Redacción DUBNÁ EFE En Dubná, a unos 100 kilómetros al norte de Moscú, se comien..."
+      },
+      "mayusculas_ratio": 0.0,
+      "palabras_mayusculas": [],
+      "adverbios_densidad": 0.0,
+      "verbos_dicendi": [],
+      "boosters": [],
+      "hedges": [],
+      "tiene_citas": false,
+      "exclamaciones": 0,
+      "interrogaciones": 0,
+      "banderas_forenses": [
+        "🔁 Redundante con Frase #2 (cos=0.47)"
+      ]
+    },
+    {
+      "idx": 6,
+      "texto": "Para ello en Dubná se harán colisionar haces de iones de oro.",
+      "num_palabras": 12,
+      "sensacionalismo_prob": 0.7076,
+      "sensacionalismo_pct": 70.8,
+      "es_oracion_gatillo": true,
+      "coherencia_consecutiva": 0.2144,
+      "similitud_media_documento": 0.2456,
+      "par_mas_redundante": {
+        "idx_oracion_cercana": 3,
+        "similitud": 0.4533,
+        "texto_resumido": "La construcción del NICA (Nuclotron based Ion Collider Facility)en el Instituto ..."
+      },
+      "mayusculas_ratio": 0.0,
+      "palabras_mayusculas": [],
+      "adverbios_densidad": 0.0,
+      "verbos_dicendi": [],
+      "boosters": [],
+      "hedges": [],
+      "tiene_citas": false,
+      "exclamaciones": 0,
+      "interrogaciones": 0,
+      "banderas_forenses": [
+        "🔥 Pico Sensacionalista (70.8%)",
+        "🔁 Redundante con Frase #3 (cos=0.45)"
+      ]
+    }
+  ]
+}
